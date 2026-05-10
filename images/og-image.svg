@@ -1,0 +1,28 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="radGlow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#3646f5" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#3646f5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0d0e14"/>
+  <ellipse cx="600" cy="280" rx="500" ry="320" fill="url(#radGlow)"/>
+  <circle cx="600" cy="315" r="200" fill="none" stroke="#3646f5" stroke-width="1" opacity="0.08"/>
+  <circle cx="600" cy="315" r="300" fill="none" stroke="#3646f5" stroke-width="0.7" opacity="0.05"/>
+  <circle cx="600" cy="315" r="400" fill="none" stroke="#3646f5" stroke-width="0.5" opacity="0.04"/>
+  <rect x="530" y="148" width="140" height="28" rx="14" fill="rgba(54,70,245,0.12)" stroke="rgba(54,70,245,0.3)" stroke-width="1"/>
+  <text x="600" y="167" font-family="Arial Black, sans-serif" font-size="11" font-weight="700" fill="#5566ff" text-anchor="middle" letter-spacing="2">KENPACHI TRADES</text>
+  <text x="600" y="260" font-family="Arial Black, sans-serif" font-size="72" font-weight="800" fill="#ffffff" text-anchor="middle">Quarterly Theory</text>
+  <text x="600" y="345" font-family="Arial Black, sans-serif" font-size="72" font-weight="800" fill="#3646f5" text-anchor="middle">Trading Education</text>
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="21" fill="rgba(255,255,255,0.4)" text-anchor="middle">Free QT courses · Custom indicators · Prop firm discounts</text>
+  <rect x="520" y="428" width="160" height="1" fill="rgba(255,255,255,0.08)"/>
+  <rect x="258" y="452" width="148" height="34" rx="17" fill="rgba(54,70,245,0.1)" stroke="rgba(54,70,245,0.22)" stroke-width="1"/>
+  <text x="332" y="474" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.6)" text-anchor="middle">QT Framework</text>
+  <rect x="422" y="452" width="148" height="34" rx="17" fill="rgba(54,70,245,0.1)" stroke="rgba(54,70,245,0.22)" stroke-width="1"/>
+  <text x="496" y="474" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.6)" text-anchor="middle">Free Education</text>
+  <rect x="586" y="452" width="148" height="34" rx="17" fill="rgba(54,70,245,0.1)" stroke="rgba(54,70,245,0.22)" stroke-width="1"/>
+  <text x="660" y="474" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.6)" text-anchor="middle">Live Trading</text>
+  <rect x="750" y="452" width="192" height="34" rx="17" fill="rgba(54,70,245,0.1)" stroke="rgba(54,70,245,0.22)" stroke-width="1"/>
+  <text x="846" y="474" font-family="Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.6)" text-anchor="middle">Prop Firm Deals</text>
+  <text x="600" y="568" font-family="Arial, sans-serif" font-size="15" fill="rgba(255,255,255,0.15)" text-anchor="middle">kenpachitrades.com</text>
+</svg>
