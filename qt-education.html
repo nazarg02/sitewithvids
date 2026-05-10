@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QT Education Center — Kenpachi Trades</title>
+  <meta name="description" content="Free Quarterly Theory education. Videos, notes, and market insights from Kenpachi_QT to help you build consistency as a trader." />
+  <meta name="keywords" content="quarterly theory education, QT trading, kenpachi trades, trading education, smart money concepts" />
+  <link rel="canonical" href="https://kenpachitrades.com/qt-education.html" />
+  <meta property="og:title" content="QT Education Center — Kenpachi Trades" />
+  <meta property="og:description" content="Free Quarterly Theory education. Videos, notes, and market insights to help you build consistency as a trader." />
+  <meta property="og:url" content="https://kenpachitrades.com/qt-education.html" />
+  <meta property="og:image" content="https://kenpachitrades.com/images/og-image.svg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://kenpachitrades.com/images/og-image.svg" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="stylesheet" href="syle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== QT EDUCATION PAGE ===== */
+    .edu-hero {
+      padding: 72px 0 56px;
+      text-align: center;
+    }
+    .edu-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: #0d0e14;
+      margin: 0 0 16px;
+      line-height: 1.15;
+    }
+    .edu-hero h1 em {
+      color: var(--blue);
+      font-style: normal;
+    }
+    .edu-hero p {
+      color: #6b7280;
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.75;
+    }
+
+    /* Free badge */
+    .edu-free-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #16a34a;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 999px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+    .edu-free-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #16a34a;
+      flex-shrink: 0;
+    }
+
+    /* Search */
+    .edu-search-wrap {
+      max-width: 500px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+    .edu-search-wrap svg {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      pointer-events: none;
+    }
+    .edu-search {
+      width: 100%;
+      padding: 13px 20px 13px 46px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 999px;
+      font-family: var(--font);
+      font-size: 0.92rem;
+      color: #0d0e14;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .edu-search::placeholder { color: #9ca3af; }
+    .edu-search:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(54,70,245,0.12);
+    }
+
+    /* Filter tabs */
+    .edu-filters {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .edu-filter-btn {
+      font-family: var(--font);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 10px 26px;
+      border-radius: 999px;
+      border: 1.5px solid #d1d5db;
+      background: #fff;
+      color: var(--blue);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .edu-filter-btn:hover {
+      border-color: var(--blue);
+      background: rgba(54,70,245,0.05);
+    }
+    .edu-filter-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    /* Content area */
+    .edu-section {
+      background: #f0f2f8;
+      padding: 56px 0 96px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .edu-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.18s, box-shadow 0.18s;
+      text-decoration: none;
+      display: block;
+    }
+    .edu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.1);
+    }
+    .edu-card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .edu-card-thumb-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #e8eaf0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .edu-card-body {
+      padding: 16px 18px 20px;
+    }
+    .edu-card-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(54,70,245,0.07);
+      border-radius: 4px;
+      padding: 2px 8px;
+      margin-bottom: 8px;
+    }
+    .edu-card-tag-yt {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fff;
+      background: #ff0000;
+      border-radius: 5px;
+      padding: 3px 8px;
+      margin-bottom: 8px;
+    }
+    .edu-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .edu-card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .edu-card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0d0e14;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .edu-card-desc { display: none; }
+    .edu-note-placeholder {
+      background: linear-gradient(135deg, #0d0e14 0%, #1a1d2e 60%, #1e2340 100%);
+      flex-direction: column;
+      gap: 8px;
+    }
+    .edu-note-abbr {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--blue-bright);
+      letter-spacing: 0.04em;
+    }
+    .edu-note-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .edu-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 20px;
+      color: #9ca3af;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      .edu-hero { padding: 48px 0 40px; }
+      .edu-filter-btn { padding: 9px 18px; font-size: 0.82rem; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0E9J28DDXG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0E9J28DDXG');
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Kenpachi Trades Logo" class="logo-img" />
+        Kenpachi Trades
+      </a>
+      <nav class="nav-links">
+        <a href="prop-firms.html">Save On Prop Firms</a>
+        <a href="indicators.html">QT Indicators</a>
+        <a href="qt-education.html" class="active">QT Education</a>
+        <a href="premium.html" class="nav-cta">Premium Access</a>
+      </nav>
+      <a href="https://whop.com/soul-society-division" target="_blank" class="nav-join">
+        <img src="images/com.avif" alt="" style="width:20px;height:20px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+        Join Community Free
+      </a>
+      <button class="burger" id="burger">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="prop-firms.html">Save On Prop Firms</a>
+      <a href="indicators.html">QT Indicators</a>
+      <a href="qt-education.html">QT Education</a>
+      <a href="premium.html">Premium Access</a>
+      <a href="https://whop.com/soul-society-division" target="_blank">Join Community Free</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="section-light edu-hero">
+    <div class="container">
+      <div class="edu-free-badge reveal">100% Free</div>
+      <h1 class="reveal reveal-delay-1">QT <em>Education Center</em></h1>
+      <p class="reveal reveal-delay-2">Everything you need to learn Quarterly Theory — videos, written breakdowns, and handpicked market insights. All in one place, completely free.</p>
+
+      <div class="edu-search-wrap reveal reveal-delay-3">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input class="edu-search" type="text" id="eduSearch" placeholder="Search..." autocomplete="off" />
+      </div>
+
+      <div class="edu-filters reveal reveal-delay-4">
+        <button class="edu-filter-btn active" data-filter="all">Library</button>
+        <button class="edu-filter-btn" data-filter="videos">Videos</button>
+        <button class="edu-filter-btn" data-filter="notes">Notes</button>
+        <button class="edu-filter-btn" data-filter="twitter">Twitter Gems</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="edu-section">
+    <div class="container">
+      <div class="edu-grid" id="eduGrid">
+        <a href="edu-qt-bootcamp-ep1.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/Quarterly Theory Bootcamp │ Market Cycles & Quarters EP. 1.png" alt="Quarterly Theory Bootcamp │ Market Cycles & Quarters EP. 1" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">QT Bootcamp Market Cycles &amp; Quarters EP. 1</div>
+            <div class="edu-card-desc">In this video you will learn basics of Quarterly Theory cycles and Market Profiles such as AMDX/XAMD.</div>
+          </div>
+        </a>
+
+        <a href="edu-market-profiles.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/How to master market profiles and entries I Kenpachi Trades.png" alt="How to master market profiles and entries I Kenpachi Trades" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">How to Master Market Profiles and Entries</div>
+            <div class="edu-card-desc">This video provides a deeper dive into Market Profiles (specifically AMDX and XAMD), serving as the final / concluding video on the topic of Market Profiles in Quarterly Theory.</div>
+          </div>
+        </a>
+
+        <a href="edu-weekly-breakdown.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/Quarterly Theory Weekly Breakdown Kenpachi Trades .png" alt="Quarterly Theory Weekly Breakdown Kenpachi Trades" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">Quarterly Theory Weekly Breakdown</div>
+            <div class="edu-card-desc">This video will teach you the basics of weekly analysis in Quarterly Theory, how to identify weekly bias, and how to effectively use it in your trades. You will also reinforce your knowledge of Market Profiles such as AMDX/XAMD, and learn how to apply them to determine the weekly bias. Additionally, you'll understand the specific role and function that Friday plays in Quarterly Theory.</div>
+          </div>
+        </a>
+
+        <a href="edu-nwog-trade.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/How I Made 1125$ In 2 Minutes Full Break Down.png" alt="How I Made 1125$ In 2 Minutes Full Break Down" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">How I Made $1125 In 2 Minutes Full Break Down</div>
+          </div>
+        </a>
+
+        <a href="edu-stacked-opens.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/Stacked Opens Model l Quarterly Theory.png" alt="Stacked Opens Model — Quarterly Theory" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">Stacked Opens Model Quarterly Theory</div>
+          </div>
+        </a>
+
+        <a href="edu-ssmt-ep2.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/Quarterly Theory Bootcamp Sequential SMT EP.2.png" alt="Quarterly Theory Bootcamp Sequential SMT EP.2" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">QT Bootcamp Sequential SMT EP. 2</div>
+          </div>
+        </a>
+
+        <a href="edu-kenpachi-model.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/Kenpachi Model Made Me $1,100.png" alt="Kenpachi Model Made Me $1,100" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">Kenpachi Model Made Me $1,100</div>
+          </div>
+        </a>
+
+        <a href="edu-mmbm-qt.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/How to Blend & Master MMBM with Quarterly Theory for Insane Precision.png" alt="How to Blend & Master MMBM with Quarterly Theory" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">How to Blend &amp; Master MMBM with Quarterly Theory</div>
+          </div>
+        </a>
+
+        <a href="edu-mmxm-pt1.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/The Study of: MMXM - Introduction to MMBM Pt.1.png" alt="The Study of MMXM Introduction to MMBM Pt.1" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">The Study of MMXM Introduction to MMBM Pt. 1</div>
+          </div>
+        </a>
+
+        <a href="edu-hidden-gems-pt1.html" class="edu-card" data-category="videos">
+          <img class="edu-card-thumb" src="videos/Hidden Gems In Quarterly Theory That Will Make You Profitable.png" alt="Hidden Gems In Quarterly Theory That Will Make You Profitable PT.1" />
+          <div class="edu-card-body">
+            <span class="edu-card-tag-yt"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</span>
+            <div class="edu-card-title">Hidden Gems In Quarterly Theory That Will Make You Profitable PT. 1</div>
+          </div>
+        </a>
+
+        <a href="edu-smt-fill.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">SMT</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">SMT Fill</div>
+          </div>
+        </a>
+
+        <a href="edu-sequential-smt.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">SSMT</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">Sequential SMT</div>
+          </div>
+        </a>
+
+        <a href="edu-true-opens.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">T.O</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">True Opens</div>
+          </div>
+        </a>
+
+        <a href="edu-psp.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">PSP</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">Precision Swing Point</div>
+          </div>
+        </a>
+
+        <a href="edu-psp-true-opens-bias.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">BIAS</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">PSP & True Opens — Identify Your Bias</div>
+          </div>
+        </a>
+
+        <a href="edu-liquidity-sweep.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">LIQ</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">Liquidity Sweep</div>
+          </div>
+        </a>
+
+        <a href="edu-smt.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">SMT</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">SMT</div>
+          </div>
+        </a>
+
+        <a href="edu-fvg.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">FVG</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">Fair Value Gap</div>
+          </div>
+        </a>
+
+        <a href="edu-ifvg.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">iFVG</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">iFair Value Gap</div>
+          </div>
+        </a>
+
+        <a href="edu-orderblock.html" class="edu-card" data-category="notes">
+          <div class="edu-card-thumb-placeholder edu-note-placeholder">
+            <span class="edu-note-abbr">OB</span>
+            <span class="edu-note-label">Notes</span>
+          </div>
+          <div class="edu-card-body">
+            <span class="edu-card-tag">Notes</span>
+            <div class="edu-card-title">Order Block</div>
+          </div>
+        </a>
+
+        <div class="edu-empty" id="eduEmpty" style="display:none;">Content coming soon.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2026 Kenpachi Trades. All rights reserved. · <a href="privacy.html" style="color:inherit;opacity:0.6;">Privacy Policy</a></div>
+      <div class="footer-disclaimer">This website is for educational purposes only and does not constitute financial advice. Trading involves significant risk of loss and is not suitable for all investors. Past performance is not indicative of future results. Always consult a licensed financial advisor before making investment decisions. Affiliate links may be present.</div>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    const filterBtns = document.querySelectorAll('.edu-filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterCards(btn.dataset.filter);
+      });
+    });
+
+    document.getElementById('eduSearch').addEventListener('input', function () {
+      const q = this.value.toLowerCase().trim();
+      const activeFilter = document.querySelector('.edu-filter-btn.active').dataset.filter;
+      filterCards(activeFilter, q);
+    });
+
+    function filterCards(filter, search = '') {
+      const cards = document.querySelectorAll('.edu-card');
+      let visible = 0;
+      cards.forEach(card => {
+        const matchFilter = filter === 'all' || card.dataset.category === filter;
+        const matchSearch = !search || card.querySelector('.edu-card-title').textContent.toLowerCase().includes(search);
+        const show = matchFilter && matchSearch;
+        card.style.display = show ? 'block' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('eduEmpty').style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+  </script>
+  <script src="site.js"></script>
+</body>
+</html>

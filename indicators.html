@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quarterly Theory Indicator for TradingView — Kenpachi Trades</title>
+  <meta name="description" content="The best Quarterly Theory indicator for TradingView. Includes SSMT, True Opens, NWOG, PSP, tCISD and more. Built for Smart Money and QT traders. Try it now." />
+  <meta name="keywords" content="quarterly theory indicator, quarterly theory tradingview, QT indicator, kenpachi indicator, SSMT indicator, NWOG tradingview, smart money indicator, quarterly theory trading, QT pro indicator, kenpachi trades" />
+  <link rel="canonical" href="https://kenpachitrades.com/indicators.html" />
+  <meta property="og:title" content="Quarterly Theory Indicator for TradingView — Kenpachi Trades" />
+  <meta property="og:description" content="Professional TradingView indicators built on Quarterly Theory. SSMT, True Opens, STDV, NWOG, PSP and more." />
+  <meta property="og:url" content="https://kenpachitrades.com/indicators.html" />
+  <meta property="og:image" content="https://kenpachitrades.com/images/og-image.svg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://kenpachitrades.com/images/og-image.svg" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="stylesheet" href="syle.css?v=4" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Kenpachi QT Pro+ Indicator",
+    "description": "Professional Quarterly Theory indicator for TradingView. Includes SSMT, True Opens, NWOG, PSP, tCISD, Previous Q H/L and more tools for Smart Money traders.",
+    "brand": { "@type": "Brand", "name": "Kenpachi Trades" },
+    "url": "https://kenpachitrades.com/indicators.html",
+    "image": "https://kenpachitrades.com/images/og-image.svg",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Monthly Subscription",
+        "price": "19.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://whop.com/checkout/plan_Pb6D59NtoYQbu"
+      },
+      {
+        "@type": "Offer",
+        "name": "Lifetime Access",
+        "price": "125.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://whop.com/checkout/plan_wQMuomyge6VNp"
+      }
+    ]
+  }
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0E9J28DDXG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0E9J28DDXG');
+  </script>
+</head>
+<body>
+
+  <!-- PROMO TICKER -->
+  <div class="promo-ticker">
+    <div class="promo-ticker-track">
+      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
+      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
+      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
+      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
+      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
+      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
+      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
+      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
+    </div>
+  </div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Kenpachi Trades Logo" class="logo-img" />
+        Kenpachi Trades
+      </a>
+      <nav class="nav-links">
+        <a href="prop-firms.html">Save On Prop Firms</a>
+        <a href="indicators.html" class="active">QT Indicators</a>
+        <a href="qt-education.html">QT Education</a>
+        <a href="premium.html" class="nav-cta">Premium Access</a>
+      </nav>
+      <a href="https://whop.com/soul-society-division" target="_blank" class="nav-join">
+        <img src="images/com.avif" alt="" style="width:20px;height:20px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+        Join Community Free
+      </a>
+      <button class="burger" id="burger">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="prop-firms.html">Save On Prop Firms</a>
+      <a href="indicators.html">QT Indicators</a>
+      <a href="qt-education.html">QT Education</a>
+      <a href="premium.html">Premium Access</a>
+      <a href="https://whop.com/soul-society-division" target="_blank">Join Community Free</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero page-hero-split">
+    <div class="container page-hero-inner">
+      <div class="page-hero-text">
+        <div class="label reveal">TradingView — Pine Script</div>
+        <h1 class="reveal reveal-delay-1">Kenpachi <em>Indicators</em></h1>
+        <p class="reveal reveal-delay-2">Built specifically for Smart Money and Quarterly Theory traders. Works on any asset, any timeframe.</p>
+      </div>
+      <div class="page-hero-img reveal reveal-delay-2">
+        <img src="images/headeradd.png" alt="Kenpachi QT Indicator Preview" />
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO SECTION -->
+  <section class="section section-video">
+
+    <div class="section-head center reveal" style="margin-bottom:40px;">
+      <div class="label">See It In Action</div>
+      <h2>Watch the <em>Indicator</em></h2>
+    </div>
+
+    <div class="video-layout">
+
+      <div class="video-icons-col">
+        <div class="feat-icon">
+          <div class="feat-icon-circle">
+            <img src="images/feat-icons/true-opens.png" alt="True Opens" />
+          </div>
+          <span>True Opens</span>
+        </div>
+        <div class="feat-icon">
+          <div class="feat-icon-circle">
+            <img src="images/feat-icons/ssmt.png" alt="Sequential SMT's" />
+          </div>
+          <span>Sequential SMT's</span>
+        </div>
+      </div>
+
+      <div class="video-wrapper reveal">
+        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" id="heroVideo">
+          <source src="videos/0428.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div class="video-icons-col">
+        <div class="feat-icon">
+          <div class="feat-icon-circle">
+            <img src="images/feat-icons/tcisd.png" alt="tCISD" />
+          </div>
+          <span>tCISD</span>
+        </div>
+        <div class="feat-icon">
+          <div class="feat-icon-circle">
+            <img src="images/feat-icons/prev-q-hl.png" alt="Previous Q H/L" />
+          </div>
+          <span>Previous Q H/L</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="video-icons-bottom">
+      <div class="feat-icon">
+        <div class="feat-icon-circle">
+          <img src="images/feat-icons/quarter-dividers.png" alt="Quarter Dividers" />
+        </div>
+        <span>Quarter Dividers</span>
+      </div>
+      <div class="feat-icon">
+        <div class="feat-icon-circle">
+          <img src="images/feat-icons/psps.png" alt="PSP's" />
+        </div>
+        <span>PSP's</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section section-light">
+
+    <div class="container">
+
+      <div class="section-head center reveal" style="margin-bottom:52px;">
+        <div class="section-avatar-badge">
+          <img src="images/avatar.png" alt="Kenpachi" />
+        </div>
+        <h2>Kenpachi QT <em>Pro+</em></h2>
+        <p>Built to simplify Quarterly Theory trading. The indicator includes all QT concepts in one tool.</p>
+      </div>
+
+      <div class="feat-showcase reveal">
+
+        <div class="feat-list">
+          <div class="feat-item active" data-img="images/Quarterly Theory (2).png" data-label="Indicator Overview" data-caption="">
+            Indicator Overview <span class="feat-arrow">›</span>
+          </div>
+          <div class="feat-item" data-img="images/ssmt.png" data-label="Sequential SMT's" data-caption="">
+            Sequential SMT's <span class="feat-arrow">›</span>
+          </div>
+          <div class="feat-item" data-img="images/psp.png" data-label="PSP Signals" data-caption="">
+            PSP Signals <span class="feat-arrow">›</span>
+          </div>
+          <div class="feat-item" data-img="images/True Opens/trueopens.png" data-label="True Opens" data-caption="Automatically plots True Opens for every major timeframe — Session, Daily, Weekly, and Monthly.">
+            True Opens <span class="feat-arrow">›</span>
+          </div>
+          <div class="feat-item" data-img="images/ndog's.png" data-label="NDOG &amp; NWOG's" data-caption="Automatically plots New Day Opening Gap and New Week Opening Gap levels.">
+            NDOG &amp; NWOG's <span class="feat-arrow">›</span>
+          </div>
+          <div class="feat-item" data-img="images/pdhl.png" data-label="Previous Day H/L" data-caption="">
+            Previous Day H/L <span class="feat-arrow">›</span>
+          </div>
+          <div class="feat-item" data-img="images/pshl.png" data-label="Previous Session H/L" data-caption="">
+            Previous Session H/L <span class="feat-arrow">›</span>
+          </div>
+          <div class="feat-item feat-item-new" data-img="images/ote levels/ote1.png" data-key="ote" data-label="OTE Levels" data-caption="">
+            OTE Levels <span class="feat-arrow">›</span>
+          </div>
+          <div class="feat-item" data-img="images/dfr.png" data-label="Defining Range" data-caption="">
+            Defining Range <span class="feat-arrow">›</span>
+          </div>
+        </div>
+
+        <!-- Image panel -->
+        <div class="feat-panel">
+          <div class="feat-panel-img-wrap">
+            <img id="feat-img" src="images/Quarterly Theory (2).png" alt="Indicator Overview" />
+            <p class="feat-caption" id="feat-caption"></p>
+          </div>
+          <div class="feat-panel-nav" id="featPanelNav">
+            <button class="feat-panel-btn" id="featPrevBtn" aria-label="Previous">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="feat-panel-dots" id="featDots">
+              <span class="feat-panel-dot active" data-idx="0"></span>
+              <span class="feat-panel-dot" data-idx="1"></span>
+            </div>
+            <button class="feat-panel-btn" id="featNextBtn" aria-label="Next">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PRICING -->
+      <div class="section-head center reveal" style="margin:64px 0 40px;">
+        <div class="label">Indicator Access</div>
+        <h2>Choose Your <em>Plan</em></h2>
+        <p>Get full access to all indicators. Choose monthly or lock in lifetime access.</p>
+      </div>
+
+      <div class="pricing-grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 1100px; margin: 0 auto 64px;">
+
+        <div class="price-card reveal reveal-delay-1">
+          <div class="price-tier-name">Monthly Subscription</div>
+          <div class="price-amount"><sup>$</sup>19</div>
+          <div class="price-period">per month — cancel anytime</div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Access active while subscription is active</li>
+            <li><span class="check">✓</span> Setup support via Discord / Whop</li>
+            <li><span class="check">✓</span> Future indicator updates included</li>
+          </ul>
+          <a href="https://whop.com/checkout/plan_Pb6D59NtoYQbu" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-block">Get Monthly Access</a>
+        </div>
+
+        <div class="price-card price-card-green reveal reveal-delay-2">
+          <div class="price-top-badge price-badge-sale">50% OFF</div>
+          <div class="price-tier-name">Life Time Subscription</div>
+          <div class="price-row">
+            <div class="price-amount"><sup>$</sup>125</div>
+            <div class="price-old">$250</div>
+          </div>
+          <div class="price-period">one-time payment</div>
+          <div class="promo-code-box">
+            <div class="promo-code-label">Discount code</div>
+            <div class="promo-code-row">
+              <span class="promo-code" id="promoCode">LIFETIME</span>
+              <button class="promo-copy-btn" id="promoCopyBtn" onclick="copyPromo()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span id="promoCopyText">Copy</span>
+              </button>
+            </div>
+          </div>
+          <div class="lt-timer-wrap">
+            <div class="lt-timer-label">Offer ends in</div>
+            <div class="lt-timer">
+              <div class="lt-unit"><span id="lt-days">00</span><em>DAYS</em></div>
+              <div class="lt-sep">:</div>
+              <div class="lt-unit"><span id="lt-hours">00</span><em>HRS</em></div>
+              <div class="lt-sep">:</div>
+              <div class="lt-unit"><span id="lt-mins">00</span><em>MIN</em></div>
+              <div class="lt-sep">:</div>
+              <div class="lt-unit lt-unit-sec"><span id="lt-secs">00</span><em>SEC</em></div>
+            </div>
+          </div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Lifetime access — pay once</li>
+            <li><span class="check">✓</span> Setup support via Discord / Whop</li>
+            <li><span class="check">✓</span> Future indicator updates included</li>
+          </ul>
+          <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
+        </div>
+
+        <div class="price-card reveal reveal-delay-3">
+          <div class="price-tier-name">3 Months</div>
+          <div class="price-amount"><sup>$</sup>49</div>
+          <div class="price-period">per 3 months — cancel anytime</div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Access active while subscription is active</li>
+            <li><span class="check">✓</span> Setup support via Discord / Whop</li>
+            <li><span class="check">✓</span> Future indicator updates included</li>
+          </ul>
+          <a href="https://whop.com/checkout/plan_G2TPWnODqHxAE" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-block">Get 3 Months Access</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer footer-merged">
+    <div class="container footer-banner-wrap reveal">
+      <div class="footer-banner-text">
+        <div class="label">Premium Required</div>
+        <h3>Save on Indicators</h3>
+        <p>All indicators are available for Premium members. Subscribe for Premium access and use the indicators for as long as your Premium subscription is active.</p>
+      </div>
+      <a href="premium.html" class="btn btn-primary" style="flex-shrink:0;">View Premium Plans</a>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2026 Kenpachi Trades. All rights reserved. · <a href="privacy.html" style="color:inherit;opacity:0.6;">Privacy Policy</a></div>
+      <div class="footer-disclaimer">This website is for educational purposes only and does not constitute financial advice. Trading involves significant risk of loss and is not suitable for all investors. Past performance is not indicative of future results. Always consult a licensed financial advisor before making investment decisions. Affiliate links may be present.</div>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobileMenu');
+    const ticker = document.querySelector('.promo-ticker');
+    burger.addEventListener('click', () => {
+      menu.classList.toggle('open');
+      if (ticker) ticker.style.display = menu.classList.contains('open') ? 'none' : '';
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      if (ticker) ticker.style.display = '';
+    }));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // Feature showcase
+    const featItems = document.querySelectorAll('.feat-item');
+    const featImg = document.getElementById('feat-img');
+    const featCaption = document.getElementById('feat-caption');
+    const featPanelNav = document.getElementById('featPanelNav');
+    const featDots = document.querySelectorAll('.feat-panel-dot');
+    const featPrevBtn = document.getElementById('featPrevBtn');
+    const featNextBtn = document.getElementById('featNextBtn');
+
+    const OTE_SLIDES = [
+      'images/ote levels/ote1.png',
+      'images/ote levels/ote2.png'
+    ];
+    let slideInterval = null;
+    let oteIdx = 0;
+
+    function setCaption(text) {
+      featCaption.textContent = text || '';
+      featCaption.style.display = text ? 'block' : 'none';
+    }
+
+    function setDot(idx) {
+      featDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    function fadeSwitch(src, label, callback) {
+      featImg.classList.remove('entering');
+      featImg.classList.add('fading');
+      const tmp = new Image();
+      const apply = () => {
+        featImg.src = src;
+        if (label) featImg.alt = label;
+        featImg.classList.remove('fading');
+        featImg.classList.add('entering');
+        featImg.addEventListener('animationend', () => {
+          featImg.classList.remove('entering');
+          if (callback) callback();
+        }, { once: true });
+      };
+      tmp.onload = () => setTimeout(apply, 280);
+      tmp.onerror = () => setTimeout(apply, 280);
+      tmp.src = src;
+    }
+
+    function showOteSlide(idx) {
+      oteIdx = (idx + OTE_SLIDES.length) % OTE_SLIDES.length;
+      setDot(oteIdx);
+      fadeSwitch(OTE_SLIDES[oteIdx], 'OTE Levels');
+    }
+
+    function startOteSlideshow() {
+      featPanelNav.classList.add('visible');
+      showOteSlide(0);
+      slideInterval = setInterval(() => showOteSlide(oteIdx + 1), 4000);
+    }
+
+    function stopSlideshow() {
+      if (slideInterval) { clearInterval(slideInterval); slideInterval = null; }
+      featPanelNav.classList.remove('visible');
+    }
+
+    featPrevBtn.addEventListener('click', () => {
+      clearInterval(slideInterval);
+      showOteSlide(oteIdx - 1);
+      slideInterval = setInterval(() => showOteSlide(oteIdx + 1), 4000);
+    });
+
+    featNextBtn.addEventListener('click', () => {
+      clearInterval(slideInterval);
+      showOteSlide(oteIdx + 1);
+      slideInterval = setInterval(() => showOteSlide(oteIdx + 1), 4000);
+    });
+
+    featDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        clearInterval(slideInterval);
+        showOteSlide(parseInt(dot.dataset.idx));
+        slideInterval = setInterval(() => showOteSlide(oteIdx + 1), 4000);
+      });
+    });
+
+    featItems.forEach(item => {
+      item.addEventListener('click', () => {
+        featItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        stopSlideshow();
+        setCaption(item.dataset.caption || '');
+        if (item.dataset.key === 'ote') {
+          startOteSlideshow();
+        } else {
+          fadeSwitch(item.dataset.img, item.dataset.label);
+        }
+      });
+    });
+  </script>
+  <script src="site.js"></script>
+  <script>
+    function copyPromo() {
+      var code = document.getElementById('promoCode').textContent;
+      var btn = document.getElementById('promoCopyBtn');
+      var txt = document.getElementById('promoCopyText');
+      navigator.clipboard.writeText(code).then(function () {
+        btn.classList.add('copied');
+        txt.textContent = 'Copied!';
+        setTimeout(function () { btn.classList.remove('copied'); txt.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    (function () {
+      var KEY = 'lt_deadline_v3';
+      var deadline = localStorage.getItem(KEY);
+      if (!deadline) {
+        deadline = Date.now() + 7 * 24 * 60 * 60 * 1000;
+        localStorage.setItem(KEY, deadline);
+      }
+      deadline = parseInt(deadline);
+      function pad(n) { return n < 10 ? '0' + n : n; }
+      function tick() {
+        var diff = deadline - Date.now();
+        if (diff <= 0) {
+          ['lt-days','lt-hours','lt-mins','lt-secs'].forEach(function(id){ document.getElementById(id).textContent = '00'; });
+          return;
+        }
+        document.getElementById('lt-days').textContent  = pad(Math.floor(diff / 86400000));
+        document.getElementById('lt-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+        document.getElementById('lt-mins').textContent  = pad(Math.floor((diff % 3600000) / 60000));
+        document.getElementById('lt-secs').textContent  = pad(Math.floor((diff % 60000) / 1000));
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>

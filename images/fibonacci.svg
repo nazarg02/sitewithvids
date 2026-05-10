@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" fill="none">
+  <!-- Grid lines -->
+  <line x1="890" y1="0" x2="890" y2="900" stroke="#6366f1" stroke-width="0.6" stroke-opacity="0.25"/>
+  <line x1="0" y1="344" x2="1440" y2="344" stroke="#6366f1" stroke-width="0.6" stroke-opacity="0.25"/>
+  <line x1="890" y1="344" x2="890" y2="900" stroke="#6366f1" stroke-width="0.6" stroke-opacity="0.18"/>
+  <line x1="890" y1="622" x2="1440" y2="622" stroke="#6366f1" stroke-width="0.6" stroke-opacity="0.18"/>
+  <line x1="1057" y1="344" x2="1057" y2="900" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.15"/>
+  <line x1="1057" y1="622" x2="1440" y2="622" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.15"/>
+  <line x1="1057" y1="519" x2="1440" y2="519" stroke="#6366f1" stroke-width="0.4" stroke-opacity="0.12"/>
+  <line x1="1057" y1="519" x2="1161" y2="519" stroke="#6366f1" stroke-width="0.4" stroke-opacity="0.12"/>
+  <line x1="1161" y1="519" x2="1161" y2="622" stroke="#6366f1" stroke-width="0.4" stroke-opacity="0.12"/>
+
+  <!-- Outer large circle — center (890,344), r=344 -->
+  <circle cx="890" cy="344" r="556" stroke="#6366f1" stroke-width="0.8" stroke-opacity="0.22" fill="none"/>
+
+  <!-- Arc 1: quadrant bottom-right, from (890,900) to (1440,344), r=556 -->
+  <path d="M 890 900 A 556 556 0 0 1 1440 344" stroke="#6366f1" stroke-width="1" stroke-opacity="0.3" fill="none"/>
+
+  <!-- Second box: 890–1440 x 344–622, r=278 -->
+  <path d="M 1440 344 A 278 278 0 0 1 890 622" stroke="#6366f1" stroke-width="0.9" stroke-opacity="0.28" fill="none"/>
+
+  <!-- Third box: 890–1057 x 622–900 (ish), r=172 -->
+  <path d="M 890 622 A 167 167 0 0 1 1057 455" stroke="#6366f1" stroke-width="0.8" stroke-opacity="0.24" fill="none"/>
+
+  <!-- Fourth box -->
+  <path d="M 1057 455 A 103 103 0 0 1 1160 622" stroke="#6366f1" stroke-width="0.7" stroke-opacity="0.2" fill="none"/>
+
+  <!-- Fifth box -->
+  <path d="M 1160 622 A 64 64 0 0 1 1057 558" stroke="#6366f1" stroke-width="0.6" stroke-opacity="0.18" fill="none"/>
+
+  <!-- Sixth -->
+  <path d="M 1057 558 A 39 39 0 0 1 1096 519" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.15" fill="none"/>
+
+  <!-- Seventh -->
+  <path d="M 1096 519 A 24 24 0 0 1 1120 543" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.12" fill="none"/>
+</svg>

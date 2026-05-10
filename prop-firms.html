@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Prop Firms 2026</title>
+  <meta name="description" content="Save on top prop firm challenges with verified discount codes. FundedSeat 60% off and Alpha Futures 15% off — hand-picked partners for funded traders." />
+  <meta name="keywords" content="prop firm discount, funded trader, FundedSeat discount, Alpha Futures discount, prop firm challenge, best prop firms 2026" />
+  <meta property="og:title" content="Best Prop Firms 2026 — Kenpachi Trades" />
+  <meta property="og:description" content="Verified discount codes for FundedSeat and Alpha Futures. Save up to 60% on your prop firm challenge." />
+  <meta property="og:url" content="https://kenpachitrades.com/prop-firms.html" />
+  <meta property="og:image" content="https://kenpachitrades.com/images/og-image.svg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://kenpachitrades.com/images/og-image.svg" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="stylesheet" href="syle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Prop firm cards ── */
+    .pf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .pf-card {
+      background: linear-gradient(160deg, rgba(36,38,58,0.95) 0%, rgba(28,30,46,0.98) 100%);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 22px;
+      padding: 32px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.35),
+        0 1px 0 rgba(255,255,255,0.04) inset;
+    }
+    .pf-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 16px 48px rgba(0,0,0,0.45),
+        0 1px 0 rgba(255,255,255,0.06) inset;
+    }
+    .pf-card.featured {
+      border-color: rgba(54,70,245,0.3);
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.35),
+        0 0 40px rgba(54,70,245,0.08),
+        0 1px 0 rgba(255,255,255,0.04) inset;
+    }
+    .pf-badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      background: rgba(54,70,245,0.1);
+      border: 1px solid rgba(54,70,245,0.2);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 22px;
+    }
+    .pf-logo {
+      width: 76px;
+      height: 76px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .pf-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .pf-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+    .pf-discount {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 22px;
+      text-shadow: 0 2px 20px rgba(54,70,245,0.3);
+    }
+    .pf-code-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 11px 16px;
+      margin-bottom: 16px;
+      width: 100%;
+    }
+    .pf-code-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      white-space: nowrap;
+      font-weight: 400;
+    }
+    .pf-code-value {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      flex: 1;
+      text-align: left;
+      letter-spacing: 0.04em;
+    }
+    .pf-copy-btn {
+      background: var(--blue);
+      border: none;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .pf-copy-btn:hover { background: var(--blue-bright); }
+    .pf-actions { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+    .pf-details-btn {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.4);
+      border-radius: var(--radius);
+      padding: 9px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+    }
+    .pf-details-btn:hover { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
+    .pf-details-btn .pf-chevron { transition: transform 0.2s; display: inline-block; }
+    .pf-card.details-open .pf-chevron { transform: rotate(180deg); }
+    .pf-details {
+      display: none;
+      width: 100%;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 20px;
+      text-align: left;
+    }
+    .pf-card.details-open .pf-details { display: block; }
+    .pf-table { width: 100%; border-collapse: collapse; }
+    .pf-table tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .pf-table tr:last-child { border-bottom: none; }
+    .pf-table td {
+      padding: 9px 4px;
+      font-size: 0.79rem;
+      line-height: 1.4;
+    }
+    .pf-table td:first-child { color: rgba(255,255,255,0.35); width: 55%; font-weight: 400; }
+    .pf-table td:last-child { color: rgba(255,255,255,0.7); font-weight: 500; text-align: right; }
+    .yes { color: #4ade80; }
+    .no  { color: #f87171; }
+
+    @media (max-width: 768px) {
+      .pf-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .pf-discount { font-size: 2.2rem; }
+      .pf-card { padding: 24px 20px 20px; }
+    }
+    @media (max-width: 480px) {
+      .pf-card { padding: 20px 16px 16px; border-radius: 16px; }
+      .pf-discount { font-size: 2rem; }
+      .pf-code-row { padding: 9px 12px; }
+      .pf-logo { width: 60px; height: 60px; border-radius: 14px; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0E9J28DDXG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0E9J28DDXG');
+  </script>
+</head>
+<body>
+
+  <!-- GIVEAWAY POPUP -->
+  <style>
+    @keyframes gw-overlay-in  { from { opacity:0 } to { opacity:1 } }
+    @keyframes gw-overlay-out { from { opacity:1 } to { opacity:0 } }
+    @keyframes gw-card-in     { from { opacity:0; transform:translateY(28px) scale(0.96) } to { opacity:1; transform:translateY(0) scale(1) } }
+    @keyframes gw-card-out    { from { opacity:1; transform:translateY(0) scale(1) } to { opacity:0; transform:translateY(16px) scale(0.97) } }
+
+    #giveawayOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    #giveawayOverlay.gw-in  { animation: gw-overlay-in  0.3s ease forwards; }
+    #giveawayOverlay.gw-out { animation: gw-overlay-out 0.25s ease forwards; }
+
+    #giveawayCard {
+      background: linear-gradient(160deg, rgba(18,19,30,0.98) 0%, rgba(13,14,22,0.99) 100%);
+      border: 1px solid rgba(108,99,255,0.3);
+      border-radius: 24px;
+      max-width: 440px;
+      width: 100%;
+      padding: 36px 32px 28px;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      text-align: center;
+      overflow: hidden;
+    }
+    #giveawayCard::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/fibonacci.png');
+      background-size: 85%;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+    #giveawayCard.gw-in  { animation: gw-card-in  0.4s cubic-bezier(0.34,1.3,0.64,1) forwards; }
+    #giveawayCard.gw-out { animation: gw-card-out 0.25s ease forwards; }
+
+    .gw-close {
+      position: absolute;
+      top: 14px; right: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.45);
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.18s;
+      line-height: 1;
+    }
+    .gw-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+    .gw-logo {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      object-fit: contain;
+      margin: 0 auto 16px;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+    .gw-badge {
+      display: inline-block;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.3);
+      color: #a89cff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .gw-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.35;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+    .gw-title span {
+      color: #7c6fff;
+      font-size: 1.75rem;
+      display: block;
+    }
+    .gw-desc {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.82rem;
+      line-height: 1.65;
+      margin: 0 0 20px;
+    }
+    .gw-form { display: flex; flex-direction: column; gap: 9px; }
+    .gw-input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 0.88rem;
+      font-family: 'Syne', sans-serif;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.18s;
+    }
+    .gw-input:focus { border-color: rgba(108,99,255,0.5); }
+    .gw-input::placeholder { color: rgba(255,255,255,0.25); }
+    .gw-btn {
+      background: linear-gradient(135deg, #6c63ff 0%, #4f46e5 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      cursor: pointer;
+      transition: opacity 0.18s, transform 0.18s;
+      box-shadow: 0 4px 16px rgba(108,99,255,0.35);
+    }
+    .gw-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .gw-fine { color: rgba(255,255,255,0.2); font-size: 0.7rem; margin-top: 12px; }
+
+    @media (max-width: 480px) {
+      #giveawayCard { padding: 28px 20px 22px; }
+      .gw-title { font-size: 1.15rem; }
+      .gw-title span { font-size: 1.5rem; }
+    }
+  </style>
+
+  <div id="giveawayOverlay">
+    <div id="giveawayCard">
+      <button class="gw-close" onclick="closeGiveaway()">&#x2715;</button>
+      <img src="images/logo.png" alt="Kenpachi Trades" class="gw-logo" />
+      <div class="gw-badge">🎁 Weekly Giveaway</div>
+      <h2 class="gw-title">
+        Take a Chance to Win a<br>
+        <span>$150,000</span>
+        Prop Firm Account
+      </h2>
+      <p class="gw-desc">Every week we give away a fully funded prop firm account. Enter your email for a chance to win — one new winner selected every week.</p>
+      <form name="giveaway" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleGiveaway(event, this)" class="gw-form">
+        <input type="hidden" name="form-name" value="giveaway" />
+        <input name="bot-field" style="display:none;" />
+        <input type="email" name="email" placeholder="your@email.com" required class="gw-input" />
+        <button type="submit" class="gw-btn">Enter Giveaway</button>
+      </form>
+      <p id="giveawaySuccess" style="display:none; color:#4ade80; font-size:0.85rem; margin-top:14px; font-weight:600;">You're in! Good luck this week! 🎉</p>
+      <p class="gw-fine">No purchase required. Winner contacted via email.</p>
+    </div>
+  </div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Kenpachi Trades Logo" class="logo-img" />
+        Kenpachi Trades
+      </a>
+      <nav class="nav-links">
+        <a href="prop-firms.html" class="active">Save On Prop Firms</a>
+        <a href="indicators.html">QT Indicators</a>
+        <a href="qt-education.html">QT Education</a>
+        <a href="premium.html" class="nav-cta">Premium Access</a>
+      </nav>
+      <a href="https://whop.com/soul-society-division" target="_blank" class="nav-join">
+        <img src="images/com.avif" alt="" style="width:20px;height:20px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+        Join Community Free
+      </a>
+      <button class="burger" id="burger">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="prop-firms.html">Save On Prop Firms</a>
+      <a href="indicators.html">QT Indicators</a>
+      <a href="qt-education.html">QT Education</a>
+      <a href="premium.html">Premium Access</a>
+      <a href="https://whop.com/soul-society-division" target="_blank">Join Community Free</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="label reveal">Verified Partners — 2026</div>
+      <h1 class="reveal reveal-delay-1">Our Partner <em>Prop Firms</em></h1>
+      <p class="reveal reveal-delay-2">Hand-picked partners with verified discount codes. Use the codes below to save on your challenge fee.</p>
+    </div>
+  </section>
+
+  <section class="section" style="background: linear-gradient(180deg, #0d0e14 0%, #111320 100%);">
+    <div class="container">
+
+      <!-- Section intro -->
+      <div style="text-align:center; margin-bottom:56px;">
+        <div style="
+          width:120px; height:120px;
+          border-radius:50%;
+          overflow:hidden;
+          margin:0 auto 24px;
+          background:#fff;
+          border:3px solid rgba(255,255,255,0.18);
+          box-shadow:
+            0 0 0 8px rgba(255,255,255,0.05),
+            0 0 0 16px rgba(255,255,255,0.02),
+            0 16px 48px rgba(0,0,0,0.6),
+            0 0 60px rgba(54,70,245,0.2);
+        ">
+          <img src="images/avatar.png" alt="Kenpachi" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-bright);margin-bottom:14px;opacity:0.9;">Personally Recommended</div>
+        <h2 style="
+          font-size:2rem;font-weight:800;
+          background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.75) 100%);
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+          letter-spacing:-0.03em;margin:0 0 12px;line-height:1.15;
+          filter: drop-shadow(0 2px 12px rgba(54,70,245,0.25));
+        ">My Top Prop Firm <span style="background:linear-gradient(135deg,#5566ff,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Picks</span></h2>
+        <p style="color:rgba(255,255,255,0.38);font-size:0.9rem;margin:0 auto;max-width:400px;line-height:1.7;font-weight:400;">The firms I personally use and trust. Use the codes below to save on your challenge fee.</p>
+      </div>
+
+      <div class="pf-grid">
+
+        <!-- FUNDEDSEAT -->
+        <div class="pf-card featured reveal reveal-delay-1">
+          <div class="pf-badge">#1 Top Pick</div>
+          <div class="pf-logo">
+            <img src="images/fundedseat-logo.png" alt="FundedSeat" />
+          </div>
+          <div class="pf-name">FundedSeat</div>
+          <div class="pf-discount">60% OFF</div>
+          <div class="pf-code-row">
+            <div class="pf-code-label">Use Code:</div>
+            <div class="pf-code-value" id="code-fs">B9IPBS</div>
+            <button class="pf-copy-btn" onclick="copyCode('code-fs', this)">Copy</button>
+          </div>
+          <div class="pf-actions">
+            <a href="https://fundedseat.link/b9ipbs" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Visit FundedSeat</a>
+            <button class="pf-details-btn" onclick="toggleDetails(this)">
+              View Details <span class="pf-chevron">&#8964;</span>
+            </button>
+          </div>
+          <div class="pf-details">
+            <table class="pf-table">
+              <tr><td>Max Account Size</td><td>$750,000</td></tr>
+              <tr><td>Profit Split</td><td>90%</td></tr>
+              <tr><td>Drawdown Type</td><td>EOD Trailing</td></tr>
+              <tr><td>Profit Target</td><td>6%</td></tr>
+              <tr><td>Min Trading Days</td><td>None</td></tr>
+              <tr><td>Payout</td><td>Daily (within 5 hrs)</td></tr>
+              <tr><td>News Trading</td><td><span class="yes">✓</span> Always allowed</td></tr>
+              <tr><td>Overnight Holding</td><td><span class="no">✗</span> Day trade only</td></tr>
+              <tr><td>EAs / Bots</td><td><span class="no">✗</span> Not allowed</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- ALPHA FUTURES -->
+        <div class="pf-card reveal reveal-delay-2">
+          <div class="pf-badge">#2 Top Pick</div>
+          <div class="pf-logo">
+            <img src="images/alpha-futures-logo.png" alt="Alpha Futures" />
+          </div>
+          <div class="pf-name">Alpha Futures</div>
+          <div class="pf-discount">15% OFF</div>
+          <div class="pf-code-row">
+            <div class="pf-code-label">Use Code:</div>
+            <div class="pf-code-value" id="code-af">Nazar019510</div>
+            <button class="pf-copy-btn" onclick="copyCode('code-af', this)">Copy</button>
+          </div>
+          <div class="pf-actions">
+            <a href="https://app.alpha-futures.com/signup/Nazar019510/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Visit Alpha Futures</a>
+            <button class="pf-details-btn" onclick="toggleDetails(this)">
+              View Details <span class="pf-chevron">&#8964;</span>
+            </button>
+          </div>
+          <div class="pf-details">
+            <table class="pf-table">
+              <tr><td>Max Account Size</td><td>$150,000</td></tr>
+              <tr><td>Profit Split</td><td>Up to 90%</td></tr>
+              <tr><td>Drawdown Type</td><td>EOD Trailing</td></tr>
+              <tr><td>Profit Target</td><td>$1.5K – $12K</td></tr>
+              <tr><td>Min Trading Days</td><td>3 days</td></tr>
+              <tr><td>Payout</td><td>Up to 4×/month</td></tr>
+              <tr><td>News Trading</td><td><span class="yes">✓</span> 2-min buffer</td></tr>
+              <tr><td>Overnight Holding</td><td><span class="no">✗</span> Day trade only</td></tr>
+              <tr><td>EAs / Bots</td><td><span class="yes">✓</span> Allowed</td></tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="reveal" style="
+        max-width:560px; margin:48px auto 0; text-align:center;
+        font-size:0.78rem; color:rgba(255,255,255,0.22);
+        line-height:1.7; font-weight:400; letter-spacing:0.01em;
+      ">⚠ Prop firm challenges involve risk of losing the fee paid. Results are not guaranteed. Discount codes are subject to change — verify on the firm's official website before purchasing.</p>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2026 Kenpachi Trades. All rights reserved. · <a href="privacy.html" style="color:inherit;opacity:0.6;">Privacy Policy</a></div>
+      <div class="footer-disclaimer">This website is for educational purposes only and does not constitute financial advice. Trading involves significant risk of loss and is not suitable for all investors. Past performance is not indicative of future results. Always consult a licensed financial advisor before making investment decisions. Affiliate links may be present.</div>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    function toggleDetails(btn) {
+      const card = btn.closest('.pf-card');
+      card.classList.toggle('details-open');
+      btn.querySelector('.pf-chevron').style.transform = card.classList.contains('details-open') ? 'rotate(180deg)' : '';
+    }
+
+    function copyCode(id, btn) {
+      const text = document.getElementById(id).textContent.trim();
+      navigator.clipboard.writeText(text).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      });
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    }
+
+    const notifAudio = new Audio('sounds/universfield-new-notification-062-494544.mp3');
+    notifAudio.volume = 0.6;
+    let notifPlayed = false;
+    function playNotif() {
+      if (notifPlayed) return;
+      notifPlayed = true;
+      notifAudio.play().catch(() => {});
+    }
+
+    function showGiveaway() {
+      const overlay = document.getElementById('giveawayOverlay');
+      const card = document.getElementById('giveawayCard');
+      overlay.style.display = 'flex';
+      overlay.classList.add('gw-in');
+      card.classList.add('gw-in');
+    }
+    function closeGiveaway() {
+      const overlay = document.getElementById('giveawayOverlay');
+      const card = document.getElementById('giveawayCard');
+      overlay.classList.remove('gw-in');
+      card.classList.remove('gw-in');
+      overlay.classList.add('gw-out');
+      card.classList.add('gw-out');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        overlay.classList.remove('gw-out');
+        card.classList.remove('gw-out');
+      }, 280);
+      sessionStorage.setItem('giveawaySeen', '1');
+    }
+    function handleGiveaway(e, form) {
+      e.preventDefault();
+      fetch('/', { method: 'POST', body: new FormData(form) }).finally(() => {
+        form.style.display = 'none';
+        document.getElementById('giveawaySuccess').style.display = 'block';
+        setTimeout(closeGiveaway, 2500);
+      });
+    }
+
+    if (!sessionStorage.getItem('giveawaySeen')) {
+      const trigger = () => { showGiveaway(); notifAudio.play().catch(() => {}); };
+      setTimeout(trigger, 5000);
+    }
+    document.getElementById('giveawayOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeGiveaway();
+    });
+  </script>
+  <script src="site.js"></script>
+</body>
+</html>
