@@ -254,6 +254,17 @@
     const menu = document.getElementById('mobileMenu');
     if (burger) burger.addEventListener('click', () => menu.classList.toggle('open'));
 
+    // Force video autoplay on mobile (iOS/Android)
+    const bgVideo = document.querySelector('.splash-bg video');
+    if (bgVideo) {
+      bgVideo.muted = true;
+      bgVideo.playsInline = true;
+      const tryPlay = () => bgVideo.play().catch(() => {});
+      tryPlay();
+      document.addEventListener('touchstart', tryPlay, { once: true });
+      document.addEventListener('click', tryPlay, { once: true });
+    }
+
     // Trigger splash animation after tiny delay
     requestAnimationFrame(() => {
       setTimeout(() => {
