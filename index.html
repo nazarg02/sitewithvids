@@ -54,10 +54,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 28px;
       opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+      transform: translateY(40px);
+      transition: opacity 1s cubic-bezier(0.4,0,0.2,1), transform 1s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      z-index: 2;
+      padding: 0 24px;
     }
     .splash-inner.visible {
       opacity: 1;
@@ -65,13 +68,13 @@
     }
 
     .splash-avatar {
-      width: 140px;
-      height: 140px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       overflow: hidden;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      background: #111;
+      border: 3px solid rgba(255,255,255,0.15);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 24px 64px rgba(0,0,0,0.7), 0 0 60px rgba(180,30,30,0.25);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -84,145 +87,110 @@
     }
     .splash-avatar.no-img::after {
       content: 'K';
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      color: var(--blue-bright);
+      color: #fff;
     }
 
     .splash-name {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-    .splash-name .verified {
-      width: 22px;
-      height: 22px;
-      background: var(--blue);
+      gap: 10px;
+      font-size: 2rem;
+      font-weight: 800;
       color: #fff;
-      font-size: 0.68rem;
-      font-weight: 700;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.8);
     }
 
     .splash-bio {
-      font-size: 0.88rem;
-      color: var(--text-muted);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
       text-align: center;
-      line-height: 1.55;
-      margin-top: -6px;
+      line-height: 1.6;
+      margin-top: -12px;
+      letter-spacing: 0.01em;
     }
 
     .splash-socials {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       align-items: center;
       justify-content: center;
-      margin-top: 4px;
     }
     .splash-socials .social-icon {
-      width: 44px;
-      height: 44px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .splash-socials .social-icon:hover { transform: translateY(-3px); }
+    .splash-socials .social-icon:hover { transform: translateY(-4px) scale(1.08); }
     .splash-socials .social-icon--discord {
       color: #5865F2;
-      background: rgba(88,101,242,0.1);
-      border: 1px solid rgba(88,101,242,0.2);
+      background: rgba(88,101,242,0.15);
+      border: 1px solid rgba(88,101,242,0.3);
     }
     .splash-socials .social-icon--discord:hover {
-      background: rgba(88,101,242,0.2);
+      background: rgba(88,101,242,0.28);
       border-color: #5865F2;
-      box-shadow: 0 4px 16px rgba(88,101,242,0.3);
+      box-shadow: 0 8px 24px rgba(88,101,242,0.4);
     }
     .splash-socials .social-icon--x {
       color: #fff;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
     }
     .splash-socials .social-icon--x:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.3);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.1);
     }
     .splash-socials .social-icon--yt {
       color: #ff4444;
-      background: rgba(255,60,60,0.07);
-      border: 1px solid rgba(255,60,60,0.15);
+      background: rgba(255,60,60,0.12);
+      border: 1px solid rgba(255,60,60,0.25);
     }
     .splash-socials .social-icon--yt:hover {
-      background: rgba(255,60,60,0.14);
+      background: rgba(255,60,60,0.22);
       border-color: #ff4444;
-      box-shadow: 0 4px 16px rgba(255,60,60,0.2);
+      box-shadow: 0 8px 24px rgba(255,60,60,0.35);
     }
 
-    .splash-divider {
-      width: 40px;
-      height: 1px;
-      background: var(--border);
-      margin: 4px 0;
-    }
+    .splash-divider { display: none; }
 
     .splash-enter {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       font-family: var(--font);
-      font-size: 0.85rem;
+      font-size: 1rem;
       font-weight: 700;
       color: #fff;
-      background: var(--blue);
-      border: none;
-      border-radius: var(--radius);
-      padding: 12px 28px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      padding: 16px 48px;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
-      letter-spacing: 0.02em;
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+      letter-spacing: 0.06em;
       text-decoration: none;
-      margin-top: 8px;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .splash-enter:hover {
-      background: var(--blue-bright);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(54,70,245,0.45);
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
     }
     .splash-enter::after { content: '→'; transition: transform 0.2s; }
-    .splash-enter:hover::after { transform: translateX(4px); }
-
-    /* Circles decoration like QTI */
-    .splash-circles {
-      position: absolute;
-      pointer-events: none;
-      opacity: 0.06;
-    }
-    .splash-circles.top-left {
-      top: -80px;
-      left: -80px;
-      width: 400px;
-      height: 400px;
-    }
-    .splash-circles.bottom-right {
-      bottom: -80px;
-      right: -80px;
-      width: 400px;
-      height: 400px;
-    }
-    .splash-circles svg circle {
-      fill: none;
-      stroke: var(--blue);
-      stroke-width: 1;
-    }
+    .splash-enter:hover::after { transform: translateX(6px); }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0E9J28DDXG"></script>
@@ -244,20 +212,6 @@
         <source src="videos/mainbackground.mp4" type="video/mp4">
       </video>
     </div>
-    <!-- Decorative circles -->
-    <svg class="splash-circles top-left" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="200" cy="200" r="80"/>
-      <circle cx="200" cy="200" r="120"/>
-      <circle cx="200" cy="200" r="160"/>
-      <circle cx="200" cy="200" r="200"/>
-    </svg>
-    <svg class="splash-circles bottom-right" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="200" cy="200" r="80"/>
-      <circle cx="200" cy="200" r="120"/>
-      <circle cx="200" cy="200" r="160"/>
-      <circle cx="200" cy="200" r="200"/>
-    </svg>
-
     <div class="splash-inner" id="splashInner">
 
       <div class="splash-avatar" id="splashAvatar">
@@ -275,8 +229,6 @@
       <div class="splash-bio">
         Full Time Quarterly Theory<br>day trader.
       </div>
-
-      <div class="splash-divider"></div>
 
       <div class="splash-socials">
         <a href="https://discord.com/invite/soulsocietydivision" target="_blank" class="social-icon social-icon--discord" aria-label="Discord">
