@@ -70,7 +70,10 @@
       "Bash(perl -i -pe 's|\\(<span class=\"edu-card-tag-yt\"><svg[^<]*<path[^/]*/></svg>\\)\\(</span>\\)|$1YouTube$2|g' \"/Users/user/Downloads/site-alternativ-main 2/qt-education.html\")",
       "Bash(where python *)",
       "Bash(node -e ' *)",
-      "WebFetch(domain:cdn.cursors-4u.net)"
+      "WebFetch(domain:cdn.cursors-4u.net)",
+      "Bash(git rm *)",
+      "Bash(cat)",
+      "Bash(bash /tmp/check_broken.sh)"
     ]
   }
 }
