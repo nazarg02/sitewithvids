@@ -2191,7 +2191,7 @@ a { text-decoration: none; color: inherit; }
   .section-head h2 { font-size: clamp(1.5rem, 5.5vw, 2rem); }
 
   /* Pricing */
-  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 100%; margin: 0 auto; }
   .price-amount { font-size: 2.6rem; }
   .price-card { padding: 28px 22px; }
 
@@ -2236,8 +2236,13 @@ a { text-decoration: none; color: inherit; }
   .stat-item { flex: 0 0 50%; border-bottom: 1px solid var(--border2); }
 
   /* FAQ */
+  .faq-wrap { max-width: 100%; margin-top: 40px; }
   .faq-q { font-size: 0.9rem; }
   .faq-item { padding: 18px 16px; }
+
+  /* Touch targets */
+  .btn { min-height: 44px; }
+  .burger { min-width: 44px; min-height: 44px; }
 }
 
 /* ===== SMALL PHONES (max 480px) ===== */
@@ -2298,4 +2303,22 @@ a { text-decoration: none; color: inherit; }
   /* Access banner */
   .access-banner { padding: 22px 16px; }
   .access-banner h3 { font-size: 1.1rem; }
+}
+
+/* ===== VERY SMALL PHONES (max 375px) ===== */
+@media (max-width: 375px) {
+  .container { padding: 0 10px; }
+  .page-hero h1 { font-size: clamp(1.2rem, 8vw, 1.6rem); }
+  .section-head h2 { font-size: clamp(1.2rem, 7vw, 1.6rem); }
+  .price-amount { font-size: 1.9rem; }
+  .price-card { padding: 20px 14px; }
+  .faq-q { font-size: 0.82rem; }
+  .btn { font-size: 0.8rem; padding: 10px 16px; }
+  .stat-value { font-size: 1.2rem; }
+  .stat-label { font-size: 0.68rem; }
+  .promo-ticker-track span { font-size: 0.62rem; padding: 0 14px; }
+  .firm-card { padding: 16px 12px; }
+  .section-avatar-badge { width: 76px; height: 76px; }
+  .qt-module-title { font-size: 0.84rem; }
+  .splash-name { font-size: 1.2rem; }
 }
