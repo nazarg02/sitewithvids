@@ -35,8 +35,8 @@
   btn.title = 'Support';
   btn.style.cssText = [
     'position:fixed',
-    'bottom:24px',
-    'right:24px',
+    'bottom:calc(24px + env(safe-area-inset-bottom, 0px))',
+    'right:calc(24px + env(safe-area-inset-right, 0px))',
     'width:56px',
     'height:56px',
     'border-radius:50%',

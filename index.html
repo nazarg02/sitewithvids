@@ -192,6 +192,25 @@
     }
     .splash-enter::after { content: '→'; transition: transform 0.2s; }
     .splash-enter:hover::after { transform: translateX(6px); }
+
+    @media (max-width: 768px) {
+      .splash-inner { gap: 20px; padding: 0 20px; }
+      .splash-avatar {
+        width: 130px;
+        height: 130px;
+      }
+      .splash-name { font-size: 1.55rem; }
+      .splash-bio { font-size: 0.9rem; }
+      .splash-socials { gap: 12px; }
+      .splash-socials .social-icon { width: 48px; height: 48px; }
+      .splash-enter { padding: 14px 40px; font-size: 0.95rem; }
+    }
+
+    @media (max-width: 390px) {
+      .splash-avatar { width: 110px; height: 110px; }
+      .splash-name { font-size: 1.35rem; }
+      .splash-enter { padding: 13px 32px; }
+    }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0E9J28DDXG"></script>
