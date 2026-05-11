@@ -532,6 +532,17 @@
   </footer>
 
   <script>
+    // Force heroVideo autoplay on mobile
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+      heroVideo.muted = true;
+      heroVideo.playsInline = true;
+      const tryPlayHero = () => heroVideo.play().catch(() => {});
+      tryPlayHero();
+      document.addEventListener('touchstart', tryPlayHero, { once: true });
+      document.addEventListener('click', tryPlayHero, { once: true });
+    }
+
     const burger = document.getElementById('burger');
     const menu = document.getElementById('mobileMenu');
     const ticker = document.querySelector('.promo-ticker');
