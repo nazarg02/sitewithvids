@@ -622,8 +622,8 @@
           if (callback) callback();
         }, { once: true });
       };
-      tmp.onload = () => setTimeout(apply, 280);
-      tmp.onerror = () => setTimeout(apply, 280);
+      tmp.onload = apply;
+      tmp.onerror = apply;
       tmp.src = src;
     }
 
