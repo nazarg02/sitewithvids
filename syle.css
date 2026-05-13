@@ -1394,15 +1394,13 @@ a { text-decoration: none; color: inherit; }
   object-fit: contain;
   display: block;
   background: #fff;
-  transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1);
-  transform: translateY(0) scale(1);
+  transition: opacity 0.2s ease;
 }
 .feat-panel-img-wrap img.fading {
   opacity: 0;
-  transform: translateY(10px) scale(0.98);
 }
 .feat-panel-img-wrap img.entering {
-  animation: img-enter 0.38s cubic-bezier(0.22,1,0.36,1) forwards;
+  animation: img-enter 0.2s ease forwards;
 }
 .feat-panel-img-wrap .feat-caption {
   position: absolute;
@@ -1733,8 +1731,8 @@ a { text-decoration: none; color: inherit; }
   animation: img-enter 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 @keyframes img-enter {
-  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Bottom toolbar */
