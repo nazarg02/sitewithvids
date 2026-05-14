@@ -208,6 +208,59 @@
       z-index: 10000;
     }
     #feat-img { cursor: zoom-in; }
+    .btn-try-free {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(34,197,94,0.4), 0 0 0 1px rgba(34,197,94,0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .btn-try-free:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(34,197,94,0.55), 0 0 0 1px rgba(34,197,94,0.4);
+    }
+    .btn-scroll-plans {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #1a1f3c 0%, #0d0f1a 100%);
+      color: #fff;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(54,70,245,0.35);
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+    }
+    .btn-scroll-plans::after {
+      content: '↓';
+      font-size: 1rem;
+      opacity: 0.6;
+      transition: transform 0.22s;
+    }
+    .btn-scroll-plans:hover {
+      border-color: rgba(54,70,245,0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(54,70,245,0.3);
+    }
+    .btn-scroll-plans:hover::after {
+      transform: translateY(3px);
+    }
+    @media (max-width: 768px) {
+      .btn-scroll-plans { display: none; }
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- JSON-LD Structured Data -->
@@ -420,6 +473,7 @@
             <img id="feat-img" src="images/Quarterly Theory (2).png" alt="Indicator Overview" />
             <p class="feat-caption" id="feat-caption"></p>
           </div>
+          <a href="#pricing" class="btn-scroll-plans" style="width:100%;padding:15px 0;margin-top:12px;margin-bottom:4px;" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">View Plans</a>
           <div class="feat-panel-nav" id="featPanelNav">
             <button class="feat-panel-btn" id="featPrevBtn" aria-label="Previous">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -440,7 +494,7 @@
   </section>
 
   <!-- PRICING -->
-  <section class="ind-pricing">
+  <section class="ind-pricing" id="pricing">
     <div class="container">
       <div class="section-head center reveal" style="margin:0 0 40px;">
         <h2>Choose Your <em>Plan</em></h2>
@@ -499,6 +553,7 @@
             <li><span class="check">✓</span> Future indicator updates included</li>
           </ul>
           <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
+          <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener noreferrer" class="btn btn-block btn-try-free" style="margin-top:10px;">Try for Free</a>
         </div>
 
         <div class="price-card reveal reveal-delay-3">
