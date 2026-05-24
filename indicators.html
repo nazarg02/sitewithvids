@@ -472,20 +472,20 @@
           <div class="feat-panel-img-wrap">
             <img id="feat-img" src="images/Quarterly Theory (2).png" alt="Indicator Overview" />
             <p class="feat-caption" id="feat-caption"></p>
+            <div class="feat-panel-nav" id="featPanelNav">
+              <button class="feat-panel-btn" id="featPrevBtn" aria-label="Previous">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <div class="feat-panel-dots" id="featDots">
+                <span class="feat-panel-dot active" data-idx="0"></span>
+                <span class="feat-panel-dot" data-idx="1"></span>
+              </div>
+              <button class="feat-panel-btn" id="featNextBtn" aria-label="Next">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
           </div>
           <a href="#pricing" class="btn-scroll-plans" style="width:100%;padding:15px 0;margin-top:12px;margin-bottom:4px;" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">View Plans</a>
-          <div class="feat-panel-nav" id="featPanelNav">
-            <button class="feat-panel-btn" id="featPrevBtn" aria-label="Previous">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <div class="feat-panel-dots" id="featDots">
-              <span class="feat-panel-dot active" data-idx="0"></span>
-              <span class="feat-panel-dot" data-idx="1"></span>
-            </div>
-            <button class="feat-panel-btn" id="featNextBtn" aria-label="Next">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
         </div>
 
       </div>
@@ -545,6 +545,13 @@
               <div class="lt-sep">:</div>
               <div class="lt-unit lt-unit-sec"><span id="lt-secs">00</span><em>SEC</em></div>
             </div>
+            <div style="margin-top:12px;display:flex;align-items:center;justify-content:center;gap:7px;">
+              <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e63946;box-shadow:0 0 8px rgba(230,57,70,0.9);animation:lt-blink 1.2s ease-in-out infinite;flex-shrink:0;"></span>
+              <span style="font-size:0.72rem;font-weight:700;color:#e63946;letter-spacing:0.03em;">Expires Mon, May 26 · 11:50 PM ET</span>
+            </div>
+            <style>
+              @keyframes lt-blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+            </style>
           </div>
           <div class="price-divider"></div>
           <ul class="price-features">
@@ -852,13 +859,8 @@
     }
 
     (function () {
-      var KEY = 'lt_deadline_v3';
-      var deadline = localStorage.getItem(KEY);
-      if (!deadline) {
-        deadline = Date.now() + 7 * 24 * 60 * 60 * 1000;
-        localStorage.setItem(KEY, deadline);
-      }
-      deadline = parseInt(deadline);
+      // Fixed UTC deadline: Monday 2026-05-26 23:50 EDT (= 2026-05-27 03:50 UTC) — same for everyone
+      var deadline = new Date('2026-05-27T03:50:00Z').getTime();
       function pad(n) { return n < 10 ? '0' + n : n; }
       function tick() {
         var diff = deadline - Date.now();
