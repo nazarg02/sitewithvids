@@ -147,6 +147,15 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 28px rgba(34,197,94,0.55), 0 0 0 1px rgba(34,197,94,0.4);
     }
+    @media (max-width: 768px) {
+      .prem-faq { padding: 44px 0 60px; }
+      .prem-pricing { padding: 0; }
+      .prem-pricing .container { padding-bottom: 40px; }
+      .page-hero { padding: 24px 0 20px !important; }
+      .page-hero h1 { font-size: clamp(1.4rem, 6vw, 2rem) !important; }
+      .btn-try-free-prem { font-size: 0.9rem; padding: 13px 0; }
+      .espada-hero-img { max-height: 200px !important; opacity: 0.5 !important; }
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Google Analytics -->
@@ -204,7 +213,7 @@
 
   <!-- PAGE HERO -->
   <section class="page-hero" style="background:#080910; position:relative; overflow:hidden;">
-    <img src="images/espada.png" alt="" style="position:absolute; right:2%; top:50%; transform:translateY(-50%); height:220%; max-height:420px; opacity:1; pointer-events:none; user-select:none; mix-blend-mode:screen; -webkit-mask-image:linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%); mask-image:linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);">
+    <img src="images/espada.png" alt="" class="espada-hero-img" style="position:absolute; right:2%; top:50%; transform:translateY(-50%); height:220%; max-height:420px; opacity:1; pointer-events:none; user-select:none; mix-blend-mode:screen; -webkit-mask-image:linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%); mask-image:linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);">
     <div class="container" style="position:relative; z-index:1;">
       <h1 class="reveal reveal-delay-1">Choose Your <em>Plan</em></h1>
       <p class="reveal reveal-delay-2">Start free or unlock full access. Cancel anytime — no long-term commitment required.</p>
