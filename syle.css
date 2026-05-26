@@ -1771,7 +1771,11 @@ a { text-decoration: none; color: inherit; }
 .feat-caption { display: none !important; }
 
 @media (max-width: 860px) {
-  .feat-showcase { flex-direction: column; }
+  .feat-showcase {
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
   .feat-list {
     width: 100%;
     flex-direction: row;
@@ -1779,24 +1783,28 @@ a { text-decoration: none; color: inherit; }
     gap: 8px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
+    padding: 4px 4px 8px;
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
   }
   .feat-list::-webkit-scrollbar { display: none; }
   .feat-item {
-    width: auto;
     flex-shrink: 0;
     font-size: 0.82rem;
-    padding: 10px 16px;
+    padding: 9px 16px;
     scroll-snap-align: start;
-    min-height: 44px;
+    min-height: 42px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
   }
   .feat-panel { width: 100%; }
-  .feat-panel-img-wrap { border-radius: 8px; aspect-ratio: 16/9; }
+  .feat-panel-img-wrap {
+    border-radius: 10px;
+    aspect-ratio: 16/9;
+    width: 100%;
+  }
   .feat-panel-img-wrap img { object-fit: contain; }
 }
 

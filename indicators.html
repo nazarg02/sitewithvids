@@ -259,8 +259,21 @@
     .btn-scroll-plans:hover::after {
       transform: translateY(3px);
     }
+    /* ── ≤860px: tablet + phone ── */
+    @media (max-width: 860px) {
+      /* Hide desktop View Plans from feat-list — ind-mobile-plans handles it */
+      .btn-view-plans-anim { display: none !important; }
+      .btn-scroll-plans   { display: none !important; }
+
+      /* Section head: compact */
+      .section-avatar-badge { width: 76px; height: 76px; margin-bottom: 12px; }
+      .section-light .section-head { margin-bottom: 28px !important; }
+      .section-light .section-head h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+      .section-light .section-head p  { font-size: 0.88rem; }
+    }
+
+    /* ── ≤768px: phone only ── */
     @media (max-width: 768px) {
-      .btn-scroll-plans { display: none; }
       .ind-pricing { padding: 44px 0 60px; }
       .ind-pricing .section-head { margin-bottom: 24px !important; }
       .lt-unit span { font-size: 1.4rem; }
@@ -269,18 +282,13 @@
       .btn-try-free { font-size: 0.88rem; padding: 13px 20px; }
       .promo-code-row { padding: 7px 8px 7px 14px; }
 
-      /* Hero image — contain so transparent bg cards show fully */
+      /* Hero */
       .page-hero-img { max-height: 180px; }
       .page-hero-img img { object-fit: contain; max-height: 180px; background: transparent; }
 
-      /* Section head avatar */
-      .section-avatar-badge { width: 72px; height: 72px; }
-
-      /* feat-panel on mobile — aspect-ratio handles height */
+      /* feat-showcase column, full width */
+      .feat-showcase { gap: 12px; margin-bottom: 32px; }
       .feat-panel { width: 100%; }
-
-      /* View Plans anim button hidden on mobile (btn-scroll-plans already hidden) */
-      .btn-view-plans-anim { display: none; }
     }
 
     /* ── View Plans animated button ── */
