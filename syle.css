@@ -1400,7 +1400,7 @@ a { text-decoration: none; color: inherit; }
   opacity: 0;
 }
 .feat-panel-img-wrap img.entering {
-  animation: img-enter 0.2s ease forwards;
+  opacity: 1;
 }
 .feat-panel-img-wrap .feat-caption {
   position: absolute;

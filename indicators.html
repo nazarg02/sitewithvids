@@ -755,99 +755,114 @@
     });
 
     // Feature showcase
-    const featItems = document.querySelectorAll('.feat-item');
-    const featImg = document.getElementById('feat-img');
-    const featCaption = document.getElementById('feat-caption');
+    const featItems = Array.from(document.querySelectorAll('.feat-item'));
+    const featImg   = document.getElementById('feat-img');
+    const featCaption  = document.getElementById('feat-caption');
     const featPanelNav = document.getElementById('featPanelNav');
-    const featDots = document.querySelectorAll('.feat-panel-dot');
-    const featPrevBtn = document.getElementById('featPrevBtn');
-    const featNextBtn = document.getElementById('featNextBtn');
+    const featDots  = document.querySelectorAll('.feat-panel-dot');
+    const featPrevBtn  = document.getElementById('featPrevBtn');
+    const featNextBtn  = document.getElementById('featNextBtn');
+    const imgWrap   = document.querySelector('.feat-panel-img-wrap');
 
-    const OTE_SLIDES = [
-      'images/ote-levels-new.png',
-      'images/ote-level-2-new.png'
-    ];
+    const OTE_SLIDES = ['images/ote-levels-new.png', 'images/ote-level-2-new.png'];
     let slideInterval = null;
     let oteIdx = 0;
+    let currentTabIdx = 0;
+    let switching = false;
 
     function setCaption(text) {
       featCaption.textContent = text || '';
       featCaption.style.display = text ? 'block' : 'none';
     }
-
     function setDot(idx) {
       featDots.forEach((d, i) => d.classList.toggle('active', i === idx));
     }
 
-    function fadeSwitch(src, label, callback) {
-      featImg.classList.remove('entering');
+    /* Smooth, lag-free image swap */
+    function switchImg(src, label) {
+      if (switching) return;
+      switching = true;
       featImg.classList.add('fading');
       const tmp = new Image();
       const apply = () => {
         featImg.src = src;
         if (label) featImg.alt = label;
-        featImg.classList.remove('fading');
-        featImg.classList.add('entering');
-        featImg.addEventListener('animationend', () => {
-          featImg.classList.remove('entering');
-          if (callback) callback();
-        }, { once: true });
+        requestAnimationFrame(() => {
+          featImg.classList.remove('fading');
+          featImg.classList.add('entering');
+          setTimeout(() => { featImg.classList.remove('entering'); switching = false; }, 200);
+        });
       };
       tmp.onload = apply;
       tmp.onerror = apply;
       tmp.src = src;
     }
 
-    function showOteSlide(idx) {
-      oteIdx = (idx + OTE_SLIDES.length) % OTE_SLIDES.length;
-      setDot(oteIdx);
-      fadeSwitch(OTE_SLIDES[oteIdx], 'OTE Levels');
-    }
-
-    function startOteSlideshow() {
-      featPanelNav.classList.add('visible');
-      showOteSlide(0);
-      slideInterval = setInterval(() => showOteSlide(oteIdx + 1), 4000);
-    }
-
     function stopSlideshow() {
-      if (slideInterval) { clearInterval(slideInterval); slideInterval = null; }
+      clearInterval(slideInterval); slideInterval = null;
       featPanelNav.classList.remove('visible');
     }
+    function startOteSlideshow() {
+      featPanelNav.classList.add('visible');
+      oteIdx = 0; setDot(0);
+      switchImg(OTE_SLIDES[0], 'OTE Levels');
+      slideInterval = setInterval(() => {
+        oteIdx = (oteIdx + 1) % OTE_SLIDES.length;
+        setDot(oteIdx); switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
+      }, 4000);
+    }
 
-    featPrevBtn.addEventListener('click', () => {
+    /* Activate tab by index — works for ALL tabs */
+    function activateTab(idx) {
+      idx = ((idx % featItems.length) + featItems.length) % featItems.length;
+      currentTabIdx = idx;
+      featItems.forEach(i => i.classList.remove('active'));
+      featItems[idx].classList.add('active');
+      /* Scroll tab into view on mobile */
+      featItems[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      stopSlideshow();
+      setCaption(featItems[idx].dataset.caption || '');
+      if (featItems[idx].dataset.key === 'ote') startOteSlideshow();
+      else switchImg(featItems[idx].dataset.img, featItems[idx].dataset.label);
+    }
+
+    /* Tab clicks */
+    featItems.forEach((item, idx) => item.addEventListener('click', () => activateTab(idx)));
+
+    /* Prev / Next — navigate ALL tabs */
+    featPrevBtn.addEventListener('click', () => activateTab(currentTabIdx - 1));
+    featNextBtn.addEventListener('click', () => activateTab(currentTabIdx + 1));
+
+    /* OTE dots */
+    featDots.forEach(dot => dot.addEventListener('click', () => {
       clearInterval(slideInterval);
-      showOteSlide(oteIdx - 1);
-      slideInterval = setInterval(() => showOteSlide(oteIdx + 1), 4000);
+      oteIdx = parseInt(dot.dataset.idx); setDot(oteIdx);
+      switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
+      slideInterval = setInterval(() => {
+        oteIdx = (oteIdx + 1) % OTE_SLIDES.length;
+        setDot(oteIdx); switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
+      }, 4000);
+    }));
+
+    /* Keyboard ← → */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  activateTab(currentTabIdx - 1);
+      if (e.key === 'ArrowRight') activateTab(currentTabIdx + 1);
     });
 
-    featNextBtn.addEventListener('click', () => {
-      clearInterval(slideInterval);
-      showOteSlide(oteIdx + 1);
-      slideInterval = setInterval(() => showOteSlide(oteIdx + 1), 4000);
-    });
-
-    featDots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        clearInterval(slideInterval);
-        showOteSlide(parseInt(dot.dataset.idx));
-        slideInterval = setInterval(() => showOteSlide(oteIdx + 1), 4000);
-      });
-    });
-
-    featItems.forEach(item => {
-      item.addEventListener('click', () => {
-        featItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        stopSlideshow();
-        setCaption(item.dataset.caption || '');
-        if (item.dataset.key === 'ote') {
-          startOteSlideshow();
-        } else {
-          fadeSwitch(item.dataset.img, item.dataset.label);
-        }
-      });
-    });
+    /* Swipe on image panel (mobile + PC drag) */
+    let swipeStartX = 0, swipeStartY = 0;
+    imgWrap.addEventListener('touchstart', e => {
+      swipeStartX = e.touches[0].clientX;
+      swipeStartY = e.touches[0].clientY;
+    }, { passive: true });
+    imgWrap.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - swipeStartX;
+      const dy = e.changedTouches[0].clientY - swipeStartY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        activateTab(dx < 0 ? currentTabIdx + 1 : currentTabIdx - 1);
+      }
+    }, { passive: true });
   </script>
   <!-- Lightbox -->
   <div id="lightbox">
