@@ -268,7 +268,61 @@
       .lt-sep { font-size: 1.1rem; }
       .btn-try-free { font-size: 0.88rem; padding: 13px 20px; }
       .promo-code-row { padding: 7px 8px 7px 14px; }
+
+      /* Hero image — contain so transparent bg cards show fully */
+      .page-hero-img { max-height: 180px; }
+      .page-hero-img img { object-fit: contain; max-height: 180px; background: transparent; }
+
+      /* Section head avatar */
+      .section-avatar-badge { width: 72px; height: 72px; }
+
+      /* feat-panel fills width and auto height on mobile */
+      .feat-panel { align-self: auto; min-height: 220px; }
+
+      /* View Plans anim button hidden on mobile (btn-scroll-plans already hidden) */
+      .btn-view-plans-anim { display: none; }
     }
+
+    /* ── View Plans animated button ── */
+    .btn-view-plans-anim {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px 0;
+      text-align: center;
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: #fff;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #1a1b2e 0%, #2d2f5e 40%, #3640f5 60%, #1a1b2e 100%);
+      background-size: 250% 100%;
+      animation: btn-shimmer 2.4s ease infinite;
+      box-shadow: 0 4px 18px rgba(54,64,245,0.35);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-view-plans-anim:hover {
+      box-shadow: 0 8px 28px rgba(54,64,245,0.55);
+      transform: translateY(-2px);
+    }
+    @keyframes btn-shimmer {
+      0%   { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    /* ── Decorative squiggles ── */
+    .section-light { position: relative; }
+    .ind-deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .section-light .container { position: relative; z-index: 1; }
+    .ind-deco svg { position: absolute; }
+    .pill-1 { width: 155px; top: 6%;  left: 12%;  opacity: 0.8; transform: rotate(15deg); }
+    .pill-2 { width: 140px; bottom: 8%; left: 5%;  opacity: 0.65; transform: rotate(18deg); }
+    .pill-3 { width: 150px; top: 6%;  right: 12%; opacity: 0.8; transform: rotate(-18deg); }
+    .pill-1, .pill-2, .pill-3 { position: absolute; pointer-events: none; mix-blend-mode: multiply; }
+    @media (max-width: 860px) { .ind-deco { display: none; } }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- JSON-LD Structured Data -->
@@ -362,7 +416,7 @@
         <p class="reveal reveal-delay-2">Built specifically for Smart Money and Quarterly Theory traders. Works on any asset, any timeframe.</p>
       </div>
       <div class="page-hero-img reveal reveal-delay-2">
-        <img src="images/headeradd.png" alt="Kenpachi QT Indicator Preview" />
+        <img src="images/header-bb-photoroom.png" alt="Kenpachi QT Indicator Preview" />
       </div>
     </div>
   </section>
@@ -433,6 +487,13 @@
 
   <section class="section section-light">
 
+    <!-- decorative pills -->
+    <div class="ind-deco" aria-hidden="true">
+      <img class="pill-1" src="images/Updated Pictures/Digital Marketing Banner with Energetic Colors (2).png" alt="" />
+      <img class="pill-2" src="images/Updated Pictures/Digital Marketing Banner with Energetic Colors (3).png" alt="" />
+      <img class="pill-3" src="images/Updated Pictures/Digital Marketing Banner with Energetic Colors (4).png" alt="" />
+    </div>
+
     <div class="container">
 
       <div class="section-head center reveal" style="margin-bottom:52px;">
@@ -470,12 +531,15 @@
           <div class="feat-item feat-item-new" data-img="images/ote-levels-new.png" data-key="ote" data-label="OTE Levels" data-caption="">
             OTE Levels <span class="feat-arrow">›</span>
           </div>
+          <a href="#pricing" class="btn-scroll-plans btn-view-plans-anim" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">
+            View Plans &darr;
+          </a>
         </div>
 
         <!-- Image panel -->
         <div class="feat-panel">
           <div class="feat-panel-img-wrap">
-            <img id="feat-img" src="images/Quarterly Theory (2).png" alt="Indicator Overview" />
+            <img id="feat-img" src="images/ind-overview.png" alt="Indicator Overview" />
             <p class="feat-caption" id="feat-caption"></p>
             <div class="feat-panel-nav" id="featPanelNav">
               <button class="feat-panel-btn" id="featPrevBtn" aria-label="Previous">
@@ -490,7 +554,6 @@
               </button>
             </div>
           </div>
-          <a href="#pricing" class="btn-scroll-plans" style="width:100%;padding:15px 0;margin-top:12px;margin-bottom:4px;" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">View Plans</a>
         </div>
 
       </div>
