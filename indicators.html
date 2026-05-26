@@ -829,9 +829,26 @@
     /* Tab clicks */
     featItems.forEach((item, idx) => item.addEventListener('click', () => activateTab(idx)));
 
-    /* Prev / Next — navigate ALL tabs */
-    featPrevBtn.addEventListener('click', () => activateTab(currentTabIdx - 1));
-    featNextBtn.addEventListener('click', () => activateTab(currentTabIdx + 1));
+    /* Navigate OTE slides or tabs depending on current context */
+    function isOteActive() {
+      return featItems[currentTabIdx] && featItems[currentTabIdx].dataset.key === 'ote';
+    }
+    function navigateOte(dir) {
+      clearInterval(slideInterval);
+      oteIdx = (oteIdx + dir + OTE_SLIDES.length) % OTE_SLIDES.length;
+      setDot(oteIdx);
+      switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
+      slideInterval = setInterval(() => {
+        oteIdx = (oteIdx + 1) % OTE_SLIDES.length;
+        setDot(oteIdx); switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
+      }, 4000);
+    }
+    function navigatePrev() { isOteActive() ? navigateOte(-1) : activateTab(currentTabIdx - 1); }
+    function navigateNext() { isOteActive() ? navigateOte(1)  : activateTab(currentTabIdx + 1); }
+
+    /* Prev / Next */
+    featPrevBtn.addEventListener('click', navigatePrev);
+    featNextBtn.addEventListener('click', navigateNext);
 
     /* OTE dots */
     featDots.forEach(dot => dot.addEventListener('click', () => {
@@ -846,8 +863,8 @@
 
     /* Keyboard ← → */
     document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft')  activateTab(currentTabIdx - 1);
-      if (e.key === 'ArrowRight') activateTab(currentTabIdx + 1);
+      if (e.key === 'ArrowLeft')  navigatePrev();
+      if (e.key === 'ArrowRight') navigateNext();
     });
 
     /* Swipe on image panel (mobile + PC drag) */
@@ -860,7 +877,7 @@
       const dx = e.changedTouches[0].clientX - swipeStartX;
       const dy = e.changedTouches[0].clientY - swipeStartY;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-        activateTab(dx < 0 ? currentTabIdx + 1 : currentTabIdx - 1);
+        dx < 0 ? navigateNext() : navigatePrev();
       }
     }, { passive: true });
   </script>
