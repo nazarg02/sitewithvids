@@ -1332,12 +1332,11 @@ a { text-decoration: none; color: inherit; }
   flex: 1;
   min-width: 0;
   position: relative;
-  align-self: stretch;
 }
 .feat-panel-img-wrap {
   width: 100%;
-  height: 100%;
-  background: #fff;
+  aspect-ratio: 16/9;
+  background: #f5f6f8;
   border-radius: 10px;
   border: 1.5px solid rgba(13,14,20,0.13);
   box-shadow: 0 4px 32px rgba(0,0,0,0.07);
@@ -1392,7 +1391,7 @@ a { text-decoration: none; color: inherit; }
 .feat-panel-img-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   background: #fff;
   transition: opacity 0.2s ease;
@@ -2102,6 +2101,20 @@ a { text-decoration: none; color: inherit; }
 /* Section-head on light */
 .section-light .section-head h2 { color: #0d0e14; }
 .section-light .section-head p { color: #6b7280; }
+
+/* ===== MacBook 13" (1280px) ===== */
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .feat-showcase { gap: 28px; }
+  .feat-list { width: 260px; }
+  .feat-item { padding: 11px 16px; font-size: 0.84rem; }
+}
+
+/* ===== MacBook 14–16" / 1440–1600px ===== */
+@media (min-width: 1400px) and (max-width: 1600px) {
+  .feat-showcase { gap: 32px; }
+  .feat-list { width: 290px; }
+  .feat-item { padding: 12px 18px; font-size: 0.87rem; }
+}
 
 /* ===== 1920px OPTIMIZATION ===== */
 @media (min-width: 1600px) {
