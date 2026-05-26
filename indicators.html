@@ -318,16 +318,42 @@
     .ind-deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
     .section-light .container { position: relative; z-index: 1; }
     .ind-deco svg { position: absolute; }
-    .pill-1 { width: 155px; top: 6%;  left: 12%;  opacity: 0.9; transform: rotate(15deg); }
-    .pill-2 { width: 140px; bottom: 8%; left: 5%;  opacity: 0.8; transform: rotate(18deg); }
-    .pill-3 { width: 150px; top: 6%;  right: 12%; opacity: 0.9; transform: rotate(-18deg); }
+    .pill-1 { width: 150px; top: 5%;  left: 11%;  opacity: 1; transform: rotate(15deg); }
+    .pill-2 { width: 135px; bottom: 7%; left: 4%;  opacity: 1; transform: rotate(18deg); }
+    .pill-3 { width: 145px; top: 5%;  right: 11%; opacity: 1; transform: rotate(-18deg); }
     .pill-1, .pill-2, .pill-3 {
       position: absolute;
       pointer-events: none;
-      mix-blend-mode: multiply;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.18));
     }
     @media (max-width: 860px) { .ind-deco { display: none; } }
+
+    /* Mobile View Plans button — shown only below 860px */
+    .ind-mobile-plans {
+      display: none;
+    }
+    @media (max-width: 860px) {
+      .ind-mobile-plans {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        margin-top: 16px;
+        padding: 15px 0;
+        background: linear-gradient(90deg, #1a1b2e 0%, #2d2f5e 40%, #3640f5 60%, #1a1b2e 100%);
+        background-size: 250% 100%;
+        animation: btn-shimmer 2.4s ease infinite;
+        color: #fff;
+        font-family: 'Instrument Sans', sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.04em;
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: 0 4px 18px rgba(54,64,245,0.35);
+      }
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- JSON-LD Structured Data -->
@@ -494,9 +520,9 @@
 
     <!-- decorative pills -->
     <div class="ind-deco" aria-hidden="true">
-      <img class="pill-1" src="images/Updated Pictures/Digital Marketing Banner with Energetic Colors (2).png" alt="" />
-      <img class="pill-2" src="images/Updated Pictures/Digital Marketing Banner with Energetic Colors (3).png" alt="" />
-      <img class="pill-3" src="images/Updated Pictures/Digital Marketing Banner with Energetic Colors (4).png" alt="" />
+      <img class="pill-1" src="images/pill-blue.png" alt="" />
+      <img class="pill-2" src="images/pill-yellow.png" alt="" />
+      <img class="pill-3" src="images/pill-green.png" alt="" />
     </div>
 
     <div class="container">
@@ -559,6 +585,8 @@
               </button>
             </div>
           </div>
+          <!-- Mobile-only View Plans button — shows below image on phones/tablets -->
+          <a href="#pricing" class="ind-mobile-plans" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">View Plans ↓</a>
         </div>
 
       </div>
