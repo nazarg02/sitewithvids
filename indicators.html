@@ -31,6 +31,26 @@
     .ind-pricing {
       background: #080910;
       padding: 80px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ind-pricing .bg-pill {
+      position: absolute;
+      width: 320px;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.18;
+      filter: blur(0.5px);
+    }
+    .ind-pricing .bg-pill-left {
+      left: -80px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-28deg);
+    }
+    .ind-pricing .bg-pill-right {
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%) rotate(28deg);
     }
     .ind-pricing .section-head h2 { color: #fff; }
     .ind-pricing .section-head p { color: rgba(255,255,255,0.45); }
@@ -40,205 +60,270 @@
     .ind-pricing .pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1060px;
+      gap: 28px;
+      max-width: 1080px;
       margin: 0 auto 64px;
     }
     .ind-pricing .card-gif-wrap { display: none; }
 
+    /* Base card */
     .ind-pricing .price-card {
-      background: linear-gradient(160deg, #111420 0%, #0d0f1a 100%);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.45);
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      position: relative;
     }
-    .ind-pricing .price-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 20px 56px rgba(0,0,0,0.65);
-      border-color: rgba(255,255,255,0.14);
+    /* Top accent stripe */
+    .ind-pricing .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      z-index: 2;
     }
-    .ind-pricing .price-card-green { border-color: rgba(255,255,255,0.08) !important; }
-    .ind-pricing .price-card-green:hover { border-color: rgba(255,255,255,0.14) !important; box-shadow: 0 20px 56px rgba(0,0,0,0.65) !important; }
 
-    /* Pill image at top */
+    /* Monthly — black + blue accents */
+    .ind-pricing .price-card:nth-child(1) {
+      background: #08090f;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    }
+    .ind-pricing .price-card:nth-child(1)::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+    .ind-pricing .price-card:nth-child(1):hover {
+      transform: translateY(-7px);
+      box-shadow: 0 24px 60px rgba(37,99,235,0.35);
+      border-color: rgba(96,165,250,0.30);
+    }
+
+    /* Lifetime — black + green accents */
+    .ind-pricing .price-card:nth-child(2),
+    .ind-pricing .price-card-green {
+      background: #08090f !important;
+      border: 1.5px solid rgba(255,255,255,0.08) !important;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important;
+    }
+    .ind-pricing .price-card:nth-child(2)::before,
+    .ind-pricing .price-card-green::before { background: linear-gradient(90deg, #16a34a, #4ade80) !important; }
+    .ind-pricing .price-card:nth-child(2):hover,
+    .ind-pricing .price-card-green:hover {
+      transform: translateY(-7px) !important;
+      box-shadow: 0 24px 60px rgba(22,163,74,0.35) !important;
+      border-color: rgba(74,222,128,0.30) !important;
+    }
+
+    /* 3 Months — black + red accents */
+    .ind-pricing .price-card:nth-child(3) {
+      background: #08090f;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    }
+    .ind-pricing .price-card:nth-child(3)::before { background: linear-gradient(90deg, #dc2626, #f87171); }
+    .ind-pricing .price-card:nth-child(3):hover {
+      transform: translateY(-7px);
+      box-shadow: 0 24px 60px rgba(220,38,38,0.35);
+      border-color: rgba(248,113,113,0.30);
+    }
+
+    /* Pill image at top — tinted bg per card */
     .card-pill-wrap {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px 24px 20px;
-      background: #f4f5f8;
-      border-radius: 18px 18px 0 0;
+      padding: 32px 24px 26px;
+      border-radius: 14px 14px 0 0;
       position: relative;
     }
-    .card-pill-wrap::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 28px;
-      background: linear-gradient(to bottom, transparent, #111420);
-      pointer-events: none;
+    .ind-pricing .price-card:nth-child(1) .card-pill-wrap {
+      background: linear-gradient(to bottom, #cfe0ff 50%, #08090f 100%);
+    }
+    .ind-pricing .price-card:nth-child(2) .card-pill-wrap,
+    .ind-pricing .price-card-green .card-pill-wrap {
+      background: linear-gradient(to bottom, #c8f0da 50%, #08090f 100%);
+    }
+    .ind-pricing .price-card:nth-child(3) .card-pill-wrap {
+      background: linear-gradient(to bottom, #ffd8d0 50%, #08090f 100%);
     }
     .card-pill-wrap img {
-      height: 80px;
+      height: 86px;
       width: auto;
       object-fit: contain;
       mix-blend-mode: multiply;
-      transition: transform 0.4s ease;
+      transition: transform 0.35s ease;
       position: relative;
       z-index: 1;
     }
     .ind-pricing .price-card:hover .card-pill-wrap img {
-      transform: scale(1.08) translateY(-3px);
+      transform: scale(1.07) translateY(-4px);
     }
 
+    /* Card body */
     .card-body {
-      padding: 4px 26px 26px;
+      padding: 22px 28px 28px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
-    .ind-pricing .price-tier-name {
-      font-size: 0.56rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #1a1a2e;
-      margin-bottom: 0;
-      text-align: center;
+    .ind-pricing .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      margin-bottom: 4px;
     }
     .ind-pricing .price-amount {
-      font-size: 3rem;
+      font-size: 2.4rem;
       font-weight: 800;
-      color: #fff;
+      color: #ffffff;
       line-height: 1;
-      margin-bottom: 5px;
+      letter-spacing: -0.03em;
       font-family: 'Syne', sans-serif;
     }
     .ind-pricing .price-amount sup {
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      vertical-align: super;
-      margin-right: 2px;
+      vertical-align: baseline;
+      position: relative;
+      top: -0.7rem;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0;
     }
     .ind-pricing .price-period {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.38);
-      margin-bottom: 18px;
+      color: rgba(255,255,255,0.40);
+      margin-bottom: 22px;
+      letter-spacing: 0.01em;
     }
-    .ind-pricing .price-row { display: block; }
+    .ind-pricing .price-row { display: flex; }
     .ind-pricing .price-divider {
       height: 1px;
-      background: rgba(255,255,255,0.07);
-      margin: 0 0 16px;
+      margin: 0 0 20px;
       display: block;
     }
+    .ind-pricing .price-card:nth-child(1) .price-divider { background: rgba(96,165,250,0.18); }
+    .ind-pricing .price-card:nth-child(2) .price-divider,
+    .ind-pricing .price-card-green .price-divider { background: rgba(34,197,94,0.18); }
+    .ind-pricing .price-card:nth-child(3) .price-divider { background: rgba(239,68,68,0.18); }
+
+    /* Features */
     .ind-pricing .price-features {
       list-style: none;
       padding: 0;
-      margin: 0 0 22px;
+      margin: 0 0 26px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 14px;
       flex: 1;
     }
     .ind-pricing .price-features li {
-      color: rgba(255,255,255,0.65);
-      font-size: 0.84rem;
+      font-size: 0.88rem;
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.4;
+      align-items: center;
+      gap: 10px;
+      line-height: 1;
+      white-space: nowrap;
+      color: rgba(255,255,255,0.88);
     }
     .ind-pricing .price-features li .check {
-      color: #22c55e;
-      font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: 900;
       flex-shrink: 0;
-      margin-top: 1px;
+      line-height: 1;
     }
+    .ind-pricing .price-card:nth-child(1) .check { color: #60a5fa; }
+    .ind-pricing .price-card:nth-child(2) .check,
+    .ind-pricing .price-card-green .check { color: #4ade80; }
+    .ind-pricing .price-card:nth-child(3) .check { color: #f87171; }
+
     /* Buttons */
     .ind-pricing .btn-block {
       border-radius: 10px;
-      padding: 13px 20px;
+      padding: 14px 20px;
       font-weight: 700;
-      font-size: 0.88rem;
-      letter-spacing: 0.02em;
+      font-size: 0.9rem;
+      letter-spacing: 0.025em;
       transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
       text-align: center;
       display: block;
-    }
-    .ind-pricing .btn-ghost {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.85);
-    }
-    .ind-pricing .btn-ghost:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.26);
+      border: none;
       color: #fff;
+    }
+    .ind-pricing .price-card:nth-child(1) .btn-ghost {
+      background: #2563eb;
+      box-shadow: 0 3px 16px rgba(37,99,235,0.40);
+    }
+    .ind-pricing .price-card:nth-child(1) .btn-ghost:hover {
+      filter: brightness(1.15);
       transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37,99,235,0.55);
+    }
+    .ind-pricing .price-card:nth-child(3) .btn-ghost {
+      background: #dc2626;
+      box-shadow: 0 3px 16px rgba(220,38,38,0.40);
+    }
+    .ind-pricing .price-card:nth-child(3) .btn-ghost:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(220,38,38,0.55);
     }
     .ind-pricing .btn-primary {
-      background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
-      box-shadow: 0 2px 14px rgba(37,99,235,0.38) !important;
+      background: #2563eb !important;
+      box-shadow: 0 3px 16px rgba(37,99,235,0.40) !important;
       border: none !important;
       color: #fff !important;
     }
     .ind-pricing .btn-primary:hover {
-      filter: brightness(1.1);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(37,99,235,0.55) !important;
+      filter: brightness(1.15) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 28px rgba(37,99,235,0.55) !important;
     }
     .ind-pricing .btn-try-free {
-      background: linear-gradient(135deg, #16a34a, #22c55e) !important;
-      box-shadow: 0 2px 14px rgba(34,197,94,0.32) !important;
+      background: #16a34a !important;
+      box-shadow: 0 3px 16px rgba(22,163,74,0.38) !important;
       border-radius: 10px !important;
-      padding: 13px 20px !important;
-      font-size: 0.88rem !important;
+      padding: 14px 20px !important;
+      font-size: 0.9rem !important;
       font-weight: 700 !important;
       color: #fff !important;
       border: none !important;
     }
     .ind-pricing .btn-try-free:hover {
-      filter: brightness(1.1) !important;
+      filter: brightness(1.15) !important;
       transform: translateY(-2px) !important;
-      box-shadow: 0 6px 24px rgba(34,197,94,0.48) !important;
+      box-shadow: 0 8px 28px rgba(22,163,74,0.52) !important;
     }
     /* === PRICING RESPONSIVE === */
-    /* Touch — disable lift */
     @media (hover: none) {
-      .ind-pricing .price-card:hover { transform: none; box-shadow: 0 4px 32px rgba(0,0,0,0.45); border-color: rgba(255,255,255,0.08); }
-      .ind-pricing .price-card:hover .card-pill-wrap img { transform: none; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.35)); }
+      .ind-pricing .price-card:hover { transform: none !important; }
+      .ind-pricing .price-card:hover .card-pill-wrap img { transform: none; }
     }
     /* Laptop 861–1140px */
     @media (min-width: 861px) and (max-width: 1140px) {
-      .ind-pricing .pricing-grid { gap: 16px; }
-      .card-pill-wrap { padding: 18px 18px 16px; }
-      .card-pill-wrap img { height: 62px; }
-      .card-body { padding: 4px 20px 22px; }
-      .ind-pricing .price-amount { font-size: 2.4rem; }
-      .ind-pricing .btn-block { padding: 11px 16px; font-size: 0.83rem; }
+      .ind-pricing .pricing-grid { gap: 18px; }
+      .card-pill-wrap { padding: 22px 18px 18px; }
+      .card-pill-wrap img { height: 68px; }
+      .card-body { padding: 18px 20px 22px; }
+      .ind-pricing .price-amount { font-size: 3.2rem; }
+      .ind-pricing .btn-block { padding: 12px 16px; font-size: 0.85rem; }
     }
     /* Tablet ≤860px */
     @media (max-width: 860px) {
       .ind-pricing { padding: 56px 0 72px; }
       .ind-pricing .pricing-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto 48px; padding: 0 16px; }
-      .card-pill-wrap img { height: 72px; }
+      .card-pill-wrap img { height: 78px; }
     }
     /* Phone ≤480px */
     @media (max-width: 480px) {
       .ind-pricing { padding: 40px 0 52px; }
-      .ind-pricing .pricing-grid { max-width: 100%; gap: 14px; padding: 0 12px; margin-bottom: 32px; }
-      .card-pill-wrap { padding: 18px 14px 14px; }
-      .card-pill-wrap img { height: 58px; }
-      .card-body { padding: 4px 16px 18px; }
-      .ind-pricing .price-amount { font-size: 2.2rem; }
-      .ind-pricing .price-features li { font-size: 0.81rem; }
-      .ind-pricing .btn-block { padding: 12px 14px; font-size: 0.84rem; }
-      .ind-pricing .btn-try-free { padding: 12px 14px !important; font-size: 0.84rem !important; }
+      .ind-pricing .pricing-grid { max-width: 100%; gap: 16px; padding: 0 12px; margin-bottom: 32px; }
+      .card-pill-wrap { padding: 22px 14px 18px; }
+      .card-pill-wrap img { height: 64px; }
+      .card-body { padding: 18px 18px 22px; }
+      .ind-pricing .price-amount { font-size: 3rem; }
+      .ind-pricing .price-features li { font-size: 0.84rem; }
+      .ind-pricing .btn-block { padding: 13px 14px; font-size: 0.86rem; }
+      .ind-pricing .btn-try-free { padding: 13px 14px !important; font-size: 0.86rem !important; }
     }
 
     /* ===== LIGHTBOX ===== */
@@ -731,6 +816,8 @@
 
   <!-- PRICING -->
   <section class="ind-pricing" id="pricing">
+    <img src="images/backpill.png" class="bg-pill bg-pill-left" alt="" />
+    <img src="images/backpill 2.png" class="bg-pill bg-pill-right" alt="" />
     <div class="container">
       <div class="section-head center reveal" style="margin:0 0 40px;">
         <h2>Choose Your <em>Plan</em></h2>
@@ -741,17 +828,16 @@
 
         <div class="price-card reveal reveal-delay-1">
           <div class="card-pill-wrap">
-            <div class="price-tier-name">Monthly Subscription</div>
-            <img src="images/Monthly pill.png" alt="Monthly" />
+            <img src="images/Monthly pill updated.png" alt="Monthly" />
           </div>
           <div class="card-body">
-            <div class="price-amount"><sup>$</sup>19</div>
-            <div class="price-period">per month — cancel anytime</div>
+            <div class="price-row"><div class="price-amount"><sup>$</sup>19</div></div>
+            <div class="price-period">per month · cancel anytime</div>
             <div class="price-divider"></div>
             <ul class="price-features">
-              <li><span class="check">✓</span> Access active while subscription is active</li>
-              <li><span class="check">✓</span> Setup support via Discord / Whop</li>
-              <li><span class="check">✓</span> Future indicator updates included</li>
+              <li><span class="check">›</span> Active while subscribed</li>
+              <li><span class="check">›</span> Support via Discord &amp; Whop</li>
+              <li><span class="check">›</span> All future updates included</li>
             </ul>
             <a href="https://whop.com/checkout/plan_Pb6D59NtoYQbu" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-block">Get Monthly Access</a>
           </div>
@@ -759,17 +845,16 @@
 
         <div class="price-card price-card-green reveal reveal-delay-2">
           <div class="card-pill-wrap">
-            <div class="price-tier-name">Life Time Subscription</div>
-            <img src="images/LifeTime pill.png" alt="Lifetime" />
+            <img src="images/LifeTime pill updated.png" alt="Lifetime" />
           </div>
           <div class="card-body">
-            <div class="price-amount"><sup>$</sup>250</div>
+            <div class="price-row"><div class="price-amount"><sup>$</sup>250</div></div>
             <div class="price-period">one-time payment</div>
             <div class="price-divider"></div>
             <ul class="price-features">
-              <li><span class="check">✓</span> Lifetime access — pay once</li>
-              <li><span class="check">✓</span> Setup support via Discord / Whop</li>
-              <li><span class="check">✓</span> Future indicator updates included</li>
+              <li><span class="check">›</span> Lifetime access — pay once</li>
+              <li><span class="check">›</span> Support via Discord &amp; Whop</li>
+              <li><span class="check">›</span> All future updates included</li>
             </ul>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
             <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener noreferrer" class="btn btn-block btn-try-free" style="margin-top:10px;">Try for Free</a>
@@ -778,17 +863,16 @@
 
         <div class="price-card reveal reveal-delay-3">
           <div class="card-pill-wrap">
-            <div class="price-tier-name">3 Months</div>
-            <img src="images/3 Month pill.png" alt="3 Months" />
+            <img src="images/3 Months pill updated.png" alt="3 Months" />
           </div>
           <div class="card-body">
-            <div class="price-amount"><sup>$</sup>49</div>
-            <div class="price-period">per 3 months — cancel anytime</div>
+            <div class="price-row"><div class="price-amount"><sup>$</sup>49</div></div>
+            <div class="price-period">per 3 months · cancel anytime</div>
             <div class="price-divider"></div>
             <ul class="price-features">
-              <li><span class="check">✓</span> Access active while subscription is active</li>
-              <li><span class="check">✓</span> Setup support via Discord / Whop</li>
-              <li><span class="check">✓</span> Future indicator updates included</li>
+              <li><span class="check">›</span> Active while subscribed</li>
+              <li><span class="check">›</span> Support via Discord &amp; Whop</li>
+              <li><span class="check">›</span> All future updates included</li>
             </ul>
             <a href="https://whop.com/checkout/plan_G2TPWnODqHxAE" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-block">Get 3 Months Access</a>
           </div>
