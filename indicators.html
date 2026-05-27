@@ -46,6 +46,33 @@
       transform: translateY(-5px);
       box-shadow: 0 16px 48px rgba(0,0,0,0.6);
     }
+    /* GIF inside card */
+    .card-gif-wrap {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 14px 0 16px;
+      position: relative;
+    }
+    .card-gif-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07);
+      pointer-events: none;
+    }
+    .card-gif {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: brightness(0.78) saturate(0.9);
+    }
+    .ind-pricing .price-card:hover .card-gif {
+      transform: scale(1.04);
+      filter: brightness(1.05) saturate(1.1);
+    }
     .ind-pricing .price-card-green {
       border: 1px solid rgba(54,70,245,0.45) !important;
       box-shadow: 0 0 0 1px rgba(54,70,245,0.15), 0 8px 48px rgba(54,70,245,0.15) !important;
@@ -561,6 +588,9 @@
           <div class="price-tier-name">Monthly Subscription</div>
           <div class="price-amount"><sup>$</sup>19</div>
           <div class="price-period">per month — cancel anytime</div>
+          <div class="card-gif-wrap">
+            <img class="card-gif" src="videos/videosforbuttons/19$.gif" alt="" loading="lazy" />
+          </div>
           <div class="price-divider"></div>
           <ul class="price-features">
             <li><span class="check">✓</span> Access active while subscription is active</li>
@@ -576,6 +606,9 @@
             <div class="price-amount"><sup>$</sup>250</div>
           </div>
           <div class="price-period">one-time payment</div>
+          <div class="card-gif-wrap">
+            <img class="card-gif" src="videos/videosforbuttons/250.gif" alt="" loading="lazy" />
+          </div>
           <div class="price-divider"></div>
           <ul class="price-features">
             <li><span class="check">✓</span> Lifetime access — pay once</li>
@@ -590,6 +623,9 @@
           <div class="price-tier-name">3 Months</div>
           <div class="price-amount"><sup>$</sup>49</div>
           <div class="price-period">per 3 months — cancel anytime</div>
+          <div class="card-gif-wrap">
+            <img class="card-gif" src="videos/videosforbuttons/49$.gif" alt="" loading="lazy" />
+          </div>
           <div class="price-divider"></div>
           <ul class="price-features">
             <li><span class="check">✓</span> Access active while subscription is active</li>
