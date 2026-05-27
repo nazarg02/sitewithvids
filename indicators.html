@@ -59,104 +59,6 @@
     .ind-pricing .price-divider { background: rgba(255,255,255,0.07); }
     .ind-pricing .price-features li { color: rgba(255,255,255,0.7); }
     .ind-pricing .price-features li .check { color: #5b8fff; }
-    .ind-pricing .price-old { color: rgba(255,255,255,0.25); text-decoration: line-through; }
-
-    /* 50% OFF badge */
-    .ind-pricing .price-top-badge {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      background: linear-gradient(135deg, #3646f5, #6573f8);
-      color: #fff;
-      border-radius: 6px;
-      padding: 4px 12px;
-      top: -14px;
-      left: 24px;
-      box-shadow: 0 4px 14px rgba(54,70,245,0.4);
-    }
-
-    /* Promo code box */
-    .ind-pricing .promo-code-box {
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin: 12px 0 8px;
-    }
-    .ind-pricing .promo-code-label {
-      color: rgba(255,255,255,0.25);
-      font-size: 0.58rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-    .ind-pricing .promo-code-row {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 8px 8px 8px 16px;
-    }
-    .ind-pricing .promo-code {
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      font-family: 'Syne', sans-serif;
-    }
-
-    /* Timer */
-    .ind-pricing .lt-timer-wrap {
-      margin: 16px 0 18px;
-    }
-    .ind-pricing .lt-timer-label {
-      font-size: 0.58rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.22);
-      margin-bottom: 12px;
-    }
-    .ind-pricing .lt-timer {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 4px;
-    }
-    .ind-pricing .lt-unit {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: none;
-      border: none;
-      padding: 0 6px;
-      min-width: 44px;
-    }
-    .ind-pricing .lt-unit span {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
-    .ind-pricing .lt-unit-sec span { color: rgba(255,255,255,0.5); }
-    .ind-pricing .lt-unit em {
-      font-style: normal;
-      font-size: 0.5rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      color: rgba(255,255,255,0.22);
-      margin-top: 5px;
-    }
-    .ind-pricing .lt-sep {
-      font-size: 1.4rem;
-      font-weight: 300;
-      color: rgba(255,255,255,0.15);
-      margin-top: 2px;
-      align-self: flex-start;
-    }
     /* ===== LIGHTBOX ===== */
     #lightbox {
       display: none;
@@ -457,20 +359,6 @@
 </head>
 <body>
 
-  <!-- PROMO TICKER -->
-  <div class="promo-ticker">
-    <div class="promo-ticker-track">
-      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
-      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
-      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
-      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
-      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
-      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
-      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
-      <span><em class="tk-label">Limited offer</em><em class="tk-sep">·</em>50% off lifetime access<em class="tk-sep">·</em>use code<em class="tk-code">LIFETIME</em></span>
-    </div>
-  </div>
-
   <header class="nav">
     <div class="container nav-inner">
       <a href="index.html" class="logo">
@@ -683,42 +571,11 @@
         </div>
 
         <div class="price-card price-card-green reveal reveal-delay-2">
-          <div class="price-top-badge price-badge-sale">50% OFF</div>
           <div class="price-tier-name">Life Time Subscription</div>
           <div class="price-row">
-            <div class="price-amount"><sup>$</sup>125</div>
-            <div class="price-old">$250</div>
+            <div class="price-amount"><sup>$</sup>250</div>
           </div>
           <div class="price-period">one-time payment</div>
-          <div class="promo-code-box">
-            <div class="promo-code-label">Discount code</div>
-            <div class="promo-code-row">
-              <span class="promo-code" id="promoCode">LIFETIME</span>
-              <button class="promo-copy-btn" id="promoCopyBtn" onclick="copyPromo()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                <span id="promoCopyText">Copy</span>
-              </button>
-            </div>
-          </div>
-          <div class="lt-timer-wrap">
-            <div class="lt-timer-label">Offer ends in</div>
-            <div class="lt-timer">
-              <div class="lt-unit"><span id="lt-days">00</span><em>DAYS</em></div>
-              <div class="lt-sep">:</div>
-              <div class="lt-unit"><span id="lt-hours">00</span><em>HRS</em></div>
-              <div class="lt-sep">:</div>
-              <div class="lt-unit"><span id="lt-mins">00</span><em>MIN</em></div>
-              <div class="lt-sep">:</div>
-              <div class="lt-unit lt-unit-sec"><span id="lt-secs">00</span><em>SEC</em></div>
-            </div>
-            <div style="margin-top:12px;display:flex;align-items:center;justify-content:center;gap:7px;">
-              <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e63946;box-shadow:0 0 8px rgba(230,57,70,0.9);animation:lt-blink 1.2s ease-in-out infinite;flex-shrink:0;"></span>
-              <span style="font-size:0.72rem;font-weight:700;color:#e63946;letter-spacing:0.03em;">Expires Mon, May 26 · 11:50 PM ET</span>
-            </div>
-            <style>
-              @keyframes lt-blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
-            </style>
-          </div>
           <div class="price-divider"></div>
           <ul class="price-features">
             <li><span class="check">✓</span> Lifetime access — pay once</li>
