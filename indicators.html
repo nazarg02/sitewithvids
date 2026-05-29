@@ -33,6 +33,8 @@
       padding: 80px 0 100px;
       position: relative;
       overflow: hidden;
+      content-visibility: auto;
+      contain-intrinsic-size: 0 800px;
     }
     .ind-pricing .bg-pill {
       position: absolute;
@@ -40,7 +42,6 @@
       pointer-events: none;
       user-select: none;
       opacity: 0.18;
-      filter: blur(0.5px);
     }
     .ind-pricing .bg-pill-left {
       left: -80px;
@@ -74,6 +75,7 @@
       flex-direction: column;
       transition: transform 0.28s ease, box-shadow 0.28s ease;
       position: relative;
+      will-change: transform;
     }
     /* Top accent stripe */
     .ind-pricing .price-card::before {
@@ -134,6 +136,7 @@
       padding: 32px 24px 26px;
       border-radius: 14px 14px 0 0;
       position: relative;
+      isolation: isolate;
     }
     .ind-pricing .price-card:nth-child(1) .card-pill-wrap {
       background: linear-gradient(to bottom, #cfe0ff 50%, #08090f 100%);
@@ -785,16 +788,16 @@
 
     <!-- decorative pills -->
     <div class="ind-deco" aria-hidden="true">
-      <img class="pill-1" src="images/pill-blue.png" alt="" />
-      <img class="pill-2" src="images/pill-yellow.png" alt="" />
-      <img class="pill-3" src="images/pill-green.png" alt="" />
+      <img class="pill-1" src="images/pill-blue.png" alt="" loading="lazy" decoding="async" />
+      <img class="pill-2" src="images/pill-yellow.png" alt="" loading="lazy" decoding="async" />
+      <img class="pill-3" src="images/pill-green.png" alt="" loading="lazy" decoding="async" />
     </div>
 
     <div class="container">
 
       <div class="section-head center reveal" style="margin-bottom:52px;">
         <div class="section-avatar-badge">
-          <img src="images/avatar.png" alt="Kenpachi" />
+          <img src="images/avatar.png" alt="Kenpachi" loading="lazy" decoding="async" />
         </div>
         <h2>Kenpachi QT <em>Pro+</em></h2>
         <p>Built to simplify Quarterly Theory trading. The indicator includes all QT concepts in one tool.</p>
@@ -867,8 +870,8 @@
 
   <!-- PRICING -->
   <section class="ind-pricing" id="pricing">
-    <img src="images/backpill.png" class="bg-pill bg-pill-left" alt="" />
-    <img src="images/backpill 2.png" class="bg-pill bg-pill-right" alt="" />
+    <img src="images/backpill.png" class="bg-pill bg-pill-left" alt="" loading="lazy" decoding="async" />
+    <img src="images/backpill 2.png" class="bg-pill bg-pill-right" alt="" loading="lazy" decoding="async" />
     <div class="container">
       <div class="section-head center reveal" style="margin:0 0 40px;">
         <h2>Choose Your <em>Plan</em></h2>
@@ -879,7 +882,7 @@
 
         <div class="price-card reveal reveal-delay-1">
           <div class="card-pill-wrap">
-            <img src="images/Monthly pill updated.png" alt="Monthly" />
+            <img src="images/Monthly pill updated.png" alt="Monthly" loading="lazy" decoding="async" />
           </div>
           <div class="card-body">
             <div class="price-row"><div class="price-amount"><sup>$</sup>19</div></div>
@@ -896,7 +899,7 @@
 
         <div class="price-card price-card-green reveal reveal-delay-2">
           <div class="card-pill-wrap">
-            <img src="images/LifeTime pill updated.png" alt="Lifetime" />
+            <img src="images/LifeTime pill updated.png" alt="Lifetime" loading="lazy" decoding="async" />
           </div>
           <div class="card-body">
             <div class="price-row"><div class="price-amount"><sup>$</sup>250</div></div>
@@ -914,7 +917,7 @@
 
         <div class="price-card reveal reveal-delay-3">
           <div class="card-pill-wrap">
-            <img src="images/3 Months pill updated.png" alt="3 Months" />
+            <img src="images/3 Months pill updated.png" alt="3 Months" loading="lazy" decoding="async" />
           </div>
           <div class="card-body">
             <div class="price-row"><div class="price-amount"><sup>$</sup>49</div></div>
