@@ -1370,17 +1370,23 @@
     })();
 
     (function() {
-      var deadline = (function(){ var d = new Date(2026,5,3,23,59,59); return d.getTime(); })(); // June 3 2026 23:59:59 local time
-      function pad(n) { return String(n).padStart(2, '0'); }
+      var d = new Date(2026, 5, 3, 23, 59, 59);
+      var deadline = d.getTime();
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
       function tickPromo() {
         var diff = deadline - Date.now();
-        if (diff <= 0) { ['cd-h','cd-m','cd-s'].forEach(function(id){ document.getElementById(id).textContent = '00'; }); return; }
-        document.getElementById('cd-h').textContent = pad(Math.floor(diff / 3600000));
-        document.getElementById('cd-m').textContent = pad(Math.floor((diff % 3600000) / 60000));
-        document.getElementById('cd-s').textContent = pad(Math.floor((diff % 60000) / 1000));
-        setTimeout(tickPromo, 1000);
+        var h = diff > 0 ? Math.floor(diff / 3600000) : 0;
+        var m = diff > 0 ? Math.floor((diff % 3600000) / 60000) : 0;
+        var s = diff > 0 ? Math.floor((diff % 60000) / 1000) : 0;
+        var eh = document.getElementById('cd-h');
+        var em = document.getElementById('cd-m');
+        var es = document.getElementById('cd-s');
+        if (eh) eh.textContent = pad(h);
+        if (em) em.textContent = pad(m);
+        if (es) es.textContent = pad(s);
       }
       tickPromo();
+      setInterval(tickPromo, 1000);
     })();
   </script>
 </body>
