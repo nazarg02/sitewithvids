@@ -257,6 +257,62 @@
       box-shadow: 0 8px 28px rgba(22,163,74,0.52);
     }
 
+    /* Countdown banner */
+    .promo-countdown { text-align: center; }
+    .promo-countdown-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(251,191,36,0.25);
+      border-radius: 14px;
+      padding: 14px 28px;
+    }
+    .promo-fire { font-size: 1.3rem; }
+    .promo-text { color: rgba(255,255,255,0.6); font-size: 0.88rem; letter-spacing: 0.03em; }
+    .countdown-blocks { display: flex; align-items: center; gap: 6px; }
+    .cd-block { display: flex; flex-direction: column; align-items: center; min-width: 48px; }
+    .cd-block span { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: #fbbf24; line-height: 1; }
+    .cd-block label { font-size: 0.65rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+    .cd-sep { font-size: 1.4rem; font-weight: 700; color: rgba(251,191,36,0.5); margin-bottom: 10px; }
+    @media (max-width: 480px) {
+      .promo-countdown-inner { padding: 12px 16px; gap: 10px; flex-wrap: wrap; justify-content: center; }
+      .cd-block span { font-size: 1.3rem; }
+      .cd-block { min-width: 38px; }
+    }
+
+    /* Promo code box */
+    .promo-code-box {
+      background: rgba(217,119,6,0.10);
+      border: 1px dashed rgba(251,191,36,0.40);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+    }
+    .promo-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .promo-label strong { color: #fbbf24; }
+    .promo-code-row { display: flex; align-items: center; gap: 10px; }
+    .promo-code {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #fbbf24;
+      flex: 1;
+    }
+    .promo-copy {
+      background: rgba(251,191,36,0.15);
+      border: 1px solid rgba(251,191,36,0.35);
+      color: #fbbf24;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .promo-copy:hover { background: rgba(251,191,36,0.28); }
+
     /* Touch — no lift */
     @media (hover: none) {
       .prem-pricing .price-card:hover { transform: none !important; }
@@ -378,6 +434,21 @@
         <p>Start free or unlock full access. Cancel anytime — no long-term commitment required.</p>
       </div>
 
+      <!-- Countdown banner -->
+      <div class="promo-countdown reveal" style="margin-bottom:40px;">
+        <div class="promo-countdown-inner">
+          <span class="promo-fire">🔥</span>
+          <span class="promo-text">Sale ends in</span>
+          <div class="countdown-blocks">
+            <div class="cd-block"><span id="cd-h">00</span><label>hrs</label></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-block"><span id="cd-m">00</span><label>min</label></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-block"><span id="cd-s">00</span><label>sec</label></div>
+          </div>
+        </div>
+      </div>
+
       <div class="pricing-grid">
 
         <div class="price-card prem-free reveal reveal-delay-1">
@@ -449,6 +520,13 @@
               <li><span class="check">›</span> QT Zero-to-Mastery</li>
               <li><span class="check">›</span> QT Private Models</li>
             </ul>
+            <div class="promo-code-box">
+              <div class="promo-label">Use code at checkout for <strong>50% off</strong></div>
+              <div class="promo-code-row">
+                <span class="promo-code">JUNE2</span>
+                <button class="promo-copy" onclick="navigator.clipboard.writeText('JUNE2');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
+              </div>
+            </div>
             <a href="https://whop.com/checkout/plan_OqRT7PMSwsiyC" target="_blank" rel="noopener noreferrer" class="btn btn-block">Get Elite</a>
           </div>
         </div>
@@ -533,5 +611,33 @@
     });
   </script>
   <script src="site.js"></script>
+  <script>
+    (function() {
+      // June 3 23:59:59 local time
+      var deadline = new Date();
+      deadline.setFullYear(2026, 5, 3); // month is 0-indexed: 5 = June
+      deadline.setHours(23, 59, 59, 0);
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      function tick() {
+        var diff = deadline - Date.now();
+        if (diff <= 0) {
+          document.getElementById('cd-h').textContent = '00';
+          document.getElementById('cd-m').textContent = '00';
+          document.getElementById('cd-s').textContent = '00';
+          return;
+        }
+        var h = Math.floor(diff / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('cd-h').textContent = pad(h);
+        document.getElementById('cd-m').textContent = pad(m);
+        document.getElementById('cd-s').textContent = pad(s);
+        setTimeout(tick, 1000);
+      }
+      tick();
+    })();
+  </script>
 </body>
 </html>
