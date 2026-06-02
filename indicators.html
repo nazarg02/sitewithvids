@@ -309,15 +309,17 @@
     .promo-countdown-inner {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(74,222,128,0.20);
       border-radius: 10px;
-      padding: 10px 14px;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      width: 100%;
     }
     .promo-dot {
-      width: 8px; height: 8px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: #ef4444;
       flex-shrink: 0;
@@ -328,12 +330,12 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.15; }
     }
-    .promo-text { color: rgba(255,255,255,0.55); font-size: 0.78rem; letter-spacing: 0.02em; flex-shrink: 0; }
-    .countdown-blocks { display: flex; align-items: center; gap: 4px; margin-left: auto; }
-    .cd-block { display: flex; flex-direction: column; align-items: center; min-width: 36px; }
-    .cd-block span { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; color: #4ade80; line-height: 1; }
-    .cd-block label { font-size: 0.58rem; color: rgba(255,255,255,0.30); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
-    .cd-sep { font-size: 1rem; font-weight: 700; color: rgba(74,222,128,0.4); margin-bottom: 8px; }
+    .promo-text { color: rgba(255,255,255,0.55); font-size: 0.75rem; letter-spacing: 0.02em; flex-shrink: 0; }
+    .countdown-blocks { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+    .cd-block { display: flex; flex-direction: column; align-items: center; min-width: 30px; }
+    .cd-block span { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: #4ade80; line-height: 1; }
+    .cd-block label { font-size: 0.52rem; color: rgba(255,255,255,0.30); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+    .cd-sep { font-size: 0.85rem; font-weight: 700; color: rgba(74,222,128,0.4); margin-bottom: 7px; padding: 0 1px; }
 
     /* Promo code box */
     .promo-code-box {
@@ -1371,7 +1373,7 @@
     })();
 
     (function() {
-      var deadline = new Date('2026-06-04T04:59:59Z').getTime(); // June 3 23:59:59 EDT
+      var deadline = (function(){ var d = new Date(2026,5,3,23,59,59); return d.getTime(); })(); // June 3 2026 23:59:59 local time
       function pad(n) { return String(n).padStart(2, '0'); }
       function tickPromo() {
         var diff = deadline - Date.now();
