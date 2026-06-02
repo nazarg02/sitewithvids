@@ -304,61 +304,61 @@
       .ind-pricing .price-card:hover .card-pill-wrap img { transform: none; }
     }
 
-    /* Countdown banner */
-    .promo-countdown { text-align: center; }
+    /* Countdown inside card */
+    .promo-countdown { margin-bottom: 12px; }
     .promo-countdown-inner {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 14px;
+      justify-content: space-between;
+      gap: 10px;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(74,222,128,0.25);
-      border-radius: 14px;
-      padding: 14px 28px;
+      border: 1px solid rgba(74,222,128,0.20);
+      border-radius: 10px;
+      padding: 10px 14px;
     }
-    .promo-fire { font-size: 1.3rem; }
-    .promo-text { color: rgba(255,255,255,0.6); font-size: 0.88rem; letter-spacing: 0.03em; }
-    .countdown-blocks { display: flex; align-items: center; gap: 6px; }
-    .cd-block { display: flex; flex-direction: column; align-items: center; min-width: 48px; }
-    .cd-block span { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: #4ade80; line-height: 1; }
-    .cd-block label { font-size: 0.65rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
-    .cd-sep { font-size: 1.4rem; font-weight: 700; color: rgba(74,222,128,0.5); margin-bottom: 10px; }
+    .promo-fire { font-size: 1.1rem; flex-shrink: 0; }
+    .promo-text { color: rgba(255,255,255,0.55); font-size: 0.78rem; letter-spacing: 0.02em; flex-shrink: 0; }
+    .countdown-blocks { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .cd-block { display: flex; flex-direction: column; align-items: center; min-width: 36px; }
+    .cd-block span { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; color: #4ade80; line-height: 1; }
+    .cd-block label { font-size: 0.58rem; color: rgba(255,255,255,0.30); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+    .cd-sep { font-size: 1rem; font-weight: 700; color: rgba(74,222,128,0.4); margin-bottom: 8px; }
 
     /* Promo code box */
     .promo-code-box {
       background: rgba(22,163,74,0.10);
       border: 1px dashed rgba(74,222,128,0.40);
       border-radius: 10px;
-      padding: 12px 16px;
-      margin-bottom: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      overflow: hidden;
     }
-    .promo-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .promo-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
     .promo-label strong { color: #4ade80; }
-    .promo-code-row { display: flex; align-items: center; gap: 10px; }
+    .promo-code-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
     .promo-code {
       font-family: 'Syne', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 800;
       letter-spacing: 0.12em;
       color: #4ade80;
       flex: 1;
+      min-width: 0;
     }
     .promo-copy {
       background: rgba(74,222,128,0.15);
       border: 1px solid rgba(74,222,128,0.35);
       color: #4ade80;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      padding: 5px 12px;
+      padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
       transition: background 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .promo-copy:hover { background: rgba(74,222,128,0.28); }
-    @media (max-width: 480px) {
-      .promo-countdown-inner { padding: 12px 16px; gap: 10px; flex-wrap: wrap; justify-content: center; }
-      .cd-block span { font-size: 1.3rem; }
-      .cd-block { min-width: 38px; }
-    }
 
     /* Large desktop ≥1400px */
     @media (min-width: 1400px) {
@@ -934,20 +934,6 @@
         <p>Get full access to all indicators. Choose monthly or lock in lifetime access.</p>
       </div>
 
-      <div class="promo-countdown reveal" style="margin-bottom:36px;">
-        <div class="promo-countdown-inner">
-          <span class="promo-fire">🔥</span>
-          <span class="promo-text">Sale ends in</span>
-          <div class="countdown-blocks">
-            <div class="cd-block"><span id="cd-h">00</span><label>hrs</label></div>
-            <div class="cd-sep">:</div>
-            <div class="cd-block"><span id="cd-m">00</span><label>min</label></div>
-            <div class="cd-sep">:</div>
-            <div class="cd-block"><span id="cd-s">00</span><label>sec</label></div>
-          </div>
-        </div>
-      </div>
-
       <div class="pricing-grid reveal">
 
         <div class="price-card reveal reveal-delay-1">
@@ -964,6 +950,7 @@
               <li><span class="check">›</span> All future updates included</li>
             </ul>
             <a href="https://whop.com/checkout/plan_Pb6D59NtoYQbu" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-block">Get Monthly Access</a>
+            <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener noreferrer" class="btn btn-block btn-try-free" style="margin-top:10px;">Try for Free</a>
           </div>
         </div>
 
@@ -987,8 +974,20 @@
                 <button class="promo-copy" onclick="navigator.clipboard.writeText('JUNE2');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
               </div>
             </div>
+            <div class="promo-countdown">
+              <div class="promo-countdown-inner">
+                <span class="promo-fire">🔥</span>
+                <span class="promo-text">Sale ends in</span>
+                <div class="countdown-blocks">
+                  <div class="cd-block"><span id="cd-h">00</span><label>hrs</label></div>
+                  <div class="cd-sep">:</div>
+                  <div class="cd-block"><span id="cd-m">00</span><label>min</label></div>
+                  <div class="cd-sep">:</div>
+                  <div class="cd-block"><span id="cd-s">00</span><label>sec</label></div>
+                </div>
+              </div>
+            </div>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
-            <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener noreferrer" class="btn btn-block btn-try-free" style="margin-top:10px;">Try for Free</a>
           </div>
         </div>
 
