@@ -311,27 +311,51 @@
       border-radius: 12px;
       padding: 14px 16px;
       margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .promo-top-row {
+    .promo-hint {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+    .promo-hint strong { color: #4ade80; font-weight: 700; }
+    .promo-main-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      gap: 10px;
     }
-    .promo-badge {
+    .promo-code {
       font-family: 'Syne', sans-serif;
-      font-size: 0.72rem;
+      font-size: 1.4rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
-      color: #4ade80;
-      background: rgba(74,222,128,0.12);
-      border-radius: 6px;
-      padding: 4px 10px;
+      letter-spacing: 0.14em;
+      color: #fff;
     }
+    .promo-copy {
+      background: #4ade80;
+      border: none;
+      color: #052e16;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.03em;
+    }
+    .promo-copy:hover { filter: brightness(1.1); transform: translateY(-1px); }
     .promo-timer-row {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
+      padding-top: 2px;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
     .promo-dot {
       width: 6px; height: 6px;
@@ -348,43 +372,15 @@
     .promo-timer-label {
       font-size: 0.7rem;
       color: rgba(255,255,255,0.35);
-      letter-spacing: 0.02em;
     }
     .promo-timer-val {
       font-family: 'Syne', sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.05em;
+      margin-left: auto;
     }
-    .promo-bottom-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .promo-code {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      color: #fff;
-    }
-    .promo-copy {
-      background: #4ade80;
-      border: none;
-      color: #052e16;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 7px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: filter 0.2s, transform 0.15s;
-      white-space: nowrap;
-      flex-shrink: 0;
-      letter-spacing: 0.03em;
-    }
-    .promo-copy:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
     /* Large desktop ≥1400px */
     @media (min-width: 1400px) {
@@ -1006,17 +1002,15 @@
               <li><span class="check">›</span> All future updates included</li>
             </ul>
             <div class="promo-block">
-              <div class="promo-top-row">
-                <span class="promo-badge">40% OFF</span>
-                <div class="promo-timer-row">
-                  <span class="promo-dot"></span>
-                  <span class="promo-timer-label">ends in</span>
-                  <span class="promo-timer-val"><span id="cd-h">00</span>:<span id="cd-m">00</span>:<span id="cd-s">00</span></span>
-                </div>
-              </div>
-              <div class="promo-bottom-row">
+              <p class="promo-hint">Use code at checkout · <strong>40% off</strong></p>
+              <div class="promo-main-row">
                 <span class="promo-code">JUNE2</span>
                 <button class="promo-copy" onclick="navigator.clipboard.writeText('JUNE2');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
+              </div>
+              <div class="promo-timer-row">
+                <span class="promo-dot"></span>
+                <span class="promo-timer-label">Ends in</span>
+                <span class="promo-timer-val"><span id="cd-h">00</span>:<span id="cd-m">00</span>:<span id="cd-s">00</span></span>
               </div>
             </div>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
