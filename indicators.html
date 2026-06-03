@@ -381,13 +381,37 @@
       font-size: 0.7rem;
       color: rgba(255,255,255,0.3);
     }
-    .promo-timer-val {
+    .promo-timer-blocks {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .promo-t-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+    .promo-t-unit span {
       font-family: 'Syne', sans-serif;
       font-size: 0.85rem;
       font-weight: 700;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.05em;
-      margin-left: auto;
+      color: rgba(255,255,255,0.7);
+      line-height: 1;
+    }
+    .promo-t-unit label {
+      font-size: 0.48rem;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+    .promo-t-sep {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 8px;
+      padding: 0 1px;
     }
 
     /* Large desktop ≥1400px */
@@ -1021,7 +1045,13 @@
               <div class="promo-timer-row">
                 <span class="promo-dot"></span>
                 <span class="promo-timer-label">Ends in</span>
-                <span class="promo-timer-val"><span id="cd-h">00</span>:<span id="cd-m">00</span>:<span id="cd-s">00</span></span>
+                <div class="promo-timer-blocks">
+                  <div class="promo-t-unit"><span id="cd-h">00</span><label>H</label></div>
+                  <span class="promo-t-sep">:</span>
+                  <div class="promo-t-unit"><span id="cd-m">00</span><label>M</label></div>
+                  <span class="promo-t-sep">:</span>
+                  <div class="promo-t-unit"><span id="cd-s">00</span><label>S</label></div>
+                </div>
               </div>
             </div>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
