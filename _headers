@@ -1,0 +1,38 @@
+# Images — cache 1 year
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Videos — cache 1 year
+/videos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS & JS — cache 1 year
+/syle.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/site.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Favicons & icons — cache 1 year
+/favicon.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+/apple-touch-icon.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/apple-touch-icon-precomposed.png
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML pages — short cache so updates show quickly
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Root HTML
+/
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
