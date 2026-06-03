@@ -171,8 +171,20 @@
     .ind-pricing .price-row {
       display: flex;
       align-items: baseline;
-      gap: 2px;
+      gap: 10px;
       margin-bottom: 4px;
+    }
+    .ind-pricing .price-original {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      text-decoration: line-through;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .ind-pricing .price-original sup {
+      font-size: 0.6rem;
+      vertical-align: super;
     }
     .ind-pricing .price-amount {
       font-size: 2.4rem;
@@ -986,7 +998,10 @@
             <img src="images/LifeTime pill updated.png" alt="Lifetime" loading="lazy" decoding="async" />
           </div>
           <div class="card-body">
-            <div class="price-row"><div class="price-amount"><sup>$</sup>250</div></div>
+            <div class="price-row">
+              <div class="price-amount"><sup>$</sup>149</div>
+              <div class="price-original"><sup>$</sup>250</div>
+            </div>
             <div class="price-period">one-time payment</div>
             <div class="price-divider"></div>
             <ul class="price-features">
