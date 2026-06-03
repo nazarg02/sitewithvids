@@ -188,15 +188,23 @@
     .no  { color: #f87171; }
 
     @media (max-width: 768px) {
-      .pf-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .pf-grid { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; }
       .pf-discount { font-size: 2.2rem; }
       .pf-card { padding: 24px 20px 20px; }
+    }
+    @media (max-width: 600px) {
+      .pf-grid { max-width: 100%; }
     }
     @media (max-width: 480px) {
       .pf-card { padding: 20px 16px 16px; border-radius: 16px; }
       .pf-discount { font-size: 2rem; }
       .pf-code-row { padding: 9px 12px; }
       .pf-logo { width: 60px; height: 60px; border-radius: 14px; }
+    }
+    @media (max-width: 375px) {
+      .pf-card { padding: 16px 12px 14px; }
+      .pf-discount { font-size: 1.8rem; }
+      .pf-name { font-size: 1rem; }
     }
   </style>
   <!-- Google Analytics -->

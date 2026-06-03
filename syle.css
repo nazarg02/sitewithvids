@@ -2215,7 +2215,7 @@ a { text-decoration: none; color: inherit; }
   .section-head h2 { font-size: clamp(1.45rem, 5vw, 1.9rem); }
 
   /* Pricing */
-  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; }
   .price-amount { font-size: 2.2rem; }
   .price-card { padding: 22px 18px; }
 
@@ -2227,7 +2227,7 @@ a { text-decoration: none; color: inherit; }
 
   /* Compare table */
   .compare-wrap { -webkit-overflow-scrolling: touch; overflow-x: auto; }
-  .compare-table { font-size: 0.78rem; min-width: 480px; }
+  .compare-table { font-size: 0.78rem; min-width: 440px; }
   .compare-table th, .compare-table td { padding: 10px 12px; }
 
   /* Indicators */
@@ -2268,6 +2268,16 @@ a { text-decoration: none; color: inherit; }
   /* Touch targets */
   .btn { min-height: 44px; }
   .burger { min-width: 44px; min-height: 44px; }
+}
+
+/* ===== TABLET PORTRAIT (481px–600px) ===== */
+@media (min-width: 481px) and (max-width: 600px) {
+  .container { padding: 0 20px; }
+  .pricing-grid { max-width: 520px; margin: 0 auto; }
+  .compare-table { min-width: 460px; }
+  .firms-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .section-head h2 { font-size: clamp(1.35rem, 5.5vw, 1.8rem); }
+  .edu-grid { grid-template-columns: 1fr; }
 }
 
 /* ===== SMALL PHONES (max 480px) ===== */
