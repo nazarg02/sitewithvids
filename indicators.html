@@ -304,71 +304,87 @@
       .ind-pricing .price-card:hover .card-pill-wrap img { transform: none; }
     }
 
-    /* Countdown inside card */
-    .promo-countdown { margin-bottom: 12px; }
-    .promo-countdown-inner {
+    /* Promo block */
+    .promo-block {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .promo-top-row {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 4px 0;
-      box-sizing: border-box;
-      width: 100%;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .promo-badge {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #4ade80;
+      background: rgba(74,222,128,0.12);
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+    .promo-timer-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .promo-dot {
-      width: 7px; height: 7px;
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: #ef4444;
       flex-shrink: 0;
       animation: blink-dot 1.2s ease-in-out infinite;
-      box-shadow: 0 0 6px rgba(239,68,68,0.7);
+      box-shadow: 0 0 5px rgba(239,68,68,0.8);
     }
     @keyframes blink-dot {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.15; }
+      50% { opacity: 0.1; }
     }
-    .promo-text { color: rgba(255,255,255,0.55); font-size: 0.75rem; letter-spacing: 0.02em; flex-shrink: 0; }
-    .countdown-blocks { display: flex; align-items: center; gap: 2px; margin-left: auto; }
-    .cd-block { display: flex; flex-direction: column; align-items: center; min-width: 30px; }
-    .cd-block span { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: #4ade80; line-height: 1; }
-    .cd-block label { font-size: 0.52rem; color: rgba(255,255,255,0.30); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
-    .cd-sep { font-size: 0.85rem; font-weight: 700; color: rgba(74,222,128,0.4); margin-bottom: 7px; padding: 0 1px; }
-
-    /* Promo code box */
-    .promo-code-box {
-      background: rgba(22,163,74,0.10);
-      border: 1px dashed rgba(74,222,128,0.40);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 10px;
-      overflow: hidden;
+    .promo-timer-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.02em;
     }
-    .promo-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
-    .promo-label strong { color: #4ade80; }
-    .promo-code-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .promo-timer-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+    }
+    .promo-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
     .promo-code {
       font-family: 'Syne', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.35rem;
       font-weight: 800;
-      letter-spacing: 0.12em;
-      color: #4ade80;
-      flex: 1;
-      min-width: 0;
+      letter-spacing: 0.14em;
+      color: #fff;
     }
     .promo-copy {
-      background: rgba(74,222,128,0.15);
-      border: 1px solid rgba(74,222,128,0.35);
-      color: #4ade80;
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 5px 10px;
-      border-radius: 6px;
+      background: #4ade80;
+      border: none;
+      color: #052e16;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: filter 0.2s, transform 0.15s;
       white-space: nowrap;
       flex-shrink: 0;
+      letter-spacing: 0.03em;
     }
-    .promo-copy:hover { background: rgba(74,222,128,0.28); }
+    .promo-copy:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
     /* Large desktop ≥1400px */
     @media (min-width: 1400px) {
@@ -989,24 +1005,18 @@
               <li><span class="check">›</span> Support via Discord &amp; Whop</li>
               <li><span class="check">›</span> All future updates included</li>
             </ul>
-            <div class="promo-code-box">
-              <div class="promo-label">Use code at checkout for <strong>40% off</strong></div>
-              <div class="promo-code-row">
+            <div class="promo-block">
+              <div class="promo-top-row">
+                <span class="promo-badge">40% OFF</span>
+                <div class="promo-timer-row">
+                  <span class="promo-dot"></span>
+                  <span class="promo-timer-label">ends in</span>
+                  <span class="promo-timer-val"><span id="cd-h">00</span>:<span id="cd-m">00</span>:<span id="cd-s">00</span></span>
+                </div>
+              </div>
+              <div class="promo-bottom-row">
                 <span class="promo-code">JUNE2</span>
                 <button class="promo-copy" onclick="navigator.clipboard.writeText('JUNE2');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
-              </div>
-            </div>
-            <div class="promo-countdown">
-              <div class="promo-countdown-inner">
-                <span class="promo-dot"></span>
-                <span class="promo-text">Sale ends in</span>
-                <div class="countdown-blocks">
-                  <div class="cd-block"><span id="cd-h">00</span><label>hrs</label></div>
-                  <div class="cd-sep">:</div>
-                  <div class="cd-block"><span id="cd-m">00</span><label>min</label></div>
-                  <div class="cd-sep">:</div>
-                  <div class="cd-block"><span id="cd-s">00</span><label>sec</label></div>
-                </div>
               </div>
             </div>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
