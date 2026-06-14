@@ -393,6 +393,131 @@
       white-space: nowrap;
     }
 
+    /* ===== REVIEWS SECTION ===== */
+    .reviews-section {
+      background: #080910;
+      padding: 80px 0 60px;
+      position: relative;
+    }
+    .reviews-section .section-head h2 { margin-bottom: 8px; }
+    .reviews-head-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .reviews-head-stars {
+      display: flex;
+      gap: 2px;
+      color: #fbbf24;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    .reviews-head-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+    .reviews-head-text strong { color: #fff; font-weight: 700; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      max-width: 1140px;
+      margin: 44px auto 0;
+      padding: 0 24px;
+    }
+    .review-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 22px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.16);
+    }
+    .review-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .review-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a2d3a, #3b3f52);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.85);
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+    }
+    .review-meta { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .review-name {
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+    .review-stars {
+      display: flex;
+      gap: 1px;
+      color: #fbbf24;
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+    }
+    .review-body {
+      color: rgba(255,255,255,0.78);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .review-date {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: auto;
+      padding-top: 4px;
+    }
+    .reviews-cta {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
+    .reviews-cta a {
+      color: #4ade80;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px dashed rgba(74,222,128,0.4);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .reviews-cta a:hover { color: #86efac; border-bottom-color: #86efac; }
+
+    @media (max-width: 1000px) {
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); max-width: 760px; }
+    }
+    @media (max-width: 640px) {
+      .reviews-section { padding: 56px 0 44px; }
+      .reviews-grid { grid-template-columns: 1fr; max-width: 480px; padding: 0 18px; gap: 14px; margin-top: 32px; }
+      .review-card { padding: 18px 18px 16px; }
+      .review-body { font-size: 0.88rem; }
+    }
+    @media (max-width: 380px) {
+      .reviews-grid { padding: 0 14px; }
+      .review-card { padding: 16px 16px 14px; }
+      .review-name { font-size: 0.9rem; }
+      .review-body { font-size: 0.85rem; }
+    }
+
     /* Large desktop ≥1400px */
     @media (min-width: 1400px) {
       .ind-pricing .pricing-grid { max-width: 1160px; gap: 32px; }
@@ -1085,6 +1210,99 @@
 
       </div>
 
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews-section">
+    <div class="container">
+      <div class="section-head center reveal">
+        <h2>What <em>Traders</em> Say</h2>
+        <div class="reviews-head-rating">
+          <span class="reviews-head-stars">★★★★★</span>
+          <span class="reviews-head-text"><strong>5.0</strong> · Based on 10 reviews on Whop</span>
+        </div>
+      </div>
+
+      <div class="reviews-grid reveal">
+
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">EB</div>
+            <div class="review-meta">
+              <span class="review-name">EB</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-body">Best QT indicator I've ever used. Love it</p>
+          <span class="review-date">May 29, 2026 · 1 month after purchase</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">JN</div>
+            <div class="review-meta">
+              <span class="review-name">James Nieva</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-body">Amazing Quarterly Theory indicator. Really clean and really helpful!</p>
+          <span class="review-date">May 22, 2026 · 8 days after purchase</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">YU</div>
+            <div class="review-meta">
+              <span class="review-name">Yugo</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-body">The indicator is great for QT traders and easy to use</p>
+          <span class="review-date">May 9, 2026 · 1 month after purchase</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">SX</div>
+            <div class="review-meta">
+              <span class="review-name">Super XingXing</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-body">The Quarterly Theory indicator lifetime is a simple and reliable tool for new traders, and it works best within a broader strategy since it covers most needs without requiring multiple indicators.</p>
+          <span class="review-date">April 11, 2026 · 14 days after purchase</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">HE</div>
+            <div class="review-meta">
+              <span class="review-name">Helito</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-body">Bought lifetime access indicator, the best indicator i have ever seen. The P H/L and EQ Zones are very useful, love it</p>
+          <span class="review-date">April 11, 2026 · 2 days after purchase</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">TN</div>
+            <div class="review-meta">
+              <span class="review-name">tnszyyc</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-body">The indicator is actually very useful, trading QT with it, so much easier.</p>
+          <span class="review-date">April 9, 2026 · 12 days after purchase</span>
+        </div>
+
+      </div>
+
+      <p class="reviews-cta">
+        Read all reviews on <a href="https://whop.com/joined/soul-society-division/?tab=reviews" target="_blank" rel="noopener">Whop ↗</a>
+      </p>
     </div>
   </section>
 
