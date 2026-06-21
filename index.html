@@ -48,20 +48,27 @@
       object-fit: cover;
       opacity: 0;
       transition: opacity 1.8s ease;
+      position: relative;
+      z-index: 0;
     }
-    /* Hide iOS native play-button overlay on paused/blocked autoplay */
-    .intro-bg video::-webkit-media-controls,
-    .intro-bg video::-webkit-media-controls-panel,
-    .intro-bg video::-webkit-media-controls-play-button,
-    .intro-bg video::-webkit-media-controls-start-playback-button {
+    /* Hide every variant of iOS/webkit native play-button overlay */
+    video::-webkit-media-controls,
+    video::-webkit-media-controls-panel,
+    video::-webkit-media-controls-overlay-play-button,
+    video::-webkit-media-controls-play-button,
+    video::-webkit-media-controls-start-playback-button {
       display: none !important;
+      opacity: 0 !important;
       -webkit-appearance: none;
     }
+    /* Dark overlay sits ABOVE the video, covering any native play UI */
     .intro-bg::after {
       content: '';
       position: absolute;
       inset: 0;
+      z-index: 1;
       background: radial-gradient(ellipse 90% 90% at 50% 50%, rgba(5,6,8,0.55) 0%, rgba(5,6,8,0.92) 100%);
+      pointer-events: none;
     }
 
     /* ─── STAGE ─── */
@@ -335,7 +342,9 @@
 
   <!-- video bg -->
   <div class="intro-bg" id="introBg">
-    <video autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback id="introBgVideo">
+    <video autoplay loop muted playsinline webkit-playsinline preload="auto"
+           disablepictureinpicture disableremoteplayback
+           x-webkit-airplay="deny" id="introBgVideo">
       <source src="videos/mainbackground.mp4" type="video/mp4">
     </video>
   </div>
@@ -423,16 +432,25 @@
     const bgVideo  = document.getElementById('introBgVideo');
     const bgWrap   = document.getElementById('introBg');
 
-    // Force video play — iOS requires defaultMuted + playsInline properties (not just attributes)
+    // iOS autoplay: must set these as properties AND attributes
     bgVideo.muted = true;
     bgVideo.defaultMuted = true;
     bgVideo.playsInline = true;
     bgVideo.setAttribute('muted', '');
-    const tryPlay = () => bgVideo.play().catch(() => {});
-    bgVideo.addEventListener('loadeddata', tryPlay, { once: true });
+    bgVideo.setAttribute('playsinline', '');
+    bgVideo.controls = false;
+
+    const tryPlay = () => {
+      const p = bgVideo.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+
+    // Try immediately, on data ready, and on first touch/click
     tryPlay();
+    bgVideo.addEventListener('loadeddata', tryPlay, { once: true });
+    bgVideo.addEventListener('canplay',    tryPlay, { once: true });
     document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
-    document.addEventListener('click', tryPlay, { once: true });
+    document.addEventListener('click',      tryPlay, { once: true });
 
     function navigate() {
       fade.classList.add('out');
