@@ -49,6 +49,14 @@
       opacity: 0;
       transition: opacity 1.8s ease;
     }
+    /* Hide iOS native play-button overlay on paused/blocked autoplay */
+    .intro-bg video::-webkit-media-controls,
+    .intro-bg video::-webkit-media-controls-panel,
+    .intro-bg video::-webkit-media-controls-play-button,
+    .intro-bg video::-webkit-media-controls-start-playback-button {
+      display: none !important;
+      -webkit-appearance: none;
+    }
     .intro-bg::after {
       content: '';
       position: absolute;
@@ -327,7 +335,7 @@
 
   <!-- video bg -->
   <div class="intro-bg" id="introBg">
-    <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback id="introBgVideo">
+    <video autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback id="introBgVideo">
       <source src="videos/mainbackground.mp4" type="video/mp4">
     </video>
   </div>
@@ -415,12 +423,15 @@
     const bgVideo  = document.getElementById('introBgVideo');
     const bgWrap   = document.getElementById('introBg');
 
-    // Force video play
+    // Force video play — iOS requires defaultMuted + playsInline properties (not just attributes)
     bgVideo.muted = true;
+    bgVideo.defaultMuted = true;
     bgVideo.playsInline = true;
+    bgVideo.setAttribute('muted', '');
     const tryPlay = () => bgVideo.play().catch(() => {});
+    bgVideo.addEventListener('loadeddata', tryPlay, { once: true });
     tryPlay();
-    document.addEventListener('touchstart', tryPlay, { once: true });
+    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
     document.addEventListener('click', tryPlay, { once: true });
 
     function navigate() {
