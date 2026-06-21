@@ -797,48 +797,192 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 28px rgba(34,197,94,0.55), 0 0 0 1px rgba(34,197,94,0.4);
     }
-    .btn-scroll-plans {
+    /* ── Feat section — dark background ── */
+    .ind-feat-section {
+      background: #080910;
+      position: relative;
+      overflow: hidden;
+    }
+    .ind-feat-section .section-head h2 { color: #fff; }
+    .ind-feat-section .section-head p  { color: rgba(255,255,255,0.5); }
+    .ind-feat-section em { color: #5566ff; font-style: normal; }
+
+    /* ── Background pill decorations ── */
+    .feat-bg-pill {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    .feat-bg-pill-1 {
+      width: 280px;
+      top: -60px;
+      left: -90px;
+      opacity: 0.13;
+      transform: rotate(-30deg);
+    }
+    .feat-bg-pill-2 {
+      width: 260px;
+      bottom: -40px;
+      right: -70px;
+      opacity: 0.11;
+      transform: rotate(22deg);
+    }
+    .feat-bg-pill-3 {
+      width: 200px;
+      top: 40%;
+      right: 8%;
+      opacity: 0.07;
+      transform: rotate(-12deg);
+    }
+    .ind-feat-section .container { position: relative; z-index: 1; }
+    .section-avatar-badge {
+      border-color: rgba(54,70,245,0.3) !important;
+    }
+
+    /* ── Feat list ── */
+    .feat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 250px;
+      flex-shrink: 0;
+    }
+    .feat-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 11px 16px 11px 20px;
+      border-radius: 8px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .feat-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      bottom: 20%;
+      width: 3px;
+      border-radius: 2px;
+      background: transparent;
+      transition: background 0.15s, top 0.15s, bottom 0.15s;
+    }
+    .feat-item:hover { background: rgba(255,255,255,0.04); }
+    .feat-item:hover::before { background: rgba(255,255,255,0.15); top: 25%; bottom: 25%; }
+    .feat-item.active { background: rgba(255,255,255,0.06); }
+    .feat-item.active::before { background: #5566ff; top: 15%; bottom: 15%; }
+    .feat-item-dot { display: none; }
+    .feat-item-name {
+      font-size: 0.88rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.15s;
+    }
+    .feat-item.active .feat-item-name { color: #fff; font-weight: 600; }
+    .feat-item:hover:not(.active) .feat-item-name { color: rgba(255,255,255,0.7); }
+
+    /* NEW badge — blue (first) */
+    .feat-item-new {
+      margin-top: 8px;
+    }
+    .feat-item-new::after {
+      content: 'NEW';
+      position: absolute;
+      top: -7px;
+      left: 24px;
+      font-size: 0.47rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, #3646f5, #5566ff);
+      border-radius: 3px;
+      padding: 2px 5px;
+      line-height: 1.6;
+      pointer-events: none;
+      z-index: 5;
+    }
+    /* NEW badge — red (second new item) */
+    .feat-item-new2::after {
+      background: linear-gradient(135deg, #dc2626, #f87171);
+    }
+
+    /* ── Image panel — clean dark card ── */
+    .feat-panel-img-wrap {
+      background: #0a0b12;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .feat-panel-img-wrap #feat-img {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* ── CTA row — sits inside feat-panel, below the image ── */
+    .feat-cta-row {
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      margin-top: 14px;
+      width: 100%;
+    }
+    .feat-cta-btn {
       display: inline-flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #1a1f3c 0%, #0d0f1a 100%);
-      color: #fff;
-      font-weight: 700;
+      gap: 2px;
+      padding: 13px 20px;
+      border-radius: 10px;
       font-family: 'Syne', sans-serif;
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      border: 1px solid rgba(54,70,245,0.35);
-      border-radius: 14px;
+      font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      cursor: pointer;
+      flex: 1;
     }
-    .btn-scroll-plans::after {
-      content: '↓';
-      font-size: 1rem;
-      opacity: 0.6;
-      transition: transform 0.22s;
+    .feat-cta-primary {
+      background: linear-gradient(135deg, #3646f5, #5566ff);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(54,70,245,0.45);
     }
-    .btn-scroll-plans:hover {
-      border-color: rgba(54,70,245,0.7);
+    .feat-cta-primary:hover {
+      filter: brightness(1.12);
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(54,70,245,0.3);
+      box-shadow: 0 8px 32px rgba(54,70,245,0.6);
     }
-    .btn-scroll-plans:hover::after {
-      transform: translateY(3px);
+    .feat-cta-main {
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
     }
-    /* ── ≤860px: tablet + phone ── */
-    @media (max-width: 860px) {
-      /* Hide desktop View Plans from feat-list — ind-mobile-plans handles it */
-      .btn-view-plans-anim { display: none !important; }
-      .btn-scroll-plans   { display: none !important; }
-
-      /* Section head: compact */
-      .section-avatar-badge { width: 76px; height: 76px; margin-bottom: 12px; }
-      .section-light .section-head { margin-bottom: 28px !important; }
-      .section-light .section-head h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
-      .section-light .section-head p  { font-size: 0.88rem; }
+    .feat-cta-sub {
+      font-size: 0.72rem;
+      font-weight: 500;
+      opacity: 0.75;
+      letter-spacing: 0.03em;
+    }
+    .feat-cta-ghost {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      padding: 14px 28px;
+    }
+    .feat-cta-ghost:hover {
+      border-color: rgba(255,255,255,0.35);
+      color: #fff;
+      transform: translateY(-2px);
     }
 
     /* ── ≤768px: phone only ── */
@@ -850,86 +994,18 @@
       .lt-sep { font-size: 1.1rem; }
       .btn-try-free { font-size: 0.88rem; padding: 13px 20px; }
       .promo-code-row { padding: 7px 8px 7px 14px; }
-
-      /* Hero */
       .page-hero-img { max-height: 180px; }
       .page-hero-img img { object-fit: contain; max-height: 180px; background: transparent; }
-
-      /* feat-showcase column, full width */
       .feat-showcase { gap: 12px; margin-bottom: 32px; }
       .feat-panel { width: 100%; }
-    }
-
-    /* ── View Plans animated button ── */
-    .btn-view-plans-anim {
-      display: block;
-      width: 100%;
-      margin-top: 10px;
-      padding: 14px 0;
-      text-align: center;
-      font-family: 'Instrument Sans', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      color: #fff;
-      border-radius: 12px;
-      background: linear-gradient(90deg, #1a1b2e 0%, #2d2f5e 40%, #3640f5 60%, #1a1b2e 100%);
-      background-size: 250% 100%;
-      animation: btn-shimmer 2.4s ease infinite;
-      box-shadow: 0 4px 18px rgba(54,64,245,0.35);
-      position: relative;
-      overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .btn-view-plans-anim:hover {
-      box-shadow: 0 8px 28px rgba(54,64,245,0.55);
-      transform: translateY(-2px);
-    }
-    @keyframes btn-shimmer {
-      0%   { background-position: 200% center; }
-      100% { background-position: -200% center; }
-    }
-
-    /* ── Decorative squiggles ── */
-    .section-light { position: relative; }
-    .ind-deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 2; }
-    .section-light .container { position: relative; z-index: 1; }
-    .ind-deco svg { position: absolute; }
-    .pill-1 { width: 150px; top: 5%;  left: 11%;  opacity: 1; transform: rotate(15deg); }
-    .pill-2 { width: 135px; bottom: 7%; left: 4%;  opacity: 1; transform: rotate(18deg); }
-    .pill-3 { width: 145px; top: 5%;  right: 11%; opacity: 1; transform: rotate(-18deg); }
-    .pill-1, .pill-2, .pill-3 {
-      position: absolute;
-      pointer-events: none;
-      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.18));
-    }
-    @media (max-width: 860px) { .ind-deco { display: none; } }
-
-    /* Mobile View Plans button — shown only below 860px */
-    .ind-mobile-plans {
-      display: none;
+      .feat-cta-row { gap: 8px; }
+      .feat-cta-btn { padding: 12px 14px; }
     }
     @media (max-width: 860px) {
-      .ind-mobile-plans {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        margin-top: 16px;
-        padding: 15px 0;
-        background: linear-gradient(90deg, #1a1b2e 0%, #2d2f5e 40%, #3640f5 60%, #1a1b2e 100%);
-        background-size: 250% 100%;
-        animation: btn-shimmer 2.4s ease infinite;
-        color: #fff;
-        font-family: 'Instrument Sans', sans-serif;
-        font-weight: 600;
-        font-size: 0.95rem;
-        letter-spacing: 0.04em;
-        border-radius: 12px;
-        text-decoration: none;
-        box-shadow: 0 4px 18px rgba(54,64,245,0.35);
-      }
+      .section-avatar-badge { width: 76px; height: 76px; margin-bottom: 12px; }
+      .ind-feat-section .section-head { margin-bottom: 28px !important; }
+      .ind-feat-section .section-head h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+      .ind-feat-section .section-head p  { font-size: 0.88rem; }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -1136,55 +1212,61 @@
     </div>
   </section>
 
-  <section class="section section-light">
+  <section class="section ind-feat-section">
 
-    <!-- decorative pills -->
-    <div class="ind-deco" aria-hidden="true">
-      <img class="pill-1" src="images/pill-blue.png" alt="" loading="lazy" decoding="async" />
-      <img class="pill-2" src="images/pill-yellow.png" alt="" loading="lazy" decoding="async" />
-      <img class="pill-3" src="images/pill-green.png" alt="" loading="lazy" decoding="async" />
-    </div>
+    <img src="images/pill-blue.png"   class="feat-bg-pill feat-bg-pill-1" alt="" loading="lazy" decoding="async" />
+    <img src="images/pill-yellow.png" class="feat-bg-pill feat-bg-pill-2" alt="" loading="lazy" decoding="async" />
+    <img src="images/pill-green.png"  class="feat-bg-pill feat-bg-pill-3" alt="" loading="lazy" decoding="async" />
 
     <div class="container">
 
-      <div class="section-head center reveal" style="margin-bottom:52px;">
-        <div class="section-avatar-badge">
+      <div class="section-head center reveal" style="margin-bottom:48px;">
+        <div class="section-avatar-badge" style="border-color:rgba(54,70,245,0.3);">
           <img src="images/avatar.png" alt="Kenpachi" loading="lazy" decoding="async" />
         </div>
-        <h2>Kenpachi QT <em>Pro+</em></h2>
-        <p>Built to simplify Quarterly Theory trading. The indicator includes all QT concepts in one tool.</p>
+        <h2 style="color:#fff;">Kenpachi QT <em>Pro+</em></h2>
+        <p style="color:rgba(255,255,255,0.5);">Built to simplify Quarterly Theory trading. The indicator includes all QT concepts in one tool.</p>
       </div>
 
       <div class="feat-showcase reveal">
 
         <div class="feat-list">
           <div class="feat-item active" data-img="images/ind-overview.png" data-label="Indicator Overview" data-caption="">
-            Indicator Overview <span class="feat-arrow">›</span>
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">Indicator Overview</span>
           </div>
           <div class="feat-item" data-img="images/ssmt-new.png" data-label="Sequential SMT's" data-caption="">
-            Sequential SMT's <span class="feat-arrow">›</span>
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">Sequential SMT's</span>
           </div>
           <div class="feat-item" data-img="images/psp-new.png" data-label="PSP Signals" data-caption="">
-            PSP Signals <span class="feat-arrow">›</span>
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">PSP Signals</span>
           </div>
           <div class="feat-item" data-img="images/true-opens-new.png" data-label="True Opens" data-caption="Automatically plots True Opens for every major timeframe — Session, Daily, Weekly, and Monthly.">
-            True Opens <span class="feat-arrow">›</span>
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">True Opens</span>
           </div>
           <div class="feat-item" data-img="images/nwog-new.png" data-label="NDOG &amp; NWOG's" data-caption="Automatically plots New Day Opening Gap and New Week Opening Gap levels.">
-            NDOG &amp; NWOG's <span class="feat-arrow">›</span>
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">NDOG &amp; NWOG's</span>
           </div>
           <div class="feat-item" data-img="images/pdhl-new.png" data-label="Previous Day H/L" data-caption="">
-            Previous Day H/L <span class="feat-arrow">›</span>
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">Previous Day H/L</span>
           </div>
           <div class="feat-item" data-img="images/sessions-hl.png" data-label="Previous Session H/L" data-caption="">
-            Previous Session H/L <span class="feat-arrow">›</span>
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">Previous Session H/L</span>
           </div>
-          <div class="feat-item feat-item-new" data-img="images/ote-levels-new.png" data-key="ote" data-label="OTE Levels" data-caption="">
-            OTE Levels <span class="feat-arrow">›</span>
+          <div class="feat-item feat-item-new" data-key="ote" data-img="images/ote-levels-new.png" data-label="OTE Levels" data-caption="">
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">OTE Levels</span>
           </div>
-          <a href="#pricing" class="btn-scroll-plans btn-view-plans-anim" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">
-            View Plans &darr;
-          </a>
+          <div class="feat-item feat-item-new feat-item-new2" data-img="images/+1 cycle/Digital Marketing Banner with Energetic Colors.jpg" data-label="+1 Cycle (2 Stage SSMT)" data-caption="">
+            <div class="feat-item-dot"></div>
+            <span class="feat-item-name">+1 Cycle (2 Stage SSMT)</span>
+          </div>
         </div>
 
         <!-- Image panel -->
@@ -1211,8 +1293,17 @@
               </button>
             </div>
           </div>
-          <!-- Mobile-only View Plans button — shows below image on phones/tablets -->
-          <a href="#pricing" class="ind-mobile-plans" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">View Plans ↓</a>
+
+          <!-- CTA row — sits directly under the image -->
+          <div class="feat-cta-row reveal">
+            <a href="#pricing" class="feat-cta-btn feat-cta-primary" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">
+              <span class="feat-cta-main">Get Indicator Access</span>
+              <span class="feat-cta-sub">from $19 / month</span>
+            </a>
+            <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener noreferrer" class="feat-cta-btn feat-cta-ghost">
+              Try for Free →
+            </a>
+          </div>
         </div>
 
       </div>

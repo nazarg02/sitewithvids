@@ -43,7 +43,12 @@
       letter-spacing: 0.01em;
     }
     .edu-hero h1 em {
-      color: var(--blue-bright);
+      background: linear-gradient(135deg, #5566ff 0%, #8899ff 55%, #5566ff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-x 5s ease infinite;
       font-style: normal;
     }
     .edu-hero p {
@@ -174,24 +179,38 @@
       border: 1px solid rgba(255,255,255,0.07);
       border-radius: 14px;
       overflow: hidden;
-      transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), border-color 0.22s;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s var(--ease), border-color 0.35s;
       text-decoration: none;
       display: flex;
       flex-direction: column;
+      position: relative;
+      will-change: transform;
     }
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(54,70,245,0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .edu-card:hover::before { opacity: 1; }
     .edu-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 56px rgba(0,0,0,0.6), 0 0 0 1px rgba(85,102,255,0.25);
-      border-color: rgba(85,102,255,0.25);
+      transform: translateY(-7px) scale(1.015);
+      box-shadow: 0 28px 70px rgba(0,0,0,0.7), 0 0 0 1px rgba(85,102,255,0.35), 0 0 40px rgba(54,70,245,0.12);
+      border-color: rgba(85,102,255,0.35);
     }
     .edu-card-thumb {
       width: 100%;
       aspect-ratio: 16/9;
       object-fit: cover;
       display: block;
-      transition: transform 0.32s var(--ease);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
     }
-    .edu-card:hover .edu-card-thumb { transform: scale(1.04); }
+    .edu-card:hover .edu-card-thumb { transform: scale(1.07); }
     .edu-card-thumb-placeholder {
       width: 100%;
       aspect-ratio: 16/9;
@@ -398,9 +417,9 @@
   <!-- HERO -->
   <section class="edu-hero">
     <div class="container">
-      <img src="images/avatar.png" alt="Kenpachi" class="edu-hero-avatar reveal" />
+      <img src="images/avatar.png" alt="Kenpachi" class="edu-hero-avatar reveal reveal-scale" />
       <h1 class="reveal reveal-delay-1">Quarterly Theory <em>Education</em></h1>
-      <p class="reveal reveal-delay-2">Here you'll find all my Quarterly Theory study notes — videos and notes to help you learn. For even more content and discussion, make sure to join the Discord.</p>
+      <p class="reveal reveal-delay-2">All my Quarterly Theory study notes — videos, concepts, and models to help you build consistency. Join the Discord for live discussion.</p>
 
       <div class="edu-search-wrap reveal reveal-delay-3">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">

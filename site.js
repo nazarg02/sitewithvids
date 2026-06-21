@@ -1,22 +1,18 @@
 /* ===== PAGE TRANSITIONS ===== */
 (function () {
-  // Create overlay element
   const overlay = document.createElement('div');
   overlay.className = 'page-transition';
   document.body.appendChild(overlay);
 
-  // Fade in on load
   window.addEventListener('pageshow', () => {
     overlay.classList.remove('fade-in');
   });
 
-  // Intercept internal link clicks
   document.addEventListener('click', function (e) {
     const link = e.target.closest('a');
     if (!link) return;
     const href = link.getAttribute('href');
     if (!href) return;
-    // Skip external links, anchors, mailto, tel
     if (link.target === '_blank') return;
     if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http')) return;
 
@@ -26,13 +22,93 @@
   });
 })();
 
+/* ===== SCROLL REVEAL (IntersectionObserver) ===== */
+(function () {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+
+  function observeAll() {
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .section-fade').forEach(el => {
+      if (!el.classList.contains('visible')) io.observe(el);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', observeAll);
+  } else {
+    observeAll();
+  }
+})();
+
+/* ===== EDU CARD STAGGER ON SCROLL ===== */
+(function () {
+  function staggerCards() {
+    const grid = document.getElementById('eduGrid');
+    if (!grid) return;
+
+    const cards = grid.querySelectorAll('.edu-card');
+    cards.forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(24px)';
+      card.style.transition = `opacity 0.5s ease ${i * 0.04}s, transform 0.55s cubic-bezier(0.16,1,0.3,1) ${i * 0.04}s`;
+    });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    cards.forEach(card => io.observe(card));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', staggerCards);
+  } else {
+    staggerCards();
+  }
+})();
+
+/* ===== NAV SCROLL SHADOW ===== */
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.scrollY > 20) {
+          nav.style.boxShadow = '0 4px 32px rgba(0,0,0,0.5)';
+          nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+        } else {
+          nav.style.boxShadow = '';
+          nav.style.borderBottomColor = '';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
 /* ===== WHOP SUPPORT BUTTON ===== */
 (function () {
   var btn = document.createElement('a');
   btn.href = 'https://whop.com/soul-society-division';
   btn.target = '_blank';
   btn.rel = 'noopener';
-  btn.title = 'Support';
+  btn.title = 'Join Community';
   btn.style.cssText = [
     'position:fixed',
     'bottom:calc(24px + env(safe-area-inset-bottom, 0px))',
