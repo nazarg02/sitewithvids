@@ -1012,9 +1012,10 @@
         width: 100% !important;
         flex-direction: row !important;
         flex-wrap: wrap !important;
-        overflow: visible !important;
+        overflow: hidden !important;
         gap: 8px !important;
         padding: 0 !important;
+        scroll-snap-type: none !important;
       }
       .feat-item {
         flex: 1 1 calc(50% - 4px) !important;
@@ -1025,6 +1026,7 @@
         border-radius: 8px !important;
         justify-content: center;
         text-align: center;
+        scroll-snap-align: none !important;
       }
       .feat-item::before { display: none !important; }
       .feat-item-name { font-size: 0.8rem !important; text-align: center; }
