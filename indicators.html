@@ -1714,7 +1714,7 @@
       featItems.forEach(i => i.classList.remove('active'));
       featItems[idx].classList.add('active');
       /* Scroll tab into view on mobile */
-      featItems[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      featItems[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
       stopSlideshow();
       setCaption(featItems[idx].dataset.caption || '');
       if (featItems[idx].dataset.key === 'ote') startOteSlideshow();
