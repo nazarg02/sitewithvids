@@ -332,6 +332,15 @@
       .qt-cycle-wrap    { margin-bottom: 24px; }
       .qt-cycle-wrap svg { width: 170px; height: 72px; }
     }
+
+    /* ─── MOBILE: no video, dark gradient background ─── */
+    @media (max-width: 768px) {
+      #introBgVideo { display: none; }
+      .intro-bg {
+        background: radial-gradient(ellipse 100% 70% at 50% 20%, #0d1128 0%, #07080f 50%, #050608 100%);
+      }
+      .intro-bg::after { display: none; }
+    }
   </style>
 </head>
 <body>
