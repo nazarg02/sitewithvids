@@ -15,65 +15,191 @@
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://kenpachitrades.com/images/logo.png" />
-  <link rel="icon" type="image/png" href="images/logo.png" />
   <link rel="stylesheet" href="syle.css" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
+
     /* ===== HERO ===== */
-    .page-hero { background: #080910; }
-    .page-hero.page-hero-split::before {
-      background: url('images/fibonacci.svg') left center / 50% no-repeat;
-      mix-blend-mode: normal;
-      opacity: 0.6;
+    .pf-hero {
+      background: linear-gradient(180deg, #0a0c1e 0%, #060711 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 80px;
+      border-bottom: 1px solid rgba(54,70,245,0.15);
+    }
+    .pf-hero-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .pf-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(54,70,245,0.12);
+      border: 1px solid rgba(54,70,245,0.35);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+    }
+    .pf-hero-badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 10px rgba(74,222,128,0.9);
+      display: inline-block;
+      animation: pf-dot-pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pf-dot-pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.6; }
+    }
+    .pf-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.8rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin: 0 0 22px;
+    }
+    .pf-hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, #5566ff 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pf-hero p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      margin: 0 auto 52px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+    .pf-hero-stats {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 24px 0;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .pf-hero-stat {
+      text-align: center;
+      padding: 0 44px;
+    }
+    .pf-hero-stat-sep {
+      width: 1px;
+      height: 38px;
+      background: rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+    .pf-hero-stat-val {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .pf-hero-stat-val.green {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pf-hero-stat-val.blue {
+      background: linear-gradient(135deg, #5566ff, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pf-hero-stat-lbl {
+      display: block;
+      font-size: 0.71rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+      letter-spacing: 0.04em;
     }
 
     /* ===== PF SECTION ===== */
     .pf-section {
       background: #080910;
-      padding: 60px 0 80px;
+      padding: 72px 0 88px;
       position: relative;
       overflow: hidden;
     }
     .pf-section .bg-pill {
       position: absolute;
       pointer-events: none;
-      opacity: 0.10;
+      opacity: 0.08;
       z-index: 0;
     }
-    .pf-section .bg-pill-left { width: 320px; top: 8%; left: -120px; transform: rotate(-18deg); }
+    .pf-section .bg-pill-left  { width: 320px; top: 8%;  left: -120px; transform: rotate(-18deg); }
     .pf-section .bg-pill-right { width: 320px; bottom: 6%; right: -110px; transform: rotate(15deg); }
     .pf-section .container { position: relative; z-index: 1; }
 
     /* ── Section intro ── */
-    .pf-intro { text-align: center; margin-bottom: 56px; }
+    .pf-intro { text-align: center; margin-bottom: 60px; }
+    .pf-intro-label {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
     .pf-avatar-badge {
-      width: 110px; height: 110px;
+      width: 96px; height: 96px;
       border-radius: 50%;
       overflow: hidden;
-      margin: 0 auto 22px;
+      margin: 0 auto 20px;
       background: #fff;
-      border: 3px solid rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.12);
       box-shadow:
-        0 0 0 8px rgba(255,255,255,0.04),
-        0 0 0 16px rgba(255,255,255,0.02),
+        0 0 0 6px rgba(54,70,245,0.08),
+        0 0 0 12px rgba(54,70,245,0.04),
         0 16px 48px rgba(0,0,0,0.55),
-        0 0 60px rgba(74,222,128,0.15);
+        0 0 60px rgba(74,222,128,0.14);
       animation: pf-avatar-glow 4s ease-in-out infinite;
     }
     @keyframes pf-avatar-glow {
-      0%, 100% { box-shadow: 0 0 0 8px rgba(255,255,255,0.04), 0 0 0 16px rgba(255,255,255,0.02), 0 16px 48px rgba(0,0,0,0.55), 0 0 60px rgba(74,222,128,0.15); }
-      50%      { box-shadow: 0 0 0 8px rgba(255,255,255,0.05), 0 0 0 16px rgba(255,255,255,0.025), 0 16px 48px rgba(0,0,0,0.55), 0 0 80px rgba(74,222,128,0.28); }
+      0%,100% { box-shadow: 0 0 0 6px rgba(54,70,245,0.08), 0 0 0 12px rgba(54,70,245,0.04), 0 16px 48px rgba(0,0,0,0.55), 0 0 60px rgba(74,222,128,0.14); }
+      50%      { box-shadow: 0 0 0 6px rgba(54,70,245,0.12), 0 0 0 12px rgba(54,70,245,0.06), 0 16px 48px rgba(0,0,0,0.55), 0 0 80px rgba(74,222,128,0.26); }
     }
     .pf-avatar-badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .pf-intro h2 {
-      font-size: 2rem; font-weight: 700;
-      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      letter-spacing: 0.01em; margin: 0; line-height: 1.25;
+      font-size: 2.1rem; font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em; margin: 0 0 10px; line-height: 1.2;
     }
     .pf-intro h2 span {
       background: linear-gradient(135deg, #4ade80, #38bdf8);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .pf-intro-sub {
+      color: rgba(255,255,255,0.58);
+      font-size: 0.88rem;
+      font-weight: 400;
+      margin: 0;
+      line-height: 1.6;
     }
 
     /* ── Prop firm cards ── */
@@ -86,12 +212,10 @@
     }
     .pf-card {
       position: relative;
-      background:
-        radial-gradient(120% 80% at 0% 0%, rgba(255,255,255,0.05) 0%, transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.008) 100%);
+      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 24px;
-      padding: 34px 30px 26px;
+      padding: 36px 30px 28px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -105,11 +229,11 @@
       overflow: hidden;
     }
     .pf-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.15);
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.1),
-        0 24px 60px -22px rgba(74,222,128,0.18),
+        0 28px 64px -22px rgba(54,70,245,0.22),
         0 12px 32px -14px rgba(0,0,0,0.7);
     }
     /* gradient border for featured */
@@ -119,7 +243,7 @@
       inset: 0;
       border-radius: 24px;
       padding: 1.5px;
-      background: linear-gradient(135deg, #4ade80, #38bdf8 50%, #fbbf24);
+      background: linear-gradient(135deg, #4ade80, #38bdf8 50%, #5566ff);
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
               mask-composite: exclude;
@@ -133,23 +257,20 @@
       0%   { background-position: 0% 50%; }
       100% { background-position: 200% 50%; }
     }
-    .pf-card.featured:hover::before { opacity: 0.85; }
+    .pf-card.featured:hover::before { opacity: 0.9; }
     .pf-card.featured {
-      background:
-        radial-gradient(120% 80% at 0% 0%, rgba(74,222,128,0.06) 0%, transparent 55%),
-        radial-gradient(120% 80% at 100% 100%, rgba(56,189,248,0.04) 0%, transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+      background: rgba(74,222,128,0.03);
     }
     .pf-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-family: 'Syne', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.7);
       padding: 6px 14px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -162,7 +283,7 @@
       color: #4ade80;
       background: rgba(74,222,128,0.08);
       border-color: rgba(74,222,128,0.25);
-      box-shadow: 0 0 18px rgba(74,222,128,0.18);
+      box-shadow: 0 0 18px rgba(74,222,128,0.15);
     }
     .pf-badge::before {
       content: '';
@@ -172,8 +293,7 @@
       box-shadow: 0 0 6px currentColor;
     }
     .pf-logo {
-      width: 84px;
-      height: 84px;
+      width: 84px; height: 84px;
       border-radius: 20px;
       overflow: hidden;
       background: rgba(255,255,255,0.06);
@@ -182,15 +302,13 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 18px;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.12),
-        0 6px 20px rgba(0,0,0,0.4);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 6px 20px rgba(0,0,0,0.4);
       position: relative;
       z-index: 1;
       transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
     .pf-card:hover .pf-logo {
-      transform: scale(1.05);
+      transform: scale(1.06);
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.18),
         0 10px 28px rgba(0,0,0,0.55),
@@ -198,9 +316,9 @@
     }
     .pf-logo img { width: 100%; height: 100%; object-fit: contain; }
     .pf-name {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.55);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
       margin-bottom: 10px;
       letter-spacing: 0.01em;
       position: relative;
@@ -208,30 +326,29 @@
     }
     .pf-discount {
       font-family: 'Syne', sans-serif;
-      font-size: 3.2rem;
+      font-size: 3.4rem;
       font-weight: 800;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       line-height: 1;
-      margin-bottom: 26px;
+      margin-bottom: 28px;
       position: relative;
       z-index: 1;
-      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      filter: drop-shadow(0 4px 18px rgba(255,255,255,0.08));
+      color: #fff;
+      filter: drop-shadow(0 4px 18px rgba(255,255,255,0.07));
     }
     .pf-card.featured .pf-discount {
       background: linear-gradient(135deg, #4ade80 0%, #38bdf8 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      filter: drop-shadow(0 4px 22px rgba(74,222,128,0.35));
+      filter: drop-shadow(0 4px 24px rgba(74,222,128,0.32));
     }
     .pf-code-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: rgba(0,0,0,0.25);
-      border: 1px dashed rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.28);
+      border: 1px dashed rgba(255,255,255,0.12);
       border-radius: 12px;
-      padding: 11px 14px;
+      padding: 12px 14px;
       margin-bottom: 16px;
       width: 100%;
       position: relative;
@@ -239,15 +356,15 @@
       transition: border-color 0.3s ease, background 0.3s ease;
     }
     .pf-card:hover .pf-code-row {
-      border-color: rgba(255,255,255,0.22);
-      background: rgba(0,0,0,0.35);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.38);
     }
     .pf-code-label {
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.4);
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.55);
       white-space: nowrap;
       font-weight: 500;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
     .pf-code-value {
@@ -257,24 +374,29 @@
       color: #fff;
       flex: 1;
       text-align: left;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
     .pf-copy-btn {
-      background: linear-gradient(135deg, #4ade80, #22c55e);
+      background: linear-gradient(135deg, #3646f5, #5566ff);
       border: none;
-      color: #062012;
-      padding: 6px 14px;
+      color: #fff;
+      padding: 7px 15px;
       border-radius: 8px;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
       cursor: pointer !important;
-      transition: filter 0.2s ease, transform 0.2s ease;
+      transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       white-space: nowrap;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
       font-family: inherit;
-      box-shadow: 0 4px 12px rgba(74,222,128,0.3);
+      box-shadow: 0 4px 14px rgba(54,70,245,0.4);
     }
-    .pf-copy-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .pf-card.featured .pf-copy-btn {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      color: #062012;
+      box-shadow: 0 4px 14px rgba(74,222,128,0.35);
+    }
+    .pf-copy-btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
     .pf-actions {
       width: 100%;
       display: flex;
@@ -286,16 +408,16 @@
     .pf-cta {
       display: block;
       width: 100%;
-      padding: 13px 18px;
+      padding: 14px 18px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #4f5dff 0%, #3646f5 100%);
+      background: linear-gradient(135deg, #3646f5 0%, #5566ff 100%);
       color: #fff;
       font-weight: 700;
       text-align: center;
       text-decoration: none;
       font-size: 0.9rem;
       letter-spacing: 0.01em;
-      box-shadow: 0 8px 22px -6px rgba(79,93,255,0.55);
+      box-shadow: 0 8px 24px -6px rgba(54,70,245,0.55);
       transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer !important;
       position: relative;
@@ -306,20 +428,20 @@
       position: absolute;
       top: 0; left: -100%;
       width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-      transition: left 0.6s ease;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+      transition: left 0.55s ease;
     }
-    .pf-cta:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 12px 28px -6px rgba(79,93,255,0.7); }
+    .pf-cta:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 12px 30px -6px rgba(54,70,245,0.7); }
     .pf-cta:hover::after { left: 100%; }
     .pf-card.featured .pf-cta {
       background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-      box-shadow: 0 8px 22px -6px rgba(34,197,94,0.55);
+      box-shadow: 0 8px 24px -6px rgba(34,197,94,0.55);
     }
-    .pf-card.featured .pf-cta:hover { box-shadow: 0 12px 28px -6px rgba(34,197,94,0.7); }
+    .pf-card.featured .pf-cta:hover { box-shadow: 0 12px 30px -6px rgba(34,197,94,0.7); }
     .pf-details-btn {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.65);
       border-radius: 10px;
       padding: 10px;
       font-size: 0.82rem;
@@ -333,7 +455,7 @@
       gap: 6px;
       width: 100%;
     }
-    .pf-details-btn:hover { border-color: rgba(255,255,255,0.2); color: #fff; background: rgba(255,255,255,0.04); }
+    .pf-details-btn:hover { border-color: rgba(255,255,255,0.18); color: #fff; background: rgba(255,255,255,0.04); }
     .pf-details-btn .pf-chevron { transition: transform 0.3s ease; display: inline-block; font-size: 0.7rem; }
     .pf-card.details-open .pf-chevron { transform: rotate(180deg); }
     .pf-details {
@@ -343,8 +465,7 @@
       text-align: left;
       transition: max-height 0.5s cubic-bezier(0.2,0.8,0.2,1), margin-top 0.5s ease, padding-top 0.5s ease, border-color 0.5s ease;
       border-top: 1px solid transparent;
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
     }
     .pf-card.details-open .pf-details {
       max-height: 600px;
@@ -355,75 +476,83 @@
     .pf-table { width: 100%; border-collapse: collapse; }
     .pf-table tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
     .pf-table tr:last-child { border-bottom: none; }
-    .pf-table td {
-      padding: 10px 4px;
-      font-size: 0.8rem;
-      line-height: 1.4;
-    }
-    .pf-table td:first-child { color: rgba(255,255,255,0.4); width: 55%; font-weight: 400; }
-    .pf-table td:last-child { color: rgba(255,255,255,0.85); font-weight: 600; text-align: right; }
+    .pf-table td { padding: 10px 4px; font-size: 0.8rem; line-height: 1.4; }
+    .pf-table td:first-child { color: rgba(255,255,255,0.58); width: 55%; font-weight: 400; }
+    .pf-table td:last-child { color: #fff; font-weight: 600; text-align: right; }
     .yes { color: #4ade80; font-weight: 700; }
     .no  { color: #f87171; font-weight: 700; }
 
     .pf-disclaimer {
       max-width: 600px;
-      margin: 48px auto 0;
+      margin: 52px auto 0;
       text-align: center;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.25);
-      line-height: 1.7;
+      font-size: 0.77rem;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.75;
       font-weight: 400;
       letter-spacing: 0.01em;
     }
 
     /* ── Responsive ── */
-    @media (max-width: 860px) {
-      .pf-section .bg-pill-left { width: 200px; left: -100px; }
-      .pf-section .bg-pill-right { width: 200px; right: -100px; }
+    @media (max-width: 900px) {
+      .pf-hero h1 { font-size: 2.8rem; }
+      .pf-hero-stat { padding: 0 28px; }
     }
     @media (max-width: 768px) {
-      .pf-section { padding: 44px 0 60px; }
+      .pf-hero { padding: 64px 0 60px; }
+      .pf-hero h1 { font-size: 2.2rem; }
+      .pf-hero p { font-size: 0.95rem; margin-bottom: 40px; }
+      .pf-hero-stats { padding: 18px 0; }
+      .pf-hero-stat { padding: 0 20px; }
+      .pf-hero-stat-val { font-size: 1.55rem; }
+      .pf-section { padding: 52px 0 68px; }
       .pf-grid { grid-template-columns: 1fr; max-width: 520px; gap: 18px; }
-      .pf-discount { font-size: 2.6rem; }
-      .pf-card { padding: 28px 24px 22px; }
-      .pf-intro { margin-bottom: 40px; }
-      .pf-intro h2 { font-size: 1.7rem; }
-      .pf-avatar-badge { width: 92px; height: 92px; margin-bottom: 18px; }
+      .pf-discount { font-size: 2.8rem; }
+      .pf-card { padding: 30px 24px 24px; }
+      .pf-intro { margin-bottom: 44px; }
+      .pf-intro h2 { font-size: 1.75rem; }
+      .pf-avatar-badge { width: 84px; height: 84px; margin-bottom: 18px; }
     }
     @media (max-width: 600px) {
       .pf-section .bg-pill { display: none; }
       .pf-grid { max-width: 100%; }
+      .pf-hero-stats { flex-wrap: wrap; gap: 0; }
+      .pf-hero-stat { padding: 12px 20px; min-width: 50%; }
+      .pf-hero-stat-sep { display: none; }
     }
     @media (max-width: 480px) {
-      .pf-section { padding: 36px 0 52px; }
-      .pf-card { padding: 22px 18px 18px; border-radius: 18px; }
-      .pf-discount { font-size: 2.2rem; }
-      .pf-code-row { padding: 9px 12px; }
-      .pf-logo { width: 68px; height: 68px; border-radius: 16px; margin-bottom: 14px; }
-      .pf-intro h2 { font-size: 1.45rem; }
-      .pf-intro { margin-bottom: 32px; }
-      .pf-avatar-badge { width: 84px; height: 84px; margin-bottom: 16px; }
-      .pf-disclaimer { margin-top: 36px; font-size: 0.74rem; }
+      .pf-hero { padding: 52px 0 48px; }
+      .pf-hero h1 { font-size: 1.85rem; }
+      .pf-hero-stats { border-radius: 14px; }
+      .pf-hero-stat-val { font-size: 1.35rem; }
+      .pf-section { padding: 40px 0 56px; }
+      .pf-card { padding: 24px 18px 20px; border-radius: 20px; }
+      .pf-discount { font-size: 2.4rem; }
+      .pf-code-row { padding: 10px 12px; }
+      .pf-logo { width: 70px; height: 70px; border-radius: 16px; margin-bottom: 14px; }
+      .pf-intro h2 { font-size: 1.5rem; }
+      .pf-intro { margin-bottom: 34px; }
+      .pf-avatar-badge { width: 80px; height: 80px; margin-bottom: 16px; }
+      .pf-disclaimer { margin-top: 40px; font-size: 0.73rem; }
     }
     @media (max-width: 375px) {
       .pf-card { padding: 18px 14px 16px; }
-      .pf-discount { font-size: 1.9rem; margin-bottom: 20px; }
-      .pf-name { font-size: 0.9rem; }
+      .pf-discount { font-size: 2rem; margin-bottom: 20px; }
+      .pf-name { font-size: 0.88rem; }
       .pf-code-value { font-size: 0.86rem; }
-      .pf-code-label { font-size: 0.64rem; }
-      .pf-copy-btn { font-size: 0.7rem; padding: 5px 11px; }
       .pf-cta { padding: 12px 14px; font-size: 0.85rem; }
       .pf-details-btn { font-size: 0.78rem; padding: 9px; }
       .pf-table td { padding: 8px 4px; font-size: 0.75rem; }
       .pf-intro h2 { font-size: 1.3rem; }
-      .pf-intro p { font-size: 0.84rem; }
-      .pf-avatar-badge { width: 76px; height: 76px; }
+      .pf-avatar-badge { width: 72px; height: 72px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .pf-avatar-badge,
+      .pf-hero-orb,
       .pf-card.featured::before { animation: none; }
     }
   </style>
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0E9J28DDXG"></script>
   <script>
@@ -440,165 +569,208 @@
   <style>
     @keyframes gw-overlay-in  { from { opacity:0 } to { opacity:1 } }
     @keyframes gw-overlay-out { from { opacity:1 } to { opacity:0 } }
-    @keyframes gw-card-in     { from { opacity:0; transform:translateY(28px) scale(0.96) } to { opacity:1; transform:translateY(0) scale(1) } }
-    @keyframes gw-card-out    { from { opacity:1; transform:translateY(0) scale(1) } to { opacity:0; transform:translateY(16px) scale(0.97) } }
+    @keyframes gw-card-in     { from { opacity:0; transform:translateY(44px) scale(0.88) } to { opacity:1; transform:translateY(0) scale(1) } }
+    @keyframes gw-card-out    { from { opacity:1; transform:translateY(0) scale(1) } to { opacity:0; transform:translateY(20px) scale(0.95) } }
+    @keyframes gw-float       { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-7px) } }
+    @keyframes gw-amount-glow { 0%,100% { filter: drop-shadow(0 0 14px rgba(74,222,128,0.4)) } 50% { filter: drop-shadow(0 0 36px rgba(74,222,128,0.75)) } }
+    @keyframes gw-border-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(54,70,245,0.3), 0 32px 80px rgba(0,0,0,0.85) } 50% { box-shadow: 0 0 0 7px rgba(54,70,245,0.0), 0 32px 80px rgba(0,0,0,0.85) } }
+    @keyframes gw-spark-a { 0%,100% { transform:translate(0,0) scale(1); opacity:.7 } 40% { transform:translate(10px,-16px) scale(1.3); opacity:1 } 70% { transform:translate(-6px,-10px) scale(.8); opacity:.4 } }
+    @keyframes gw-spark-b { 0%,100% { transform:translate(0,0) scale(1); opacity:.6 } 35% { transform:translate(-14px,-9px) scale(.9); opacity:1 } 65% { transform:translate(9px,-18px) scale(1.2); opacity:.3 } }
+    @keyframes gw-spark-c { 0%,100% { transform:translate(0,0) scale(1); opacity:.8 } 50% { transform:translate(16px,-7px) scale(1.4); opacity:.2 } }
+    @keyframes gw-btn-shine { 0% { left:-70% } 100% { left:140% } }
+    @keyframes gw-orb-drift  { 0%,100% { transform:translateX(-50%) translateY(0) } 50% { transform:translateX(-50%) translateY(12px) } }
+    @keyframes gw-badge-dot  { 0%,100% { transform:scale(1); opacity:1 } 50% { transform:scale(1.5); opacity:0.6 } }
 
     #giveawayOverlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0,0,0,0.82);
       z-index: 9999;
       align-items: center;
       justify-content: center;
       padding: 16px;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     #giveawayOverlay.gw-in  { animation: gw-overlay-in  0.3s ease forwards; }
     #giveawayOverlay.gw-out { animation: gw-overlay-out 0.25s ease forwards; }
 
     #giveawayCard {
-      background: linear-gradient(160deg, rgba(18,19,30,0.98) 0%, rgba(13,14,22,0.99) 100%);
-      border: 1px solid rgba(108,99,255,0.3);
-      border-radius: 24px;
+      background: linear-gradient(160deg, #0a0b18 0%, #060710 100%);
+      border: 1px solid rgba(54,70,245,0.4);
+      border-radius: 28px;
       max-width: 440px;
       width: 100%;
-      padding: 36px 32px 28px;
+      padding: 42px 32px 32px;
       position: relative;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.88), 0 0 0 1px rgba(255,255,255,0.04) inset, 0 0 80px rgba(54,70,245,0.07);
       text-align: center;
       overflow: hidden;
+      animation: gw-border-pulse 3s ease-in-out infinite;
     }
+    #giveawayCard.gw-in  { animation: gw-card-in  0.5s cubic-bezier(0.34,1.45,0.64,1) forwards; }
+    #giveawayCard.gw-out { animation: gw-card-out 0.25s ease forwards; }
+
+    /* Blue glow orb top */
     #giveawayCard::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background-image: url('images/fibonacci.png');
-      background-size: 85%;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0.04;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(54,70,245,0.14) 0%, transparent 65%);
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      animation: gw-orb-drift 5s ease-in-out infinite;
+    }
+    /* Green glow orb bottom */
+    #giveawayCard::after {
+      content: '';
+      position: absolute;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,222,128,0.07) 0%, transparent 65%);
+      bottom: -80px; left: 50%;
+      transform: translateX(-50%);
       pointer-events: none;
     }
-    #giveawayCard.gw-in  { animation: gw-card-in  0.4s cubic-bezier(0.34,1.3,0.64,1) forwards; }
-    #giveawayCard.gw-out { animation: gw-card-out 0.25s ease forwards; }
+
+    .gw-spark { position: absolute; border-radius: 50%; pointer-events: none; }
+    .gw-spark:nth-child(1) { width:5px; height:5px; background:#5566ff; top:22%; left:10%;  animation: gw-spark-a 3.2s ease-in-out infinite; }
+    .gw-spark:nth-child(2) { width:4px; height:4px; background:#38bdf8; top:28%; right:9%;  animation: gw-spark-b 2.8s ease-in-out infinite 0.5s; }
+    .gw-spark:nth-child(3) { width:3px; height:3px; background:#4ade80; top:68%; left:7%;  animation: gw-spark-c 3.6s ease-in-out infinite 1.1s; }
+    .gw-spark:nth-child(4) { width:4px; height:4px; background:#a89cff; top:14%; right:16%; animation: gw-spark-a 4.1s ease-in-out infinite 0.3s; }
+    .gw-spark:nth-child(5) { width:3px; height:3px; background:#38bdf8; top:78%; right:11%; animation: gw-spark-b 3s ease-in-out infinite 0.8s; }
 
     .gw-close {
-      position: absolute;
-      top: 14px; right: 16px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.45);
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      font-size: 1rem;
-      cursor: pointer;
+      position: absolute; top: 14px; right: 16px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.4); width: 32px; height: 32px; border-radius: 50%;
+      font-size: 1rem; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.18s;
-      line-height: 1;
+      transition: all 0.2s; z-index: 2;
     }
-    .gw-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .gw-close:hover { background: rgba(255,255,255,0.12); color: #fff; transform: rotate(90deg); }
 
-    .gw-logo {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      object-fit: contain;
-      margin: 0 auto 16px;
-      display: block;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
+    .gw-icon {
+      font-size: 3rem; display: block; margin: 0 auto 14px; line-height: 1;
+      animation: gw-float 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 16px rgba(74,222,128,0.5));
     }
     .gw-badge {
-      display: inline-block;
-      background: rgba(108,99,255,0.15);
-      border: 1px solid rgba(108,99,255,0.3);
-      color: #a89cff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 14px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(54,70,245,0.14); border: 1px solid rgba(54,70,245,0.38);
+      color: rgba(255,255,255,0.75); font-size: 0.67rem; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
+    }
+    .gw-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 8px rgba(74,222,128,0.9); display: inline-block;
+      animation: gw-badge-dot 1.6s ease-in-out infinite;
     }
     .gw-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.35;
-      margin: 0 0 8px;
-      letter-spacing: -0.02em;
+      font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
+      color: rgba(255,255,255,0.9); line-height: 1.4; margin: 0 0 4px; letter-spacing: -0.01em;
     }
-    .gw-title span {
-      color: #7c6fff;
-      font-size: 1.75rem;
-      display: block;
+    .gw-amount {
+      font-family: 'Syne', sans-serif; font-size: 3.2rem; font-weight: 900;
+      background: linear-gradient(135deg, #4ade80 0%, #38bdf8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; line-height: 1.1; margin: 10px 0 6px; letter-spacing: -0.04em;
+      animation: gw-amount-glow 2.5s ease-in-out infinite;
+    }
+    .gw-subtitle {
+      font-family: 'Syne', sans-serif; font-size: 0.76rem; font-weight: 700;
+      color: rgba(255,255,255,0.6); margin: 0 0 18px;
+      letter-spacing: 0.1em; text-transform: uppercase;
     }
     .gw-desc {
-      color: rgba(255,255,255,0.4);
-      font-size: 0.82rem;
-      line-height: 1.65;
-      margin: 0 0 20px;
+      color: rgba(255,255,255,0.58); font-size: 0.79rem; line-height: 1.72; margin: 0 0 20px;
+    }
+    .gw-stats { display: flex; gap: 8px; margin-bottom: 20px; }
+    .gw-stat {
+      flex: 1; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 6px;
+    }
+    .gw-stat-val {
+      display: block; font-family: 'Syne', sans-serif; font-size: 0.88rem;
+      font-weight: 800; color: #5566ff;
+    }
+    .gw-stat-lbl {
+      display: block; font-size: 0.61rem; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em; margin-top: 2px;
     }
     .gw-form { display: flex; flex-direction: column; gap: 9px; }
     .gw-input {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 12px 16px;
-      color: #fff;
-      font-size: 0.88rem;
-      font-family: 'Syne', sans-serif;
-      outline: none;
-      width: 100%;
-      box-sizing: border-box;
-      transition: border-color 0.18s;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px; padding: 13px 16px; color: #fff; font-size: 0.88rem;
+      font-family: 'Syne', sans-serif; outline: none; width: 100%; box-sizing: border-box;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .gw-input:focus { border-color: rgba(108,99,255,0.5); }
-    .gw-input::placeholder { color: rgba(255,255,255,0.25); }
+    .gw-input:focus { border-color: rgba(54,70,245,0.6); background: rgba(54,70,245,0.06); }
+    .gw-input::placeholder { color: rgba(255,255,255,0.2); }
     .gw-btn {
-      background: linear-gradient(135deg, #6c63ff 0%, #4f46e5 100%);
-      border: none;
-      border-radius: 10px;
-      padding: 13px;
-      color: #fff;
-      font-size: 0.88rem;
-      font-weight: 700;
-      font-family: 'Syne', sans-serif;
-      cursor: pointer;
-      transition: opacity 0.18s, transform 0.18s;
-      box-shadow: 0 4px 16px rgba(108,99,255,0.35);
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #3646f5 0%, #5566ff 100%);
+      border: none; border-radius: 12px; padding: 14px; color: #fff;
+      font-size: 0.9rem; font-weight: 700; font-family: 'Syne', sans-serif;
+      cursor: pointer; transition: transform 0.18s, box-shadow 0.18s;
+      box-shadow: 0 4px 24px rgba(54,70,245,0.5), 0 0 0 1px rgba(255,255,255,0.07) inset;
     }
-    .gw-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .gw-fine { color: rgba(255,255,255,0.2); font-size: 0.7rem; margin-top: 12px; }
+    .gw-btn::after {
+      content: ''; position: absolute; top: 0; left: -70%;
+      width: 45%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.26), transparent);
+      transform: skewX(-20deg);
+      animation: gw-btn-shine 2.8s ease-in-out infinite 1.2s;
+    }
+    .gw-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(54,70,245,0.65), 0 0 0 1px rgba(255,255,255,0.1) inset; }
+    .gw-fine { color: rgba(255,255,255,0.4); font-size: 0.67rem; margin-top: 12px; }
 
     @media (max-width: 480px) {
-      #giveawayCard { padding: 28px 20px 22px; }
-      .gw-title { font-size: 1.15rem; }
-      .gw-title span { font-size: 1.5rem; }
+      #giveawayCard { padding: 34px 20px 26px; }
+      .gw-amount { font-size: 2.6rem; }
+      .gw-title { font-size: 0.95rem; }
     }
   </style>
 
   <div id="giveawayOverlay">
     <div id="giveawayCard">
+      <div class="gw-spark"></div>
+      <div class="gw-spark"></div>
+      <div class="gw-spark"></div>
+      <div class="gw-spark"></div>
+      <div class="gw-spark"></div>
       <button class="gw-close" onclick="closeGiveaway()">&#x2715;</button>
-      <img src="images/logo.png" alt="Kenpachi Trades" class="gw-logo" />
-      <div class="gw-badge">🎁 Weekly Giveaway</div>
-      <h2 class="gw-title">
-        Take a Chance to Win a<br>
-        <span>$150,000</span>
-        Prop Firm Account
-      </h2>
+      <span class="gw-icon">&#127942;</span>
+      <div class="gw-badge"><span class="gw-badge-dot"></span>Weekly Giveaway</div>
+      <p class="gw-title">Take a Chance to Win</p>
+      <span class="gw-amount">$150,000</span>
+      <p class="gw-subtitle">Funded Prop Firm Account</p>
       <p class="gw-desc">Every week we give away a fully funded prop firm account. Enter your email for a chance to win — one new winner selected every week.</p>
+      <div class="gw-stats">
+        <div class="gw-stat">
+          <span class="gw-stat-val">Weekly</span>
+          <span class="gw-stat-lbl">draws</span>
+        </div>
+        <div class="gw-stat">
+          <span class="gw-stat-val">Free</span>
+          <span class="gw-stat-lbl">to enter</span>
+        </div>
+        <div class="gw-stat">
+          <span class="gw-stat-val">Email</span>
+          <span class="gw-stat-lbl">notification</span>
+        </div>
+      </div>
       <form name="giveaway" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleGiveaway(event, this)" class="gw-form">
         <input type="hidden" name="form-name" value="giveaway" />
         <input name="bot-field" style="display:none;" />
         <input type="email" name="email" placeholder="your@email.com" required class="gw-input" />
-        <button type="submit" class="gw-btn">Enter Giveaway</button>
+        <button type="submit" class="gw-btn">Enter Giveaway &#8594;</button>
       </form>
-      <p id="giveawaySuccess" style="display:none; color:#4ade80; font-size:0.85rem; margin-top:14px; font-weight:600;">You're in! Good luck this week! 🎉</p>
+      <p id="giveawaySuccess" style="display:none; color:#4ade80; font-size:0.85rem; margin-top:14px; font-weight:600;">You're in! Good luck this week! &#127881;</p>
       <p class="gw-fine">No purchase required. Winner contacted via email.</p>
     </div>
   </div>
@@ -631,12 +803,30 @@
     </div>
   </header>
 
-  <!-- PAGE HERO -->
-  <section class="page-hero page-hero-split" style="background:#080910;">
-    <div class="container page-hero-inner">
-      <div class="page-hero-text">
-        <h1 class="reveal reveal-delay-1">Our Partner <em>Prop Firms</em></h1>
-        <p class="reveal reveal-delay-2">Hand-picked partners with verified discount codes. Save on your challenge fee with the firms I personally trust and trade with.</p>
+  <!-- HERO -->
+  <section class="pf-hero">
+    <div class="container pf-hero-inner">
+      <div class="pf-hero-badge reveal">
+        <span class="pf-hero-badge-dot"></span>
+        Verified Partners &middot; Updated 2026
+      </div>
+      <h1 class="reveal reveal-delay-1">Save on Your<br><em>Prop Firm Challenge</em></h1>
+      <p class="reveal reveal-delay-2">Hand-picked partners with verified discount codes. Save on your challenge fee with firms I personally trade with.</p>
+      <div class="pf-hero-stats reveal reveal-delay-3">
+        <div class="pf-hero-stat">
+          <span class="pf-hero-stat-val green">60%</span>
+          <span class="pf-hero-stat-lbl">Max Savings</span>
+        </div>
+        <div class="pf-hero-stat-sep"></div>
+        <div class="pf-hero-stat">
+          <span class="pf-hero-stat-val blue">2</span>
+          <span class="pf-hero-stat-lbl">Verified Partners</span>
+        </div>
+        <div class="pf-hero-stat-sep"></div>
+        <div class="pf-hero-stat">
+          <span class="pf-hero-stat-val">Daily</span>
+          <span class="pf-hero-stat-lbl">Payouts Available</span>
+        </div>
       </div>
     </div>
   </section>
@@ -647,12 +837,13 @@
     <img src="images/backpill 2.png" class="bg-pill bg-pill-right" alt="" loading="lazy" decoding="async" />
     <div class="container">
 
-      <!-- Section intro -->
       <div class="pf-intro reveal">
+        <div class="pf-intro-label">Curated &middot; Verified &middot; Trusted</div>
         <div class="pf-avatar-badge">
           <img src="images/avatar.png" alt="Kenpachi" />
         </div>
         <h2>My Top Prop Firm <span>Picks</span></h2>
+        <p class="pf-intro-sub">Every firm below is one I've personally vetted and traded with.</p>
       </div>
 
       <div class="pf-grid">
@@ -684,9 +875,9 @@
               <tr><td>Profit Target</td><td>6%</td></tr>
               <tr><td>Min Trading Days</td><td>None</td></tr>
               <tr><td>Payout</td><td>Daily (within 5 hrs)</td></tr>
-              <tr><td>News Trading</td><td><span class="yes">✓</span> Always allowed</td></tr>
-              <tr><td>Overnight Holding</td><td><span class="no">✗</span> Day trade only</td></tr>
-              <tr><td>EAs / Bots</td><td><span class="no">✗</span> Not allowed</td></tr>
+              <tr><td>News Trading</td><td><span class="yes">&#10003;</span> Always allowed</td></tr>
+              <tr><td>Overnight Holding</td><td><span class="no">&#10007;</span> Day trade only</td></tr>
+              <tr><td>EAs / Bots</td><td><span class="no">&#10007;</span> Not allowed</td></tr>
             </table>
           </div>
         </div>
@@ -715,19 +906,19 @@
               <tr><td>Max Account Size</td><td>$150,000</td></tr>
               <tr><td>Profit Split</td><td>Up to 90%</td></tr>
               <tr><td>Drawdown Type</td><td>EOD Trailing</td></tr>
-              <tr><td>Profit Target</td><td>$1.5K – $12K</td></tr>
+              <tr><td>Profit Target</td><td>$1.5K &ndash; $12K</td></tr>
               <tr><td>Min Trading Days</td><td>3 days</td></tr>
-              <tr><td>Payout</td><td>Up to 4×/month</td></tr>
-              <tr><td>News Trading</td><td><span class="yes">✓</span> 2-min buffer</td></tr>
-              <tr><td>Overnight Holding</td><td><span class="no">✗</span> Day trade only</td></tr>
-              <tr><td>EAs / Bots</td><td><span class="yes">✓</span> Allowed</td></tr>
+              <tr><td>Payout</td><td>Up to 4&times;/month</td></tr>
+              <tr><td>News Trading</td><td><span class="yes">&#10003;</span> 2-min buffer</td></tr>
+              <tr><td>Overnight Holding</td><td><span class="no">&#10007;</span> Day trade only</td></tr>
+              <tr><td>EAs / Bots</td><td><span class="yes">&#10003;</span> Allowed</td></tr>
             </table>
           </div>
         </div>
 
       </div>
 
-      <p class="pf-disclaimer reveal">⚠ Prop firm challenges involve risk of losing the fee paid. Results are not guaranteed. Discount codes are subject to change — verify on the firm's official website before purchasing.</p>
+      <p class="pf-disclaimer reveal">&#9888; Prop firm challenges involve risk of losing the fee paid. Results are not guaranteed. Discount codes are subject to change — verify on the firm's official website before purchasing.</p>
 
     </div>
   </section>
@@ -784,12 +975,6 @@
 
     const notifAudio = new Audio('sounds/universfield-new-notification-062-494544.mp3');
     notifAudio.volume = 0.6;
-    let notifPlayed = false;
-    function playNotif() {
-      if (notifPlayed) return;
-      notifPlayed = true;
-      notifAudio.play().catch(() => {});
-    }
 
     function showGiveaway() {
       const overlay = document.getElementById('giveawayOverlay');
@@ -822,13 +1007,11 @@
     }
 
     if (!sessionStorage.getItem('giveawaySeen')) {
-      const trigger = () => { showGiveaway(); notifAudio.play().catch(() => {}); };
-      setTimeout(trigger, 5000);
+      setTimeout(() => { showGiveaway(); notifAudio.play().catch(() => {}); }, 5000);
     }
     document.getElementById('giveawayOverlay').addEventListener('click', function(e) {
       if (e.target === this) closeGiveaway();
     });
   </script>
-  <script src="site.js"></script>
 </body>
 </html>
