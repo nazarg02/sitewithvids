@@ -282,7 +282,12 @@ h1, h2, h3, h4, h5, .btn, button, input {
 .edu-note-abbr { color: var(--tt-accent-dk); }
 .edu-note-label { color: var(--tt-ink-faint); }
 .edu-empty span { color: var(--tt-ink-soft); }
-.edu-empty img { mix-blend-mode: multiply; filter: none; opacity: 0.9; }
+/* loading gif has a black background — invert it to white and blend it away */
+.edu-empty img {
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
 
 /* ============================================================
    EDU DETAIL PAGES (edu-*.html — videos & notes)
