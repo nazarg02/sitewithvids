@@ -18,1029 +18,13 @@
   <meta property="og:image:alt" content="Quarterly Theory Indicator for TradingView — Kenpachi Trades" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Quarterly Theory Indicator for TradingView — Kenpachi Trades" />
-  <meta name="twitter:description" content="Professional TradingView indicators built on Quarterly Theory. SSMT, True Opens, STDV, NWOG, PSP and more." />
+  <meta name="twitter:description" content="Professional TradingView indicators built on Quarterly Theory. SSMT, True Opens, NWOG, PSP and more." />
   <meta name="twitter:image" content="https://kenpachitrades.com/images/og-image.jpg" />
   <meta name="description" content="The best Quarterly Theory indicator for TradingView. Includes SSMT, True Opens, NWOG, PSP, tCISD and more. Built for Smart Money and QT traders. Try it now." />
   <meta name="keywords" content="quarterly theory indicator, quarterly theory tradingview, QT indicator, kenpachi indicator, SSMT indicator, NWOG tradingview, smart money indicator, quarterly theory trading, QT pro indicator, kenpachi trades" />
   <link rel="canonical" href="https://kenpachitrades.com/indicators.html" />
-<link rel="icon" type="image/png" href="images/logo.png" />
   <link rel="stylesheet" href="syle.css?v=6" />
-  <style>
-    /* ── Hero override — black bg, white spirals ── */
-    .page-hero.page-hero-split::before {
-      background: url('images/fibonacci.svg') right center / 60% no-repeat;
-      mix-blend-mode: normal;
-      opacity: 0.35;
-      filter: invert(1);
-    }
-
-    .ind-pricing .btn,
-    .ind-pricing a.btn,
-    .ind-pricing button,
-    .ind-pricing .btn-ghost,
-    .ind-pricing .btn-primary,
-    .ind-pricing .btn-try-free,
-    .promo-copy { cursor: pointer !important; }
-
-    /* ── Pricing section dark ── */
-    .ind-pricing {
-      background: #080910;
-      padding: 80px 0 40px;
-      position: relative;
-      overflow: hidden;
-      content-visibility: auto;
-      contain-intrinsic-size: 0 800px;
-    }
-    .ind-pricing .bg-pill {
-      position: absolute;
-      width: 320px;
-      pointer-events: none;
-      user-select: none;
-      opacity: 0.18;
-    }
-    .ind-pricing .bg-pill-left {
-      left: -80px;
-      top: 50%;
-      transform: translateY(-50%) rotate(-28deg);
-    }
-    .ind-pricing .bg-pill-right {
-      right: -80px;
-      top: 50%;
-      transform: translateY(-50%) rotate(28deg);
-    }
-    .ind-pricing .section-head h2 { color: #fff; }
-    .ind-pricing .section-head p { color: rgba(255,255,255,0.45); }
-    .ind-pricing em { color: var(--blue-bright); font-style: normal; }
-
-    /* === PRICING — PILL CARDS === */
-    .ind-pricing .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      max-width: 1080px;
-      margin: 0 auto 64px;
-    }
-    .ind-pricing .card-gif-wrap { display: none; }
-
-    /* Base card */
-    .ind-pricing .price-card {
-      border-radius: 16px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.28s ease, box-shadow 0.28s ease;
-      position: relative;
-      will-change: transform;
-    }
-    /* Top accent stripe */
-    .ind-pricing .price-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      z-index: 2;
-    }
-
-    /* Monthly — black + blue accents */
-    .ind-pricing .price-card:nth-child(1) {
-      background: #08090f;
-      border: 1.5px solid rgba(255,255,255,0.08);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
-    }
-    .ind-pricing .price-card:nth-child(1)::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
-    .ind-pricing .price-card:nth-child(1):hover {
-      transform: translateY(-7px);
-      box-shadow: 0 24px 60px rgba(37,99,235,0.35);
-      border-color: rgba(96,165,250,0.30);
-    }
-
-    /* Lifetime — black + green accents */
-    .ind-pricing .price-card:nth-child(2),
-    .ind-pricing .price-card-green {
-      background: #08090f !important;
-      border: 1.5px solid rgba(255,255,255,0.08) !important;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important;
-    }
-    .ind-pricing .price-card:nth-child(2)::before,
-    .ind-pricing .price-card-green::before { background: linear-gradient(90deg, #16a34a, #4ade80) !important; }
-    .ind-pricing .price-card:nth-child(2):hover,
-    .ind-pricing .price-card-green:hover {
-      transform: translateY(-7px) !important;
-      box-shadow: 0 24px 60px rgba(22,163,74,0.35) !important;
-      border-color: rgba(74,222,128,0.30) !important;
-    }
-
-    /* 3 Months — black + red accents */
-    .ind-pricing .price-card:nth-child(3) {
-      background: #08090f;
-      border: 1.5px solid rgba(255,255,255,0.08);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
-    }
-    .ind-pricing .price-card:nth-child(3)::before { background: linear-gradient(90deg, #dc2626, #f87171); }
-    .ind-pricing .price-card:nth-child(3):hover {
-      transform: translateY(-7px);
-      box-shadow: 0 24px 60px rgba(220,38,38,0.35);
-      border-color: rgba(248,113,113,0.30);
-    }
-
-    /* Pill image at top — tinted bg per card */
-    .card-pill-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 32px 24px 26px;
-      border-radius: 14px 14px 0 0;
-      position: relative;
-      isolation: isolate;
-    }
-    .ind-pricing .price-card:nth-child(1) .card-pill-wrap {
-      background: linear-gradient(to bottom, #cfe0ff 50%, #08090f 100%);
-    }
-    .ind-pricing .price-card:nth-child(2) .card-pill-wrap,
-    .ind-pricing .price-card-green .card-pill-wrap {
-      background: linear-gradient(to bottom, #c8f0da 50%, #08090f 100%);
-    }
-    .ind-pricing .price-card:nth-child(3) .card-pill-wrap {
-      background: linear-gradient(to bottom, #ffd8d0 50%, #08090f 100%);
-    }
-    .card-pill-wrap img {
-      height: 86px;
-      width: auto;
-      object-fit: contain;
-      mix-blend-mode: multiply;
-      transition: transform 0.35s ease;
-      position: relative;
-      z-index: 1;
-    }
-    .ind-pricing .price-card:hover .card-pill-wrap img {
-      transform: scale(1.07) translateY(-4px);
-    }
-
-    /* Card body */
-    .card-body {
-      padding: 22px 28px 28px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .ind-pricing .price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 4px;
-    }
-    .ind-pricing .price-original {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.28);
-      text-decoration: line-through;
-      text-decoration-thickness: 1px;
-      text-decoration-color: rgba(255,255,255,0.4);
-      letter-spacing: 0;
-      line-height: 1;
-      font-family: 'Syne', sans-serif;
-    }
-    .ind-pricing .price-original sup {
-      font-size: 0.55rem;
-      vertical-align: super;
-    }
-    .ind-pricing .price-amount {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1;
-      letter-spacing: -0.03em;
-      font-family: 'Syne', sans-serif;
-    }
-    .ind-pricing .price-amount sup {
-      font-size: 0.9rem;
-      font-weight: 600;
-      vertical-align: baseline;
-      position: relative;
-      top: -0.7rem;
-      color: rgba(255,255,255,0.55);
-      font-family: 'Syne', sans-serif;
-      letter-spacing: 0;
-    }
-    .ind-pricing .price-period {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.40);
-      margin-bottom: 22px;
-      letter-spacing: 0.01em;
-    }
-    .ind-pricing .price-row { display: flex; }
-    .ind-pricing .price-divider {
-      height: 1px;
-      margin: 0 0 20px;
-      display: block;
-    }
-    .ind-pricing .price-card:nth-child(1) .price-divider { background: rgba(96,165,250,0.18); }
-    .ind-pricing .price-card:nth-child(2) .price-divider,
-    .ind-pricing .price-card-green .price-divider { background: rgba(34,197,94,0.18); }
-    .ind-pricing .price-card:nth-child(3) .price-divider { background: rgba(239,68,68,0.18); }
-
-    /* Features */
-    .ind-pricing .price-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      flex: 1;
-    }
-    .ind-pricing .price-features li {
-      font-size: 0.88rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      line-height: 1;
-      white-space: nowrap;
-      color: rgba(255,255,255,0.88);
-    }
-    .ind-pricing .price-features li .check {
-      font-size: 1.1rem;
-      font-weight: 900;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-    .ind-pricing .price-card:nth-child(1) .check { color: #60a5fa; }
-    .ind-pricing .price-card:nth-child(2) .check,
-    .ind-pricing .price-card-green .check { color: #4ade80; }
-    .ind-pricing .price-card:nth-child(3) .check { color: #f87171; }
-
-    /* Buttons */
-    .ind-pricing .btn-block {
-      border-radius: 10px;
-      padding: 14px 20px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.025em;
-      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
-      text-align: center;
-      display: block;
-      border: none;
-      color: #fff;
-    }
-    .ind-pricing .price-card:nth-child(1) .btn-ghost {
-      background: #2563eb;
-      box-shadow: 0 3px 16px rgba(37,99,235,0.40);
-    }
-    .ind-pricing .price-card:nth-child(1) .btn-ghost:hover {
-      filter: brightness(1.15);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(37,99,235,0.55);
-    }
-    .ind-pricing .price-card:nth-child(3) .btn-ghost {
-      background: #dc2626;
-      box-shadow: 0 3px 16px rgba(220,38,38,0.40);
-    }
-    .ind-pricing .price-card:nth-child(3) .btn-ghost:hover {
-      filter: brightness(1.15);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(220,38,38,0.55);
-    }
-    .ind-pricing .btn-primary {
-      background: #2563eb !important;
-      box-shadow: 0 3px 16px rgba(37,99,235,0.40) !important;
-      border: none !important;
-      color: #fff !important;
-      cursor: pointer !important;
-    }
-    .ind-pricing .btn-primary:hover {
-      filter: brightness(1.15) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 28px rgba(37,99,235,0.55) !important;
-    }
-    .ind-pricing .btn-try-free {
-      background: #16a34a !important;
-      box-shadow: 0 3px 16px rgba(22,163,74,0.38) !important;
-      border-radius: 10px !important;
-      padding: 14px 20px !important;
-      font-size: 0.9rem !important;
-      font-weight: 700 !important;
-      color: #fff !important;
-      border: none !important;
-      cursor: pointer !important;
-    }
-    .ind-pricing .btn-try-free:hover {
-      filter: brightness(1.15) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 28px rgba(22,163,74,0.52) !important;
-    }
-    /* === PRICING RESPONSIVE === */
-
-    /* Touch devices — disable hover lift */
-    @media (hover: none) {
-      .ind-pricing .price-card:hover { transform: none !important; box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important; border-color: rgba(255,255,255,0.08) !important; }
-      .ind-pricing .price-card:hover .card-pill-wrap img { transform: none; }
-    }
-
-    /* Promo block */
-    .promo-block {
-      margin-bottom: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .promo-hint {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.35);
-      margin: 0;
-    }
-    .promo-hint strong { color: #4ade80; font-weight: 700; }
-    .promo-main-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .promo-code {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      color: #fff;
-    }
-    .promo-copy {
-      background: #4ade80;
-      border: none;
-      color: #052e16;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 7px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: filter 0.2s, transform 0.15s;
-      white-space: nowrap;
-      flex-shrink: 0;
-      letter-spacing: 0.03em;
-    }
-    .promo-copy:hover { filter: brightness(1.1); transform: translateY(-1px); }
-    .promo-timer-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .promo-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #ef4444;
-      flex-shrink: 0;
-      animation: blink-dot 1.2s ease-in-out infinite;
-      box-shadow: 0 0 5px rgba(239,68,68,0.8);
-    }
-    @keyframes blink-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.1; }
-    }
-    .promo-entries-label {
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.35);
-      white-space: nowrap;
-    }
-
-    /* ===== REVIEWS SECTION (horizontal marquee) ===== */
-    .reviews-section {
-      background: #080910;
-      padding: 16px 0 48px;
-      position: relative;
-      overflow: hidden;
-    }
-    .reviews-section .container { position: relative; z-index: 1; }
-    .reviews-section .section-head { margin-bottom: 28px; }
-    .reviews-section .section-head h2 { margin-bottom: 8px; }
-    .reviews-head-rating {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 14px;
-      padding: 7px 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 999px;
-      backdrop-filter: blur(8px);
-    }
-    .reviews-head-stars {
-      display: flex;
-      gap: 3px;
-      color: #fbbf24;
-      font-size: 1rem;
-      letter-spacing: 1px;
-      text-shadow: 0 0 12px rgba(251,191,36,0.45);
-      animation: stars-shimmer 3.5s ease-in-out infinite;
-    }
-    @keyframes stars-shimmer {
-      0%, 100% { filter: brightness(1); }
-      50%      { filter: brightness(1.25); }
-    }
-    .reviews-head-text {
-      color: rgba(255,255,255,0.7);
-      font-size: 0.86rem;
-    }
-    .reviews-head-text strong { color: #fff; font-weight: 700; }
-
-    /* marquee track */
-    .reviews-marquee {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      padding: 14px 0;
-      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-              mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-    }
-    .reviews-track {
-      display: flex;
-      gap: 22px;
-      width: max-content;
-      animation: rev-marquee 48s linear infinite;
-      will-change: transform;
-    }
-    @keyframes rev-marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    .review-card {
-      position: relative;
-      flex: 0 0 360px;
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 22px 22px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1);
-    }
-    .review-card:hover {
-      transform: translateY(-4px);
-    }
-    .review-card:hover .review-avatar {
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.2),
-        0 0 0 2px rgba(255,255,255,0.12),
-        0 6px 18px -4px rgba(255,255,255,0.18);
-    }
-    .review-head {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      position: relative;
-      z-index: 1;
-    }
-    .review-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #2a2d3a, #3b3f52);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.95);
-      flex-shrink: 0;
-      letter-spacing: 0.5px;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.15),
-        0 0 0 1px rgba(255,255,255,0.06),
-        0 4px 12px -4px rgba(0,0,0,0.5);
-      transition: box-shadow 0.35s ease, transform 0.35s ease;
-    }
-    /* tinted avatars cycling */
-    .reviews-track .review-card:nth-child(6n+1) .review-avatar { background: linear-gradient(135deg, #1f4d3a, #2d6a4f); }
-    .reviews-track .review-card:nth-child(6n+2) .review-avatar { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
-    .reviews-track .review-card:nth-child(6n+3) .review-avatar { background: linear-gradient(135deg, #5b1a3d, #9d174d); }
-    .reviews-track .review-card:nth-child(6n+4) .review-avatar { background: linear-gradient(135deg, #4a2c0e, #b45309); }
-    .reviews-track .review-card:nth-child(6n+5) .review-avatar { background: linear-gradient(135deg, #3a1f5e, #6d28d9); }
-    .reviews-track .review-card:nth-child(6n+6) .review-avatar { background: linear-gradient(135deg, #0e3a4a, #0891b2); }
-    .review-meta { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-    .review-name {
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.96rem;
-      line-height: 1;
-      letter-spacing: 0.01em;
-    }
-    .review-stars {
-      display: flex;
-      gap: 1px;
-      color: #fbbf24;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      text-shadow: 0 0 10px rgba(251,191,36,0.45);
-    }
-    .review-body {
-      color: rgba(255,255,255,0.82);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      margin: 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-      font-weight: 400;
-    }
-    .review-date {
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.4);
-      margin-top: auto;
-      padding-top: 10px;
-      letter-spacing: 0.02em;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .review-date::before {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
-      max-width: 30px;
-    }
-    .reviews-cta {
-      text-align: center;
-      margin-top: 22px;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.55);
-    }
-    .reviews-cta a {
-      color: #4ade80;
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px dashed rgba(74,222,128,0.4);
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .reviews-cta a:hover { color: #86efac; border-bottom-color: #86efac; }
-
-    @media (max-width: 640px) {
-      .reviews-section { padding: 8px 0 36px; }
-      .review-card { flex-basis: 300px; padding: 18px 18px 16px; }
-      .review-body { font-size: 0.86rem; }
-      .reviews-track { gap: 16px; animation-duration: 38s; }
-    }
-    @media (max-width: 380px) {
-      .review-card { flex-basis: 270px; padding: 16px 16px 14px; }
-      .review-name { font-size: 0.9rem; }
-      .review-body { font-size: 0.82rem; }
-      .reviews-head-rating { padding: 6px 14px; gap: 8px; }
-      .reviews-head-text { font-size: 0.76rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .reviews-track { animation: none; }
-      .reviews-head-stars { animation: none; }
-    }
-
-    /* Large desktop ≥1400px */
-    @media (min-width: 1400px) {
-      .ind-pricing .pricing-grid { max-width: 1160px; gap: 32px; }
-      .card-pill-wrap { padding: 36px 28px 28px; }
-      .card-pill-wrap img { height: 96px; }
-      .card-body { padding: 24px 32px 32px; }
-      .ind-pricing .price-amount { font-size: 2.4rem; }
-      .ind-pricing .bg-pill { width: 380px; }
-    }
-
-    /* Laptop 1141–1399px — baseline, no changes needed */
-
-    /* Laptop small 861–1140px */
-    @media (min-width: 861px) and (max-width: 1140px) {
-      .ind-pricing .pricing-grid { gap: 16px; max-width: 900px; }
-      .card-pill-wrap { padding: 22px 18px 18px; }
-      .card-pill-wrap img { height: 70px; }
-      .card-body { padding: 16px 20px 22px; }
-      .ind-pricing .price-amount { font-size: 2rem; }
-      .ind-pricing .price-amount sup { font-size: 0.8rem; top: -0.55rem; }
-      .ind-pricing .btn-block { padding: 12px 14px; font-size: 0.84rem; }
-      .ind-pricing .btn-try-free { padding: 12px 14px !important; font-size: 0.84rem !important; }
-      .ind-pricing .bg-pill { width: 240px; }
-    }
-
-    /* Tablet landscape 601–860px — 1 col, wider */
-    @media (min-width: 601px) and (max-width: 860px) {
-      .ind-pricing { padding: 52px 0 68px; }
-      .ind-pricing .pricing-grid { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto 48px; padding: 0 24px; gap: 20px; }
-      .card-pill-wrap { padding: 28px 24px 22px; }
-      .card-pill-wrap img { height: 86px; }
-      .card-body { padding: 20px 28px 26px; }
-      .ind-pricing .price-amount { font-size: 1.9rem; }
-      .ind-pricing .price-amount sup { font-size: 1rem; top: -0.8rem; }
-      .ind-pricing .bg-pill { width: 200px; opacity: 0.10; }
-      .ind-pricing .bg-pill-left { left: -60px; }
-      .ind-pricing .bg-pill-right { right: -60px; }
-      .ind-pricing .price-features li { white-space: normal; }
-      .promo-code { font-size: 1.2rem; }
-    }
-
-    /* Large phone 481–600px */
-    @media (max-width: 600px) {
-      .ind-pricing { padding: 44px 0 60px; }
-      .ind-pricing .pricing-grid { grid-template-columns: 1fr; max-width: 100%; padding: 0 16px; gap: 18px; margin-bottom: 36px; }
-      .card-pill-wrap { padding: 24px 20px 18px; }
-      .card-pill-wrap img { height: 76px; }
-      .card-body { padding: 18px 20px 22px; }
-      .ind-pricing .price-amount { font-size: 2rem; }
-      .ind-pricing .price-amount sup { font-size: 0.9rem; top: -0.72rem; }
-      .ind-pricing .bg-pill { width: 180px; opacity: 0.09; }
-      .ind-pricing .price-features li { white-space: normal; }
-    }
-
-    /* Phone ≤480px */
-    @media (max-width: 480px) {
-      .ind-pricing { padding: 36px 0 52px; }
-      .ind-pricing .pricing-grid { max-width: 100%; padding: 0 14px; gap: 16px; margin-bottom: 28px; }
-      .card-pill-wrap { padding: 22px 16px 18px; }
-      .card-pill-wrap img { height: 66px; }
-      .card-body { padding: 16px 16px 20px; }
-      .ind-pricing .price-amount { font-size: 1.85rem; }
-      .ind-pricing .price-amount sup { font-size: 0.82rem; top: -0.65rem; }
-      .ind-pricing .price-period { font-size: 0.68rem; margin-bottom: 16px; }
-      .ind-pricing .price-features { gap: 11px; margin-bottom: 20px; }
-      .ind-pricing .price-features li { font-size: 0.82rem; white-space: normal; }
-      .ind-pricing .btn-block { padding: 13px 14px; font-size: 0.85rem; }
-      .ind-pricing .btn-try-free { padding: 13px 14px !important; font-size: 0.85rem !important; }
-      .ind-pricing .bg-pill { width: 160px; opacity: 0.08; }
-      .ind-pricing .bg-pill-left { left: -50px; }
-      .ind-pricing .bg-pill-right { right: -50px; }
-      .ind-pricing .section-head { margin-bottom: 28px !important; }
-      .promo-code { font-size: 1rem; }
-    }
-
-    /* Very small ≤360px */
-    @media (max-width: 360px) {
-      .ind-pricing .pricing-grid { padding: 0 10px; }
-      .card-body { padding: 14px 14px 18px; }
-      .ind-pricing .price-amount { font-size: 2rem; }
-      .ind-pricing .btn-block { padding: 12px 12px; font-size: 0.82rem; }
-      .ind-pricing .btn-try-free { padding: 12px 12px !important; font-size: 0.82rem !important; }
-      .promo-code { font-size: 0.92rem; letter-spacing: 0.08em; }
-      .promo-copy { padding: 5px 8px; font-size: 0.68rem; }
-    }
-
-    /* ===== LIGHTBOX ===== */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(0,0,0,0.95);
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      touch-action: none;
-    }
-    #lightbox.open { display: flex; }
-    #lightbox-img-wrap {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      touch-action: none;
-    }
-    #lightbox img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.8);
-      transform-origin: center center;
-      will-change: transform;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
-    #lightbox-close {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #fff;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      line-height: 1;
-      z-index: 10000;
-    }
-    .lb-arrow {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10000;
-      background: rgba(0,0,0,0.35);
-      border: none;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: rgba(255,255,255,0.7);
-      opacity: 0;
-      transition: opacity 0.25s, background 0.15s, color 0.15s;
-      backdrop-filter: blur(6px);
-    }
-    #lightbox:hover .lb-arrow { opacity: 1; }
-    .lb-arrow:hover { background: rgba(0,0,0,0.6); color: #fff; }
-    .lb-arrow-left  { left: 18px; }
-    .lb-arrow-right { right: 18px; }
-    #feat-img { cursor: zoom-in; }
-    /* Hover arrows on image panel */
-    .img-hover-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 6;
-      background: rgba(0,0,0,0.28);
-      border: none;
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: rgba(255,255,255,0.75);
-      opacity: 0;
-      transition: opacity 0.2s, background 0.15s, color 0.15s;
-      pointer-events: none;
-      backdrop-filter: blur(4px);
-    }
-    .img-hover-arrow.arr-left  { left: 10px; }
-    .img-hover-arrow.arr-right { right: 10px; }
-    .feat-panel-img-wrap:hover .img-hover-arrow {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .img-hover-arrow:hover { background: rgba(0,0,0,0.52); color: #fff; }
-    .btn-try-free {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
-      color: #fff;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(34,197,94,0.4), 0 0 0 1px rgba(34,197,94,0.25);
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-    .btn-try-free:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(34,197,94,0.55), 0 0 0 1px rgba(34,197,94,0.4);
-    }
-    /* ── Feat section — dark background ── */
-    .ind-feat-section {
-      background: #080910;
-      position: relative;
-      overflow: hidden;
-    }
-    .ind-feat-section .section-head h2 { color: #fff; }
-    .ind-feat-section .section-head p  { color: rgba(255,255,255,0.5); }
-    .ind-feat-section em { color: #5566ff; font-style: normal; }
-
-    /* ── Background pill decorations ── */
-    .feat-bg-pill {
-      position: absolute;
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
-    }
-    .feat-bg-pill-1 {
-      width: 280px;
-      top: -60px;
-      left: -90px;
-      opacity: 0.13;
-      transform: rotate(-30deg);
-    }
-    .feat-bg-pill-2 {
-      width: 260px;
-      bottom: -40px;
-      right: -70px;
-      opacity: 0.11;
-      transform: rotate(22deg);
-    }
-    .feat-bg-pill-3 {
-      width: 200px;
-      top: 40%;
-      right: 8%;
-      opacity: 0.07;
-      transform: rotate(-12deg);
-    }
-    .ind-feat-section .container { position: relative; z-index: 1; }
-    .section-avatar-badge {
-      border-color: rgba(54,70,245,0.3) !important;
-    }
-
-    /* ── Feat list ── */
-    .feat-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      width: 250px;
-      flex-shrink: 0;
-    }
-    .feat-item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      padding: 11px 16px 11px 20px;
-      border-radius: 8px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      transition: background 0.15s;
-      user-select: none;
-    }
-    .feat-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 20%;
-      bottom: 20%;
-      width: 3px;
-      border-radius: 2px;
-      background: transparent;
-      transition: background 0.15s, top 0.15s, bottom 0.15s;
-    }
-    .feat-item:hover { background: rgba(255,255,255,0.04); }
-    .feat-item:hover::before { background: rgba(255,255,255,0.15); top: 25%; bottom: 25%; }
-    .feat-item.active { background: rgba(255,255,255,0.06); }
-    .feat-item.active::before { background: #5566ff; top: 15%; bottom: 15%; }
-    .feat-item-dot { display: none; }
-    .feat-item-name {
-      font-size: 0.88rem;
-      font-family: 'Syne', sans-serif;
-      font-weight: 500;
-      color: rgba(255,255,255,0.4);
-      transition: color 0.15s;
-    }
-    .feat-item.active .feat-item-name { color: #fff; font-weight: 600; }
-    .feat-item:hover:not(.active) .feat-item-name { color: rgba(255,255,255,0.7); }
-
-    /* NEW badge — blue (first) */
-    .feat-item-new {
-      margin-top: 8px;
-    }
-    .feat-item-new::after {
-      content: 'NEW';
-      position: absolute;
-      top: -7px;
-      left: 24px;
-      font-size: 0.47rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #fff;
-      background: linear-gradient(135deg, #3646f5, #5566ff);
-      border-radius: 3px;
-      padding: 2px 5px;
-      line-height: 1.6;
-      pointer-events: none;
-      z-index: 5;
-    }
-    /* NEW badge — red (second new item) */
-    .feat-item-new2::after {
-      background: linear-gradient(135deg, #dc2626, #f87171);
-    }
-
-    /* ── Image panel — clean dark card ── */
-    .feat-panel-img-wrap {
-      background: #0a0b12;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      position: relative;
-    }
-    .feat-panel-img-wrap #feat-img {
-      width: 100%;
-      display: block;
-      object-fit: contain;
-    }
-
-    /* ── CTA row — sits inside feat-panel, below the image ── */
-    .feat-cta-row {
-      display: flex;
-      align-items: stretch;
-      gap: 12px;
-      margin-top: 14px;
-      width: 100%;
-    }
-    .feat-cta-btn {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2px;
-      padding: 13px 20px;
-      border-radius: 10px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
-      cursor: pointer;
-      flex: 1;
-    }
-    .feat-cta-primary {
-      background: linear-gradient(135deg, #3646f5, #5566ff);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(54,70,245,0.45);
-    }
-    .feat-cta-primary:hover {
-      filter: brightness(1.12);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(54,70,245,0.6);
-    }
-    .feat-cta-main {
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-    }
-    .feat-cta-sub {
-      font-size: 0.72rem;
-      font-weight: 500;
-      opacity: 0.75;
-      letter-spacing: 0.03em;
-    }
-    .feat-cta-ghost {
-      background: transparent;
-      border: 1.5px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.65);
-      font-size: 0.9rem;
-      letter-spacing: 0.02em;
-      padding: 14px 28px;
-    }
-    .feat-cta-ghost:hover {
-      border-color: rgba(255,255,255,0.35);
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* ── ≤768px: phone only ── */
-    @media (max-width: 768px) {
-      .ind-pricing { padding: 44px 0 60px; }
-      .ind-pricing .section-head { margin-bottom: 24px !important; }
-      .lt-unit span { font-size: 1.4rem; }
-      .lt-unit { min-width: 34px; padding: 0 4px; }
-      .lt-sep { font-size: 1.1rem; }
-      .btn-try-free { font-size: 0.88rem; padding: 13px 20px; }
-      .promo-code-row { padding: 7px 8px 7px 14px; }
-      .page-hero-img { max-height: 180px; }
-      .page-hero-img img { object-fit: contain; max-height: 180px; background: transparent; }
-      .feat-showcase { gap: 12px; margin-bottom: 32px; }
-      .feat-panel { width: 100%; }
-      .feat-cta-row { gap: 8px; }
-      .feat-cta-btn { padding: 12px 14px; }
-    }
-    @media (max-width: 860px) {
-      .section-avatar-badge { width: 76px; height: 76px; margin-bottom: 12px; }
-      .ind-feat-section .section-head { margin-bottom: 28px !important; }
-      .ind-feat-section .section-head h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
-      .ind-feat-section .section-head p  { font-size: 0.88rem; }
-
-      /* ── feat-list: grid 2 col on mobile ── */
-      .feat-list {
-        width: 100% !important;
-        flex-direction: row !important;
-        flex-wrap: wrap !important;
-        overflow: hidden !important;
-        gap: 8px !important;
-        padding: 0 !important;
-        scroll-snap-type: none !important;
-      }
-      .feat-item {
-        flex: 1 1 calc(50% - 4px) !important;
-        min-width: 0 !important;
-        white-space: normal !important;
-        padding: 10px 12px !important;
-        font-size: 0.8rem !important;
-        border-radius: 8px !important;
-        justify-content: center;
-        text-align: center;
-        scroll-snap-align: none !important;
-      }
-      .feat-item::before { display: none !important; }
-      .feat-item-name { font-size: 0.8rem !important; text-align: center; }
-      .feat-item-new  { margin-top: 0 !important; }
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
@@ -1123,29 +107,12 @@
         },
         "shippingDetails": {
           "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "USD"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "geoTargetName": "Worldwide"
-          },
+          "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "USD" },
+          "shippingDestination": { "@type": "DefinedRegion", "geoTargetName": "Worldwide" },
           "deliveryTime": {
             "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 0,
-              "maxValue": 0,
-              "unitCode": "DAY"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 0,
-              "maxValue": 0,
-              "unitCode": "DAY"
-            }
+            "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY" },
+            "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY" }
           }
         }
       },
@@ -1163,29 +130,12 @@
         },
         "shippingDetails": {
           "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "USD"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "geoTargetName": "Worldwide"
-          },
+          "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "USD" },
+          "shippingDestination": { "@type": "DefinedRegion", "geoTargetName": "Worldwide" },
           "deliveryTime": {
             "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 0,
-              "maxValue": 0,
-              "unitCode": "DAY"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 0,
-              "maxValue": 0,
-              "unitCode": "DAY"
-            }
+            "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY" },
+            "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY" }
           }
         }
       }
@@ -1201,6 +151,1071 @@
     gtag('config', 'G-0E9J28DDXG');
   </script>
   <link rel="stylesheet" href="https://cdn.cursors-4u.net/cursors/animated/overwatch-working-in-background-3ef963f5-32.css">
+  <style>
+    /* ============================================================
+       INDICATORS PAGE — Clean light redesign (ttrades-inspired)
+       White paper, charcoal ink, periwinkle accent, soft shadows.
+       ============================================================ */
+    :root {
+      --tt-ink:        #2e3440;
+      --tt-ink-soft:   #5c6472;
+      --tt-ink-faint:  #8a91a3;
+      --tt-accent:     #6274f2;
+      --tt-accent-dk:  #4d5fe8;
+      --tt-accent-lt:  #eef0fe;
+      --tt-line:       #e6e9f3;
+      --tt-line-soft:  #eef0f7;
+      --tt-paper:      #ffffff;
+      --tt-paper-alt:  #f5f7fc;
+      --tt-shadow:     0 14px 44px rgba(46,52,64,0.09);
+      --tt-shadow-sm:  0 6px 22px rgba(46,52,64,0.07);
+      --tt-star:       #f4a41d;
+    }
+
+    html { background-color: var(--tt-paper) !important; }
+    body {
+      background: var(--tt-paper);
+      color: var(--tt-ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 400;
+    }
+    ::selection { background: var(--tt-accent-lt); color: var(--tt-accent-dk); }
+
+    /* ── NAV — light theme overrides ── */
+    .nav {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--tt-line-soft);
+    }
+    .nav .logo { color: var(--tt-ink); }
+    .nav-links a { color: var(--tt-ink-soft); }
+    .nav-links a:hover { color: var(--tt-ink); background: var(--tt-paper-alt); }
+    .nav-links a.active { color: var(--tt-ink); background: var(--tt-accent-lt); }
+    .nav-links .nav-cta {
+      background: var(--tt-accent);
+      box-shadow: 0 2px 12px rgba(98,116,242,0.3);
+    }
+    .nav-links .nav-cta:hover { background: var(--tt-accent-dk); box-shadow: 0 6px 20px rgba(98,116,242,0.4); }
+    .nav-join {
+      background: var(--tt-ink);
+      color: #fff;
+    }
+    .nav-join:hover { background: #3c4351; color: #fff; }
+    .burger { border-color: var(--tt-line); color: var(--tt-ink-soft); }
+    .burger:hover { border-color: var(--tt-ink-faint); color: var(--tt-ink); }
+    .mobile-menu {
+      background: rgba(255,255,255,0.98);
+      border-bottom: 1px solid var(--tt-line-soft);
+    }
+    .mobile-menu a { color: var(--tt-ink-soft); border-bottom-color: var(--tt-line-soft); }
+    .mobile-menu a:hover { color: var(--tt-ink); background: var(--tt-paper-alt); }
+
+    /* ── Shared bits ── */
+    .tt-container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+    .tt-head { text-align: center; margin-bottom: 44px; }
+    .tt-head h2 {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: clamp(1.7rem, 3.4vw, 2.35rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--tt-ink);
+      line-height: 1.15;
+      margin: 0 0 12px;
+    }
+    .tt-head h2 em { color: var(--tt-accent); font-style: normal; }
+    .tt-head p {
+      font-size: 1rem;
+      color: var(--tt-ink-soft);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .tt-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.94rem; font-weight: 600; letter-spacing: 0.01em;
+      border-radius: 10px; padding: 14px 30px; border: none; cursor: pointer;
+      text-decoration: none; white-space: nowrap;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .tt-btn:focus-visible { outline: 2px solid var(--tt-accent); outline-offset: 2px; }
+    .tt-btn-primary {
+      background: var(--tt-accent); color: #fff;
+      box-shadow: 0 4px 18px rgba(98,116,242,0.32);
+    }
+    .tt-btn-primary:hover {
+      background: var(--tt-accent-dk);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(98,116,242,0.42);
+    }
+    .tt-btn-ghost {
+      background: var(--tt-paper); color: var(--tt-ink);
+      border: 1px solid var(--tt-line);
+      box-shadow: var(--tt-shadow-sm);
+    }
+    .tt-btn-ghost:hover {
+      border-color: var(--tt-ink-faint);
+      transform: translateY(-2px);
+    }
+
+    /* ── HERO ── */
+    .tt-hero { background: var(--tt-paper); padding: 88px 0 0; position: relative; overflow: hidden; }
+    .tt-hero-inner { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; }
+
+    /* background pills — static photo composition */
+    .tt-pill {
+      position: absolute; z-index: 0; pointer-events: none; user-select: none;
+      height: auto;
+    }
+    .tt-pill-1 { width: 190px; top: 7%;   left: 4.5%; transform: rotate(-28deg); filter: drop-shadow(0 18px 28px rgba(46,52,64,0.18)); }
+    .tt-pill-2 { width: 110px; top: 46%;  left: 12%;  transform: rotate(14deg) scaleX(-1); filter: blur(3px); opacity: 0.6; }
+    .tt-pill-3 { width: 185px; top: 7%;   right: 4.5%; transform: rotate(24deg) scaleX(-1); filter: drop-shadow(0 18px 28px rgba(46,52,64,0.18)); }
+    .tt-pill-4 { width: 110px; top: 48%;  right: 12%; transform: rotate(-16deg); filter: hue-rotate(-12deg) saturate(1.3) blur(3px); opacity: 0.65; }
+    .tt-pill-5 { width: 300px; top: 64%;  left: -4%;  transform: rotate(10deg);  filter: blur(7px); opacity: 0.4; }
+    .tt-pill-6 { width: 280px; top: 60%;  right: -4%; transform: rotate(-12deg) scaleX(-1); filter: blur(7px); opacity: 0.4; }
+    .tt-hero h1 {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      font-weight: 700; letter-spacing: -0.035em; line-height: 1.12;
+      color: var(--tt-ink); margin: 0 0 20px; max-width: 960px;
+    }
+    .tt-hero h1 em { color: var(--tt-accent); font-style: normal; }
+    .tt-hero-line2 { white-space: nowrap; }
+    .tt-hero-pro {
+      display: inline-block; vertical-align: 0.12em;
+      font-size: 0.34em; font-weight: 700; letter-spacing: 0.08em;
+      line-height: 1; color: #fff; background: var(--tt-accent);
+      border-radius: 100px;
+      padding: 0.5em 0.9em; margin-left: 0.35em;
+      box-shadow: 0 4px 16px rgba(98,116,242,0.35);
+    }
+    .tt-hero-sub {
+      font-size: 1.08rem; color: var(--tt-ink-soft); line-height: 1.7;
+      max-width: 600px; margin: 0 0 36px;
+    }
+    .tt-hero-quote { font-style: italic; }
+    .tt-hero-quote-author {
+      display: block; margin-top: 10px;
+      font-style: normal; font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.02em; color: var(--tt-ink-faint);
+    }
+    .tt-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 60px; }
+
+    /* hero screenshot */
+    .tt-hero-shot {
+      width: 100%; max-width: 960px; margin: 0 auto;
+      border: 1px solid var(--tt-line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(46,52,64,0.14), 0 4px 18px rgba(46,52,64,0.06);
+      background: var(--tt-paper-alt);
+      cursor: zoom-in;
+      line-height: 0;
+    }
+    .tt-hero-shot img { width: 100%; display: block; }
+
+    /* stats */
+    .tt-stats {
+      display: flex; justify-content: center; gap: 0;
+      max-width: 860px; margin: 56px auto 0;
+      padding-bottom: 80px;
+    }
+    .tt-stat { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 18px; }
+    .tt-stat + .tt-stat { border-left: 1px solid var(--tt-line-soft); }
+    .tt-stat-num {
+      font-size: 2.15rem; font-weight: 700; letter-spacing: -0.03em;
+      color: var(--tt-ink); line-height: 1;
+    }
+    .tt-stat-num .tt-stat-star { color: var(--tt-star); font-size: 1.5rem; vertical-align: 2px; }
+    .tt-stat-label { font-size: 0.86rem; font-weight: 500; color: var(--tt-ink-faint); text-align: center; }
+
+    /* ── FEATURES ── */
+    .tt-features {
+      background: var(--tt-paper-alt);
+      border-top: 1px solid var(--tt-line-soft);
+      border-bottom: 1px solid var(--tt-line-soft);
+      padding: 44px 0 88px;
+      position: relative;
+      overflow: hidden;
+    }
+    .feat-pill {
+      position: absolute; pointer-events: none; user-select: none; z-index: 0;
+      border-radius: 30%;
+      box-shadow: 0 0 0 1px rgba(99,102,241,0.14);
+    }
+    .feat-pill-1 { width: 112px; top: 6%;  left: 4.5%;  transform: rotate(-12deg); filter: invert(1) sepia(0.55) saturate(2.4) hue-rotate(202deg) brightness(1.04) drop-shadow(0 20px 30px rgba(85,102,255,0.35)); }
+    .feat-pill-2 { width: 80px;  top: 38%; left: 8%;    transform: rotate(9deg);   filter: invert(1) sepia(0.55) saturate(2.4) hue-rotate(202deg) brightness(1.04) blur(3px); opacity: 0.6; }
+    .feat-pill-3 { width: 112px; top: 7%;  right: 4.5%; transform: rotate(13deg);  filter: invert(1) sepia(0.55) saturate(2.4) hue-rotate(202deg) brightness(1.04) drop-shadow(0 20px 30px rgba(85,102,255,0.35)); }
+    .feat-pill-4 { width: 80px;  top: 42%; right: 8%;   transform: rotate(-10deg); filter: invert(1) sepia(0.55) saturate(2.4) hue-rotate(202deg) brightness(1.04) blur(3px); opacity: 0.6; }
+    .feat-pill-5 { width: 185px; top: 66%; left: 1%;    transform: rotate(10deg);  filter: invert(1) sepia(0.55) saturate(2.4) hue-rotate(202deg) brightness(1.04) blur(7px); opacity: 0.4; }
+    .feat-pill-6 { width: 180px; top: 62%; right: 1%;   transform: rotate(-11deg); filter: invert(1) sepia(0.55) saturate(2.4) hue-rotate(202deg) brightness(1.04) blur(7px); opacity: 0.4; }
+    .tt-features .tt-container { position: relative; z-index: 1; }
+
+    .feat-carousel { position: relative; max-width: 900px; margin: 0 auto; }
+    .feat-carousel::before {
+      content: '';
+      position: absolute;
+      inset: -36px -48px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 55%, rgba(255,255,255,0) 100%);
+      filter: blur(26px);
+      pointer-events: none;
+    }
+    .fc-viewport { overflow: hidden; border-radius: 16px; position: relative; z-index: 1; }
+    .fc-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .fc-slide { flex: 0 0 100%; min-width: 0; }
+    .fc-card { background: transparent; border: none; box-shadow: none; }
+    .fc-img-wrap {
+      cursor: zoom-in;
+      padding: 0;
+      position: relative;
+      line-height: 0;
+    }
+    .fc-img-wrap img {
+      position: relative; z-index: 1;
+      width: 100%; display: block;
+    }
+    .fc-text { padding: 4px 30px 10px; text-align: center; }
+    .fc-text h3::before {
+      content: '🌀';
+      display: inline-block; margin-right: 9px;
+      font-size: 0.9em;
+      animation: fc-spin 2.6s linear infinite;
+    }
+    @keyframes fc-spin { to { transform: rotate(360deg); } }
+    .fc-badge {
+      display: inline-block;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--tt-accent-dk); background: var(--tt-accent-lt);
+      border: 1px solid #dbe1fc;
+      border-radius: 100px; padding: 4px 11px; margin-bottom: 12px;
+    }
+    .fc-text h3 {
+      color: var(--tt-ink); font-family: 'Instrument Sans', sans-serif;
+      font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px;
+    }
+    .fc-text p { color: var(--tt-ink-soft); font-size: 0.96rem; line-height: 1.7; margin: 0; }
+    .fc-arrow {
+      position: absolute; top: 42%; transform: translateY(-50%); z-index: 5;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--tt-paper); border: 1px solid var(--tt-line);
+      color: var(--tt-ink); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: var(--tt-shadow-sm);
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .fc-arrow:hover {
+      background: var(--tt-accent); border-color: var(--tt-accent); color: #fff;
+      transform: translateY(-50%) scale(1.06);
+    }
+    .fc-prev { left: -23px; }
+    .fc-next { right: -23px; }
+    .fc-dots { display: flex; justify-content: center; gap: 8px; margin-top: 26px; flex-wrap: wrap; position: relative; z-index: 1; }
+    .fc-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #ccd2e6;
+      cursor: pointer; transition: background 0.2s, width 0.2s;
+    }
+    .fc-dot.active { background: var(--tt-accent); width: 24px; border-radius: 5px; }
+
+    .tt-feat-cta { display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 36px; flex-wrap: wrap; }
+    .tt-feat-cta .tt-btn { width: 240px; height: 54px; padding: 0 24px; font-size: 0.97rem; }
+    .tt-feat-cta-note { text-align: center; font-size: 0.8rem; color: var(--tt-ink-faint); margin: 14px 0 0; }
+
+    /* ── PRICING ── */
+    .tt-pricing { background: var(--tt-paper); padding: 88px 0 72px; }
+    .tt-pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+      max-width: 1020px; margin: 0 auto; align-items: stretch;
+    }
+    .tt-plan {
+      position: relative;
+      background: var(--tt-paper);
+      border: 1px solid var(--tt-line);
+      border-radius: 18px;
+      padding: 32px 28px 28px;
+      display: flex; flex-direction: column;
+      box-shadow: var(--tt-shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .tt-plan:hover { transform: translateY(-5px); box-shadow: var(--tt-shadow); border-color: #d7dcee; }
+    .tt-plan-featured {
+      border: 2px solid var(--tt-accent);
+      box-shadow: 0 20px 56px rgba(98,116,242,0.16);
+    }
+    .tt-plan-featured:hover { border-color: var(--tt-accent-dk); box-shadow: 0 26px 64px rgba(98,116,242,0.22); }
+    .tt-plan-flag {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--tt-accent); color: #fff;
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      border-radius: 100px; padding: 5px 14px; white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(98,116,242,0.35);
+    }
+    .tt-plan-pill {
+      display: flex; justify-content: center; align-items: center;
+      padding: 6px 0 22px;
+    }
+    .tt-plan-pill img {
+      height: 88px; width: auto; object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .tt-plan:hover .tt-plan-pill img { transform: scale(1.06) translateY(-3px); }
+    @media (hover: none) {
+      .tt-plan:hover .tt-plan-pill img { transform: none; }
+    }
+    .tt-plan-name { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tt-ink-faint); margin-bottom: 14px; }
+    .tt-plan-price-row { display: flex; align-items: baseline; gap: 10px; }
+    .tt-plan-price {
+      font-size: 2.6rem; font-weight: 700; letter-spacing: -0.04em;
+      color: var(--tt-ink); line-height: 1;
+    }
+    .tt-plan-price sup { font-size: 1.05rem; font-weight: 600; color: var(--tt-ink-faint); margin-right: 2px; vertical-align: 18px; }
+    .tt-plan-was { font-size: 0.98rem; font-weight: 500; color: var(--tt-ink-faint); text-decoration: line-through; }
+    .tt-plan-period { font-size: 0.82rem; color: var(--tt-ink-faint); margin: 8px 0 20px; }
+    .tt-plan-divider { height: 1px; background: var(--tt-line-soft); margin-bottom: 20px; }
+    .tt-plan-features { list-style: none; padding: 0; margin: 0 0 26px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .tt-plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.92rem; color: var(--tt-ink-soft); line-height: 1.45; }
+    .tt-plan-features .tick {
+      flex-shrink: 0; width: 19px; height: 19px; border-radius: 50%;
+      background: var(--tt-accent-lt); color: var(--tt-accent-dk);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.62rem; font-weight: 700; margin-top: 1px;
+    }
+    .tt-plan .tt-btn { width: 100%; padding: 13px 20px; }
+    .tt-plan .tt-btn + .tt-btn { margin-top: 10px; }
+    .tt-btn-soft {
+      background: var(--tt-paper-alt); color: var(--tt-ink-soft);
+      border: 1px solid var(--tt-line);
+    }
+    .tt-btn-soft:hover { color: var(--tt-ink); border-color: var(--tt-ink-faint); transform: translateY(-1px); }
+
+    /* promo code */
+    .tt-promo {
+      border: 1px dashed #c8cfef;
+      background: #f8f9ff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .tt-promo-hint { font-size: 0.72rem; color: var(--tt-ink-faint); margin: 0 0 7px; }
+    .tt-promo-hint strong { color: var(--tt-accent-dk); font-weight: 700; }
+    .tt-promo-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .tt-promo-code { font-size: 1.06rem; font-weight: 700; letter-spacing: 0.12em; color: var(--tt-ink); }
+    .tt-promo-copy {
+      background: var(--tt-accent-lt); border: 1px solid #dbe1fc; color: var(--tt-accent-dk);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.72rem; font-weight: 700; padding: 6px 14px; border-radius: 7px;
+      cursor: pointer; letter-spacing: 0.03em; white-space: nowrap;
+      transition: background 0.2s, transform 0.12s;
+    }
+    .tt-promo-copy:hover { background: #e0e5fd; transform: translateY(-1px); }
+    .tt-promo-copy:active { transform: scale(0.96); }
+    .tt-promo-left { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+    .tt-promo-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--tt-accent);
+      animation: tt-blink 1.2s ease-in-out infinite;
+    }
+    @keyframes tt-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
+    .tt-promo-left span:last-child { font-size: 0.7rem; color: var(--tt-ink-faint); }
+
+    /* ── REVIEWS ── */
+    .tt-reviews {
+      background: var(--tt-paper-alt);
+      border-top: 1px solid var(--tt-line-soft);
+      border-bottom: 1px solid var(--tt-line-soft);
+      padding: 80px 0 72px;
+      overflow: hidden;
+    }
+    .tt-reviews-rating {
+      display: inline-flex; align-items: center; gap: 12px; margin-top: 16px;
+      background: var(--tt-paper); border: 1px solid var(--tt-line);
+      border-radius: 100px; padding: 8px 18px; box-shadow: var(--tt-shadow-sm);
+    }
+    .tt-reviews-stars { color: var(--tt-star); font-size: 0.98rem; letter-spacing: 2px; }
+    .tt-reviews-count { font-size: 0.86rem; color: var(--tt-ink-soft); }
+    .tt-reviews-count strong { color: var(--tt-ink); font-weight: 700; }
+    .reviews-marquee {
+      position: relative; width: 100%; overflow: hidden; padding: 10px 0;
+      margin-top: 34px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+              mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+    }
+    .reviews-track { display: flex; gap: 16px; width: max-content; animation: rev-marquee 48s linear infinite; will-change: transform; }
+    @keyframes rev-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .review-card {
+      flex: 0 0 340px;
+      background: var(--tt-paper);
+      border: 1px solid var(--tt-line);
+      border-radius: 14px;
+      padding: 20px 20px 16px;
+      display: flex; flex-direction: column; gap: 12px;
+      box-shadow: var(--tt-shadow-sm);
+      transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s;
+    }
+    .review-card:hover { transform: translateY(-4px); box-shadow: var(--tt-shadow); }
+    .review-head { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--tt-accent-lt);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.78rem; letter-spacing: 0.5px;
+      color: var(--tt-accent-dk); flex-shrink: 0;
+    }
+    .review-meta { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .review-name { color: var(--tt-ink); font-weight: 600; font-size: 0.9rem; line-height: 1; }
+    .review-stars { color: var(--tt-star); font-size: 0.76rem; letter-spacing: 1px; }
+    .tt-reviews .review-card p.review-body {
+      color: var(--tt-ink-soft); font-size: 0.9rem; line-height: 1.62; margin: 0;
+      display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .review-date { font-size: 0.7rem; color: var(--tt-ink-faint); margin-top: auto; padding-top: 6px; }
+    .reviews-cta { text-align: center; margin-top: 26px; font-size: 0.88rem; color: var(--tt-ink-soft); }
+    .reviews-cta a { color: var(--tt-accent-dk); font-weight: 600; text-decoration: none; border-bottom: 1px solid #c8cfef; transition: color 0.2s, border-color 0.2s; }
+    .reviews-cta a:hover { color: var(--tt-accent); border-bottom-color: var(--tt-accent); }
+
+    /* ── EDUCATION TEASERS ── */
+    .tt-edu { background: var(--tt-paper); padding: 84px 0; }
+    .tt-edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1020px; margin: 0 auto; }
+    .tt-edu-card {
+      display: flex; flex-direction: column; text-decoration: none;
+      background: var(--tt-paper); border: 1px solid var(--tt-line);
+      border-radius: 16px; overflow: hidden;
+      box-shadow: var(--tt-shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .tt-edu-card:hover { transform: translateY(-5px); box-shadow: var(--tt-shadow); border-color: #d7dcee; }
+    .tt-edu-thumb { height: 160px; overflow: hidden; }
+    .tt-edu-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.35s ease;
+    }
+    .tt-edu-card:hover .tt-edu-thumb img { transform: scale(1.07); }
+    .tt-edu-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .tt-edu-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tt-ink-faint); }
+    .tt-edu-body h3 { color: var(--tt-ink); font-size: 1.06rem; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+    .tt-edu-body p { color: var(--tt-ink-soft); font-size: 0.88rem; line-height: 1.6; margin: 0; flex: 1; }
+    .tt-edu-link { color: var(--tt-accent-dk); font-size: 0.84rem; font-weight: 600; margin-top: 6px; transition: color 0.2s; }
+    .tt-edu-card:hover .tt-edu-link { color: var(--tt-accent); }
+
+    /* ── FOOTER — structured light footer ── */
+    .tt-footer {
+      background: var(--tt-paper-alt);
+      border-top: 1px solid var(--tt-line-soft);
+      padding: 64px 0 28px;
+    }
+    .tt-footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--tt-line);
+      margin-bottom: 24px;
+    }
+    .tt-footer-logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1.02rem; color: var(--tt-ink);
+      text-decoration: none;
+    }
+    .tt-footer-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .tt-footer-brand p {
+      color: var(--tt-ink-soft); font-size: 0.88rem; line-height: 1.65;
+      margin: 14px 0 18px; max-width: 300px;
+    }
+    .tt-footer-socials { display: flex; gap: 14px; }
+    .tt-footer-socials a {
+      display: flex; align-items: center; justify-content: center;
+      color: #aab1c5; transition: color 0.2s, transform 0.2s;
+    }
+    .tt-footer-socials a:hover { color: var(--tt-ink); transform: translateY(-2px); }
+    .tt-footer-socials a.dc:hover { color: #5865f2; }
+    .tt-footer-socials a.yt:hover { color: #ff4444; }
+    .tt-footer-col h4 {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--tt-ink-faint); margin: 0 0 14px;
+    }
+    .tt-footer-col a {
+      display: block; color: var(--tt-ink-soft); text-decoration: none;
+      font-size: 0.88rem; padding: 5px 0; transition: color 0.15s;
+    }
+    .tt-footer-col a:hover { color: var(--tt-accent-dk); }
+    .tt-footer-bottom {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 20px; flex-wrap: wrap;
+    }
+    .tt-footer-copy { font-size: 0.78rem; color: var(--tt-ink-faint); }
+    .tt-footer-copy a { color: inherit; }
+    .tt-footer-disclaimer {
+      font-size: 0.72rem; color: var(--tt-ink-faint); max-width: 560px;
+      text-align: right; line-height: 1.55; margin: 0;
+    }
+    @media (max-width: 900px) {
+      .tt-footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 24px; }
+      .tt-footer-col a { font-size: 0.8rem; }
+    }
+    @media (max-width: 560px) {
+      .tt-footer { padding: 48px 0 24px; }
+      /* brand on top, then 3 link columns side by side — same build as desktop */
+      .tt-footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 24px 10px; padding-bottom: 32px; }
+      .tt-footer-brand { grid-column: 1 / -1; }
+      .tt-footer-col h4 { font-size: 0.62rem; }
+      .tt-footer-col a { font-size: 0.74rem; padding: 4px 0; }
+      .tt-footer-bottom { flex-direction: column; }
+      .tt-footer-disclaimer { text-align: left; max-width: 100%; }
+    }
+
+    /* ── LIGHTBOX (kept dark for image viewing) ── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(14,16,24,0.95);
+      align-items: center; justify-content: center; overflow: hidden; touch-action: none;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox-img-wrap { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; touch-action: none; }
+    #lightbox img {
+      max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+      transform-origin: center center; will-change: transform;
+      user-select: none; -webkit-user-drag: none;
+    }
+    #lightbox-close {
+      position: fixed; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; line-height: 1; z-index: 10000; transition: background 0.2s;
+    }
+    #lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lb-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 10000;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 50%; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: rgba(255,255,255,0.7);
+      opacity: 0; transition: opacity 0.25s, background 0.15s, color 0.15s;
+      backdrop-filter: blur(6px);
+    }
+    #lightbox:hover .lb-arrow { opacity: 1; }
+    .lb-arrow:hover { background: rgba(255,255,255,0.16); color: #fff; }
+    .lb-arrow-left { left: 18px; }
+    .lb-arrow-right { right: 18px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1000px) {
+      .fc-prev { left: 10px; }
+      .fc-next { right: 10px; }
+      .tt-pricing-grid { grid-template-columns: 1fr; max-width: 480px; gap: 18px; }
+      .tt-plan-featured { order: -1; }
+      .tt-edu-grid { gap: 14px; }
+      .tt-edu-thumb { height: 120px; }
+      .tt-edu-body { padding: 14px 14px 18px; }
+      .tt-edu-body h3 { font-size: 0.92rem; }
+      .tt-edu-body p { font-size: 0.8rem; }
+    }
+    @media (max-width: 700px) {
+      .tt-container { padding: 0 18px; }
+      .tt-hero { padding-top: 56px; }
+      /* background pills — same composition as desktop, scaled down */
+      .tt-pill-1 { width: 88px;  top: 2%;  left: -14px; }
+      .tt-pill-2 { width: 46px;  top: 13%; left: -8px; }
+      .tt-pill-3 { width: 86px;  top: 2%;  right: -14px; }
+      .tt-pill-4 { width: 46px;  top: 14%; right: -8px; }
+      .tt-pill-5 { width: 130px; top: 84%; left: -30px; }
+      .tt-pill-6 { width: 122px; top: 82%; right: -30px; }
+      .feat-pill-1 { width: 44px; top: 1%; left: -6px; }
+      .feat-pill-2 { width: 36px; top: 30%;  left: -8px; }
+      .feat-pill-3 { width: 44px; top: 1.2%; right: -6px; }
+      .feat-pill-4 { width: 36px; top: 33%;  right: -8px; }
+      .feat-pill-5 { width: 82px; top: 76%;  left: -14px; }
+      .feat-pill-6 { width: 78px; top: 73%;  right: -14px; }
+      .tt-hero h1 { font-size: clamp(2rem, 8.6vw, 2.5rem); }
+      .tt-hero-sub { font-size: 0.98rem; margin-bottom: 28px; }
+      /* buttons side by side — same as desktop */
+      .tt-hero-actions { flex-direction: row; flex-wrap: nowrap; width: 100%; margin-bottom: 40px; }
+      .tt-hero-actions .tt-btn { flex: 1; min-width: 0; padding: 13px 10px; font-size: 0.86rem; }
+      /* stats — one row of 4, like desktop */
+      .tt-stats { flex-wrap: nowrap; gap: 0; margin-top: 40px; padding-bottom: 56px; }
+      .tt-stat { flex: 1; padding: 0 6px; }
+      .tt-stat-num { font-size: 1.28rem; }
+      .tt-stat-num .tt-stat-star { font-size: 0.95rem; vertical-align: 1px; }
+      .tt-stat-label { font-size: 0.6rem; }
+      .tt-features { padding: 56px 0 60px; }
+      .tt-head { margin-bottom: 30px; }
+      .fc-img-wrap { padding: 0; }
+      .fc-text { padding: 18px 20px 22px; }
+      .fc-text h3 { font-size: 1.15rem; }
+      .fc-arrow { width: 40px; height: 40px; }
+      .tt-feat-cta { flex-direction: row; flex-wrap: nowrap; }
+      .tt-feat-cta .tt-btn { flex: 1; width: auto; min-width: 0; padding: 0 10px; font-size: 0.86rem; height: 50px; }
+      .tt-pricing { padding: 60px 0 48px; }
+      .tt-plan { padding: 26px 20px 22px; }
+      .tt-plan-price { font-size: 2.25rem; }
+      .tt-reviews { padding: 56px 0 48px; }
+      .review-card { flex-basis: 290px; padding: 16px 16px 14px; }
+      .reviews-track { gap: 12px; animation-duration: 38s; }
+      .tt-edu { padding: 56px 0; }
+      .tt-edu-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; gap: 20px; }
+      .tt-edu-thumb { height: 160px; }
+      .tt-edu-body { padding: 20px 22px 24px; }
+      .tt-edu-body h3 { font-size: 1.06rem; }
+      .tt-edu-body p { font-size: 0.88rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reviews-track { animation: none; }
+    }
+    /* ═══════ PRICING — original card layout, adapted to light theme ═══════ */
+    .ind-pricing .btn,
+    .ind-pricing a.btn,
+    .ind-pricing button,
+    .ind-pricing .btn-ghost,
+    .ind-pricing .btn-primary,
+    .ind-pricing .btn-try-free,
+    .promo-copy { cursor: pointer !important; }
+
+    .ind-pricing {
+      background: var(--tt-paper);
+      padding: 80px 0 40px;
+      position: relative;
+      overflow: hidden;
+      content-visibility: auto;
+      contain-intrinsic-size: 0 800px;
+    }
+    .ind-pricing .container { width: min(1140px, 92%); margin: 0 auto; position: relative; z-index: 1; }
+    .ind-pricing .bg-pill {
+      position: absolute;
+      width: 320px;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.18;
+    }
+    .ind-pricing .bg-pill-left {
+      left: -80px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-28deg);
+    }
+    .ind-pricing .bg-pill-right {
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%) rotate(28deg);
+    }
+    .ind-pricing .section-head { margin-bottom: 52px; }
+    .ind-pricing .section-head.center { text-align: center; }
+    .ind-pricing .section-head.center p { margin: 0 auto; }
+    .ind-pricing .section-head h2 {
+      color: var(--tt-ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: clamp(1.7rem, 3.4vw, 2.35rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .ind-pricing .section-head p { color: var(--tt-ink-soft); font-size: 1rem; max-width: 540px; line-height: 1.7; }
+    .ind-pricing em { color: var(--tt-accent); font-style: normal; }
+
+    /* === PRICING — PILL CARDS === */
+    .ind-pricing .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1080px;
+      margin: 0 auto 64px;
+    }
+
+    /* Base card */
+    .ind-pricing .price-card {
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      position: relative;
+      will-change: transform;
+    }
+    /* Top accent stripe */
+    .ind-pricing .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      z-index: 2;
+    }
+
+    /* Monthly — white + blue accents */
+    .ind-pricing .price-card:nth-child(1) {
+      background: #fff;
+      border: 1.5px solid var(--tt-line);
+      box-shadow: var(--tt-shadow-sm);
+    }
+    .ind-pricing .price-card:nth-child(1)::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+    .ind-pricing .price-card:nth-child(1):hover {
+      transform: translateY(-7px);
+      box-shadow: 0 24px 60px rgba(37,99,235,0.20);
+      border-color: rgba(96,165,250,0.45);
+    }
+
+    /* Lifetime — white + green accents */
+    .ind-pricing .price-card:nth-child(2),
+    .ind-pricing .price-card-green {
+      background: #fff !important;
+      border: 1.5px solid var(--tt-line) !important;
+      box-shadow: var(--tt-shadow-sm) !important;
+    }
+    .ind-pricing .price-card:nth-child(2)::before,
+    .ind-pricing .price-card-green::before { background: linear-gradient(90deg, #16a34a, #4ade80) !important; }
+    .ind-pricing .price-card:nth-child(2):hover,
+    .ind-pricing .price-card-green:hover {
+      transform: translateY(-7px) !important;
+      box-shadow: 0 24px 60px rgba(22,163,74,0.20) !important;
+      border-color: rgba(74,222,128,0.55) !important;
+    }
+
+    /* 3 Months — white + red accents */
+    .ind-pricing .price-card:nth-child(3) {
+      background: #fff;
+      border: 1.5px solid var(--tt-line);
+      box-shadow: var(--tt-shadow-sm);
+    }
+    .ind-pricing .price-card:nth-child(3)::before { background: linear-gradient(90deg, #dc2626, #f87171); }
+    .ind-pricing .price-card:nth-child(3):hover {
+      transform: translateY(-7px);
+      box-shadow: 0 24px 60px rgba(220,38,38,0.18);
+      border-color: rgba(248,113,113,0.45);
+    }
+
+    /* Pill image at top — tinted bg per card */
+    .card-pill-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 32px 24px 26px;
+      border-radius: 14px 14px 0 0;
+      position: relative;
+      isolation: isolate;
+    }
+    .ind-pricing .price-card:nth-child(1) .card-pill-wrap {
+      background: linear-gradient(to bottom, #cfe0ff 50%, #ffffff 100%);
+    }
+    .ind-pricing .price-card:nth-child(2) .card-pill-wrap,
+    .ind-pricing .price-card-green .card-pill-wrap {
+      background: linear-gradient(to bottom, #c8f0da 50%, #ffffff 100%);
+    }
+    .ind-pricing .price-card:nth-child(3) .card-pill-wrap {
+      background: linear-gradient(to bottom, #ffd8d0 50%, #ffffff 100%);
+    }
+    .card-pill-wrap img {
+      height: 86px;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      transition: transform 0.35s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .ind-pricing .price-card:hover .card-pill-wrap img {
+      transform: scale(1.07) translateY(-4px);
+    }
+
+    /* Card body */
+    .card-body {
+      padding: 22px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .ind-pricing .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .ind-pricing .price-original {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--tt-ink-faint);
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+      text-decoration-color: var(--tt-ink-faint);
+      letter-spacing: 0;
+      line-height: 1;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+    .ind-pricing .price-original sup {
+      font-size: 0.55rem;
+      vertical-align: super;
+    }
+    .ind-pricing .price-amount {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--tt-ink);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+    .ind-pricing .price-amount sup {
+      font-size: 0.9rem;
+      font-weight: 600;
+      vertical-align: baseline;
+      position: relative;
+      top: -0.7rem;
+      color: var(--tt-ink-faint);
+      font-family: 'Instrument Sans', sans-serif;
+      letter-spacing: 0;
+    }
+    .ind-pricing .price-period {
+      font-size: 0.75rem;
+      color: var(--tt-ink-faint);
+      margin-bottom: 22px;
+      letter-spacing: 0.01em;
+    }
+    .ind-pricing .price-divider {
+      height: 1px;
+      margin: 0 0 20px;
+      display: block;
+    }
+    .ind-pricing .price-card:nth-child(1) .price-divider { background: rgba(96,165,250,0.18); }
+    .ind-pricing .price-card:nth-child(2) .price-divider,
+    .ind-pricing .price-card-green .price-divider { background: rgba(34,197,94,0.18); }
+    .ind-pricing .price-card:nth-child(3) .price-divider { background: rgba(239,68,68,0.18); }
+
+    /* Features */
+    .ind-pricing .price-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+    .ind-pricing .price-features li {
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1;
+      white-space: nowrap;
+      color: var(--tt-ink-soft);
+    }
+    .ind-pricing .price-features li .check {
+      font-size: 1.1rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .ind-pricing .price-card:nth-child(1) .check { color: #60a5fa; }
+    .ind-pricing .price-card:nth-child(2) .check,
+    .ind-pricing .price-card-green .check { color: #4ade80; }
+    .ind-pricing .price-card:nth-child(3) .check { color: #f87171; }
+
+    /* Buttons */
+    .ind-pricing .btn-block {
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.025em;
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      text-align: center;
+      display: block;
+      border: none;
+      color: #fff;
+      text-decoration: none;
+    }
+    .ind-pricing .price-card:nth-child(1) .btn-ghost {
+      background: #2563eb;
+      box-shadow: 0 3px 16px rgba(37,99,235,0.40);
+    }
+    .ind-pricing .price-card:nth-child(1) .btn-ghost:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37,99,235,0.55);
+    }
+    .ind-pricing .price-card:nth-child(3) .btn-ghost {
+      background: #dc2626;
+      box-shadow: 0 3px 16px rgba(220,38,38,0.40);
+    }
+    .ind-pricing .price-card:nth-child(3) .btn-ghost:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(220,38,38,0.55);
+    }
+    .ind-pricing .btn-primary {
+      background: #2563eb !important;
+      box-shadow: 0 3px 16px rgba(37,99,235,0.40) !important;
+      border: none !important;
+      color: #fff !important;
+      cursor: pointer !important;
+    }
+    .ind-pricing .btn-primary:hover {
+      filter: brightness(1.15) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 28px rgba(37,99,235,0.55) !important;
+    }
+    .ind-pricing .btn-try-free {
+      background: #16a34a !important;
+      box-shadow: 0 3px 16px rgba(22,163,74,0.38) !important;
+      border-radius: 10px !important;
+      padding: 14px 20px !important;
+      font-size: 0.9rem !important;
+      font-weight: 700 !important;
+      color: #fff !important;
+      border: none !important;
+      cursor: pointer !important;
+    }
+    .ind-pricing .btn-try-free:hover {
+      filter: brightness(1.15) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 28px rgba(22,163,74,0.52) !important;
+    }
+
+    /* Touch devices — disable hover lift */
+    @media (hover: none) {
+      .ind-pricing .price-card:hover { transform: none !important; box-shadow: var(--tt-shadow-sm) !important; border-color: var(--tt-line) !important; }
+      .ind-pricing .price-card:hover .card-pill-wrap img { transform: none; }
+    }
+
+    /* Promo block */
+    .promo-block {
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .promo-hint {
+      font-size: 0.72rem;
+      color: var(--tt-ink-faint);
+      margin: 0;
+    }
+    .promo-hint strong { color: #16a34a; font-weight: 700; }
+    .promo-main-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .promo-code {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--tt-ink);
+    }
+    .promo-copy {
+      background: #4ade80;
+      border: none;
+      color: #052e16;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.03em;
+    }
+    .promo-copy:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .promo-timer-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .promo-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #ef4444;
+      flex-shrink: 0;
+      animation: blink-dot 1.2s ease-in-out infinite;
+      box-shadow: 0 0 5px rgba(239,68,68,0.8);
+    }
+    @keyframes blink-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.1; }
+    }
+    .promo-entries-label {
+      font-size: 0.7rem;
+      color: var(--tt-ink-faint);
+      white-space: nowrap;
+    }
+
+    /* === PRICING RESPONSIVE === */
+    @media (min-width: 1400px) {
+      .ind-pricing .pricing-grid { max-width: 1160px; gap: 32px; }
+      .card-pill-wrap { padding: 36px 28px 28px; }
+      .card-pill-wrap img { height: 96px; }
+      .card-body { padding: 24px 32px 32px; }
+      .ind-pricing .price-amount { font-size: 2.4rem; }
+      .ind-pricing .bg-pill { width: 380px; }
+    }
+    @media (min-width: 861px) and (max-width: 1140px) {
+      .ind-pricing .pricing-grid { gap: 16px; max-width: 900px; }
+      .card-pill-wrap { padding: 22px 18px 18px; }
+      .card-pill-wrap img { height: 70px; }
+      .card-body { padding: 16px 20px 22px; }
+      .ind-pricing .price-amount { font-size: 2rem; }
+      .ind-pricing .price-amount sup { font-size: 0.8rem; top: -0.55rem; }
+      .ind-pricing .btn-block { padding: 12px 14px; font-size: 0.84rem; }
+      .ind-pricing .btn-try-free { padding: 12px 14px !important; font-size: 0.84rem !important; }
+      .ind-pricing .bg-pill { width: 240px; }
+    }
+    /* tablet — keep 3 cards in a row, same build as desktop, just tighter */
+    @media (min-width: 601px) and (max-width: 860px) {
+      .ind-pricing { padding: 52px 0 68px; }
+      .ind-pricing .pricing-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; margin: 0 auto 48px; padding: 0; gap: 12px; }
+      .card-pill-wrap { padding: 18px 14px 14px; }
+      .card-pill-wrap img { height: 58px; }
+      .card-body { padding: 14px 14px 18px; }
+      .ind-pricing .price-amount { font-size: 1.7rem; }
+      .ind-pricing .price-amount sup { font-size: 0.8rem; top: -0.55rem; }
+      .ind-pricing .price-period { font-size: 0.68rem; }
+      .ind-pricing .price-features { gap: 11px; margin-bottom: 20px; }
+      .ind-pricing .price-features li { white-space: normal; font-size: 0.78rem; }
+      .ind-pricing .btn-block { padding: 11px 8px; font-size: 0.76rem; }
+      .ind-pricing .btn-try-free { padding: 11px 8px !important; font-size: 0.76rem !important; }
+      .ind-pricing .bg-pill { width: 200px; opacity: 0.10; }
+      .ind-pricing .bg-pill-left { left: -60px; }
+      .ind-pricing .bg-pill-right { right: -60px; }
+      .promo-code { font-size: 0.95rem; letter-spacing: 0.08em; }
+      .promo-copy { padding: 5px 10px; font-size: 0.68rem; }
+    }
+    @media (max-width: 600px) {
+      .ind-pricing { padding: 44px 0 60px; }
+      .ind-pricing .pricing-grid { grid-template-columns: 1fr; max-width: 100%; padding: 0 16px; gap: 18px; margin-bottom: 36px; }
+      .card-pill-wrap { padding: 24px 20px 18px; }
+      .card-pill-wrap img { height: 76px; }
+      .card-body { padding: 18px 20px 22px; }
+      .ind-pricing .price-amount { font-size: 2rem; }
+      .ind-pricing .price-amount sup { font-size: 0.9rem; top: -0.72rem; }
+      .ind-pricing .bg-pill { width: 180px; opacity: 0.09; }
+      .ind-pricing .price-features li { white-space: normal; }
+    }
+    @media (max-width: 480px) {
+      .ind-pricing { padding: 36px 0 52px; }
+      .ind-pricing .pricing-grid { max-width: 100%; padding: 0 14px; gap: 16px; margin-bottom: 28px; }
+      .card-pill-wrap { padding: 22px 16px 18px; }
+      .card-pill-wrap img { height: 66px; }
+      .card-body { padding: 16px 16px 20px; }
+      .ind-pricing .price-amount { font-size: 1.85rem; }
+      .ind-pricing .price-amount sup { font-size: 0.82rem; top: -0.65rem; }
+      .ind-pricing .price-period { font-size: 0.68rem; margin-bottom: 16px; }
+      .ind-pricing .price-features { gap: 11px; margin-bottom: 20px; }
+      .ind-pricing .price-features li { font-size: 0.82rem; white-space: normal; }
+      .ind-pricing .btn-block { padding: 13px 14px; font-size: 0.85rem; }
+      .ind-pricing .btn-try-free { padding: 13px 14px !important; font-size: 0.85rem !important; }
+      .ind-pricing .bg-pill { width: 160px; opacity: 0.08; }
+      .ind-pricing .bg-pill-left { left: -50px; }
+      .ind-pricing .bg-pill-right { right: -50px; }
+      .ind-pricing .section-head { margin-bottom: 28px !important; }
+      .promo-code { font-size: 1rem; }
+    }
+    @media (max-width: 360px) {
+      .ind-pricing .pricing-grid { padding: 0 10px; }
+      .card-body { padding: 14px 14px 18px; }
+      .ind-pricing .price-amount { font-size: 2rem; }
+      .ind-pricing .btn-block { padding: 12px 12px; font-size: 0.82rem; }
+      .ind-pricing .btn-try-free { padding: 12px 12px !important; font-size: 0.82rem !important; }
+      .promo-code { font-size: 0.92rem; letter-spacing: 0.08em; }
+      .promo-copy { padding: 5px 8px; font-size: 0.68rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -1231,119 +1246,168 @@
     </div>
   </header>
 
-  <!-- PAGE HERO -->
-  <section class="page-hero page-hero-split" style="background:#080910;">
-    <div class="container page-hero-inner">
-      <div class="page-hero-text">
-        <h1 class="reveal reveal-delay-1">Kenpachi <em>Indicator</em></h1>
-        <p class="reveal reveal-delay-2">Built specifically for Smart Money and Quarterly Theory traders. Works on any asset, any timeframe.</p>
+  <!-- HERO -->
+  <section class="tt-hero">
+    <img src="images/backpill.png" alt="" aria-hidden="true" class="tt-pill tt-pill-1" />
+    <img src="images/backpill 2.png" alt="" aria-hidden="true" class="tt-pill tt-pill-2" />
+    <img src="images/backpill 3.png" alt="" aria-hidden="true" class="tt-pill tt-pill-3" />
+    <img src="images/backpill 3.png" alt="" aria-hidden="true" class="tt-pill tt-pill-4" />
+    <img src="images/backpill.png" alt="" aria-hidden="true" class="tt-pill tt-pill-5" />
+    <img src="images/backpill 2.png" alt="" aria-hidden="true" class="tt-pill tt-pill-6" />
+    <div class="tt-container tt-hero-inner">
+      <h1 class="reveal reveal-delay-1">Quarterly Theory <span class="tt-hero-line2"><em>Toolkit</em> <span class="tt-hero-pro">PRO+</span></span></h1>
+      <p class="tt-hero-sub tt-hero-quote reveal reveal-delay-2">&ldquo;I created this indicator to simplify my Quarterly Theory trading process. It includes every QT concept I use intraday, plus my personal model features.&rdquo;<span class="tt-hero-quote-author">&mdash; Kenpachi, creator</span></p>
+      <div class="tt-hero-actions reveal reveal-delay-3">
+        <a href="#pricing" class="tt-btn tt-btn-primary" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">Get the Indicator</a>
+        <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener noreferrer" class="tt-btn tt-btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          Try for Free
+        </a>
       </div>
-      <div class="page-hero-img reveal reveal-delay-2">
-        <img src="images/header-bb-photoroom.png" alt="Kenpachi QT Indicator Preview" />
+      <div class="tt-hero-shot reveal reveal-delay-3" id="heroShot" role="button" tabindex="0" aria-label="View indicator screenshot fullscreen">
+        <img src="images/ind-overview.png" alt="Kenpachi Quarterly Theory Toolkit Pro+ indicator overview — all QT concepts in one TradingView indicator" decoding="async" />
+      </div>
+      <div class="tt-stats reveal">
+        <div class="tt-stat"><span class="tt-stat-num">5.0<span class="tt-stat-star">★</span></span><span class="tt-stat-label">Average Rating</span></div>
+        <div class="tt-stat"><span class="tt-stat-num">9+</span><span class="tt-stat-label"><span style="color:var(--tt-accent);font-weight:700;">QT</span> Tools Included</span></div>
+        <div class="tt-stat"><span class="tt-stat-num">All</span><span class="tt-stat-label"><span style="color:var(--tt-accent);font-weight:700;">QT</span> Concepts</span></div>
+        <div class="tt-stat"><span class="tt-stat-num">Free</span><span class="tt-stat-label">Trial Available</span></div>
       </div>
     </div>
   </section>
 
-  <section class="section ind-feat-section">
+  <!-- FEATURES -->
+  <section class="tt-features" id="features">
+    <img src="images/feat-icons/ssmt.png" alt="" aria-hidden="true" class="feat-pill feat-pill-1" />
+    <img src="images/feat-icons/psps.png" alt="" aria-hidden="true" class="feat-pill feat-pill-2" />
+    <img src="images/feat-icons/quarter-dividers.png" alt="" aria-hidden="true" class="feat-pill feat-pill-3" />
+    <img src="images/feat-icons/prev-q-hl.png" alt="" aria-hidden="true" class="feat-pill feat-pill-4" />
+    <img src="images/feat-icons/qt-alerts.png" alt="" aria-hidden="true" class="feat-pill feat-pill-5" />
+    <img src="images/feat-icons/tcisd.png" alt="" aria-hidden="true" class="feat-pill feat-pill-6" />
+    <div class="tt-container">
 
-    <img src="images/pill-blue.png"   class="feat-bg-pill feat-bg-pill-1" alt="" loading="lazy" decoding="async" />
-    <img src="images/pill-yellow.png" class="feat-bg-pill feat-bg-pill-2" alt="" loading="lazy" decoding="async" />
-    <img src="images/pill-green.png"  class="feat-bg-pill feat-bg-pill-3" alt="" loading="lazy" decoding="async" />
-
-    <div class="container">
-
-      <div class="section-head center reveal" style="margin-bottom:48px;">
-        <div class="section-avatar-badge" style="border-color:rgba(54,70,245,0.3);">
-          <img src="images/avatar.png" alt="Kenpachi" loading="lazy" decoding="async" />
-        </div>
-        <h2 style="color:#fff;">Kenpachi QT <em>Pro+</em></h2>
-        <p style="color:rgba(255,255,255,0.5);">Built to simplify Quarterly Theory trading. The indicator includes all QT concepts in one tool.</p>
+      <div class="tt-head reveal">
+        <h2>Every <em>QT</em> concept you need</h2>
+        <p>Simplify your trading forever &mdash; one all-in-one toolkit, the only indicator you'll ever need.</p>
       </div>
 
-      <div class="feat-showcase reveal">
+      <div class="feat-carousel reveal">
+        <button class="fc-arrow fc-prev" id="fcPrev" aria-label="Previous feature">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="fc-arrow fc-next" id="fcNext" aria-label="Next feature">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="fc-viewport" id="fcViewport">
+          <div class="fc-track" id="fcTrack">
 
-        <div class="feat-list">
-          <div class="feat-item active" data-img="images/ind-overview.png" data-label="Indicator Overview" data-caption="">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">Indicator Overview</span>
-          </div>
-          <div class="feat-item" data-img="images/ssmt-new.png" data-label="Sequential SMT's" data-caption="">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">Sequential SMT's</span>
-          </div>
-          <div class="feat-item" data-img="images/psp-new.png" data-label="PSP Signals" data-caption="">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">PSP Signals</span>
-          </div>
-          <div class="feat-item" data-img="images/true-opens-new.png" data-label="True Opens" data-caption="Automatically plots True Opens for every major timeframe — Session, Daily, Weekly, and Monthly.">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">True Opens</span>
-          </div>
-          <div class="feat-item" data-img="images/nwog-new.png" data-label="NDOG &amp; NWOG's" data-caption="Automatically plots New Day Opening Gap and New Week Opening Gap levels.">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">NDOG &amp; NWOG's</span>
-          </div>
-          <div class="feat-item" data-img="images/pdhl-new.png" data-label="Previous Day H/L" data-caption="">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">Previous Day H/L</span>
-          </div>
-          <div class="feat-item" data-img="images/sessions-hl.png" data-label="Previous Session H/L" data-caption="">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">Previous Session H/L</span>
-          </div>
-          <div class="feat-item feat-item-new" data-key="ote" data-img="images/ote-levels-new.png" data-label="OTE Levels" data-caption="">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">OTE Levels</span>
-          </div>
-          <div class="feat-item feat-item-new feat-item-new2" data-img="images/+1 cycle/Digital Marketing Banner with Energetic Colors.jpg" data-label="+1 Cycle (2 Stage SSMT)" data-caption="">
-            <div class="feat-item-dot"></div>
-            <span class="feat-item-name">+1 Cycle (2 Stage SSMT)</span>
-          </div>
-        </div>
-
-        <!-- Image panel -->
-        <div class="feat-panel">
-          <div class="feat-panel-img-wrap">
-            <button class="img-hover-arrow arr-left" id="imgArrPrev" aria-label="Previous">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button class="img-hover-arrow arr-right" id="imgArrNext" aria-label="Next">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-            <img id="feat-img" src="images/ind-overview.png" alt="Indicator Overview" />
-            <p class="feat-caption" id="feat-caption"></p>
-            <div class="feat-panel-nav" id="featPanelNav">
-              <button class="feat-panel-btn" id="featPrevBtn" aria-label="Previous">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-              </button>
-              <div class="feat-panel-dots" id="featDots">
-                <span class="feat-panel-dot active" data-idx="0"></span>
-                <span class="feat-panel-dot" data-idx="1"></span>
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/coverwhite.png" alt="Indicator Overview" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>Indicator Overview</h3>
+                  <p>Every Quarterly Theory concept on a single chart — plotted automatically, on any asset and any timeframe.</p>
+                </div>
               </div>
-              <button class="feat-panel-btn" id="featNextBtn" aria-label="Next">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-              </button>
-            </div>
-          </div>
+            </article>
 
-          <!-- CTA row — sits directly under the image -->
-          <div class="feat-cta-row reveal">
-            <a href="#pricing" class="feat-cta-btn feat-cta-primary" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">
-              <span class="feat-cta-main">Get Indicator Access</span>
-              <span class="feat-cta-sub">from $19 / month</span>
-            </a>
-            <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener noreferrer" class="feat-cta-btn feat-cta-ghost">
-              Try for Free →
-            </a>
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/pictures white/SSMT.png" alt="Sequential SMT's" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>Sequential SMT's</h3>
+                  <p>Spots sequential SMT divergences across correlated pairs the moment they print.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/pictures white/PSP.png" alt="PSP Signals" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>PSP Signals</h3>
+                  <p>Marks Precision Swing Point signals live as price confirms them.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/pictures white/True Opens.png" alt="True Opens" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>True Opens</h3>
+                  <p>Automatically plots True Opens for every major timeframe — Session, Daily, Weekly, and Monthly.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/pictures white/NDOG.png" alt="NDOG &amp; NWOG's" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>NDOG &amp; NWOG's</h3>
+                  <p>Draws New Day Opening Gap and New Week Opening Gap levels automatically.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/pictures white/PD HL.png" alt="Previous Day H/L" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>Previous Day H/L</h3>
+                  <p>Highlights previous-day highs and lows as key liquidity targets.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/pictures white/Sessions H L.png" alt="Previous Session H/L" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>Previous Session H/L</h3>
+                  <p>Tracks previous-session highs and lows through the trading day.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/pictures white/OTE.png" alt="OTE Levels" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>OTE Levels</h3>
+                  <p>Optimal Trade Entry zones mapped automatically for cleaner, more precise entries.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="fc-slide">
+              <div class="fc-card">
+                <div class="fc-img-wrap"><img src="images/pictures white/+1 Cycle.png" alt="+1 Cycle (2 Stage SSMT)" loading="lazy" decoding="async" /></div>
+                <div class="fc-text">
+                  <h3>+1 Cycle (2 Stage SSMT)</h3>
+                  <p>Two-stage SSMT detection on the +1 cycle for higher-confidence setups.</p>
+                </div>
+              </div>
+            </article>
+
           </div>
         </div>
-
+        <div class="fc-dots" id="fcDots"></div>
       </div>
+
+      <div class="tt-feat-cta reveal">
+        <a href="#pricing" class="tt-btn tt-btn-primary" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">Get Indicator Access</a>
+        <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener noreferrer" class="tt-btn tt-btn-ghost">
+          Try for Free →
+        </a>
+      </div>
+      <p class="tt-feat-cta-note reveal">From $19 / month &middot; Free trial available &middot; Cancel anytime</p>
 
     </div>
   </section>
 
-  <!-- PRICING -->
+  <!-- PRICING (original dark style from live site) -->
   <section class="ind-pricing" id="pricing">
     <img src="images/backpill.png" class="bg-pill bg-pill-left" alt="" loading="lazy" decoding="async" />
     <img src="images/backpill 2.png" class="bg-pill bg-pill-right" alt="" loading="lazy" decoding="async" />
@@ -1397,7 +1461,7 @@
               </div>
               <div class="promo-timer-row">
                 <span class="promo-dot"></span>
-                <span class="promo-entries-label">1 entry left</span>
+                <span class="promo-entries-label">11 entries left</span>
               </div>
             </div>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
@@ -1422,15 +1486,18 @@
         </div>
 
       </div>
-
     </div>
   </section>
 
   <!-- REVIEWS -->
-  <section class="reviews-section">
-    <div class="container">
-      <div class="section-head center reveal">
+  <section class="tt-reviews">
+    <div class="tt-container">
+      <div class="tt-head reveal" style="margin-bottom:0;">
         <h2>What <em>Traders</em> Say</h2>
+        <div class="tt-reviews-rating">
+          <span class="tt-reviews-stars">★★★★★</span>
+          <span class="tt-reviews-count"><strong>5.0</strong> average rating on Whop</span>
+        </div>
       </div>
     </div>
 
@@ -1585,208 +1652,108 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="tt-container">
       <p class="reviews-cta">
         Read all reviews on <a href="https://whop.com/joined/soul-society-division/?tab=reviews" target="_blank" rel="noopener">Whop ↗</a>
       </p>
     </div>
   </section>
 
-  <footer class="footer footer-merged">
-    <div class="container footer-banner-wrap reveal">
-      <div class="footer-banner-text">
-        <h3>Save on Indicators</h3>
-        <p>All indicators are available for Premium members. Subscribe for Premium access and use the indicators for as long as your Premium subscription is active.</p>
+  <!-- FROM THE EDUCATION -->
+  <section class="tt-edu">
+    <div class="tt-container">
+      <div class="tt-head reveal">
+        <h2>From the <em>Education</em></h2>
+        <p>Free Quarterly Theory lessons to get the most out of the indicator.</p>
       </div>
-      <a href="premium.html" class="btn btn-primary" style="flex-shrink:0;">View Premium Plans</a>
+      <div class="tt-edu-grid reveal">
+        <a class="tt-edu-card" href="qt-education.html">
+          <div class="tt-edu-thumb"><img src="images/QTEP1.png" alt="Quarterly Theory: From Zero to Mastery" loading="lazy" decoding="async" /></div>
+          <div class="tt-edu-body">
+            <span class="tt-edu-tag">Course</span>
+            <h3>Free Quarterly Theory Course</h3>
+            <p>Learn the full QT framework from the ground up — completely free.</p>
+            <span class="tt-edu-link">Start learning →</span>
+          </div>
+        </a>
+        <a class="tt-edu-card" href="edu-true-opens.html">
+          <div class="tt-edu-thumb"><img src="images/Qtnotes.png" alt="True Opens study notes" loading="lazy" decoding="async" /></div>
+          <div class="tt-edu-body">
+            <span class="tt-edu-tag">Lesson</span>
+            <h3>True Opens Explained</h3>
+            <p>How True Opens frame directional bias across every timeframe.</p>
+            <span class="tt-edu-link">Read the guide →</span>
+          </div>
+        </a>
+        <a class="tt-edu-card" href="edu-smt.html">
+          <div class="tt-edu-thumb"><img src="images/ictnotes.png" alt="SMT divergence study notes" loading="lazy" decoding="async" /></div>
+          <div class="tt-edu-body">
+            <span class="tt-edu-tag">Lesson</span>
+            <h3>SMT Divergence</h3>
+            <p>Spotting Smart Money Technique divergences with confidence.</p>
+            <span class="tt-edu-link">Read the guide →</span>
+          </div>
+        </a>
+      </div>
     </div>
-    <div class="container footer-bottom">
-      <div class="footer-copy">© 2026 Kenpachi Trades. All rights reserved. · <a href="privacy.html" style="color:inherit;opacity:0.6;">Privacy Policy</a></div>
-      <div class="footer-socials">
-        <a href="https://discord.com/invite/soulsocietydivision" target="_blank" class="footer-social-link footer-social-link--dc" aria-label="Discord">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-        </a>
-        <a href="https://x.com/kenpachi_qt" target="_blank" class="footer-social-link footer-social-link--x" aria-label="X / Twitter">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="https://youtube.com/@kenpachi_qt" target="_blank" class="footer-social-link footer-social-link--yt" aria-label="YouTube">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
+  </section>
+
+  <footer class="tt-footer">
+    <div class="tt-container">
+      <div class="tt-footer-grid">
+
+        <div class="tt-footer-brand">
+          <a href="index.html" class="tt-footer-logo">
+            <img src="images/logo.png" alt="Kenpachi Trades Logo" />
+            Kenpachi Trades
+          </a>
+          <p>Quarterly Theory indicators, free education and a trading community — everything you need to trade QT with confidence.</p>
+          <div class="tt-footer-socials">
+            <a href="https://discord.com/invite/soulsocietydivision" target="_blank" rel="noopener" class="dc" aria-label="Discord">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+            </a>
+            <a href="https://x.com/kenpachi_qt" target="_blank" rel="noopener" aria-label="X / Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://youtube.com/@kenpachi_qt" target="_blank" rel="noopener" class="yt" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="tt-footer-col">
+          <h4>Pages</h4>
+          <a href="indicators.html">QT Indicators</a>
+          <a href="qt-education.html">QT Education</a>
+          <a href="prop-firms.html">Save On Prop Firms</a>
+          <a href="premium.html">Premium Access</a>
+        </div>
+
+        <div class="tt-footer-col">
+          <h4>Community</h4>
+          <a href="https://whop.com/soul-society-division" target="_blank" rel="noopener">Join Free Community</a>
+          <a href="https://discord.com/invite/soulsocietydivision" target="_blank" rel="noopener">Discord</a>
+          <a href="https://youtube.com/@kenpachi_qt" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://x.com/kenpachi_qt" target="_blank" rel="noopener">X / Twitter</a>
+        </div>
+
+        <div class="tt-footer-col">
+          <h4>Get Started</h4>
+          <a href="#pricing">Indicator Plans</a>
+          <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener">Try for Free</a>
+          <a href="premium.html">Premium Plans</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+
       </div>
-      <div class="footer-disclaimer">This website is for educational purposes only and does not constitute financial advice. Trading involves significant risk of loss and is not suitable for all investors. Past performance is not indicative of future results. Always consult a licensed financial advisor before making investment decisions. Affiliate links may be present.</div>
+
+      <div class="tt-footer-bottom">
+        <div class="tt-footer-copy">© 2026 Kenpachi Trades. All rights reserved. · <a href="privacy.html">Privacy Policy</a></div>
+        <p class="tt-footer-disclaimer">This website is for educational purposes only and does not constitute financial advice. Trading involves significant risk of loss and is not suitable for all investors. Past performance is not indicative of future results. Always consult a licensed financial advisor before making investment decisions. Affiliate links may be present.</p>
+      </div>
     </div>
   </footer>
 
-  <script>
-    // Force heroVideo autoplay on mobile
-    const heroVideo = document.getElementById('heroVideo');
-    if (heroVideo) {
-      heroVideo.muted = true;
-      heroVideo.playsInline = true;
-      const tryPlayHero = () => heroVideo.play().catch(() => {});
-      tryPlayHero();
-      document.addEventListener('touchstart', tryPlayHero, { once: true });
-      document.addEventListener('click', tryPlayHero, { once: true });
-    }
-
-    const burger = document.getElementById('burger');
-    const menu = document.getElementById('mobileMenu');
-    const ticker = document.querySelector('.promo-ticker');
-    burger.addEventListener('click', () => {
-      menu.classList.toggle('open');
-      if (ticker) ticker.style.display = menu.classList.contains('open') ? 'none' : '';
-    });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      menu.classList.remove('open');
-      if (ticker) ticker.style.display = '';
-    }));
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, { threshold: 0.07 });
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
-
-    const sectionObserver = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('section-visible');
-      });
-    }, { threshold: 0.06 });
-    document.querySelectorAll('section').forEach(s => {
-      s.classList.add('section-fade');
-      sectionObserver.observe(s);
-    });
-
-    // Feature showcase
-    const featItems = Array.from(document.querySelectorAll('.feat-item'));
-    const featImg   = document.getElementById('feat-img');
-    const featCaption  = document.getElementById('feat-caption');
-    const featPanelNav = document.getElementById('featPanelNav');
-    const featDots  = document.querySelectorAll('.feat-panel-dot');
-    const featPrevBtn  = document.getElementById('featPrevBtn');
-    const featNextBtn  = document.getElementById('featNextBtn');
-    const imgWrap   = document.querySelector('.feat-panel-img-wrap');
-
-    const OTE_SLIDES = ['images/ote-levels-new.png', 'images/ote-level-2-new.png'];
-    let slideInterval = null;
-    let oteIdx = 0;
-    let currentTabIdx = 0;
-    let switching = false;
-
-    function setCaption(text) {
-      featCaption.textContent = text || '';
-      featCaption.style.display = text ? 'block' : 'none';
-    }
-    function setDot(idx) {
-      featDots.forEach((d, i) => d.classList.toggle('active', i === idx));
-    }
-
-    /* Smooth, lag-free image swap */
-    function switchImg(src, label) {
-      if (switching) return;
-      switching = true;
-      featImg.classList.add('fading');
-      const tmp = new Image();
-      const apply = () => {
-        featImg.src = src;
-        if (label) featImg.alt = label;
-        requestAnimationFrame(() => {
-          featImg.classList.remove('fading');
-          featImg.classList.add('entering');
-          setTimeout(() => { featImg.classList.remove('entering'); switching = false; }, 200);
-        });
-      };
-      tmp.onload = apply;
-      tmp.onerror = apply;
-      tmp.src = src;
-    }
-
-    function stopSlideshow() {
-      clearInterval(slideInterval); slideInterval = null;
-      featPanelNav.classList.remove('visible');
-    }
-    function startOteSlideshow() {
-      featPanelNav.classList.add('visible');
-      oteIdx = 0; setDot(0);
-      switchImg(OTE_SLIDES[0], 'OTE Levels');
-      slideInterval = setInterval(() => {
-        oteIdx = (oteIdx + 1) % OTE_SLIDES.length;
-        setDot(oteIdx); switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
-      }, 4000);
-    }
-
-    /* Activate tab by index — works for ALL tabs */
-    function activateTab(idx) {
-      idx = ((idx % featItems.length) + featItems.length) % featItems.length;
-      currentTabIdx = idx;
-      featItems.forEach(i => i.classList.remove('active'));
-      featItems[idx].classList.add('active');
-      /* Scroll tab into view on mobile */
-      featItems[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-      stopSlideshow();
-      setCaption(featItems[idx].dataset.caption || '');
-      if (featItems[idx].dataset.key === 'ote') startOteSlideshow();
-      else switchImg(featItems[idx].dataset.img, featItems[idx].dataset.label);
-    }
-
-    /* Tab clicks */
-    featItems.forEach((item, idx) => item.addEventListener('click', () => activateTab(idx)));
-
-    /* Navigate OTE slides or tabs depending on current context */
-    function isOteActive() {
-      return featItems[currentTabIdx] && featItems[currentTabIdx].dataset.key === 'ote';
-    }
-    function navigateOte(dir) {
-      clearInterval(slideInterval);
-      oteIdx = (oteIdx + dir + OTE_SLIDES.length) % OTE_SLIDES.length;
-      setDot(oteIdx);
-      switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
-      slideInterval = setInterval(() => {
-        oteIdx = (oteIdx + 1) % OTE_SLIDES.length;
-        setDot(oteIdx); switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
-      }, 4000);
-    }
-    function navigatePrev() { isOteActive() ? navigateOte(-1) : activateTab(currentTabIdx - 1); }
-    function navigateNext() { isOteActive() ? navigateOte(1)  : activateTab(currentTabIdx + 1); }
-
-    /* Prev / Next (bottom nav, OTE dots area) */
-    featPrevBtn.addEventListener('click', navigatePrev);
-    featNextBtn.addEventListener('click', navigateNext);
-
-    /* Hover arrows on image */
-    document.getElementById('imgArrPrev').addEventListener('click', navigatePrev);
-    document.getElementById('imgArrNext').addEventListener('click', navigateNext);
-
-    /* OTE dots */
-    featDots.forEach(dot => dot.addEventListener('click', () => {
-      clearInterval(slideInterval);
-      oteIdx = parseInt(dot.dataset.idx); setDot(oteIdx);
-      switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
-      slideInterval = setInterval(() => {
-        oteIdx = (oteIdx + 1) % OTE_SLIDES.length;
-        setDot(oteIdx); switchImg(OTE_SLIDES[oteIdx], 'OTE Levels');
-      }, 4000);
-    }));
-
-    /* Keyboard ← → */
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft')  navigatePrev();
-      if (e.key === 'ArrowRight') navigateNext();
-    });
-
-    /* Swipe on image panel (mobile + PC drag) */
-    let swipeStartX = 0, swipeStartY = 0;
-    imgWrap.addEventListener('touchstart', e => {
-      swipeStartX = e.touches[0].clientX;
-      swipeStartY = e.touches[0].clientY;
-    }, { passive: true });
-    imgWrap.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - swipeStartX;
-      const dy = e.changedTouches[0].clientY - swipeStartY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-        dx < 0 ? navigateNext() : navigatePrev();
-      }
-    }, { passive: true });
-  </script>
   <!-- Lightbox -->
   <div id="lightbox">
     <button id="lightbox-close" aria-label="Close">✕</button>
@@ -1802,12 +1769,77 @@
   </div>
 
   <script>
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // Feature carousel
+    (function () {
+      const track = document.getElementById('fcTrack');
+      if (!track) return;
+      const slides = Array.from(track.children);
+      const dotsWrap = document.getElementById('fcDots');
+      const viewport = document.getElementById('fcViewport');
+      const prevBtn = document.getElementById('fcPrev');
+      const nextBtn = document.getElementById('fcNext');
+      const total = slides.length;
+      let idx = 0, timer = null;
+
+      slides.forEach((s, i) => {
+        const d = document.createElement('span');
+        d.className = 'fc-dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => { go(i); restart(); });
+        dotsWrap.appendChild(d);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      function render() {
+        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+      function go(i) { idx = ((i % total) + total) % total; render(); }
+      function nextSlide() { go(idx + 1); }
+      function prevSlide() { go(idx - 1); }
+      function restart() { clearInterval(timer); timer = setInterval(nextSlide, 5000); }
+
+      prevBtn.addEventListener('click', () => { prevSlide(); restart(); });
+      nextBtn.addEventListener('click', () => { nextSlide(); restart(); });
+
+      let sx = 0;
+      viewport.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+      viewport.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 40) { dx < 0 ? nextSlide() : prevSlide(); restart(); }
+      }, { passive: true });
+
+      track.querySelectorAll('.fc-img-wrap img').forEach(img => {
+        img.addEventListener('click', () => { if (window.openLightbox) window.openLightbox(img.src, img.alt); });
+      });
+
+      // Expose for lightbox arrows
+      window.__fc = {
+        prev: () => { prevSlide(); restart(); },
+        next: () => { nextSlide(); restart(); },
+        current: () => slides[idx].querySelector('img')
+      };
+
+      restart();
+    })();
+  </script>
+
+  <script>
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxWrap = document.getElementById('lightbox-img-wrap');
 
     let scale = 1, lastScale = 1;
-    let posX = 0, posY = 0, lastPosX = 0, lastPosY = 0;
+    let posX = 0, posY = 0;
     let startDist = 0, isPinching = false, isDragging = false;
     let startX = 0, startY = 0;
 
@@ -1854,7 +1886,7 @@
       }
     }, { passive: false });
 
-    lightboxWrap.addEventListener('touchend', function(e) {
+    lightboxWrap.addEventListener('touchend', function() {
       isPinching = false;
       isDragging = false;
       if (scale < 1.05) resetTransform();
@@ -1864,7 +1896,6 @@
       if (scale > 1) { resetTransform(); }
       else {
         scale = 2.5;
-        const rect = lightboxImg.getBoundingClientRect();
         posX = (lightboxWrap.clientWidth / 2 - e.clientX) * (scale - 1);
         posY = (lightboxWrap.clientHeight / 2 - e.clientY) * (scale - 1);
         lightboxImg.style.transition = 'transform 0.2s ease';
@@ -1886,9 +1917,6 @@
       resetTransform();
     }
 
-    document.getElementById('feat-img').addEventListener('click', function() {
-      openLightbox(this.src, this.alt);
-    });
     document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', function(e) {
       if (e.target === lightbox || e.target === lightboxWrap) closeLightbox();
@@ -1897,28 +1925,46 @@
       if (e.key === 'Escape') closeLightbox();
     });
 
-    /* Lightbox arrows — navigate then sync image */
-    function lbNavigate(fn) {
-      fn();
-      setTimeout(() => { lightboxImg.src = document.getElementById('feat-img').src; }, 250);
+    window.openLightbox = openLightbox;
+
+    // Hero screenshot → lightbox
+    (function () {
+      const shot = document.getElementById('heroShot');
+      if (!shot) return;
+      const img = shot.querySelector('img');
+      const open = () => openLightbox(img.src, img.alt);
+      shot.addEventListener('click', open);
+      shot.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    })();
+
+    /* Lightbox arrows — advance the carousel, then sync the zoomed image */
+    function lbNavigate(dir) {
+      if (!window.__fc) return;
+      dir < 0 ? window.__fc.prev() : window.__fc.next();
+      setTimeout(function () { var im = window.__fc.current(); if (im) lightboxImg.src = im.src; }, 250);
     }
-    document.getElementById('lbPrev').addEventListener('click', () => lbNavigate(navigatePrev));
-    document.getElementById('lbNext').addEventListener('click', () => lbNavigate(navigateNext));
+    document.getElementById('lbPrev').addEventListener('click', () => lbNavigate(-1));
+    document.getElementById('lbNext').addEventListener('click', () => lbNavigate(1));
   </script>
 
   <script src="site.js"></script>
   <script>
-    function copyPromo() {
-      var code = document.getElementById('promoCode').textContent;
-      var btn = document.getElementById('promoCopyBtn');
-      var txt = document.getElementById('promoCopyText');
-      navigator.clipboard.writeText(code).then(function () {
-        btn.classList.add('copied');
-        txt.textContent = 'Copied!';
-        setTimeout(function () { btn.classList.remove('copied'); txt.textContent = 'Copy'; }, 2000);
-      });
-    }
-
+    // Lighter nav scroll shadow for the light theme (runs after site.js so it wins)
+    (function () {
+      const nav = document.querySelector('.nav');
+      if (!nav) return;
+      window.addEventListener('scroll', () => {
+        requestAnimationFrame(() => {
+          if (window.scrollY > 20) {
+            nav.style.boxShadow = '0 4px 24px rgba(46,52,64,0.08)';
+            nav.style.borderBottomColor = '#e6e9f3';
+          } else {
+            nav.style.boxShadow = '';
+            nav.style.borderBottomColor = '';
+          }
+        });
+      }, { passive: true });
+    })();
 
   </script>
 </body>
