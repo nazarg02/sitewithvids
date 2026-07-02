@@ -89,8 +89,8 @@
     if (!ticking) {
       requestAnimationFrame(() => {
         if (window.scrollY > 20) {
-          nav.style.boxShadow = '0 4px 32px rgba(0,0,0,0.5)';
-          nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+          nav.style.boxShadow = '0 4px 24px rgba(46,52,64,0.08)';
+          nav.style.borderBottomColor = '#e6e9f3';
         } else {
           nav.style.boxShadow = '';
           nav.style.borderBottomColor = '';

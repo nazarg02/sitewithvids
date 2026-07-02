@@ -696,6 +696,34 @@
     .lb-arrow:hover { background: rgba(255,255,255,0.16); color: #fff; }
     .lb-arrow-left { left: 18px; }
     .lb-arrow-right { right: 18px; }
+    /* Touch devices (iPad/iPhone): no hover — keep controls visible and easy to hit */
+    @media (hover: none) {
+      #lightbox-close {
+        width: 58px; height: 58px;
+        font-size: 1.6rem;
+        top: calc(14px + env(safe-area-inset-top, 0px));
+        right: calc(14px + env(safe-area-inset-right, 0px));
+        background: rgba(255,255,255,0.18);
+        border-color: rgba(255,255,255,0.35);
+      }
+      .lb-arrow { opacity: 1; background: rgba(255,255,255,0.12); }
+      #lightbox::after {
+        content: 'Tap photo or swipe down to close';
+        position: fixed;
+        bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Instrument Sans', sans-serif;
+        font-size: 0.72rem;
+        color: rgba(255,255,255,0.55);
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 100px;
+        padding: 6px 14px;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1000px) {
@@ -1858,7 +1886,18 @@
       return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
     }
 
+    /* tap/swipe-to-close tracking (iPad/iPhone) */
+    let tapX = 0, tapY = 0, tapT = 0, hadMulti = false, lastTapT = 0, tapCloseTimer = null;
+
     lightboxWrap.addEventListener('touchstart', function(e) {
+      if (e.touches.length > 1) {
+        hadMulti = true;
+      } else {
+        hadMulti = false;
+        tapX = e.touches[0].clientX;
+        tapY = e.touches[0].clientY;
+        tapT = Date.now();
+      }
       if (e.touches.length === 2) {
         isPinching = true;
         startDist = getDist(e.touches);
@@ -1886,10 +1925,29 @@
       }
     }, { passive: false });
 
-    lightboxWrap.addEventListener('touchend', function() {
+    lightboxWrap.addEventListener('touchend', function(e) {
       isPinching = false;
       isDragging = false;
       if (scale < 1.05) resetTransform();
+
+      /* easy close on touch: tap once (not zoomed) or swipe down/up */
+      if (e.touches.length > 0 || hadMulti || scale > 1.05) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - tapX;
+      const dy = t.clientY - tapY;
+      const dt = Date.now() - tapT;
+      if (Math.abs(dy) > 70 && Math.abs(dx) < 60) { closeLightbox(); return; }
+      if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && dt < 350) {
+        const now = Date.now();
+        if (now - lastTapT < 320) {
+          /* second tap of a double-tap — let the dblclick zoom handler run */
+          clearTimeout(tapCloseTimer);
+          lastTapT = 0;
+          return;
+        }
+        lastTapT = now;
+        tapCloseTimer = setTimeout(closeLightbox, 330);
+      }
     });
 
     lightboxWrap.addEventListener('dblclick', function(e) {
