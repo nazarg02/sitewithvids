@@ -775,18 +775,44 @@
       .pr-stats { margin-top: 40px; padding-bottom: 48px; }
       .pr-stat-num { font-size: 1.6rem; }
       .pr-stat-label { font-size: 0.74rem; }
-      .pr-feat, .pr-results, .pr-steps { padding: 52px 0; }
-      .pr-feat-grid { grid-template-columns: 1fr; }
-      .pr-steps-grid { grid-template-columns: 1fr; }
+      .pr-feat, .pr-results, .pr-steps { padding: 44px 0; }
+      .pr-head { margin-bottom: 28px; }
+      /* features: 2 columns, compact cards */
+      .pr-feat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .pr-feat-card { padding: 16px 13px; border-radius: 14px; }
+      .pr-feat-icon { width: 36px; height: 36px; border-radius: 10px; margin-bottom: 10px; }
+      .pr-feat-icon svg { width: 18px; height: 18px; }
+      .pr-feat-card h3 { font-size: 0.88rem; margin-bottom: 6px; }
+      .pr-feat-card p { font-size: 0.76rem; line-height: 1.5; }
+      .pr-feat-cta { margin-top: 28px; }
+      /* steps: tighter */
+      .pr-steps-grid { grid-template-columns: 1fr; gap: 12px; }
+      .pr-step { padding: 20px 18px; }
+      .pr-step-num { width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 10px; }
+      .pr-step h3 { font-size: 0.98rem; }
+      .pr-step p { font-size: 0.84rem; }
       .pr-marquee-track { gap: 14px; }
       .pr-shot { width: 200px; }
-      .prem-pricing { padding: 48px 0 56px; }
-      .prem-pricing .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; padding: 0 16px; gap: 16px; }
-      .prem-pricing .card-body { padding: 16px 16px 20px; }
-      .prem-pricing .price-amount { font-size: 1.9rem; }
-      .prem-pricing .price-features li { font-size: 0.78rem; }
+      /* pricing: compact cards, features in 2 columns */
+      .prem-pricing { padding: 44px 0 52px; }
+      .prem-pricing .section-head.center { margin-bottom: 32px !important; }
+      .prem-pricing .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; padding: 0 16px; gap: 14px; }
+      .prem-pricing .card-body { padding: 14px 14px 16px; }
+      .prem-pricing .price-amount { font-size: 1.7rem; }
+      .prem-pricing .price-period { margin-bottom: 12px; }
+      .prem-pricing .price-divider { margin-bottom: 12px; }
+      .prem-pricing .price-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px 10px;
+        margin-bottom: 16px;
+      }
+      .prem-pricing .price-features li { font-size: 0.74rem; align-items: flex-start; gap: 7px; line-height: 1.35; }
+      .prem-pricing .price-features li .check,
+      .prem-pricing .price-features li.inactive .cross { font-size: 0.9rem; }
+      .prem-pricing .price-features li:has(.highlight-feature) { grid-column: 1 / -1; }
       .prem-pricing .btn-block { padding: 13px 12px; font-size: 0.84rem; }
-      .btn-try-free-prem { padding: 13px 0; font-size: 0.84rem; }
+      .btn-try-free-prem { padding: 13px 0; font-size: 0.84rem; margin-top: 8px; }
       .prem-faq { padding: 48px 0 60px; }
       .pr-lb-arrow { width: 38px; height: 38px; }
       .pr-lb-prev { left: 10px; }
@@ -818,8 +844,8 @@
       <a href="prop-firms.html">Save On Prop Firms</a>
       <a href="indicators.html">QT Indicators</a>
       <a href="qt-education.html">QT Education</a>
-      <a href="premium.html">Premium Access</a>
-      <a href="https://whop.com/soul-society-division" target="_blank">Join Community Free</a>
+      <a href="premium.html" class="active">Premium Access</a>
+      <a href="https://whop.com/soul-society-division" target="_blank" class="mobile-join"><img src="images/com.avif" alt="" />Join Community Free</a>
     </div>
   </header>
 

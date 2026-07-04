@@ -205,11 +205,15 @@
     .burger { border-color: var(--tt-line); color: var(--tt-ink-soft); }
     .burger:hover { border-color: var(--tt-ink-faint); color: var(--tt-ink); }
     .mobile-menu {
-      background: rgba(255,255,255,0.98);
+      background: #fff;
       border-bottom: 1px solid var(--tt-line-soft);
+      box-shadow: 0 28px 56px rgba(46,52,64,0.16);
     }
-    .mobile-menu a { color: var(--tt-ink-soft); border-bottom-color: var(--tt-line-soft); }
+    .mobile-menu a { color: var(--tt-ink-soft); }
     .mobile-menu a:hover { color: var(--tt-ink); background: var(--tt-paper-alt); }
+    .mobile-menu a.active { color: var(--tt-accent-dk); background: var(--tt-accent-lt); }
+    .mobile-menu .mobile-join { background: var(--tt-ink); color: #fff; border: none; box-shadow: 0 6px 18px rgba(46,52,64,0.22); }
+    .mobile-menu .mobile-join:hover { background: #3c4351; color: #fff; }
 
     /* ── Shared bits ── */
     .tt-container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
@@ -1267,10 +1271,10 @@
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="prop-firms.html">Save On Prop Firms</a>
-      <a href="indicators.html">QT Indicators</a>
+      <a href="indicators.html" class="active">QT Indicators</a>
       <a href="qt-education.html">QT Education</a>
       <a href="premium.html">Premium Access</a>
-      <a href="https://whop.com/soul-society-division" target="_blank">Join Community Free</a>
+      <a href="https://whop.com/soul-society-division" target="_blank" class="mobile-join"><img src="images/com.avif" alt="" />Join Community Free</a>
     </div>
   </header>
 
