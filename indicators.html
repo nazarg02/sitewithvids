@@ -24,6 +24,8 @@
   <meta name="keywords" content="quarterly theory indicator, quarterly theory tradingview, QT indicator, kenpachi indicator, SSMT indicator, NWOG tradingview, smart money indicator, quarterly theory trading, QT pro indicator, kenpachi trades" />
   <link rel="canonical" href="https://kenpachitrades.com/indicators.html" />
   <link rel="stylesheet" href="syle.css?v=7" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -150,7 +152,6 @@
     gtag('js', new Date());
     gtag('config', 'G-0E9J28DDXG');
   </script>
-  <link rel="stylesheet" href="https://cdn.cursors-4u.net/cursors/animated/overwatch-working-in-background-3ef963f5-32.css">
   <style>
     /* ============================================================
        INDICATORS PAGE — Clean light redesign (ttrades-inspired)
@@ -1145,10 +1146,66 @@
       letter-spacing: 0.03em;
     }
     .promo-copy:hover { filter: brightness(1.1); transform: translateY(-1px); }
-    .promo-timer-row {
+    .promo-countdown {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--tt-line);
+    }
+    .promo-countdown-label {
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      gap: 7px;
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ef4444;
+    }
+    .promo-countdown-units {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 10px;
+    }
+    .pc-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      min-width: 34px;
+    }
+    .pc-unit b {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--tt-ink);
+      font-variant-numeric: tabular-nums;
+    }
+    .pc-unit i {
+      font-style: normal;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--tt-ink-faint);
+    }
+    .pc-sep {
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--tt-ink-faint);
+      opacity: 0.5;
+    }
+    @media (max-width: 420px) {
+      .promo-countdown-units { gap: 7px; }
+      .pc-unit { min-width: 30px; }
+      .pc-unit b { font-size: 1.25rem; }
+      .pc-sep { font-size: 1.15rem; }
     }
     .promo-dot {
       width: 6px; height: 6px;
@@ -1161,11 +1218,6 @@
     @keyframes blink-dot {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.1; }
-    }
-    .promo-entries-label {
-      font-size: 0.7rem;
-      color: var(--tt-ink-faint);
-      white-space: nowrap;
     }
 
     /* === PRICING RESPONSIVE === */
@@ -1491,9 +1543,14 @@
                 <span class="promo-code">PILL40</span>
                 <button class="promo-copy" onclick="navigator.clipboard.writeText('PILL40');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
               </div>
-              <div class="promo-timer-row">
-                <span class="promo-dot"></span>
-                <span class="promo-entries-label">11 entries left</span>
+              <div class="promo-countdown" id="promoCountdown">
+                <div class="promo-countdown-label"><span class="promo-dot"></span> Your code expires in</div>
+                <div class="promo-countdown-units">
+                  <span class="pc-unit"><b id="pcD">7</b><i>days</i></span><span class="pc-sep">:</span>
+                  <span class="pc-unit"><b id="pcH">00</b><i>hours</i></span><span class="pc-sep">:</span>
+                  <span class="pc-unit"><b id="pcM">00</b><i>min</i></span><span class="pc-sep">:</span>
+                  <span class="pc-unit"><b id="pcS">00</b><i>sec</i></span>
+                </div>
               </div>
             </div>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
@@ -1695,7 +1752,7 @@
   <section class="tt-edu">
     <div class="tt-container">
       <div class="tt-head reveal">
-        <h2>From the <em>Education</em></h2>
+        <h2>Free <em>QT Education</em></h2>
         <p>Free Quarterly Theory lessons to get the most out of the indicator.</p>
       </div>
       <div class="tt-edu-grid reveal">
@@ -1810,6 +1867,30 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.07 });
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // Personal 7-day promo countdown: starts on first visit, stored per browser
+    (function () {
+      if (!document.getElementById('promoCountdown')) return;
+      const uD = document.getElementById('pcD'), uH = document.getElementById('pcH'),
+            uM = document.getElementById('pcM'), uS = document.getElementById('pcS');
+      const KEY = 'kt_pill40_deadline';
+      const WEEK = 7 * 24 * 60 * 60 * 1000;
+      let end = 0;
+      try { end = parseInt(localStorage.getItem(KEY), 10) || 0; } catch (e) {}
+      const save = v => { try { localStorage.setItem(KEY, v); } catch (e) {} };
+      if (!end || end - Date.now() > WEEK) { end = Date.now() + WEEK; save(end); }
+      const pad = n => String(n).padStart(2, '0');
+      function tick() {
+        let left = end - Date.now();
+        if (left <= 0) { end = Date.now() + WEEK; save(end); left = WEEK; }
+        uD.textContent = Math.floor(left / 86400000);
+        uH.textContent = pad(Math.floor(left % 86400000 / 3600000));
+        uM.textContent = pad(Math.floor(left % 3600000 / 60000));
+        uS.textContent = pad(Math.floor(left % 60000 / 1000));
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
 
     // Feature carousel
     (function () {
