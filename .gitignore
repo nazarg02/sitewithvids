@@ -1,0 +1,34 @@
+# Dependencies & local tooling
+node_modules/
+.claude/worktrees/
+.claude/skills/
+
+# Dev/test artifacts
+screenshot-*.png
+pw_fix.js
+*.zip
+
+# Local source files / duplicates not used by the site
+Lifetime Premium.png
+hero-mobile.png
+images/+1 cycle/
+images/19$.gif
+images/250.gif
+images/49$.gif
+images/Free Premium.png
+images/Montly Premium.png
+images/Quarterly Theory (3.jpg
+images/candle-blue.svg
+images/candle-green.svg
+images/candle-red.svg
+images/ind-overview-beige.png
+images/plus1-cycle-beige.png
+images/plus1-cycle-styled.png
+images/plus1-cycle.jpg
+images/qt-quarters.svg
+images/qt-swing.svg
+images/qt-trueopen.svg
+
+# Raw video sources (large, not referenced by pages)
+videos/IMG_3606.MOV
+videos/IMG_3606.mp4
