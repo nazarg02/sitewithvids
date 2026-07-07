@@ -437,51 +437,47 @@
     }
     .prem-pricing .price-card {
       background: var(--tt-paper);
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      border: 1.5px solid var(--tt-line);
+      border: 1px solid var(--tt-line);
       box-shadow: var(--tt-shadow-sm);
       transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
       position: relative;
       will-change: transform;
     }
-    .prem-pricing .price-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      z-index: 2;
+    .prem-pricing .price-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--tt-shadow);
+      border-color: #d8dcef;
     }
-    .prem-pricing .price-card.prem-free::before { background: linear-gradient(90deg, #6b7280, #9ca3af); }
-    .prem-pricing .price-card.prem-free:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 24px 60px rgba(107,114,128,0.16);
-      border-color: #ccd2e0;
+    .prem-pricing .price-card.prem-lifetime {
+      border-color: rgba(98,116,242,0.45);
+      box-shadow: 0 10px 36px rgba(98,116,242,0.10);
     }
-    .prem-pricing .price-card.prem-monthly::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
-    .prem-pricing .price-card.prem-monthly:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 24px 60px rgba(37,99,235,0.16);
-      border-color: rgba(96,165,250,0.45);
-    }
-    .prem-pricing .price-card.prem-lifetime::before { background: linear-gradient(90deg, #d97706, #fbbf24); }
     .prem-pricing .price-card.prem-lifetime:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 24px 60px rgba(217,119,6,0.16);
-      border-color: rgba(251,191,36,0.45);
+      border-color: var(--tt-accent);
+      box-shadow: 0 22px 56px rgba(98,116,242,0.16);
     }
     .prem-pricing .price-card .card-badge {
       position: absolute;
       top: 14px; right: 14px;
       z-index: 3;
-      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
       padding: 5px 11px; border-radius: 100px;
       font-family: 'Instrument Sans', sans-serif;
     }
-    .prem-pricing .prem-monthly .card-badge { background: #2563eb; color: #fff; box-shadow: 0 3px 12px rgba(37,99,235,0.4); }
-    .prem-pricing .prem-lifetime .card-badge { background: linear-gradient(135deg, #d97706, #fbbf24); color: #1a1000; box-shadow: 0 3px 12px rgba(217,119,6,0.4); }
+    .prem-pricing .prem-monthly .card-badge {
+      background: rgba(255,255,255,0.94);
+      color: var(--tt-ink);
+      box-shadow: 0 2px 10px rgba(46,52,64,0.2);
+    }
+    .prem-pricing .prem-lifetime .card-badge {
+      background: var(--tt-accent);
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(98,116,242,0.45);
+    }
 
     .prem-card-banner {
       width: 100%;
@@ -529,9 +525,93 @@
       margin: 0 0 16px;
       display: block;
     }
-    .prem-pricing .price-card.prem-free .price-divider { background: var(--tt-line-soft); }
-    .prem-pricing .price-card.prem-monthly .price-divider { background: rgba(96,165,250,0.22); }
-    .prem-pricing .price-card.prem-lifetime .price-divider { background: rgba(251,191,36,0.28); }
+    .prem-pricing .price-divider { background: var(--tt-line-soft); }
+
+    /* Plan name above price */
+    .prem-pricing .plan-name {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tt-ink-faint);
+      margin-bottom: 10px;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+    .prem-pricing .prem-lifetime .plan-name { color: var(--tt-accent); }
+
+    /* Old price (lifetime deal) */
+    .prem-pricing .price-old {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--tt-ink-faint);
+      text-decoration: line-through;
+      text-decoration-thickness: 1.5px;
+      margin-left: 10px;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+
+    /* Promo sticker on the lifetime banner */
+    .prem-pricing .banner-wrap { position: relative; }
+    .prem-pricing .promo-sticker {
+      position: absolute;
+      left: 16px;
+      bottom: -16px;
+      z-index: 3;
+      transform: rotate(-6deg);
+      background: #059669;
+      color: #fff;
+      border-radius: 12px;
+      padding: 8px 14px 9px 12px;
+      box-shadow: 0 10px 30px rgba(5,150,105,0.45), 0 3px 10px rgba(5,150,105,0.28);
+      font-family: 'Instrument Sans', sans-serif;
+      line-height: 1.3;
+      transition: transform 0.28s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prem-pricing .price-card:hover .promo-sticker { transform: rotate(-3deg) scale(1.04); }
+    .prem-pricing .promo-sticker .st-plus {
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .prem-pricing .promo-sticker .st-top {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      white-space: nowrap;
+    }
+    .prem-pricing .promo-sticker .st-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .prem-pricing .promo-sticker .st-main {
+      display: block;
+      font-size: 0.94rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+    .prem-pricing .promo-sticker .st-tag {
+      transform: rotate(-4deg);
+      background: #dc2626;
+      color: #fff;
+      border-radius: 8px;
+      padding: 2px 8px 3px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      box-shadow: 0 5px 16px rgba(220,38,38,0.5), 0 2px 6px rgba(220,38,38,0.3);
+      transition: transform 0.28s ease;
+    }
+    .prem-pricing .price-card:hover .promo-sticker .st-tag { transform: rotate(0deg); }
+    .prem-pricing .prem-lifetime .card-body { padding-top: 32px; }
 
     .prem-pricing .price-features {
       list-style: none;
@@ -551,23 +631,21 @@
       color: var(--tt-ink-soft);
     }
     .prem-pricing .price-features li .check {
-      font-size: 1rem;
-      font-weight: 900;
+      font-size: 0.85rem;
+      font-weight: 700;
       flex-shrink: 0;
       line-height: 1;
+      color: var(--tt-accent);
     }
-    .prem-pricing .price-card.prem-free .check { color: #9ca3af; }
-    .prem-pricing .price-card.prem-monthly .check { color: #2563eb; }
-    .prem-pricing .price-card.prem-lifetime .check { color: #d97706; }
+    .prem-pricing .price-card.prem-free .check { color: var(--tt-ink-faint); }
     .prem-pricing .highlight-feature {
       text-decoration: underline;
       text-underline-offset: 3px;
       text-decoration-thickness: 1.5px;
+      text-decoration-color: rgba(98,116,242,0.45);
       font-weight: 600;
       color: var(--tt-ink);
     }
-    .prem-pricing .price-card.prem-monthly .highlight-feature { text-decoration-color: #60a5fa; }
-    .prem-pricing .price-card.prem-lifetime .highlight-feature { text-decoration-color: #fbbf24; }
     .prem-pricing .price-features li.inactive { color: #c3c9d6; }
     .prem-pricing .price-features li.inactive .cross {
       font-size: 1rem;
@@ -591,57 +669,56 @@
       font-family: 'Instrument Sans', sans-serif;
     }
     .prem-pricing .price-card.prem-free .btn-block {
-      background: var(--tt-paper-alt);
+      background: var(--tt-paper);
       border: 1px solid var(--tt-line);
       color: var(--tt-ink);
     }
     .prem-pricing .price-card.prem-free .btn-block:hover {
-      background: var(--tt-line-soft);
+      background: var(--tt-paper-alt);
       border-color: var(--tt-ink-faint);
       transform: translateY(-2px);
     }
     .prem-pricing .price-card.prem-monthly .btn-block {
-      background: #2563eb;
-      box-shadow: 0 3px 16px rgba(37,99,235,0.30);
+      background: var(--tt-ink);
+      box-shadow: 0 3px 14px rgba(46,52,64,0.22);
     }
     .prem-pricing .price-card.prem-monthly .btn-block:hover {
-      filter: brightness(1.1);
+      background: #3b4252;
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(37,99,235,0.4);
+      box-shadow: 0 8px 24px rgba(46,52,64,0.3);
     }
     .prem-pricing .price-card.prem-lifetime .btn-block {
-      background: linear-gradient(135deg, #d97706, #fbbf24);
-      box-shadow: 0 3px 16px rgba(217,119,6,0.3);
-      color: #1a1000;
+      background: var(--tt-accent);
+      box-shadow: 0 3px 16px rgba(98,116,242,0.35);
     }
     .prem-pricing .price-card.prem-lifetime .btn-block:hover {
-      filter: brightness(1.06);
+      background: var(--tt-accent-dk);
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(217,119,6,0.4);
+      box-shadow: 0 8px 28px rgba(98,116,242,0.45);
     }
     .btn-try-free-prem {
       display: block;
       width: 100%;
-      background: #16a34a;
-      color: #fff;
+      background: var(--tt-accent-lt);
+      color: var(--tt-accent-dk);
       font-weight: 700;
       font-family: 'Instrument Sans', sans-serif;
       font-size: 0.9rem;
       letter-spacing: 0.025em;
-      border: none;
+      border: 1px solid rgba(98,116,242,0.22);
       border-radius: 10px;
-      padding: 14px 0;
+      padding: 13px 0;
       cursor: pointer;
       margin-top: 10px;
-      box-shadow: 0 3px 16px rgba(22,163,74,0.28);
-      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
       text-decoration: none;
       text-align: center;
     }
     .btn-try-free-prem:hover {
-      filter: brightness(1.08);
+      background: #e3e7fd;
+      border-color: rgba(98,116,242,0.4);
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(22,163,74,0.4);
+      box-shadow: 0 6px 20px rgba(98,116,242,0.18);
     }
     .prem-pricing .btn,
     .prem-pricing a.btn,
@@ -798,6 +875,14 @@
       .prem-pricing .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; padding: 0 16px; gap: 14px; }
       .prem-pricing .card-body { padding: 14px 14px 16px; }
       .prem-pricing .price-amount { font-size: 1.7rem; }
+      .prem-pricing .price-old { font-size: 0.9rem; margin-left: 8px; }
+      .prem-pricing .plan-name { font-size: 0.66rem; margin-bottom: 7px; }
+      .prem-pricing .promo-sticker { left: 12px; bottom: -13px; padding: 6px 11px 7px 10px; gap: 6px; }
+      .prem-pricing .promo-sticker .st-plus { font-size: 1.15rem; }
+      .prem-pricing .promo-sticker .st-top { font-size: 0.56rem; }
+      .prem-pricing .promo-sticker .st-main { font-size: 0.82rem; }
+      .prem-pricing .promo-sticker .st-tag { font-size: 0.68rem; padding: 2px 7px 3px; }
+      .prem-pricing .prem-lifetime .card-body { padding-top: 26px; }
       .prem-pricing .price-period { margin-bottom: 12px; }
       .prem-pricing .price-divider { margin-bottom: 12px; }
       .prem-pricing .price-features {
@@ -1030,15 +1115,16 @@
         <div class="price-card prem-free reveal reveal-delay-1">
           <img src="images/Shinigame%20free%20updated.png" class="prem-card-banner" alt="Free" loading="lazy" decoding="async" />
           <div class="card-body">
+            <div class="plan-name">Shinigami</div>
             <div class="price-row"><div class="price-amount"><sup>$</sup>0</div></div>
             <div class="price-period">Forever free</div>
             <div class="price-divider"></div>
             <ul class="price-features">
-              <li><span class="check">›</span> Free Discord Access</li>
-              <li><span class="check">›</span> Step-by-step profitability path</li>
-              <li><span class="check">›</span> Quarterly Theory Studies</li>
-              <li><span class="check">›</span> QT Free Models</li>
-              <li><span class="check">›</span> ICT Core Studies</li>
+              <li><span class="check">✓</span> Free Discord Access</li>
+              <li><span class="check">✓</span> Step-by-step profitability path</li>
+              <li><span class="check">✓</span> Quarterly Theory Studies</li>
+              <li><span class="check">✓</span> QT Free Models</li>
+              <li><span class="check">✓</span> ICT Core Studies</li>
               <li class="inactive"><span class="cross">–</span> Indicators</li>
               <li class="inactive"><span class="cross">–</span> Live Trading</li>
               <li class="inactive"><span class="cross">–</span> Private Discord</li>
@@ -1055,22 +1141,23 @@
           <span class="card-badge">Most Popular</span>
           <img src="images/Monthly%20premium%20updated.png" class="prem-card-banner" alt="Monthly Premium" loading="lazy" decoding="async" />
           <div class="card-body">
+            <div class="plan-name">Espada · Monthly</div>
             <div class="price-row"><div class="price-amount"><sup>$</sup>49</div></div>
             <div class="price-period">per month · cancel anytime</div>
             <div class="price-divider"></div>
             <ul class="price-features">
-              <li><span class="check">›</span> Espada Premium Access</li>
-              <li><span class="check">›</span> Step-by-step profitability path</li>
-              <li><span class="check">›</span> Quarterly Theory Studies</li>
-              <li><span class="check">›</span> QT Free Models</li>
-              <li><span class="check">›</span> ICT Core Studies</li>
-              <li><span class="check">›</span> <span class="highlight-feature">QT Indicator (active subscription)</span></li>
-              <li><span class="check">›</span> Live Trading</li>
-              <li><span class="check">›</span> Private Discord</li>
-              <li><span class="check">›</span> Advanced QT Modules</li>
-              <li><span class="check">›</span> Prop Firms Strategies</li>
-              <li><span class="check">›</span> QT Zero-to-Mastery</li>
-              <li><span class="check">›</span> QT Private Models</li>
+              <li><span class="check">✓</span> Espada Premium Access</li>
+              <li><span class="check">✓</span> Step-by-step profitability path</li>
+              <li><span class="check">✓</span> Quarterly Theory Studies</li>
+              <li><span class="check">✓</span> QT Free Models</li>
+              <li><span class="check">✓</span> ICT Core Studies</li>
+              <li><span class="check">✓</span> <span class="highlight-feature">QT Indicator (active subscription)</span></li>
+              <li><span class="check">✓</span> Live Trading</li>
+              <li><span class="check">✓</span> Private Discord</li>
+              <li><span class="check">✓</span> Advanced QT Modules</li>
+              <li><span class="check">✓</span> Prop Firms Strategies</li>
+              <li><span class="check">✓</span> QT Zero-to-Mastery</li>
+              <li><span class="check">✓</span> QT Private Models</li>
             </ul>
             <a href="https://whop.com/checkout/plan_0irQZyuOVX59I" target="_blank" rel="noopener noreferrer" class="btn btn-block">Get Premium</a>
             <a href="https://whop.com/joined/soul-society-division/products/premium-access-espada/" target="_blank" rel="noopener noreferrer" class="btn-try-free-prem">Try for Free</a>
@@ -1079,24 +1166,34 @@
 
         <div class="price-card prem-lifetime reveal reveal-delay-3">
           <span class="card-badge">Best Value</span>
-          <img src="images/Lifetime-Premium.png" class="prem-card-banner" alt="Lifetime Premium" loading="lazy" decoding="async" />
+          <div class="banner-wrap">
+            <img src="images/Lifetime-Premium.png" class="prem-card-banner" alt="Lifetime Premium" loading="lazy" decoding="async" />
+            <div class="promo-sticker">
+              <span class="st-plus">+</span>
+              <span class="st-text">
+                <span class="st-top">Indicator Lifetime</span>
+                <span class="st-row"><span class="st-main">Free</span><span class="st-tag">−$250</span></span>
+              </span>
+            </div>
+          </div>
           <div class="card-body">
-            <div class="price-row"><div class="price-amount"><sup>$</sup>499</div></div>
+            <div class="plan-name">Espada · Lifetime</div>
+            <div class="price-row"><div class="price-amount"><sup>$</sup>499</div><span class="price-old">$749</span></div>
             <div class="price-period">one-time payment</div>
             <div class="price-divider"></div>
             <ul class="price-features">
-              <li><span class="check">›</span> Espada Premium Access</li>
-              <li><span class="check">›</span> Step-by-step profitability path</li>
-              <li><span class="check">›</span> Quarterly Theory Studies</li>
-              <li><span class="check">›</span> QT Free Models</li>
-              <li><span class="check">›</span> ICT Core Studies</li>
-              <li><span class="check">›</span> <span class="highlight-feature">QT Indicator (lifetime access)</span></li>
-              <li><span class="check">›</span> Live Trading</li>
-              <li><span class="check">›</span> Private Discord</li>
-              <li><span class="check">›</span> Advanced QT Modules</li>
-              <li><span class="check">›</span> Prop Firms Strategies</li>
-              <li><span class="check">›</span> QT Zero-to-Mastery</li>
-              <li><span class="check">›</span> QT Private Models</li>
+              <li><span class="check">✓</span> Espada Premium Access</li>
+              <li><span class="check">✓</span> Step-by-step profitability path</li>
+              <li><span class="check">✓</span> Quarterly Theory Studies</li>
+              <li><span class="check">✓</span> QT Free Models</li>
+              <li><span class="check">✓</span> ICT Core Studies</li>
+              <li><span class="check">✓</span> <span class="highlight-feature">QT Indicator (lifetime access)</span></li>
+              <li><span class="check">✓</span> Live Trading</li>
+              <li><span class="check">✓</span> Private Discord</li>
+              <li><span class="check">✓</span> Advanced QT Modules</li>
+              <li><span class="check">✓</span> Prop Firms Strategies</li>
+              <li><span class="check">✓</span> QT Zero-to-Mastery</li>
+              <li><span class="check">✓</span> QT Private Models</li>
             </ul>
             <a href="https://whop.com/checkout/plan_OqRT7PMSwsiyC" target="_blank" rel="noopener noreferrer" class="btn btn-block">Get Elite</a>
           </div>
