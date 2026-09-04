@@ -1,0 +1,4 @@
+{
+  "_readme": "Custom avatars offered on the profile page. Drop the image file into images/avatars/ and add a line below. src is relative to the site root; label is what shows on hover. Presets in images/avatars/presets/ are listed separately and do not belong here.",
+  "avatars": []
+}

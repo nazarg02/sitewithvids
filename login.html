@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Sign in to Kenpachi Trades — connect Whop to see your subscriptions, or use an email address." />
+  <link rel="stylesheet" href="syle.css?v=7" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== SIGN IN — light ===== */
+
+    .lg-main {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-h) + 48px) 24px 64px;
+    }
+    .lg-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(98,116,242,0.10) 0%, transparent 62%);
+      pointer-events: none;
+    }
+    .lg-orb { position: absolute; border-radius: 50%; filter: blur(64px); pointer-events: none; opacity: 0.5; }
+    .lg-orb-a {
+      width: 360px; height: 360px;
+      background: rgba(98,116,242,0.22);
+      top: -80px; right: -90px;
+      animation: lgFloatA 17s ease-in-out infinite;
+    }
+    .lg-orb-b {
+      width: 280px; height: 280px;
+      background: rgba(250,69,22,0.14);
+      bottom: -60px; left: -80px;
+      animation: lgFloatB 21s ease-in-out infinite;
+    }
+    @keyframes lgFloatA {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(-32px, 36px) scale(1.08); }
+    }
+    @keyframes lgFloatB {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(38px, -30px) scale(1.06); }
+    }
+
+    /* ===== "coming soon" state — auth isn't live yet =====
+       Driven by a class on the card, so the dead form never flashes on a
+       slow connection or with JS off. Drop .lg-soon to bring login back. */
+    .lg-soon #lgProviderBlock,
+    .lg-soon #lgForm,
+    .lg-soon .lg-row { display: none !important; }
+    .lg-soon-block { text-align: center; }
+    .lg-soon-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--tt-accent-lt, #eef0fe); color: var(--tt-accent-dk, #4d5fe8);
+      font-size: 0.63rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 13px; border-radius: 999px; margin-bottom: 16px;
+    }
+    .lg-soon-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--tt-accent, #6274f2);
+      animation: lgSoonPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes lgSoonPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
+    .lg-soon-block p {
+      font-size: 0.88rem; line-height: 1.65; color: var(--tt-ink-soft, #5b6172);
+      margin: 0 0 20px;
+    }
+    .lg-soon-game {
+      width: 100%; box-sizing: border-box;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 46px; border: none; border-radius: 12px; cursor: pointer;
+      font-family: inherit; font-size: 0.9rem; font-weight: 700; color: #fff;
+      background: linear-gradient(135deg, var(--tt-accent, #6274f2), var(--tt-accent-dk, #4d5fe8));
+      box-shadow: 0 10px 26px rgba(98,116,242,0.28);
+      transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s ease, filter 0.18s ease;
+    }
+    .lg-soon-game:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 16px 34px rgba(98,116,242,0.36); }
+    .lg-soon-game:active { transform: scale(0.98); }
+    .lg-soon-alt {
+      display: inline-block; margin-top: 14px;
+      font-size: 0.82rem; font-weight: 600; color: var(--tt-ink-soft, #5b6172);
+      text-decoration: none; border-bottom: 1px solid var(--tt-line, #e6e9f3);
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .lg-soon-alt:hover { color: var(--tt-accent-dk, #4d5fe8); border-color: var(--tt-accent, #6274f2); }
+    @media (prefers-reduced-motion: reduce) { .lg-soon-badge::before { animation: none; } }
+
+    [hidden] { display: none !important; }
+
+    .lg-card {
+      position: relative;
+      z-index: 1;
+      width: min(452px, 100%);
+      background: var(--tt-paper, #fff);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 24px;
+      padding: 38px 36px 32px;
+      box-shadow: var(--tt-shadow, 0 14px 44px rgba(46,52,64,0.09));
+    }
+    .lg-head { text-align: center; margin-bottom: 26px; }
+    .lg-head h1 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--tt-ink, #2e3440);
+      margin: 0 0 8px;
+    }
+    .lg-head p {
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: var(--tt-ink-soft, #5c6472);
+      margin: 0;
+    }
+
+    /* ---- alerts ---- */
+    .lg-alert {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #fff5f5;
+      border: 1px solid #f6d4d4;
+      color: #9b3b3b;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .lg-alert svg { flex-shrink: 0; margin-top: 2px; }
+    .lg-alert-ok { background: #eefaf3; border-color: #c8ecd9; color: #1f7a4d; }
+
+    /* ---- provider buttons ---- */
+    .lg-providers { display: grid; gap: 10px; }
+
+    .lg-oauth {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 0.97rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      border-radius: 13px;
+      padding: 14px 20px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s ease, background 0.18s ease;
+    }
+    .lg-oauth img, .lg-oauth svg { flex-shrink: 0; }
+
+    /* Whop is the account that carries subscriptions, so it is the loud one:
+       Whop's own orange, black type, and the Whop mark. Black on this orange
+       clears 6:1, so the contrast holds up as well as white would. */
+    .lg-whop {
+      color: #16181d;
+      background: #fa4516;
+      box-shadow: 0 4px 16px rgba(250,69,22,0.38);
+    }
+    .lg-whop:hover {
+      background: #e63c0e;
+      color: #16181d;
+      transform: translateY(-2px);
+      box-shadow: 0 9px 26px rgba(250,69,22,0.46);
+    }
+    .lg-whop img { width: 19px; height: 19px; }
+
+    .lg-google {
+      color: var(--tt-ink, #2e3440);
+      background: #fff;
+      border-color: var(--tt-line, #e6e9f3);
+    }
+    .lg-google:hover {
+      background: var(--tt-paper-alt, #f5f7fc);
+      color: var(--tt-ink, #2e3440);
+      transform: translateY(-2px);
+      box-shadow: var(--tt-shadow-sm, 0 6px 22px rgba(46,52,64,0.07));
+    }
+
+    .lg-discord {
+      color: #fff;
+      background: #5865f2;
+      box-shadow: 0 4px 16px rgba(88,101,242,0.32);
+    }
+    .lg-discord:hover {
+      background: #4b57e0;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 9px 26px rgba(88,101,242,0.42);
+    }
+
+    .lg-whop-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--tt-ink-faint, #8a91a3);
+      margin: 10px 2px 0;
+    }
+    .lg-whop-note svg { flex-shrink: 0; margin-top: 1px; color: #fa4516; }
+
+    /* ---- divider ---- */
+    .lg-or {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 22px 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--tt-ink-faint, #8a91a3);
+    }
+    .lg-or::before, .lg-or::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--tt-line, #e6e9f3);
+    }
+
+    /* ---- form ---- */
+    .lg-field { margin-bottom: 14px; }
+    .lg-field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--tt-ink-faint, #8a91a3);
+      margin-bottom: 6px;
+    }
+    .lg-input {
+      width: 100%;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 0.96rem;
+      color: var(--tt-ink, #2e3440);
+      background: var(--tt-paper-alt, #f5f7fc);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 12px;
+      padding: 13px 14px;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .lg-input:focus {
+      outline: none;
+      background: #fff;
+      border-color: var(--tt-accent, #6274f2);
+    }
+    .lg-pw-wrap { position: relative; }
+    .lg-pw-wrap .lg-input { padding-right: 74px; }
+    .lg-peek {
+      position: absolute;
+      right: 8px; top: 50%;
+      transform: translateY(-50%);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--tt-ink-faint, #8a91a3);
+      background: none;
+      border: none;
+      padding: 6px 8px;
+      cursor: pointer;
+      border-radius: 7px;
+    }
+    .lg-peek:hover { color: var(--tt-accent, #6274f2); background: var(--tt-accent-lt, #eef0fe); }
+
+    /* ---- random name die ---- */
+    .lg-dice {
+      position: absolute;
+      right: 7px; top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      place-items: center;
+      width: 32px; height: 32px;
+      color: var(--tt-ink-faint, #8a91a3);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: color 0.18s ease, background 0.18s ease;
+    }
+    .lg-dice:hover { color: var(--tt-accent, #6274f2); background: var(--tt-accent-lt, #eef0fe); }
+    .lg-dice svg { transition: transform 0.45s cubic-bezier(0.16,1,0.3,1); }
+    .lg-dice.rolling svg { transform: rotate(180deg); }
+    .lg-name-wrap .lg-input { padding-right: 44px; }
+
+    /* ---- password strength ---- */
+    /* Four segments rather than a percentage: a bar that creeps invites
+       people to game it, four steps just say where they stand. */
+    .lg-meter { display: flex; align-items: center; gap: 10px; margin-top: 9px; }
+    .lg-meter-bars { display: flex; gap: 4px; flex: 1; min-width: 0; }
+    .lg-meter-bars i {
+      height: 4px;
+      flex: 1;
+      border-radius: 2px;
+      background: var(--tt-line, #e6e9f3);
+      transition: background 0.25s ease;
+    }
+    .lg-meter-label {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--tt-ink-faint, #8a91a3);
+      white-space: nowrap;
+    }
+    .lg-meter[data-level="1"] .lg-meter-bars i:nth-child(-n+1) { background: #e05263; }
+    .lg-meter[data-level="2"] .lg-meter-bars i:nth-child(-n+2) { background: #f4a41d; }
+    .lg-meter[data-level="3"] .lg-meter-bars i:nth-child(-n+3) { background: #6274f2; }
+    .lg-meter[data-level="4"] .lg-meter-bars i                 { background: #22b573; }
+    .lg-meter[data-level="1"] .lg-meter-label { color: #c2394a; }
+    .lg-meter[data-level="2"] .lg-meter-label { color: #9a6b12; }
+    .lg-meter[data-level="3"] .lg-meter-label { color: var(--tt-accent-dk, #4d5fe8); }
+    .lg-meter[data-level="4"] .lg-meter-label { color: #1f7a4d; }
+
+    .lg-hint { font-size: 0.79rem; margin: 6px 0 0; color: var(--tt-ink-faint, #8a91a3); }
+    .lg-hint-bad { color: #9b3b3b; }
+
+    .lg-submit {
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-family: inherit;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--tt-accent, #6274f2);
+      border: none;
+      border-radius: 13px;
+      padding: 14px 22px;
+      margin-top: 6px;
+      cursor: pointer;
+      box-shadow: 0 3px 14px rgba(98,116,242,0.32);
+      transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .lg-submit:hover:not([disabled]) {
+      background: var(--tt-accent-dk, #4d5fe8);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(98,116,242,0.42);
+    }
+    .lg-submit[disabled] { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .lg-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      font-size: 0.87rem;
+      color: var(--tt-ink-soft, #5c6472);
+    }
+    .lg-link {
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 600;
+      color: var(--tt-accent, #6274f2);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .lg-link:hover { color: var(--tt-accent-dk, #4d5fe8); text-decoration: underline; text-underline-offset: 3px; }
+
+    .lg-legal {
+      font-size: 0.76rem;
+      line-height: 1.6;
+      color: var(--tt-ink-faint, #8a91a3);
+      text-align: center;
+      margin: 24px 0 0;
+    }
+    .lg-legal a { color: var(--tt-ink-faint, #8a91a3); text-decoration: underline; text-underline-offset: 2px; }
+    .lg-legal a:hover { color: var(--tt-accent, #6274f2); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lg-orb { animation: none; }
+      .lg-oauth:hover, .lg-submit:hover:not([disabled]) { transform: none; }
+    }
+
+    @media (max-width: 520px) {
+      .lg-card { padding: 30px 22px 26px; border-radius: 20px; }
+      .lg-head h1 { font-size: 1.34rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="theme-light.css?v=2" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Kenpachi Trades Logo" class="logo-img" />
+        Kenpachi Trades
+      </a>
+      <nav class="nav-links">
+        <a href="prop-firms.html">Save On Prop Firms</a>
+        <a href="indicators.html">QT Indicators</a>
+        <a href="qt-education.html">QT Education</a>
+        <a href="premium.html" class="nav-cta">Premium Access</a>
+      </nav>
+      <button class="burger" id="burger">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="prop-firms.html">Save On Prop Firms</a>
+      <a href="indicators.html">QT Indicators</a>
+      <a href="qt-education.html">QT Education</a>
+      <a href="premium.html">Premium Access</a>
+    </div>
+  </header>
+
+  <main class="lg-main">
+    <div class="lg-orb lg-orb-a"></div>
+    <div class="lg-orb lg-orb-b"></div>
+
+    <div class="lg-card lg-soon">
+
+      <div class="lg-head">
+        <h1 id="lgTitle">Log in will be available soon</h1>
+        <p id="lgSub">Accounts are still being built.</p>
+      </div>
+
+      <div class="lg-soon-block">
+        <span class="lg-soon-badge">Coming soon</span>
+        <p>Sign-in isn’t open yet — subscriptions, badges and profiles land with it. While you wait, pick a card: some of them hide a discount code.</p>
+        <button class="lg-soon-game" type="button" id="lgSoonGame">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 21V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          Win a discount
+        </button>
+        <a class="lg-soon-alt" href="indicators.html#pricing">See the indicator plans</a>
+      </div>
+
+      <div class="lg-alert" id="lgAlert" hidden>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16.5v.01"/></svg>
+        <span id="lgAlertText"></span>
+      </div>
+
+      <!-- ===== provider buttons ===== -->
+      <div id="lgProviderBlock">
+        <div class="lg-providers" id="lgProviders"></div>
+
+        <p class="lg-whop-note" id="lgWhopNote" hidden>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Whop is where your subscriptions live. Sign in with it and everything you own shows up straight away.</span>
+        </p>
+
+        <div class="lg-or">or</div>
+      </div>
+
+      <!-- ===== email + password ===== -->
+      <form id="lgForm" novalidate>
+        <div class="lg-field" id="lgNameField" hidden>
+          <label for="lgName">Name <span style="text-transform:none;letter-spacing:0;font-weight:500;">(you can change it later)</span></label>
+          <div class="lg-pw-wrap lg-name-wrap">
+            <input class="lg-input" id="lgName" type="text" maxlength="32" autocomplete="name" placeholder="How we should call you" />
+            <button class="lg-dice" type="button" id="lgDice" aria-label="Give me a random name" title="Random name">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="4"/>
+                <circle cx="8.5" cy="8.5" r="1.15" fill="currentColor" stroke="none"/>
+                <circle cx="15.5" cy="8.5" r="1.15" fill="currentColor" stroke="none"/>
+                <circle cx="12" cy="12" r="1.15" fill="currentColor" stroke="none"/>
+                <circle cx="8.5" cy="15.5" r="1.15" fill="currentColor" stroke="none"/>
+                <circle cx="15.5" cy="15.5" r="1.15" fill="currentColor" stroke="none"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="lg-field">
+          <label for="lgEmail">Email</label>
+          <input class="lg-input" id="lgEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="lg-field" id="lgPasswordField">
+          <label for="lgPassword">Password</label>
+          <div class="lg-pw-wrap">
+            <input class="lg-input" id="lgPassword" type="password" autocomplete="current-password" placeholder="At least 8 characters" />
+            <button class="lg-peek" type="button" id="lgPeek" aria-label="Show password">Show</button>
+          </div>
+          <div class="lg-meter" id="lgMeter" data-level="0" hidden>
+            <span class="lg-meter-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="lg-meter-label" id="lgMeterLabel">At least 8 characters</span>
+          </div>
+          <p class="lg-hint" id="lgHint"></p>
+        </div>
+
+        <button class="lg-submit" type="submit" id="lgSubmit">Sign in</button>
+      </form>
+
+      <div class="lg-row">
+        <button class="lg-link" type="button" id="lgForgot">Forgot password?</button>
+        <span>
+          <span id="lgSwapLead">New here?</span>
+          <button class="lg-link" type="button" id="lgSwap">Create an account</button>
+        </span>
+      </div>
+
+      <p class="lg-legal">
+        By continuing you agree to our <a href="privacy.html">Privacy Policy</a>.
+        Trading involves significant risk of loss.
+      </p>
+
+    </div>
+  </main>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  </script>
+
+  <script src="discount-game.js?v=1"></script>
+  <script>
+    document.getElementById('lgSoonGame').addEventListener('click', function () {
+      if (window.ktDiscountGame) window.ktDiscountGame.open();
+    });
+  </script>
+
+  <script>
+  (function () {
+    const el = (id) => document.getElementById(id);
+    const params = new URLSearchParams(location.search);
+
+    // Where to land after a successful sign-in. Same-origin paths only.
+    const raw = params.get('return_to');
+    const returnTo = raw && raw.startsWith('/') && !raw.startsWith('//') ? raw : '/profile.html';
+
+    /* ---------- alerts ---------- */
+
+    const ERRORS = {
+      expired: 'That sign-in link timed out. Please try again.',
+      bad_state: 'Sign-in could not be verified. Please try again.',
+      token_exchange: "That provider wouldn't complete the sign-in. Please try again in a moment.",
+      userinfo: "Couldn't read your profile from that provider. Please try again.",
+      provider_off: 'That sign-in method is not switched on yet.',
+      not_signed_in: 'Please sign in before connecting another account.',
+      already_linked: 'That account is already connected to a different profile.',
+      access_denied: 'Sign-in was cancelled.',
+      verify_expired: 'That confirmation link has expired. Sign in and send a new one.',
+    };
+
+    function alertUser(text, ok) {
+      const box = el('lgAlert');
+      el('lgAlertText').textContent = text;
+      box.classList.toggle('lg-alert-ok', !!ok);
+      box.hidden = false;
+    }
+
+    const clearAlert = () => { el('lgAlert').hidden = true; };
+
+    const err = params.get('error');
+    if (err) {
+      alertUser(ERRORS[err] || 'Something went wrong signing you in. Please try again.');
+      history.replaceState({}, '', location.pathname);
+    }
+
+    /* ---------- provider buttons ---------- */
+
+    const GOOGLE_G = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">'
+      + '<path fill="#4285F4" d="M23.06 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h6.19c-.27 1.44-1.08 2.66-2.3 3.48v2.89h3.72c2.18-2 3.45-4.96 3.45-8.38z"/>'
+      + '<path fill="#34A853" d="M12 24c3.11 0 5.72-1.03 7.63-2.79l-3.72-2.89c-1.03.69-2.35 1.1-3.91 1.1-3 0-5.55-2.03-6.46-4.76H1.69v2.98C3.59 21.42 7.5 24 12 24z"/>'
+      + '<path fill="#FBBC05" d="M5.54 14.66A7.2 7.2 0 0 1 5.16 12c0-.92.16-1.82.38-2.66V6.36H1.69A12 12 0 0 0 .4 12c0 1.94.46 3.77 1.29 5.64l3.85-2.98z"/>'
+      + '<path fill="#EA4335" d="M12 4.75c1.69 0 3.21.58 4.4 1.72l3.3-3.3C17.71 1.19 15.1 0 12 0 7.5 0 3.59 2.58 1.69 6.36l3.85 2.98C6.45 6.61 9 4.75 12 4.75z"/></svg>';
+
+    const DISCORD_MARK = '<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>';
+
+    const STYLE = {
+      whop:    { cls: 'lg-whop',    label: 'Continue with Whop',    icon: '<img src="images/brand/whop-mark.png" alt="" width="19" height="19">' },
+      google:  { cls: 'lg-google',  label: 'Continue with Google',  icon: GOOGLE_G },
+      discord: { cls: 'lg-discord', label: 'Continue with Discord', icon: DISCORD_MARK },
+    };
+
+    // Whop first — it is the account that actually carries subscriptions.
+    const ORDER = ['whop', 'google', 'discord'];
+
+    function renderProviders(list) {
+      const wrap = el('lgProviders');
+      const ids = list.map((p) => p.id).filter((id) => STYLE[id]);
+      ids.sort((a, b) => ORDER.indexOf(a) - ORDER.indexOf(b));
+
+      if (!ids.length) {
+        // Nothing configured yet: hide the whole block rather than show an
+        // empty gap above a divider that separates nothing.
+        el('lgProviderBlock').hidden = true;
+        return;
+      }
+
+      ids.forEach((id) => {
+        const style = STYLE[id];
+        const a = document.createElement('a');
+        a.className = 'lg-oauth ' + style.cls;
+        a.href = '/api/login/' + id + '?return_to=' + encodeURIComponent(returnTo);
+        a.innerHTML = style.icon + '<span>' + style.label + '</span>';
+        wrap.append(a);
+      });
+
+      el('lgWhopNote').hidden = !ids.includes('whop');
+      // applyMode() ran before this response arrived and hid an empty block,
+      // so it has to be re-shown here now that there is something in it.
+      el('lgProviderBlock').hidden = mode === 'reset';
+    }
+
+    let mailOn = false;
+
+    fetch('/api/auth/providers')
+      .then((r) => (r.ok ? r.json() : { providers: [] }))
+      .then((data) => {
+        mailOn = !!data.mail;
+        renderProviders(data.providers || []);
+      })
+      .catch(() => { el('lgProviderBlock').hidden = true; });
+
+    /* ---------- random name ---------- */
+
+    /* Combinatorial rather than a fixed list: four shapes over these pools
+       give tens of thousands of names, so two people signing up minutes
+       apart are very unlikely to be handed the same one. */
+    const ADJ = ['Quarterly', 'Sequential', 'Bullish', 'Bearish', 'Sleepy', 'Feral',
+      'Caffeinated', 'Midnight', 'Diamond', 'Paper', 'Turbo', 'Silent', 'Lucky',
+      'Reckless', 'Zen', 'Nocturnal', 'Greedy', 'Patient', 'Rogue', 'Cosmic',
+      'Hyper', 'Humble', 'Unhinged', 'Liquid', 'Grumpy', 'Fearless', 'Sneaky',
+      'Undefeated', 'Overleveraged', 'Perpetual'];
+
+    const CREATURE = ['Hamster', 'Wizard', 'Goblin', 'Samurai', 'Whale', 'Shrimp',
+      'Gremlin', 'Sensei', 'Raccoon', 'Falcon', 'Bandit', 'Monk', 'Viking', 'Otter',
+      'Panda', 'Ninja', 'Wolf', 'Cactus', 'Pigeon', 'Sloth', 'Yeti', 'Phantom',
+      'Kraken', 'Badger', 'Tiger', 'Hedgehog', 'Mantis', 'Comet', 'Capybara', 'Moth'];
+
+    const QT = ['Sequence', 'Sweep', 'Divergence', 'Candle', 'Quarter', 'Session',
+      'TrueOpen', 'Gap', 'OrderBlock', 'Setup', 'Liquidity', 'Wick', 'Range',
+      'Expansion', 'Retrace', 'Accumulation', 'Consolidation', 'Manipulation'];
+
+    const TITLE = ['God', 'Lord', 'King', 'Enjoyer', 'Andy', 'Chad', 'Merchant',
+      'Believer', 'Respecter', 'Master', 'Sensei', 'Slayer', 'Whisperer', 'Hunter',
+      'Prophet', 'Diff', 'Haver', 'Truther', 'Apprentice', 'Bandit'];
+
+    const pick = (list) => list[Math.floor(Math.random() * list.length)];
+
+    function tag() {
+      const roll = Math.random();
+      if (roll < 0.38) return '';                                    // no number at all
+      if (roll < 0.66) return String(1 + Math.floor(Math.random() * 9));
+      if (roll < 0.88) {                                             // 333, 77, 888 …
+        const d = 1 + Math.floor(Math.random() * 9);
+        return String(d).repeat(2 + Math.floor(Math.random() * 2));
+      }
+      return pick(['2026', '007', '100', '360', '1000']);
+    }
+
+    const SHAPES = [
+      () => pick(ADJ) + pick(CREATURE),
+      () => pick(QT) + pick(TITLE),
+      () => pick(ADJ) + pick(QT),
+      () => pick(QT) + pick(CREATURE),
+      () => pick(CREATURE) + pick(TITLE),
+    ];
+
+    let lastName = '';
+
+    function randomName() {
+      // maxlength on the input is 32, so anything longer is retried rather
+      // than silently truncated into a half-word
+      for (let i = 0; i < 12; i++) {
+        const candidate = pick(SHAPES)() + tag();
+        if (candidate.length <= 32 && candidate !== lastName) {
+          lastName = candidate;
+          return candidate;
+        }
+      }
+      return 'QuarterlyTrader' + tag();
+    }
+
+    el('lgDice').addEventListener('click', () => {
+      const btn = el('lgDice');
+      el('lgName').value = randomName();
+      // re-trigger the roll even on rapid clicks
+      btn.classList.remove('rolling');
+      void btn.offsetWidth;
+      btn.classList.add('rolling');
+      setTimeout(() => btn.classList.remove('rolling'), 460);
+    });
+
+    /* ---------- password strength ---------- */
+
+    const LEVELS = ['Too short', 'Weak', 'Fair', 'Good', 'Strong'];
+
+    /* Printable ASCII only, matching the server. A password typed in another
+       keyboard layout is one you cannot retype on a phone or a borrowed
+       machine, and it locks you out of your own account with a password you
+       are certain is right. Anything outside that range simply never lands in
+       the field — no warning to read, nothing to correct. */
+    const NON_ASCII = /[^\x20-\x7E]/;
+    const NON_ASCII_ALL = /[^\x20-\x7E]/g;
+
+    /* Runs on `input`, so it catches typing, pasting, autofill and an IME
+       alike. The caret is put back where the surviving text left it, rather
+       than jumping to the end. */
+    function keepAscii(field) {
+      const before = field.value;
+      if (!NON_ASCII.test(before)) return;
+
+      let caret = before.length;
+      try { caret = field.selectionStart; } catch (e) { /* older browsers */ }
+      const dropped = (before.slice(0, caret).match(NON_ASCII_ALL) || []).length;
+
+      field.value = before.replace(NON_ASCII_ALL, '');
+      try {
+        const pos = caret - dropped;
+        field.setSelectionRange(pos, pos);
+      } catch (e) { /* password fields without selection support */ }
+    }
+
+    /* Length carries most of the weight, because it is what actually costs an
+       attacker time. Character variety adds a little on top, and the obvious
+       patterns are capped no matter how long they are. */
+    function strength(value) {
+      if (value.length < 8) return 0;
+
+      let score = 1;
+      if (value.length >= 12) score++;
+      if (value.length >= 16) score++;
+
+      const classes = [/[a-z]/, /[A-Z]/, /[0-9]/, /[^A-Za-z0-9]/]
+        .filter((re) => re.test(value)).length;
+      if (classes >= 3) score++;
+
+      // a single repeated character, a straight run, or a keyboard row
+      const weak = /^(.)\1+$/.test(value)
+        || /^(?:012345|123456|234567|345678|456789|abcdef|qwerty|asdfgh)/i.test(value)
+        || /^(?:password|passw0rd|trading|kenpachi|whopwhop)/i.test(value);
+      if (weak) return 1;
+
+      return Math.min(score, 4);
+    }
+
+    function paintStrength() {
+      const value = el('lgPassword').value;
+      const meter = el('lgMeter');
+
+      if (!value) {
+        meter.dataset.level = '0';
+        el('lgMeterLabel').textContent = 'At least 8 characters';
+        return;
+      }
+      const level = strength(value);
+      meter.dataset.level = String(level);
+      el('lgMeterLabel').textContent = level === 0
+        ? 'Too short — 8 characters minimum'
+        : LEVELS[level];
+    }
+
+    el('lgPassword').addEventListener('input', () => {
+      keepAscii(el('lgPassword'));
+      if (!el('lgMeter').hidden) paintStrength();
+    });
+
+    /* ---------- modes ---------- */
+
+    const COPY = {
+      signin: {
+        title: 'Welcome back',
+        sub: 'Sign in to see your subscriptions, badges and profile.',
+        submit: 'Sign in',
+        swapLead: 'New here?',
+        swap: 'Create an account',
+      },
+      signup: {
+        title: 'Create your account',
+        sub: 'Set up a profile now, and connect Whop whenever you like.',
+        submit: 'Create account',
+        swapLead: 'Already have one?',
+        swap: 'Sign in',
+      },
+      forgot: {
+        title: 'Reset your password',
+        sub: "Enter your email and we'll send you a link to choose a new one.",
+        submit: 'Send reset link',
+        swapLead: 'Remembered it?',
+        swap: 'Back to sign in',
+      },
+      reset: {
+        title: 'Choose a new password',
+        sub: 'Pick something you have not used elsewhere.',
+        submit: 'Save new password',
+        swapLead: '',
+        swap: 'Back to sign in',
+      },
+    };
+
+    let mode = params.get('reset') ? 'reset' : 'signin';
+    const resetToken = params.get('reset');
+    if (resetToken) history.replaceState({}, '', location.pathname);
+
+    function applyMode() {
+      const copy = COPY[mode];
+      // .lg-soon keeps its own heading — with login disabled, mode copy like
+      // "Welcome back" would contradict the coming-soon panel above it
+      if (!document.querySelector('.lg-card.lg-soon')) {
+        el('lgTitle').textContent = copy.title;
+        el('lgSub').textContent = copy.sub;
+      }
+      el('lgSubmit').textContent = copy.submit;
+      el('lgSwapLead').textContent = copy.swapLead;
+      el('lgSwap').textContent = copy.swap;
+
+      el('lgNameField').hidden = mode !== 'signup';
+      el('lgPasswordField').hidden = mode === 'forgot';
+      el('lgEmail').closest('.lg-field').hidden = mode === 'reset';
+      el('lgForgot').hidden = mode !== 'signin';
+      // The provider buttons make no sense while resetting a password
+      el('lgProviderBlock').hidden = mode === 'reset' || !el('lgProviders').children.length;
+
+      el('lgPassword').autocomplete = mode === 'signin' ? 'current-password' : 'new-password';
+      // The meter is for a password being chosen, not one being recalled.
+      el('lgMeter').hidden = !(mode === 'signup' || mode === 'reset');
+      if (!el('lgMeter').hidden) paintStrength();
+      el('lgHint').textContent = '';
+      el('lgHint').className = 'lg-hint';
+      clearAlert();
+    }
+
+    el('lgSwap').addEventListener('click', () => {
+      mode = mode === 'signin' ? 'signup' : 'signin';
+      applyMode();
+    });
+
+    el('lgForgot').addEventListener('click', () => {
+      if (!mailOn) {
+        alertUser("Password reset isn't switched on yet. Sign in with Whop or Google, or ask us to reset it for you.");
+        return;
+      }
+      mode = 'forgot';
+      applyMode();
+    });
+
+    el('lgPeek').addEventListener('click', () => {
+      const field = el('lgPassword');
+      const showing = field.type === 'text';
+      field.type = showing ? 'password' : 'text';
+      el('lgPeek').textContent = showing ? 'Show' : 'Hide';
+    });
+
+    applyMode();
+
+    /* ---------- submit ---------- */
+
+    function setHint(text, bad) {
+      const node = el('lgHint');
+      node.textContent = text;
+      node.className = 'lg-hint' + (bad ? ' lg-hint-bad' : '');
+    }
+
+    async function post(action, body) {
+      const res = await fetch('/api/auth/' + action, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message || 'Something went wrong. Please try again.');
+      return data;
+    }
+
+    el('lgForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearAlert();
+
+      const btn = el('lgSubmit');
+      const email = el('lgEmail').value.trim();
+      const password = el('lgPassword').value;
+
+      btn.disabled = true;
+      const label = btn.textContent;
+      btn.textContent = 'Working…';
+
+      try {
+        if (mode === 'signin') {
+          await post('signin', { email, password });
+          location.assign(returnTo);
+          return;
+        }
+
+        if (mode === 'signup') {
+          const data = await post('signup', { email, password, name: el('lgName').value });
+          // A brand new account goes straight to the profile; the verification
+          // email, if one was sent, is picked up whenever they open it.
+          location.assign(returnTo + (data.verificationSent ? '?welcome=verify' : '?welcome=1'));
+          return;
+        }
+
+        if (mode === 'forgot') {
+          await post('forgot', { email });
+          alertUser('If that address has an account, a reset link is on its way.', true);
+          return;
+        }
+
+        if (mode === 'reset') {
+          await post('reset', { token: resetToken, password });
+          location.assign('/profile.html?reset=done');
+          return;
+        }
+      } catch (e2) {
+        // Password problems belong next to the field; everything else is a
+        // banner, because it is usually about the account, not the input.
+        if (/password/i.test(e2.message) && mode !== 'signin') setHint(e2.message, true);
+        else alertUser(e2.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+
+    /* If they are already signed in, there is nothing to do here. */
+    fetch('/api/me?basic=1', { credentials: 'same-origin' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (data && data.authenticated && mode !== 'reset') location.replace(returnTo);
+      })
+      .catch(() => { /* offline — the form still works */ });
+  })();
+  </script>
+
+  <script src="site.js"></script>
+</body>
+</html>

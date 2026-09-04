@@ -1207,6 +1207,20 @@
       .pc-unit b { font-size: 1.25rem; }
       .pc-sep { font-size: 1.15rem; }
     }
+    .promo-deadline {
+      margin: 0;
+      text-align: center;
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--tt-ink-faint);
+    }
+    .promo-deadline strong { color: var(--tt-ink); font-weight: 700; }
+    /* once the deal is over the numbers stop shouting */
+    .promo-countdown.is-over .promo-countdown-label { color: var(--tt-ink-faint); }
+    .promo-countdown.is-over .promo-dot { animation: none; background: var(--tt-ink-faint); }
+    .promo-countdown.is-over .promo-countdown-units { opacity: 0.45; }
+
     .promo-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
@@ -1315,10 +1329,6 @@
         <a href="qt-education.html">QT Education</a>
         <a href="premium.html" class="nav-cta">Premium Access</a>
       </nav>
-      <a href="https://whop.com/soul-society-division" target="_blank" class="nav-join">
-        <img src="images/com.avif" alt="" style="width:20px;height:20px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-        Join Community Free
-      </a>
       <button class="burger" id="burger">&#9776;</button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
@@ -1564,13 +1574,14 @@
                 <button class="promo-copy" onclick="navigator.clipboard.writeText('PILL40');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
               </div>
               <div class="promo-countdown" id="promoCountdown">
-                <div class="promo-countdown-label"><span class="promo-dot"></span> Your code expires in</div>
+                <div class="promo-countdown-label"><span class="promo-dot"></span> <span id="pcLabel">09.09 is the last day</span></div>
                 <div class="promo-countdown-units">
                   <span class="pc-unit"><b id="pcD">7</b><i>days</i></span><span class="pc-sep">:</span>
                   <span class="pc-unit"><b id="pcH">00</b><i>hours</i></span><span class="pc-sep">:</span>
                   <span class="pc-unit"><b id="pcM">00</b><i>min</i></span><span class="pc-sep">:</span>
                   <span class="pc-unit"><b id="pcS">00</b><i>sec</i></span>
                 </div>
+                <p class="promo-deadline">Offer ends <strong>September 9</strong> at 23:59 UTC</p>
               </div>
             </div>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
@@ -1888,28 +1899,33 @@
     }, { threshold: 0.07 });
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
 
-    // Personal 7-day promo countdown: starts on first visit, stored per browser
+    // PILL40 deal countdown: one fixed global deadline for everyone.
+    // Sept 9, 2026 is the last day, so the offer runs out at the end of that day (UTC).
     (function () {
-      if (!document.getElementById('promoCountdown')) return;
+      const box = document.getElementById('promoCountdown');
+      if (!box) return;
       const uD = document.getElementById('pcD'), uH = document.getElementById('pcH'),
             uM = document.getElementById('pcM'), uS = document.getElementById('pcS');
-      const KEY = 'kt_pill40_deadline';
-      const WEEK = 7 * 24 * 60 * 60 * 1000;
-      let end = 0;
-      try { end = parseInt(localStorage.getItem(KEY), 10) || 0; } catch (e) {}
-      const save = v => { try { localStorage.setItem(KEY, v); } catch (e) {} };
-      if (!end || end - Date.now() > WEEK) { end = Date.now() + WEEK; save(end); }
+      const label = document.getElementById('pcLabel');
+      const END = Date.UTC(2026, 8, 9, 23, 59, 59); // 2026-09-09 23:59:59 UTC
       const pad = n => String(n).padStart(2, '0');
+      let timer = null;
       function tick() {
-        let left = end - Date.now();
-        if (left <= 0) { end = Date.now() + WEEK; save(end); left = WEEK; }
+        const left = END - Date.now();
+        if (left <= 0) {
+          uD.textContent = '0'; uH.textContent = '00'; uM.textContent = '00'; uS.textContent = '00';
+          box.classList.add('is-over');
+          if (label) label.textContent = 'This deal has ended';
+          clearInterval(timer);
+          return;
+        }
         uD.textContent = Math.floor(left / 86400000);
         uH.textContent = pad(Math.floor(left % 86400000 / 3600000));
         uM.textContent = pad(Math.floor(left % 3600000 / 60000));
         uS.textContent = pad(Math.floor(left % 60000 / 1000));
       }
       tick();
-      setInterval(tick, 1000);
+      timer = setInterval(tick, 1000);
     })();
 
     // Feature carousel
@@ -2130,5 +2146,6 @@
     })();
 
   </script>
+  <script src="account.js?v=8"></script>
 </body>
 </html>

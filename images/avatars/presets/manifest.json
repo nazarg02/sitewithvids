@@ -1,0 +1,17 @@
+{
+  "_readme": "Built-in avatars, generated as flat SVG on the site palette. Edit the .svg files directly if you want to tweak one; keep the ids stable, they are what gets saved on a profile.",
+  "avatars": [
+    { "id": "p01", "src": "images/avatars/presets/p01.svg", "label": "Candle" },
+    { "id": "p02", "src": "images/avatars/presets/p02.svg", "label": "Quarters" },
+    { "id": "p03", "src": "images/avatars/presets/p03.svg", "label": "Expansion Up" },
+    { "id": "p04", "src": "images/avatars/presets/p04.svg", "label": "Expansion Down" },
+    { "id": "p05", "src": "images/avatars/presets/p05.svg", "label": "Liquidity Sweep" },
+    { "id": "p06", "src": "images/avatars/presets/p06.svg", "label": "Fair Value Gap" },
+    { "id": "p07", "src": "images/avatars/presets/p07.svg", "label": "Order Block" },
+    { "id": "p08", "src": "images/avatars/presets/p08.svg", "label": "Range" },
+    { "id": "p09", "src": "images/avatars/presets/p09.svg", "label": "SMT" },
+    { "id": "p10", "src": "images/avatars/presets/p10.svg", "label": "True Open" },
+    { "id": "p11", "src": "images/avatars/presets/p11.svg", "label": "Sessions" },
+    { "id": "p12", "src": "images/avatars/presets/p12.svg", "label": "Blade" }
+  ]
+}

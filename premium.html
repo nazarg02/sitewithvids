@@ -294,6 +294,106 @@
     .pr-feat-card p {
       font-size: 0.86rem; color: var(--tt-ink-soft); line-height: 1.6; margin: 0;
     }
+    @keyframes blink-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.1; }
+    }
+
+    /* ── Quarter Sequence Guide spotlight ── */
+    .pr-guide {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      align-items: center;
+      gap: 42px;
+      background: var(--tt-paper);
+      border: 1px solid var(--tt-line);
+      border-radius: 20px;
+      padding: 34px 38px;
+      margin-bottom: 22px;
+      box-shadow: var(--tt-shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.22, 0.68, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .pr-guide::after {
+      content: '';
+      position: absolute;
+      top: -120px; right: -90px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(98,116,242,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      animation: guide-float 9s ease-in-out infinite;
+    }
+    @keyframes guide-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(-18px, 16px) scale(1.08); }
+    }
+    .pr-guide:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 26px 60px rgba(98,116,242,0.16);
+      border-color: #c9d1f5;
+    }
+    .pr-guide-copy { position: relative; z-index: 1; }
+    .pr-guide-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--tt-accent-lt);
+      color: var(--tt-accent-dk);
+      font-size: 0.64rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 12px; border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .pr-guide-badge::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--tt-accent);
+      animation: blink-dot 1.4s ease-in-out infinite;
+    }
+    .pr-guide-copy h3 {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em;
+      color: var(--tt-ink); margin: 0 0 10px;
+    }
+    .pr-guide-copy > p {
+      font-size: 0.9rem; color: var(--tt-ink-soft); line-height: 1.65; margin: 0 0 16px;
+    }
+    .pr-guide-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pr-guide-chips span {
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--tt-ink-soft);
+      background: var(--tt-paper-alt);
+      border: 1px solid var(--tt-line-soft);
+      padding: 5px 11px; border-radius: 999px;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+    .pr-guide-chips span:hover {
+      background: var(--tt-accent-lt);
+      border-color: #c9d1f5;
+      color: var(--tt-accent-dk);
+      transform: translateY(-2px);
+    }
+    .pr-guide-shot {
+      position: relative; z-index: 1;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--tt-line);
+      box-shadow: 0 16px 40px rgba(17,20,34,0.10);
+      transition: transform 0.4s cubic-bezier(0.22, 0.68, 0.36, 1), box-shadow 0.4s ease;
+    }
+    .pr-guide-shot img { display: block; width: 100%; height: auto; }
+    .pr-guide:hover .pr-guide-shot {
+      transform: translateY(-4px) scale(1.015);
+      box-shadow: 0 24px 54px rgba(98,116,242,0.22);
+    }
+    @media (max-width: 860px) {
+      .pr-guide { grid-template-columns: 1fr; gap: 22px; padding: 24px 20px; }
+      .pr-guide-copy h3 { font-size: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pr-guide::after, .pr-guide-badge::before { animation: none; }
+    }
+
     .pr-feat-cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 40px; }
     .pr-feat-note { text-align: center; font-size: 0.84rem; color: var(--tt-ink-faint); margin: 16px 0 0; }
 
@@ -918,10 +1018,6 @@
         <a href="qt-education.html">QT Education</a>
         <a href="premium.html" class="nav-cta active">Premium Access</a>
       </nav>
-      <a href="https://whop.com/soul-society-division" target="_blank" class="nav-join">
-        <img src="images/com.avif" alt="" style="width:20px;height:20px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-        Join Community Free
-      </a>
       <button class="burger" id="burger">&#9776;</button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
@@ -973,6 +1069,25 @@
       <div class="pr-head reveal">
         <h2>Everything inside <em>Espada</em></h2>
         <p>Learn the models, watch them traded live, and use the same tools.</p>
+      </div>
+
+      <div class="pr-guide reveal">
+        <div class="pr-guide-copy">
+          <span class="pr-guide-badge">New in Espada</span>
+          <h3>Quarter Sequence Guide</h3>
+          <p>The full sequence playbook in one place — how to spot a real sequence, trade the intraday 2 stage SSMT, read HTF bias, and tell a live setup from a near-miss. Written reference plus the setup cheat sheet.</p>
+          <div class="pr-guide-chips">
+            <span>What is a Sequence</span>
+            <span>Intraday 2 Stage SSMT</span>
+            <span>4 Stack</span>
+            <span>HTF Bias</span>
+            <span>When a Sequence Fails</span>
+            <span>Setup Cheat Sheet</span>
+          </div>
+        </div>
+        <div class="pr-guide-shot">
+          <img src="images/quarter-sequence-guide.png" alt="Quarter Sequence Guide — Kenpachi Trades" loading="lazy" decoding="async" />
+        </div>
       </div>
 
       <div class="pr-feat-grid">
@@ -1129,6 +1244,7 @@
               <li class="inactive"><span class="cross">–</span> Live Trading</li>
               <li class="inactive"><span class="cross">–</span> Private Discord</li>
               <li class="inactive"><span class="cross">–</span> Advanced QT Modules</li>
+              <li class="inactive"><span class="cross">–</span> Quarter Sequence Guide</li>
               <li class="inactive"><span class="cross">–</span> Prop Firms Strategies</li>
               <li class="inactive"><span class="cross">–</span> QT Zero-to-Mastery</li>
               <li class="inactive"><span class="cross">–</span> QT Private Models</li>
@@ -1155,6 +1271,7 @@
               <li><span class="check">✓</span> Live Trading</li>
               <li><span class="check">✓</span> Private Discord</li>
               <li><span class="check">✓</span> Advanced QT Modules</li>
+              <li><span class="check">✓</span> Quarter Sequence Guide</li>
               <li><span class="check">✓</span> Prop Firms Strategies</li>
               <li><span class="check">✓</span> QT Zero-to-Mastery</li>
               <li><span class="check">✓</span> QT Private Models</li>
@@ -1191,6 +1308,7 @@
               <li><span class="check">✓</span> Live Trading</li>
               <li><span class="check">✓</span> Private Discord</li>
               <li><span class="check">✓</span> Advanced QT Modules</li>
+              <li><span class="check">✓</span> Quarter Sequence Guide</li>
               <li><span class="check">✓</span> Prop Firms Strategies</li>
               <li><span class="check">✓</span> QT Zero-to-Mastery</li>
               <li><span class="check">✓</span> QT Private Models</li>
@@ -1217,7 +1335,7 @@
         </div>
         <div class="faq-item reveal reveal-delay-1">
           <div class="faq-q">What exactly is included in Premium? <span class="faq-icon">+</span></div>
-          <div class="faq-a">Everything on this page: live trading sessions, the private Espada Discord, Advanced QT Modules, the QT Zero-to-Mastery course, the private models, prop firm strategies and the QT indicator. You also keep everything from the free tier.</div>
+          <div class="faq-a">Everything on this page: live trading sessions, the private Espada Discord, Advanced QT Modules, the QT Zero-to-Mastery course, the private models, the Quarter Sequence Guide, prop firm strategies and the QT indicator. You also keep everything from the free tier.</div>
         </div>
         <div class="faq-item reveal reveal-delay-2">
           <div class="faq-q">Do I get the QT indicator with Premium? <span class="faq-icon">+</span></div>
@@ -1369,5 +1487,6 @@
     });
   </script>
   <script src="site.js"></script>
+  <script src="account.js?v=8"></script>
 </body>
 </html>

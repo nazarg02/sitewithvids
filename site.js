@@ -9,6 +9,9 @@
   });
 
   document.addEventListener('click', function (e) {
+    // someone upstream already handled this click (a modal, a menu) — the
+    // fade-out would navigate anyway and undo their preventDefault
+    if (e.defaultPrevented) return;
     const link = e.target.closest('a');
     if (!link) return;
     const href = link.getAttribute('href');

@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kenpachitrades.com/profile.html" />
+  <meta property="og:title" content="My Account · Kenpachi Trades" />
+  <meta property="og:description" content="Your Kenpachi Trades account — avatar, username, badges, active subscriptions and billing, all in one place." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="My Account · Kenpachi Trades" />
+  <meta name="twitter:description" content="Your Kenpachi Trades account — avatar, username, badges, active subscriptions and billing, all in one place." />
+  <meta name="description" content="Your Kenpachi Trades account — avatar, username, badges, active subscriptions and billing, all in one place." />
+  <link rel="stylesheet" href="syle.css?v=7" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== PROFILE — light ===== */
+
+    .pf-main { padding: calc(var(--nav-h) + 56px) 0 90px; position: relative; overflow: hidden; min-height: 78vh; }
+
+    /* animated background decorations */
+    .pf-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 68% 55% at 50% 0%, rgba(98,116,242,0.09) 0%, transparent 62%);
+      pointer-events: none;
+    }
+    .pf-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      opacity: 0.55;
+      z-index: 0;
+    }
+    .pf-orb-a {
+      width: 340px; height: 340px;
+      background: rgba(98,116,242,0.20);
+      top: -60px; right: -80px;
+      animation: pfFloatA 16s ease-in-out infinite;
+    }
+    .pf-orb-b {
+      width: 260px; height: 260px;
+      background: rgba(244,164,29,0.13);
+      bottom: 40px; left: -70px;
+      animation: pfFloatB 20s ease-in-out infinite;
+    }
+    @keyframes pfFloatA {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(-30px, 34px) scale(1.08); }
+    }
+    @keyframes pfFloatB {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(36px, -28px) scale(1.06); }
+    }
+
+    .pf-wrap { position: relative; z-index: 1; max-width: 940px; margin: 0 auto; padding: 0 24px; }
+
+    /* display:flex/grid below would otherwise beat the [hidden] attribute */
+    [hidden] { display: none !important; }
+
+    /* ---- alerts ---- */
+    .pf-alert {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #fff5f5;
+      border: 1px solid #f6d4d4;
+      color: #9b3b3b;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 0.92rem;
+      margin-bottom: 26px;
+    }
+    .pf-alert svg { flex-shrink: 0; margin-top: 2px; }
+    .pf-alert.pf-alert-ok { background: #eefaf3; border-color: #c8ecd9; color: #1f7a4d; }
+
+    /* ---- identity card ---- */
+    .pf-id {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      background: var(--tt-paper, #fff);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 20px;
+      padding: 26px 28px;
+      box-shadow: var(--tt-shadow-sm, 0 6px 22px rgba(46,52,64,0.07));
+      margin-bottom: 34px;
+      transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s ease;
+    }
+    .pf-id:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--tt-shadow, 0 14px 44px rgba(46,52,64,0.09));
+    }
+
+    /* avatar + its "change" overlay */
+    .pf-avatar-btn {
+      position: relative;
+      width: 86px; height: 86px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      flex-shrink: 0;
+      cursor: pointer;
+      background: none;
+      display: block;
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
+    }
+    .pf-avatar-btn:hover { transform: scale(1.04); }
+    .pf-avatar, .pf-avatar-fallback {
+      width: 86px; height: 86px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 2px solid var(--tt-accent-lt, #eef0fe);
+      background: var(--tt-paper-alt, #f5f7fc);
+      box-sizing: border-box;
+    }
+    .pf-avatar-fallback {
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--tt-accent, #6274f2), var(--tt-accent-dk, #4d5fe8));
+    }
+    .pf-avatar-edit {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      gap: 2px;
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(30,34,44,0.62);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .pf-avatar-btn:hover .pf-avatar-edit,
+    .pf-avatar-btn:focus-visible .pf-avatar-edit { opacity: 1; }
+
+    .pf-id-text { flex: 1; min-width: 0; }
+    .pf-name-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 3px; }
+    .pf-id-text h1 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--tt-ink, #2e3440);
+      margin: 0;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+    .pf-handle {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--tt-accent, #6274f2);
+      margin: 0 0 6px;
+    }
+    .pf-handle button {
+      font: inherit;
+      color: var(--tt-ink-faint, #8a91a3);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .pf-handle button:hover { color: var(--tt-accent, #6274f2); }
+    .pf-bio {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--tt-ink-soft, #5c6472);
+      margin: 0 0 6px;
+      overflow-wrap: anywhere;
+    }
+    .pf-sub {
+      font-size: 0.84rem;
+      color: var(--tt-ink-faint, #8a91a3);
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    /* tier pill next to the name */
+    .pf-tier {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--tt-ink, #2e3440);
+      white-space: nowrap;
+    }
+    .pf-tier-premium  { background: linear-gradient(135deg, #f4a41d, #e2820c); }
+    .pf-tier-lifetime { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+    .pf-tier-indicator{ background: linear-gradient(135deg, #6274f2, #4d5fe8); }
+    .pf-tier-trialist { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
+    .pf-tier-member   { background: linear-gradient(135deg, #22b573, #149a5c); }
+    .pf-tier-free     { background: #eef0f7; color: var(--tt-ink-soft, #5c6472); }
+
+    .pf-id-actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+
+    /* ---- small buttons ---- */
+    .pf-mini {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--tt-ink-soft, #5c6472);
+      background: var(--tt-paper-alt, #f5f7fc);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 10px;
+      padding: 9px 16px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+    .pf-mini:hover {
+      color: var(--tt-accent, #6274f2);
+      border-color: var(--tt-accent-lt, #eef0fe);
+      background: var(--tt-accent-lt, #eef0fe);
+      transform: translateY(-1px);
+    }
+    .pf-mini-danger:hover {
+      color: #9b3b3b;
+      border-color: #f0cfcf;
+      background: #fff5f5;
+    }
+
+    /* ---- section heading ---- */
+    .pf-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 0 0 18px;
+      flex-wrap: wrap;
+    }
+    .pf-head h2 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--tt-ink, #2e3440);
+      margin: 0;
+    }
+    .pf-head a, .pf-head span {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--tt-accent, #6274f2);
+      transition: color 0.18s ease;
+    }
+    .pf-head span { color: var(--tt-ink-faint, #8a91a3); font-weight: 500; }
+    .pf-head a:hover { color: var(--tt-accent-dk, #4d5fe8); }
+    .pf-section { margin-bottom: 40px; }
+
+    /* ---- badges ---- */
+    .pf-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+      gap: 12px;
+    }
+    .pf-badge {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      background: var(--tt-paper, #fff);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 14px;
+      padding: 13px 14px;
+      box-shadow: var(--tt-shadow-sm, 0 6px 22px rgba(46,52,64,0.07));
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .pf-badge:hover {
+      transform: translateY(-3px);
+      border-color: var(--tt-accent-lt, #eef0fe);
+      box-shadow: var(--tt-shadow, 0 14px 44px rgba(46,52,64,0.09));
+    }
+    .pf-badge-ico {
+      width: 36px; height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: #fff;
+      background: var(--pf-tone, #6274f2);
+    }
+    .pf-badge-txt { min-width: 0; }
+    .pf-badge-txt strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--tt-ink, #2e3440);
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+    .pf-badge-txt em {
+      font-style: normal;
+      font-size: 0.74rem;
+      color: var(--tt-ink-faint, #8a91a3);
+    }
+    .pf-badge-locked { opacity: 0.55; }
+    .pf-badge-locked .pf-badge-ico { background: #e3e6ef; color: #9aa2b5; }
+    .pf-badge-locked:hover { opacity: 0.85; }
+
+    /* tooltip with the full description */
+    .pf-badge-tip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 9px);
+      transform: translate(-50%, 4px);
+      width: max-content;
+      max-width: 230px;
+      font-size: 0.76rem;
+      line-height: 1.45;
+      color: #fff;
+      background: #2e3440;
+      border-radius: 9px;
+      padding: 8px 11px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 5;
+    }
+    .pf-badge:hover .pf-badge-tip { opacity: 1; transform: translate(-50%, 0); }
+
+    /* ---- subscription cards ---- */
+    .pf-grid { display: grid; gap: 14px; }
+    .pf-card {
+      background: var(--tt-paper, #fff);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 18px;
+      padding: 22px 24px;
+      box-shadow: var(--tt-shadow-sm, 0 6px 22px rgba(46,52,64,0.07));
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .pf-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--tt-accent-lt, #eef0fe);
+      box-shadow: var(--tt-shadow, 0 14px 44px rgba(46,52,64,0.09));
+    }
+    .pf-card-main { flex: 1; min-width: 210px; }
+    .pf-card h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--tt-ink, #2e3440);
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
+    }
+    .pf-meta { font-size: 0.86rem; color: var(--tt-ink-faint, #8a91a3); margin: 0; }
+    .pf-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .pf-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .pf-pill-on   { color: #1f7a4d; background: #e8f7ef; }
+    .pf-pill-warn { color: #9a6b12; background: #fdf3e0; }
+    .pf-pill-off  { color: #6b7280; background: #f1f2f6; }
+    .pf-manage {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--tt-ink, #2e3440);
+      border-radius: 10px;
+      padding: 9px 17px;
+      flex-shrink: 0;
+      transition: all 0.18s ease;
+    }
+    .pf-manage:hover { background: #3c4351; color: #fff; transform: translateY(-1px); }
+
+    /* ---- panels ---- */
+    .pf-panel {
+      background: var(--tt-paper, #fff);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 22px;
+      padding: 48px 40px;
+      text-align: center;
+      box-shadow: var(--tt-shadow-sm, 0 6px 22px rgba(46,52,64,0.07));
+    }
+    .pf-panel-icon {
+      width: 62px; height: 62px;
+      border-radius: 18px;
+      margin: 0 auto 20px;
+      display: grid;
+      place-items: center;
+      background: var(--tt-accent-lt, #eef0fe);
+      color: var(--tt-accent, #6274f2);
+    }
+    .pf-panel h1, .pf-panel h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--tt-ink, #2e3440);
+      margin: 0 0 10px;
+    }
+    .pf-panel p {
+      font-size: 0.97rem;
+      line-height: 1.65;
+      color: var(--tt-ink-soft, #5c6472);
+      max-width: 460px;
+      margin: 0 auto 26px;
+    }
+    .pf-panel-sm { padding: 30px 28px; text-align: left; display: flex; align-items: center; gap: 20px; }
+    .pf-panel-sm .pf-panel-icon { margin: 0; flex-shrink: 0; }
+    /* :not() matters — a bare `div` also matches the icon and stretches it */
+    .pf-panel-sm > div:not(.pf-panel-icon) { flex: 1; min-width: 0; }
+    .pf-panel-sm h2 { font-size: 1.08rem; margin-bottom: 5px; }
+    .pf-panel-sm p { margin: 0; max-width: none; font-size: 0.9rem; }
+
+    .pf-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff !important;
+      background: var(--tt-accent, #6274f2);
+      border: none;
+      border-radius: 12px;
+      padding: 13px 28px;
+      cursor: pointer;
+      box-shadow: 0 3px 14px rgba(98,116,242,0.32);
+      transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .pf-btn:hover {
+      background: var(--tt-accent-dk, #4d5fe8);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(98,116,242,0.42);
+    }
+    .pf-btn[disabled] { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+    .pf-btn-ghost {
+      color: var(--tt-ink, #2e3440) !important;
+      background: var(--tt-paper-alt, #f5f7fc);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      box-shadow: none;
+    }
+    .pf-btn-ghost:hover { background: #eef0f7; box-shadow: none; color: var(--tt-ink, #2e3440) !important; }
+    .pf-panel-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .pf-note { font-size: 0.83rem; color: var(--tt-ink-faint, #8a91a3); margin: 22px auto 0; }
+
+    /* ---- connect Whop banner ---- */
+    /* Whop is where subscriptions live, so an account without it is missing
+       the half of this page that matters. The banner says so once, loudly,
+       and then never appears again. */
+    .pf-connect {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(135deg, #fff4f0 0%, #fff9f7 100%);
+      border: 1px solid #ffd7c8;
+      border-radius: 20px;
+      padding: 24px 26px;
+      margin-bottom: 26px;
+    }
+    .pf-connect-mark {
+      width: 52px; height: 52px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      background: #fa4516;
+    }
+    .pf-connect-mark img { width: 26px; height: 26px; filter: invert(1); }
+    .pf-connect div { flex: 1; min-width: 0; }
+    .pf-connect h2 {
+      font-size: 1.06rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--tt-ink, #2e3440);
+      margin: 0 0 5px;
+    }
+    .pf-connect p {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--tt-ink-soft, #5c6472);
+      margin: 0;
+    }
+
+    /* Whop's own orange with black type — the same button as on the sign-in
+       page, so the two read as one action. */
+    .pf-whop-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #16181d;
+      background: #fa4516;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      flex-shrink: 0;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(250,69,22,0.34);
+      transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .pf-whop-btn:hover {
+      background: #e63c0e;
+      color: #16181d;
+      transform: translateY(-2px);
+      box-shadow: 0 9px 26px rgba(250,69,22,0.44);
+    }
+    .pf-whop-btn img { width: 17px; height: 17px; }
+
+    /* ---- connected accounts ---- */
+    .pf-conns { display: grid; gap: 12px; }
+    .pf-conn {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: var(--tt-paper, #fff);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 16px;
+      padding: 16px 20px;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s cubic-bezier(0.16,1,0.3,1);
+    }
+    .pf-conn:hover {
+      transform: translateY(-2px);
+      border-color: var(--tt-accent-lt, #eef0fe);
+      box-shadow: var(--tt-shadow-sm, 0 6px 22px rgba(46,52,64,0.07));
+    }
+    .pf-conn-ico {
+      width: 38px; height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      background: var(--tt-paper-alt, #f5f7fc);
+    }
+    .pf-conn-ico img { width: 19px; height: 19px; }
+    .pf-conn-ico-whop { background: #fa4516; }
+    .pf-conn-ico-whop img { filter: invert(1); }
+    .pf-conn-txt { flex: 1; min-width: 0; }
+    .pf-conn-txt strong {
+      display: block;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--tt-ink, #2e3440);
+      line-height: 1.3;
+    }
+    .pf-conn-txt span { font-size: 0.82rem; color: var(--tt-ink-faint, #8a91a3); }
+    .pf-conn-txt span.pf-on { color: #1f7a4d; font-weight: 600; }
+
+    /* ---- rank: the ring, the number, the bar ---- */
+
+    /* Seven tiers, and the jump between them is the whole point — a frame
+       that changed every level would stop meaning anything. Each tier sets
+       two variables and the rest of the rank styling reads them. */
+    .pf-rank {
+      position: relative;
+      flex-shrink: 0;
+      padding: 3px;
+      border-radius: 50%;
+      background: var(--rank-ring, #cfd4e2);
+      --rank-ring: #cfd4e2;
+      --rank-chip: #5c6472;
+      --rank-glow: none;
+      box-shadow: var(--rank-glow);
+    }
+    .pf-rank[data-tier="adept"]    { --rank-ring: linear-gradient(135deg, #7d8cf6, #4d5fe8); --rank-chip: #4d5fe8; }
+    .pf-rank[data-tier="veteran"]  { --rank-ring: linear-gradient(135deg, #2dd4bf, #0d9488); --rank-chip: #0d9488; }
+    .pf-rank[data-tier="elite"]    { --rank-ring: linear-gradient(135deg, #a78bfa, #6d28d9); --rank-chip: #6d28d9; }
+    .pf-rank[data-tier="master"]   { --rank-ring: linear-gradient(135deg, #fbbf24, #e2820c); --rank-chip: #b45309; }
+    .pf-rank[data-tier="legend"]   {
+      --rank-ring: linear-gradient(135deg, #fde68a, #e2820c 45%, #92400e);
+      --rank-chip: linear-gradient(135deg, #d97706, #92400e);
+      --rank-glow: 0 0 0 1px rgba(217,119,6,0.25), 0 6px 22px rgba(217,119,6,0.28);
+    }
+    /* The top rank is the one that is allowed to look like something:
+       near-black with a crimson edge. Still no animation — it earns attention
+       by being rare, not by moving. */
+    .pf-rank[data-tier="ascended"] {
+      --rank-ring: linear-gradient(140deg, #e01e37 0%, #7a0a12 45%, #16131a 100%);
+      --rank-chip: linear-gradient(140deg, #2a0d12, #14111a);
+      --rank-glow: 0 0 0 1px rgba(193,18,31,0.35), 0 8px 30px rgba(193,18,31,0.32);
+    }
+
+    .pf-rank .pf-avatar,
+    .pf-rank .pf-avatar-fallback { border-color: var(--tt-paper, #fff); border-width: 3px; }
+
+    .pf-level {
+      position: absolute;
+      right: -3px;
+      bottom: -3px;
+      min-width: 27px;
+      height: 27px;
+      padding: 0 7px;
+      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      border: 2.5px solid var(--tt-paper, #fff);
+      background: var(--rank-chip);
+      color: #fff;
+      font-size: 0.79rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    /* Sharper corners and a crimson edge at the top rank — the gothic note,
+       kept to two properties. */
+    .pf-rank[data-tier="ascended"] .pf-level {
+      border-radius: 7px;
+      box-shadow: inset 0 0 0 1px rgba(224,30,55,0.65);
+    }
+    .pf-rank[data-tier="legend"] .pf-level { border-radius: 8px; }
+
+    .pf-xp { margin-top: 10px; max-width: 340px; }
+    .pf-xp-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 5px;
+      font-size: 0.78rem;
+    }
+    .pf-xp-tier {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--tt-ink-soft, #5c6472);
+    }
+    .pf-xp-count { color: var(--tt-ink-faint, #8a91a3); font-variant-numeric: tabular-nums; }
+    .pf-xp-track {
+      height: 6px;
+      border-radius: 4px;
+      background: var(--tt-line, #e6e9f3);
+      overflow: hidden;
+    }
+    .pf-xp-track i {
+      display: block;
+      height: 100%;
+      border-radius: 4px;
+      background: var(--rank-chip, #6274f2);
+      transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    /* ---- confirm your email ---- */
+    .pf-verify {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(135deg, #f2fbf6 0%, #f9fdfb 100%);
+      border: 1px solid #c8ecd9;
+      border-radius: 20px;
+      padding: 22px 26px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+    .pf-verify-mark {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: #fff;
+      background: linear-gradient(135deg, #22b573, #149a5c);
+    }
+    .pf-verify-text { flex: 1; min-width: 220px; }
+    .pf-verify-text h2 {
+      font-size: 1.04rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--tt-ink, #2e3440);
+      margin: 0 0 4px;
+    }
+    .pf-verify-text p {
+      font-size: 0.89rem;
+      line-height: 1.55;
+      color: var(--tt-ink-soft, #5c6472);
+      margin: 0;
+    }
+    .pf-reward {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: #1f7a4d;
+      background: #ddf3e8;
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-left: 6px;
+      white-space: nowrap;
+    }
+    .pf-verify-form { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; }
+    .pf-verify-input {
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--tt-ink, #2e3440);
+      background: #fff;
+      border: 1px solid #c8ecd9;
+      border-radius: 11px;
+      padding: 11px 13px;
+      width: 210px;
+      box-sizing: border-box;
+    }
+    .pf-verify-input:focus { outline: none; border-color: #22b573; }
+    /* The code field is the one place a monospace face earns its keep: six
+       digits copied from an email are read back digit by digit. */
+    .pf-code-input {
+      width: 148px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-align: center;
+      padding: 10px 8px 10px 14px;
+    }
+    .pf-verify-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+      background: #22b573;
+      border: none;
+      border-radius: 11px;
+      padding: 11px 18px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+    .pf-verify-btn:hover:not([disabled]) { background: #149a5c; transform: translateY(-1px); }
+    .pf-verify-btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .pf-verify-ghost {
+      color: var(--tt-ink-soft, #5c6472);
+      background: transparent;
+      border: 1px solid #c8ecd9;
+    }
+    .pf-verify-ghost:hover:not([disabled]) { background: #eefaf3; color: #1f7a4d; }
+    .pf-verify-note { flex-basis: 100%; font-size: 0.8rem; margin: 0; color: var(--tt-ink-faint, #8a91a3); }
+    .pf-verify-note.bad { color: #9b3b3b; }
+    .pf-verify-note.good { color: #1f7a4d; }
+
+    /* ---- badge gallery ---- */
+    .pf-gallery-filters { display: flex; gap: 6px; background: var(--tt-paper-alt, #f5f7fc); padding: 4px; border-radius: 11px; }
+    .pf-gallery-filters button {
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--tt-ink-soft, #5c6472);
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 13px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .pf-gallery-filters button:hover { color: var(--tt-ink, #2e3440); }
+    .pf-gallery-filters button[aria-pressed="true"] {
+      background: #fff;
+      color: var(--tt-ink, #2e3440);
+      box-shadow: 0 2px 8px rgba(46,52,64,0.08);
+    }
+    .pf-badge-xp {
+      position: absolute;
+      top: 9px; right: 10px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--pf-tone, #6274f2);
+      opacity: 0.75;
+      font-variant-numeric: tabular-nums;
+    }
+    .pf-badge-locked .pf-badge-xp { color: var(--tt-ink-faint, #8a91a3); }
+
+    /* ---- loading skeleton ---- */
+    .pf-skel {
+      background: linear-gradient(90deg, #f1f3f9 25%, #e8ebf4 37%, #f1f3f9 63%);
+      background-size: 400% 100%;
+      animation: pfShimmer 1.4s ease infinite;
+      border-radius: 14px;
+    }
+    @keyframes pfShimmer {
+      0%   { background-position: 100% 50%; }
+      100% { background-position: 0 50%; }
+    }
+    .pf-skel-id { height: 140px; margin-bottom: 34px; border-radius: 20px; }
+    .pf-skel-row { height: 92px; margin-bottom: 14px; border-radius: 18px; }
+
+    /* ---- modal ---- */
+    .pf-modal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px; }
+    .pf-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(30,34,44,0.44);
+      backdrop-filter: blur(3px);
+      animation: pfFade 0.2s ease;
+    }
+    @keyframes pfFade { from { opacity: 0; } to { opacity: 1; } }
+    .pf-modal-box {
+      position: relative;
+      width: min(520px, 100%);
+      max-height: min(86vh, 720px);
+      overflow-y: auto;
+      background: var(--tt-paper, #fff);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 24px 70px rgba(24,28,38,0.28);
+      animation: pfRise 0.24s cubic-bezier(0.16,1,0.3,1);
+    }
+    @keyframes pfRise { from { opacity: 0; transform: translateY(14px) scale(0.985); } to { opacity: 1; transform: none; } }
+    .pf-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .pf-modal-head h2 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; color: var(--tt-ink, #2e3440); margin: 0 0 4px; }
+    .pf-modal-head p { font-size: 0.87rem; color: var(--tt-ink-faint, #8a91a3); margin: 0; }
+    .pf-x {
+      border: none;
+      background: var(--tt-paper-alt, #f5f7fc);
+      color: var(--tt-ink-soft, #5c6472);
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: all 0.18s ease;
+    }
+    .pf-x:hover { background: #eef0f7; color: var(--tt-ink, #2e3440); }
+
+    /* ---- form fields ---- */
+    .pf-field { margin-bottom: 18px; }
+    .pf-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--tt-ink-faint, #8a91a3);
+      margin-bottom: 7px;
+    }
+    .pf-input, .pf-textarea {
+      width: 100%;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--tt-ink, #2e3440);
+      background: var(--tt-paper-alt, #f5f7fc);
+      border: 1px solid var(--tt-line, #e6e9f3);
+      border-radius: 12px;
+      padding: 12px 14px;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .pf-input:focus, .pf-textarea:focus {
+      outline: none;
+      background: #fff;
+      border-color: var(--tt-accent, #6274f2);
+    }
+    .pf-textarea { resize: vertical; min-height: 78px; line-height: 1.5; }
+    .pf-prefixed { position: relative; }
+    .pf-prefixed span {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.95rem;
+      color: var(--tt-ink-faint, #8a91a3);
+      pointer-events: none;
+    }
+    .pf-prefixed .pf-input { padding-left: 28px; }
+    .pf-hint { font-size: 0.79rem; margin: 7px 0 0; color: var(--tt-ink-faint, #8a91a3); min-height: 1em; }
+    .pf-hint-ok  { color: #1f7a4d; }
+    .pf-hint-bad { color: #9b3b3b; }
+    .pf-modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
+
+    /* ---- avatar picker ---- */
+    .pf-tabs { display: flex; gap: 6px; background: var(--tt-paper-alt, #f5f7fc); padding: 4px; border-radius: 12px; margin-bottom: 20px; }
+    .pf-tab {
+      flex: 1;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--tt-ink-soft, #5c6472);
+      background: transparent;
+      border: none;
+      border-radius: 9px;
+      padding: 9px 10px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .pf-tab:hover { color: var(--tt-ink, #2e3440); }
+    .pf-tab[aria-selected="true"] { background: #fff; color: var(--tt-ink, #2e3440); box-shadow: 0 2px 8px rgba(46,52,64,0.08); }
+
+    .pf-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); gap: 12px; }
+    .pf-pick button {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: var(--tt-paper-alt, #f5f7fc);
+      padding: 3px;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), border-color 0.18s ease;
+    }
+    .pf-pick button:hover { transform: translateY(-3px) scale(1.04); border-color: var(--tt-accent-lt, #eef0fe); }
+    .pf-pick button[aria-pressed="true"] { border-color: var(--tt-accent, #6274f2); }
+    .pf-pick img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+
+    .pf-drop {
+      border: 2px dashed var(--tt-line, #e6e9f3);
+      border-radius: 16px;
+      padding: 30px 22px;
+      text-align: center;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .pf-drop.pf-drop-over { border-color: var(--tt-accent, #6274f2); background: var(--tt-accent-lt, #eef0fe); }
+    .pf-drop p { font-size: 0.88rem; color: var(--tt-ink-soft, #5c6472); margin: 0 0 16px; }
+    .pf-drop-preview {
+      width: 92px; height: 92px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      display: block;
+      border: 2px solid var(--tt-accent-lt, #eef0fe);
+    }
+    .pf-empty-note { font-size: 0.88rem; color: var(--tt-ink-faint, #8a91a3); text-align: center; padding: 26px 10px; margin: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pf-orb, .pf-skel { animation: none; }
+      .pf-modal-box, .pf-modal-backdrop { animation: none; }
+      .pf-id:hover, .pf-card:hover, .pf-badge:hover, .pf-pick button:hover, .pf-avatar-btn:hover { transform: none; }
+    }
+
+    @media (max-width: 640px) {
+      .pf-main { padding-top: calc(var(--nav-h) + 34px); }
+      .pf-verify { padding: 20px; }
+      .pf-verify-input { width: 100%; }
+      .pf-verify-form { width: 100%; }
+      .pf-verify-form .pf-verify-btn { flex: 1; justify-content: center; }
+      .pf-xp { max-width: none; }
+      .pf-id { flex-direction: column; align-items: flex-start; gap: 16px; padding: 22px; }
+      .pf-id-actions { flex-direction: row; align-self: stretch; }
+      .pf-id-actions .pf-mini { flex: 1; }
+      .pf-card { padding: 20px; }
+      .pf-manage { width: 100%; justify-content: center; }
+      .pf-panel { padding: 38px 22px; }
+      .pf-panel-sm { flex-direction: column; align-items: flex-start; text-align: left; }
+      .pf-panel h1, .pf-panel h2 { font-size: 1.28rem; }
+      .pf-modal-box { padding: 22px; border-radius: 18px; }
+    }
+  </style>
+  <link rel="stylesheet" href="theme-light.css?v=2" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Kenpachi Trades Logo" class="logo-img" />
+        Kenpachi Trades
+      </a>
+      <nav class="nav-links">
+        <a href="prop-firms.html">Save On Prop Firms</a>
+        <a href="indicators.html">QT Indicators</a>
+        <a href="qt-education.html">QT Education</a>
+        <a href="premium.html" class="nav-cta">Premium Access</a>
+      </nav>
+      <button class="burger" id="burger">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="prop-firms.html">Save On Prop Firms</a>
+      <a href="indicators.html">QT Indicators</a>
+      <a href="qt-education.html">QT Education</a>
+      <a href="premium.html">Premium Access</a>
+      <a href="https://whop.com/soul-society-division" target="_blank" class="mobile-join"><img src="images/com.avif" alt="" style="width:24px;height:24px;border-radius:50%;object-fit:cover;flex-shrink:0;" />Join Community Free</a>
+    </div>
+  </header>
+
+  <main class="pf-main">
+    <div class="pf-orb pf-orb-a"></div>
+    <div class="pf-orb pf-orb-b"></div>
+
+    <div class="pf-wrap">
+
+      <div class="pf-alert" id="pfAlert" hidden>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16.5v.01"/></svg>
+        <span id="pfAlertText"></span>
+      </div>
+
+      <!-- loading -->
+      <div id="pfLoading">
+        <div class="pf-skel pf-skel-id"></div>
+        <div class="pf-skel pf-skel-row"></div>
+        <div class="pf-skel pf-skel-row"></div>
+      </div>
+
+      <!-- signed out -->
+      <div id="pfSignedOut" hidden>
+        <div class="pf-panel">
+          <div class="pf-panel-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h1>Sign in to your account</h1>
+          <p>Use the same Whop account you bought with. You'll get a profile you can make your own — avatar, username, badges — plus every active subscription and its renewal date in one place.</p>
+          <div class="pf-panel-actions">
+            <a href="login.html?return_to=%2Fprofile.html" class="pf-btn">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg>
+              Sign in
+            </a>
+            <a href="login.html?return_to=%2Fprofile.html" class="pf-btn pf-btn-ghost">Create an account</a>
+          </div>
+          <p class="pf-note">Whop, Google or an email address — whichever you prefer. You can connect the others later.</p>
+        </div>
+      </div>
+
+      <!-- signed in -->
+      <div id="pfSignedIn" hidden>
+
+        <div class="pf-verify" id="pfVerify" hidden>
+          <span class="pf-verify-mark">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg>
+          </span>
+          <div class="pf-verify-text">
+            <h2 id="pfVerifyTitle">Confirm your email<span class="pf-reward" id="pfVerifyReward">+100 XP &amp; a badge</span></h2>
+            <p id="pfVerifyBlurb">Add an email address so you can get back in if you ever lose access to your other sign-ins.</p>
+          </div>
+
+          <div class="pf-verify-form" id="pfVerifyStepEmail">
+            <input class="pf-verify-input" id="pfVerifyEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" />
+            <button class="pf-verify-btn" type="button" id="pfSendCode">Send code</button>
+          </div>
+
+          <div class="pf-verify-form" id="pfVerifyStepCode" hidden>
+            <input class="pf-verify-input pf-code-input" id="pfVerifyCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" />
+            <button class="pf-verify-btn" type="button" id="pfConfirmCode">Confirm</button>
+            <button class="pf-verify-btn pf-verify-ghost" type="button" id="pfResendCode">Send again</button>
+          </div>
+
+          <p class="pf-verify-note" id="pfVerifyNote"></p>
+        </div>
+
+        <div class="pf-connect" id="pfConnectWhop" hidden>
+          <span class="pf-connect-mark"><img src="images/brand/whop-mark.png" alt="" /></span>
+          <div>
+            <h2>Connect your Whop account</h2>
+            <p>Your subscriptions, renewal dates and premium badges all come from Whop. Connect it once and they show up here automatically.</p>
+          </div>
+          <a class="pf-whop-btn" href="/api/login/whop?link=1&amp;return_to=%2Fprofile.html">
+            <img src="images/brand/whop-mark.png" alt="" />
+            Connect Whop
+          </a>
+        </div>
+
+        <div class="pf-id">
+          <div class="pf-rank" id="pfRank" data-tier="recruit">
+            <button class="pf-avatar-btn" id="pfAvatarBtn" type="button" aria-label="Change your avatar">
+              <span id="pfAvatarSlot"></span>
+              <span class="pf-avatar-edit">Change</span>
+            </button>
+            <span class="pf-level" id="pfLevel" title="Your level">1</span>
+          </div>
+
+          <div class="pf-id-text">
+            <div class="pf-name-row">
+              <h1 id="pfName">—</h1>
+              <span class="pf-tier" id="pfTier" hidden></span>
+            </div>
+            <p class="pf-handle" id="pfHandle"></p>
+            <p class="pf-bio" id="pfBio" hidden></p>
+            <p class="pf-sub" id="pfSub"></p>
+
+            <div class="pf-xp" id="pfXp">
+              <div class="pf-xp-head">
+                <span class="pf-xp-tier" id="pfXpTier">Recruit</span>
+                <span class="pf-xp-count" id="pfXpCount"></span>
+              </div>
+              <div class="pf-xp-track"><i id="pfXpFill" style="width:0%"></i></div>
+            </div>
+          </div>
+
+          <div class="pf-id-actions">
+            <button class="pf-mini" id="pfEditBtn" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+              Edit profile
+            </button>
+            <a href="/api/logout" class="pf-mini pf-mini-danger">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+              Sign out
+            </a>
+          </div>
+        </div>
+
+        <section class="pf-section">
+          <div class="pf-head">
+            <h2>Badge gallery</h2>
+            <div class="pf-gallery-filters" role="group" aria-label="Filter badges">
+              <button type="button" data-filter="all" aria-pressed="true">All</button>
+              <button type="button" data-filter="earned" aria-pressed="false">Earned</button>
+              <button type="button" data-filter="locked" aria-pressed="false">Locked</button>
+            </div>
+          </div>
+          <div class="pf-badges" id="pfBadges"></div>
+          <p class="pf-note" id="pfBadgeCount" style="text-align:left;margin-top:14px;"></p>
+        </section>
+
+        <section class="pf-section">
+          <div class="pf-head">
+            <h2>Your subscriptions</h2>
+            <a href="https://whop.com/orders" target="_blank" rel="noopener">Billing on Whop →</a>
+          </div>
+
+          <div class="pf-grid" id="pfGrid"></div>
+
+          <div id="pfNoWhop" hidden>
+            <div class="pf-panel">
+              <div class="pf-panel-icon" style="background:#fff1ec;">
+                <img src="images/brand/whop-mark.png" alt="" style="width:26px;height:26px;" />
+              </div>
+              <h2>Subscriptions live on Whop</h2>
+              <p>Connect the Whop account you bought with and everything you own — plans, renewal dates, premium status — appears right here.</p>
+              <div class="pf-panel-actions">
+                <a class="pf-whop-btn" href="/api/login/whop?link=1&amp;return_to=%2Fprofile.html">
+                  <img src="images/brand/whop-mark.png" alt="" />
+                  Connect Whop
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div id="pfEmpty" hidden>
+            <div class="pf-panel">
+              <div class="pf-panel-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 9l1.5 10.5A2 2 0 0 0 6.5 21h11a2 2 0 0 0 2-1.5L21 9M3 9l2.5-5h13L21 9"/></svg>
+              </div>
+              <h2>No subscriptions yet</h2>
+              <p>Your account is connected, but there's nothing active on it right now. The QT indicator has a free trial, and Espada Premium unlocks the full education library and live sessions.</p>
+              <div class="pf-panel-actions">
+                <a href="indicators.html" class="pf-btn">See QT Indicators</a>
+                <a href="premium.html" class="pf-btn pf-btn-ghost">Espada Premium</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="pf-section">
+          <div class="pf-head">
+            <h2>Connected accounts</h2>
+            <span>Sign in with any of them</span>
+          </div>
+          <div class="pf-conns" id="pfConns"></div>
+        </section>
+
+        <section class="pf-section">
+          <div class="pf-head"><h2>Quarterly Theory tests</h2></div>
+          <div class="pf-panel pf-panel-sm">
+            <div class="pf-panel-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h5"/></svg>
+            </div>
+            <div>
+              <h2>Coming soon</h2>
+              <p>Short tests on the Quarterly Theory material from the education pages. Pass one and its badge lands on this profile automatically.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========== edit profile modal ========== -->
+  <div class="pf-modal" id="pfEditModal" hidden>
+    <div class="pf-modal-backdrop" data-close></div>
+    <div class="pf-modal-box" role="dialog" aria-modal="true" aria-labelledby="pfEditTitle">
+      <div class="pf-modal-head">
+        <div>
+          <h2 id="pfEditTitle">Edit profile</h2>
+          <p>How you show up on Kenpachi Trades.</p>
+        </div>
+        <button class="pf-x" type="button" data-close aria-label="Close">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="pf-field">
+        <label for="pfInName">Display name</label>
+        <input class="pf-input" id="pfInName" type="text" maxlength="32" autocomplete="nickname" />
+        <p class="pf-hint" id="pfNameHint"></p>
+      </div>
+
+      <div class="pf-field">
+        <label for="pfInUser">Username</label>
+        <div class="pf-prefixed">
+          <span>@</span>
+          <input class="pf-input" id="pfInUser" type="text" maxlength="20" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="yourname" />
+        </div>
+        <p class="pf-hint" id="pfUserHint">3–20 characters: letters, numbers and underscores.</p>
+      </div>
+
+      <div class="pf-field">
+        <label for="pfInBio">Bio</label>
+        <textarea class="pf-textarea" id="pfInBio" maxlength="160" placeholder="Futures trader. QT since 2024."></textarea>
+        <p class="pf-hint" id="pfBioHint"></p>
+      </div>
+
+      <div class="pf-modal-actions">
+        <button class="pf-btn pf-btn-ghost" type="button" data-close>Cancel</button>
+        <button class="pf-btn" type="button" id="pfSaveBtn">Save changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== avatar picker modal ========== -->
+  <div class="pf-modal" id="pfAvatarModal" hidden>
+    <div class="pf-modal-backdrop" data-close></div>
+    <div class="pf-modal-box" role="dialog" aria-modal="true" aria-labelledby="pfAvatarTitle">
+      <div class="pf-modal-head">
+        <div>
+          <h2 id="pfAvatarTitle">Choose an avatar</h2>
+          <p>Pick one of ours or upload your own.</p>
+        </div>
+        <button class="pf-x" type="button" data-close aria-label="Close">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="pf-tabs" role="tablist">
+        <button class="pf-tab" type="button" role="tab" data-tab="presets" aria-selected="true">Built-in</button>
+        <button class="pf-tab" type="button" role="tab" data-tab="library" aria-selected="false" hidden>Gallery</button>
+        <button class="pf-tab" type="button" role="tab" data-tab="upload" aria-selected="false">Upload</button>
+      </div>
+
+      <div data-pane="presets">
+        <div class="pf-pick" id="pfPresets"></div>
+      </div>
+
+      <div data-pane="library" hidden>
+        <div class="pf-pick" id="pfLibrary"></div>
+      </div>
+
+      <div data-pane="upload" hidden>
+        <div class="pf-drop" id="pfDrop">
+          <img class="pf-drop-preview" id="pfDropPreview" alt="" hidden />
+          <p>Drop an image here, or choose a file. PNG, JPG, GIF or WebP — we'll crop it to a square and shrink it for you.</p>
+          <input type="file" id="pfFile" accept="image/png,image/jpeg,image/gif,image/webp" hidden />
+          <div class="pf-panel-actions">
+            <button class="pf-btn" type="button" id="pfPickFile">Choose image</button>
+            <button class="pf-btn pf-btn-ghost" type="button" id="pfUseWhop">Use my account photo</button>
+          </div>
+        </div>
+        <p class="pf-hint" id="pfUploadHint"></p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="tt-footer">
+    <div class="tt-container">
+      <div class="tt-footer-grid">
+
+        <div class="tt-footer-brand">
+          <a href="index.html" class="tt-footer-logo">
+            <img src="images/logo.png" alt="Kenpachi Trades Logo" />
+            Kenpachi Trades
+          </a>
+          <p>Quarterly Theory indicators, free education and a trading community. Everything you need to trade QT with confidence.</p>
+          <div class="tt-footer-socials">
+            <a href="https://discord.com/invite/soulsocietydivision" target="_blank" rel="noopener" class="dc" aria-label="Discord">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+            </a>
+            <a href="https://x.com/kenpachi_qt" target="_blank" rel="noopener" aria-label="X / Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://youtube.com/@kenpachi_qt" target="_blank" rel="noopener" class="yt" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="tt-footer-col">
+          <h4>Pages</h4>
+          <a href="indicators.html">QT Indicators</a>
+          <a href="qt-education.html">QT Education</a>
+          <a href="prop-firms.html">Save On Prop Firms</a>
+          <a href="premium.html">Premium Access</a>
+        </div>
+
+        <div class="tt-footer-col">
+          <h4>Community</h4>
+          <a href="https://whop.com/soul-society-division" target="_blank" rel="noopener">Join Free Community</a>
+          <a href="https://discord.com/invite/soulsocietydivision" target="_blank" rel="noopener">Discord</a>
+          <a href="https://youtube.com/@kenpachi_qt" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://x.com/kenpachi_qt" target="_blank" rel="noopener">X / Twitter</a>
+        </div>
+
+        <div class="tt-footer-col">
+          <h4>Get Started</h4>
+          <a href="indicators.html#pricing">Indicator Plans</a>
+          <a href="https://whop.com/joined/soul-society-division/products/quarterly-theory-soul-society/" target="_blank" rel="noopener">Try for Free</a>
+          <a href="premium.html">Premium Plans</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+
+      </div>
+
+      <div class="tt-footer-bottom">
+        <div class="tt-footer-copy">© 2026 Kenpachi Trades. All rights reserved. · <a href="privacy.html">Privacy Policy</a></div>
+        <p class="tt-footer-disclaimer">This website is for educational purposes only and does not constitute financial advice. Trading involves significant risk of loss and is not suitable for all investors. Past performance is not indicative of future results. Always consult a licensed financial advisor before making investment decisions. Affiliate links may be present.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  </script>
+
+  <script>
+  (function () {
+    const el = (id) => document.getElementById(id);
+    const show = (id) => { el(id).hidden = false; };
+    const hide = (id) => { el(id).hidden = true; };
+
+    /* state kept for the whole page: what the server currently believes */
+    let me = null;          // the user object from /api/profile
+    let catalog = [];       // badge definitions from /api/badges
+    let earned = new Set(); // badge ids this account holds
+    let emailState = null;  // { address, verified, pending }
+    let badgeFilter = 'all';
+
+    /* ---------------- alerts ---------------- */
+
+    const ERRORS = {
+      expired: 'That sign-in link timed out. Please try again.',
+      bad_state: 'Sign-in could not be verified. Please try again.',
+      token_exchange: "Whop wouldn't complete the sign-in. Please try again in a moment.",
+      userinfo: "Couldn't read your Whop profile. Please try again.",
+      missing_code: 'Sign-in was cancelled.',
+      no_user: "Couldn't identify your Whop account.",
+      access_denied: 'Sign-in was cancelled.',
+      provider_off: 'That sign-in method is not switched on yet.',
+      not_signed_in: 'Please sign in before connecting another account.',
+      already_linked: 'That account is already connected to a different profile.',
+      verify_expired: 'That confirmation link has expired. Send yourself a new one.',
+    };
+
+    let alertTimer = null;
+    function alertUser(text, ok) {
+      const box = el('pfAlert');
+      el('pfAlertText').textContent = text;
+      box.classList.toggle('pf-alert-ok', !!ok);
+      box.hidden = false;
+      clearTimeout(alertTimer);
+      // success messages are noise once read; errors stay until dismissed
+      if (ok) alertTimer = setTimeout(() => { box.hidden = true; }, 4000);
+    }
+
+    const params = new URLSearchParams(location.search);
+    const err = params.get('error');
+    if (err) {
+      alertUser(ERRORS[err] || 'Something went wrong signing you in. Please try again.');
+      history.replaceState({}, '', location.pathname);
+    } else {
+      // One-off notices the auth flow sends us back with.
+      const note =
+        params.get('linked')       ? 'Connected. Your subscriptions will load in a moment.'
+        : params.get('verified')   ? 'Email confirmed. Thanks!'
+        : params.get('reset') === 'done' ? 'Password updated.'
+        : params.get('welcome') === 'verify' ? 'Account created — check your inbox to confirm your email.'
+        : params.get('welcome')    ? 'Account created. Connect Whop below and your subscriptions appear here.'
+        : null;
+      if (note) {
+        alertUser(note, true);
+        history.replaceState({}, '', location.pathname);
+      }
+    }
+
+    /* ---------------- formatting ---------------- */
+
+    function fmtDate(iso) {
+      if (!iso) return null;
+      const d = new Date(iso);
+      if (isNaN(d)) return null;
+      // pinned to en-US — the rest of the site is English, so a Ukrainian
+      // browser locale shouldn't turn this into "7 серп. 2026 р."
+      return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    const PILL = {
+      active:     ['Active', 'pf-pill-on'],
+      trialing:   ['Free trial', 'pf-pill-on'],
+      completed:  ['Lifetime', 'pf-pill-on'],
+      canceling:  ['Ending soon', 'pf-pill-warn'],
+      past_due:   ['Payment due', 'pf-pill-warn'],
+      unresolved: ['Needs attention', 'pf-pill-warn'],
+      canceled:   ['Cancelled', 'pf-pill-off'],
+      expired:    ['Expired', 'pf-pill-off'],
+      drafted:    ['Incomplete', 'pf-pill-off'],
+    };
+
+    function subLine(m) {
+      if (m.status === 'trialing' && m.renewsAt) return 'Trial converts ' + (fmtDate(m.renewsAt) || '—');
+      if (m.cancelAtPeriodEnd && m.renewsAt) return 'Access ends ' + (fmtDate(m.renewsAt) || '—');
+      if (m.active && m.renewsAt) return 'Renews ' + (fmtDate(m.renewsAt) || '—');
+      if (!m.active && m.expiresAt) return 'Ended ' + (fmtDate(m.expiresAt) || '—');
+      if (m.status === 'completed') return 'One-time purchase · no renewal';
+      if (m.createdAt) return 'Started ' + (fmtDate(m.createdAt) || '—');
+      return '';
+    }
+
+    function card(m) {
+      const [label, cls] = PILL[m.status] || [m.status || 'Unknown', 'pf-pill-off'];
+      const node = document.createElement('div');
+      node.className = 'pf-card';
+
+      const main = document.createElement('div');
+      main.className = 'pf-card-main';
+      const h3 = document.createElement('h3');
+      h3.textContent = m.product;
+      const meta = document.createElement('p');
+      meta.className = 'pf-meta';
+      meta.textContent = subLine(m);
+      main.append(h3, meta);
+
+      const pill = document.createElement('span');
+      pill.className = 'pf-pill ' + cls;
+      pill.textContent = label;
+
+      const manage = document.createElement('a');
+      manage.className = 'pf-manage';
+      manage.href = 'https://whop.com/orders';
+      manage.target = '_blank';
+      manage.rel = 'noopener';
+      manage.textContent = 'Manage';
+
+      node.append(main, pill, manage);
+      return node;
+    }
+
+    /* ---------------- avatar ---------------- */
+
+    function initials(user) {
+      const div = document.createElement('div');
+      div.className = 'pf-avatar-fallback';
+      div.textContent = (user.name || '?').trim().charAt(0).toUpperCase();
+      return div;
+    }
+
+    function avatarNode(user) {
+      if (user.avatar) {
+        const img = document.createElement('img');
+        img.className = 'pf-avatar';
+        img.src = user.avatar;
+        img.alt = '';
+        img.referrerPolicy = 'no-referrer';
+        // if the source 404s, fall back to the initial rather than a broken image
+        img.onerror = () => img.replaceWith(initials(user));
+        return img;
+      }
+      return initials(user);
+    }
+
+    function paintAvatar() {
+      const slot = el('pfAvatarSlot');
+      slot.textContent = '';
+      slot.append(avatarNode(me));
+    }
+
+    /* Keeps the nav button in step without a reload. account.js caches the
+       last known identity in localStorage and renders from it first. */
+    function syncNav() {
+      try {
+        localStorage.setItem('kt_auth', JSON.stringify({
+          authenticated: true,
+          user: { id: me.id, name: me.name, picture: me.avatar, username: me.username },
+        }));
+      } catch (e) { /* private mode — the nav just refreshes a beat later */ }
+
+      const pill = document.querySelector('.nav-inner .kt-acct');
+      if (!pill) return;
+      const label = pill.querySelector('.kt-acct-name');
+      if (label) label.textContent = (me.name || 'Account').split(' ')[0];
+
+      if (!me.avatar) return;
+      const img = pill.querySelector('img');
+      if (img) { img.src = me.avatar; return; }
+      // The pill was drawn with an initial because there was no picture yet.
+      // Swap it for the one that has just been chosen, rather than making
+      // the user reload to see it.
+      const initial = pill.querySelector('.kt-ini');
+      if (initial) {
+        const fresh = document.createElement('img');
+        fresh.src = me.avatar;
+        fresh.alt = '';
+        fresh.referrerPolicy = 'no-referrer';
+        initial.replaceWith(fresh);
+      }
+    }
+
+    /* ---------------- badges ---------------- */
+
+    const TONES = {
+      accent: '#6274f2', gold: '#f4a41d', green: '#22b573', sky: '#0ea5e9',
+      violet: '#8b5cf6', teal: '#14b8a6', pink: '#ec4899', bronze: '#b45309',
+      slate: '#64748b',
+    };
+
+    function badgeNode(def, held) {
+      const node = document.createElement('div');
+      node.className = 'pf-badge' + (held ? '' : ' pf-badge-locked');
+      node.style.setProperty('--pf-tone', TONES[def.tone] || TONES.accent);
+
+      const ico = document.createElement('span');
+      ico.className = 'pf-badge-ico';
+      ico.innerHTML = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></svg>';
+      // the catalog only ever carries path data, never markup
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', def.icon);
+      ico.firstChild.appendChild(path);
+
+      const txt = document.createElement('div');
+      txt.className = 'pf-badge-txt';
+      const name = document.createElement('strong');
+      name.textContent = def.name;
+      const kind = document.createElement('em');
+      kind.textContent = held ? 'Earned' : (def.kind === 'quiz' ? 'From a test' : 'Locked');
+      txt.append(name, kind);
+
+      const tip = document.createElement('span');
+      tip.className = 'pf-badge-tip';
+      tip.textContent = def.description + (def.xp ? ' · worth ' + def.xp + ' XP' : '');
+
+      node.append(ico, txt, tip);
+
+      if (def.xp) {
+        const xp = document.createElement('span');
+        xp.className = 'pf-badge-xp';
+        xp.textContent = '+' + def.xp;
+        node.append(xp);
+      }
+      return node;
+    }
+
+    function paintBadges() {
+      const wrap = el('pfBadges');
+      wrap.textContent = '';
+
+      // held badges first, so the wall of locked ones never buries them
+      const sorted = catalog.slice().sort((a, b) => {
+        const ea = earned.has(a.id) ? 0 : 1;
+        const eb = earned.has(b.id) ? 0 : 1;
+        if (ea !== eb) return ea - eb;
+        return (b.xp || 0) - (a.xp || 0);
+      });
+
+      const shown = sorted.filter((def) => {
+        if (badgeFilter === 'earned') return earned.has(def.id);
+        if (badgeFilter === 'locked') return !earned.has(def.id);
+        return true;
+      });
+
+      shown.forEach((def) => wrap.append(badgeNode(def, earned.has(def.id))));
+
+      const held = catalog.filter((d) => earned.has(d.id));
+      const fromBadges = held.reduce((n, d) => n + (d.xp || 0), 0);
+      const available = catalog.reduce((n, d) => n + (d.xp || 0), 0);
+      el('pfBadgeCount').textContent =
+        earned.size + ' of ' + catalog.length + ' earned · '
+        + nf.format(fromBadges) + ' of ' + nf.format(available) + ' badge XP collected';
+    }
+
+    document.querySelectorAll('.pf-gallery-filters button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        badgeFilter = btn.dataset.filter;
+        document.querySelectorAll('.pf-gallery-filters button').forEach((b) =>
+          b.setAttribute('aria-pressed', String(b === btn)));
+        paintBadges();
+      });
+    });
+
+    /* ---------------- rank and XP ---------------- */
+
+    const nf = new Intl.NumberFormat('en-US');
+
+    function paintRank(level) {
+      if (!level) return;
+      el('pfRank').dataset.tier = level.tier.id;
+      el('pfLevel').textContent = level.level;
+      el('pfLevel').title = level.tier.name + ' · level ' + level.level;
+      el('pfXpTier').textContent = level.tier.name;
+      el('pfXpFill').style.width = level.percent + '%';
+      el('pfXpCount').textContent = level.maxed
+        ? nf.format(level.xp) + ' XP · max level'
+        : nf.format(level.into) + ' / ' + nf.format(level.span) + ' XP to level ' + (level.level + 1);
+    }
+
+    /* ---------------- confirm your email ---------------- */
+
+    function paintVerify() {
+      const box = el('pfVerify');
+      if (!emailState || emailState.verified) { box.hidden = true; return; }
+      box.hidden = false;
+
+      const hasAddress = Boolean(emailState.address);
+      const pending = emailState.pending;
+
+      el('pfVerifyTitle').firstChild.textContent = hasAddress ? 'Confirm your email' : 'Add an email address';
+      el('pfVerifyBlurb').textContent = pending
+        ? 'We sent a 6-digit code to ' + pending.email + '. It works for 15 minutes.'
+        : hasAddress
+          ? 'Confirm ' + emailState.address + ' so you can get back in if you lose your other sign-ins.'
+          : 'Add an email address so you can get back in if you ever lose access to your other sign-ins.';
+
+      el('pfVerifyStepEmail').hidden = Boolean(pending);
+      el('pfVerifyStepCode').hidden = !pending;
+      if (!pending && hasAddress) el('pfVerifyEmail').value = emailState.address;
+    }
+
+    function verifyNote(text, kind) {
+      const node = el('pfVerifyNote');
+      node.textContent = text || '';
+      node.className = 'pf-verify-note' + (kind ? ' ' + kind : '');
+    }
+
+    async function postAuth(action, body) {
+      const res = await fetch('/api/auth/' + action, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body || {}),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message || 'That did not work. Please try again.');
+      return data;
+    }
+
+    async function requestCode(btn) {
+      const email = (el('pfVerifyEmail').value || emailState.address || '').trim();
+      btn.disabled = true;
+      const label = btn.textContent;
+      btn.textContent = 'Sending…';
+      verifyNote('');
+      try {
+        const data = await postAuth('send-code', { email });
+        if (data.alreadyVerified) { location.reload(); return; }
+        emailState.pending = { email: data.email };
+        paintVerify();
+        verifyNote('Code sent to ' + data.email + '. Check your inbox, and the spam folder.', 'good');
+        el('pfVerifyCode').focus();
+      } catch (e) {
+        verifyNote(e.message, 'bad');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    }
+
+    el('pfSendCode').addEventListener('click', () => requestCode(el('pfSendCode')));
+    el('pfResendCode').addEventListener('click', () => requestCode(el('pfResendCode')));
+
+    // digits only, and confirm as soon as the sixth one lands
+    el('pfVerifyCode').addEventListener('input', () => {
+      const field = el('pfVerifyCode');
+      field.value = field.value.replace(/\D/g, '').slice(0, 6);
+      if (field.value.length === 6) confirmCode();
+    });
+
+    el('pfConfirmCode').addEventListener('click', () => confirmCode());
+
+    async function confirmCode() {
+      const btn = el('pfConfirmCode');
+      const code = el('pfVerifyCode').value.trim();
+      if (code.length !== 6 || btn.disabled) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Checking…';
+      verifyNote('');
+      try {
+        const data = await postAuth('confirm-code', { code });
+        emailState = { address: data.user.email, verified: true, pending: null };
+        me.email = data.user.email;
+        paintVerify();
+        paintIdentity(currentTier);
+        if (data.level) paintRank(data.level);
+        alertUser(data.xpAwarded
+          ? 'Email confirmed. +' + data.xpAwarded + ' XP and a badge.'
+          : 'Email confirmed.', true);
+        // the Confirmed badge and its XP arrive with the next read
+        refreshBadges();
+      } catch (e) {
+        verifyNote(e.message, 'bad');
+        el('pfVerifyCode').select();
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Confirm';
+      }
+    }
+
+    /* Re-reads just the badge side of the profile, so a freshly earned badge
+       appears without a full page reload. */
+    async function refreshBadges() {
+      try {
+        const data = await fetch('/api/profile', { credentials: 'same-origin' }).then((r) => r.json());
+        if (!data.authenticated) return;
+        earned = new Set(data.badges || []);
+        paintBadges();
+        paintRank(data.user.level);
+      } catch (e) { /* the next page load will catch up */ }
+    }
+
+    /* ---------------- connected accounts ---------------- */
+
+    const WHOP_MARK = '<img src="images/brand/whop-mark.png" alt="" />';
+    const GOOGLE_G = '<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true">'
+      + '<path fill="#4285F4" d="M23.06 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h6.19c-.27 1.44-1.08 2.66-2.3 3.48v2.89h3.72c2.18-2 3.45-4.96 3.45-8.38z"/>'
+      + '<path fill="#34A853" d="M12 24c3.11 0 5.72-1.03 7.63-2.79l-3.72-2.89c-1.03.69-2.35 1.1-3.91 1.1-3 0-5.55-2.03-6.46-4.76H1.69v2.98C3.59 21.42 7.5 24 12 24z"/>'
+      + '<path fill="#FBBC05" d="M5.54 14.66A7.2 7.2 0 0 1 5.16 12c0-.92.16-1.82.38-2.66V6.36H1.69A12 12 0 0 0 .4 12c0 1.94.46 3.77 1.29 5.64l3.85-2.98z"/>'
+      + '<path fill="#EA4335" d="M12 4.75c1.69 0 3.21.58 4.4 1.72l3.3-3.3C17.71 1.19 15.1 0 12 0 7.5 0 3.59 2.58 1.69 6.36l3.85 2.98C6.45 6.61 9 4.75 12 4.75z"/></svg>';
+    const DISCORD_MARK = '<svg width="19" height="19" viewBox="0 0 24 24" fill="#5865f2" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>';
+
+    const CONNECTIONS = [
+      { id: 'whop', label: 'Whop', icon: WHOP_MARK, iconClass: 'pf-conn-ico-whop',
+        blurb: 'Subscriptions, renewals and premium status' },
+      { id: 'google', label: 'Google', icon: GOOGLE_G, iconClass: '',
+        blurb: 'One-tap sign in' },
+      { id: 'discord', label: 'Discord', icon: DISCORD_MARK, iconClass: '',
+        blurb: 'Sign in with your community account' },
+    ];
+
+    let available = [];   // providers the server actually holds keys for
+
+    function connectionRow(def, linked, canUnlink) {
+      const row = document.createElement('div');
+      row.className = 'pf-conn';
+
+      const ico = document.createElement('span');
+      ico.className = 'pf-conn-ico ' + def.iconClass;
+      ico.innerHTML = def.icon;
+
+      const txt = document.createElement('div');
+      txt.className = 'pf-conn-txt';
+      const name = document.createElement('strong');
+      name.textContent = def.label;
+      const state = document.createElement('span');
+      if (linked) { state.textContent = 'Connected'; state.className = 'pf-on'; }
+      else state.textContent = def.blurb;
+      txt.append(name, state);
+
+      row.append(ico, txt);
+
+      if (!linked) {
+        const link = document.createElement('a');
+        link.className = def.id === 'whop' ? 'pf-whop-btn' : 'pf-mini';
+        link.href = '/api/login/' + def.id + '?link=1&return_to=%2Fprofile.html';
+        link.innerHTML = def.id === 'whop' ? WHOP_MARK + 'Connect' : 'Connect';
+        row.append(link);
+      } else if (canUnlink) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pf-mini pf-mini-danger';
+        btn.textContent = 'Disconnect';
+        btn.addEventListener('click', () => disconnect(def.id, btn));
+        row.append(btn);
+      }
+      return row;
+    }
+
+    async function disconnect(provider, btn) {
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/auth/disconnect', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ provider }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.message || 'That could not be disconnected.');
+        me.connections = data.user.connections;
+        paintConnections();
+        alertUser('Disconnected.', true);
+        // Whop leaving takes the subscriptions with it, so reload rather than
+        // leave a stale list of memberships on screen.
+        if (provider === 'whop') setTimeout(() => location.reload(), 900);
+      } catch (e) {
+        alertUser(e.message);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function paintConnections() {
+      const wrap = el('pfConns');
+      wrap.textContent = '';
+      const linked = new Set(me.connections || []);
+      // Only offer what the server can actually complete, but never hide a
+      // provider somebody is already signed in with.
+      const shown = CONNECTIONS.filter((d) => available.includes(d.id) || linked.has(d.id));
+      const ways = linked.size + (me.hasPassword ? 1 : 0);
+      shown.forEach((def) => wrap.append(connectionRow(def, linked.has(def.id), ways > 1)));
+
+      el('pfConnectWhop').hidden = linked.has('whop');
+    }
+
+    /* ---------------- identity block ---------------- */
+
+    function paintIdentity(tier) {
+      el('pfName').textContent = me.name || 'Trader';
+
+      const handle = el('pfHandle');
+      handle.textContent = '';
+      if (me.username) {
+        handle.textContent = '@' + me.username;
+      } else {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = 'Pick a username';
+        btn.addEventListener('click', () => openEdit('pfInUser'));
+        handle.append(btn);
+      }
+
+      const bio = el('pfBio');
+      bio.textContent = me.bio || '';
+      bio.hidden = !me.bio;
+
+      const bits = [];
+      if (me.email) bits.push(me.email);
+      if (me.joinedAt && fmtDate(me.joinedAt)) bits.push('Joined ' + fmtDate(me.joinedAt));
+      el('pfSub').textContent = bits.join(' · ');
+
+      const pill = el('pfTier');
+      if (tier) {
+        pill.textContent = tier.label;
+        pill.className = 'pf-tier pf-tier-' + tier.id;
+        pill.hidden = false;
+      } else {
+        pill.hidden = true;
+      }
+
+      paintAvatar();
+    }
+
+    /* ---------------- modals ---------------- */
+
+    let lastFocus = null;
+
+    function openModal(id, focusId) {
+      lastFocus = document.activeElement;
+      show(id);
+      const target = focusId ? el(focusId) : el(id).querySelector('button, input, [tabindex]');
+      if (target) target.focus();
+    }
+
+    function closeModal(id) {
+      hide(id);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('.pf-modal').forEach((modal) => {
+      modal.querySelectorAll('[data-close]').forEach((btn) =>
+        btn.addEventListener('click', () => closeModal(modal.id)));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.pf-modal:not([hidden])').forEach((m) => closeModal(m.id));
+    });
+
+    /* ---------------- edit profile ---------------- */
+
+    function openEdit(focusId) {
+      el('pfInName').value = me.name || '';
+      el('pfInUser').value = me.username || '';
+      el('pfInBio').value = me.bio || '';
+      el('pfNameHint').textContent = '';
+      el('pfBioHint').textContent = '';
+      setHint('pfUserHint', '3–20 characters: letters, numbers and underscores.', null);
+      openModal('pfEditModal', focusId || 'pfInName');
+    }
+
+    el('pfEditBtn').addEventListener('click', () => openEdit());
+
+    function setHint(id, text, ok) {
+      const node = el(id);
+      node.textContent = text;
+      node.className = 'pf-hint' + (ok === true ? ' pf-hint-ok' : ok === false ? ' pf-hint-bad' : '');
+    }
+
+    /* Live username check. Debounced so a fast typist doesn't fire a request
+       per keystroke, and stamped so a slow earlier reply can't overwrite the
+       verdict for what's in the box now. */
+    let checkTimer = null;
+    let checkStamp = 0;
+
+    el('pfInUser').addEventListener('input', () => {
+      const value = el('pfInUser').value.trim().toLowerCase();
+      clearTimeout(checkTimer);
+
+      if (!value || value === (me.username || '')) {
+        setHint('pfUserHint', '3–20 characters: letters, numbers and underscores.', null);
+        return;
+      }
+      if (!/^[a-z0-9_]{3,20}$/.test(value)) {
+        setHint('pfUserHint', 'Letters, numbers and underscores, 3–20 characters.', false);
+        return;
+      }
+
+      setHint('pfUserHint', 'Checking…', null);
+      const stamp = ++checkStamp;
+      checkTimer = setTimeout(() => {
+        fetch('/api/username?u=' + encodeURIComponent(value), { credentials: 'same-origin' })
+          .then((r) => r.json())
+          .then((data) => {
+            if (stamp !== checkStamp) return;
+            setHint('pfUserHint', data.message || '', !!data.available);
+          })
+          .catch(() => {
+            if (stamp !== checkStamp) return;
+            setHint('pfUserHint', "Couldn't check that right now.", null);
+          });
+      }, 350);
+    });
+
+    el('pfInBio').addEventListener('input', () => {
+      const left = 160 - el('pfInBio').value.length;
+      el('pfBioHint').textContent = left <= 40 ? left + ' characters left' : '';
+    });
+
+    async function patchProfile(body) {
+      const res = await fetch('/api/profile', {
+        method: 'PATCH',
+        credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message || 'That change could not be saved.');
+      return data;
+    }
+
+    el('pfSaveBtn').addEventListener('click', async () => {
+      const btn = el('pfSaveBtn');
+      const name = el('pfInName').value.trim();
+      if (!name) { setHint('pfNameHint', 'Your name cannot be empty.', false); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+      try {
+        const body = { displayName: name, bio: el('pfInBio').value };
+        const username = el('pfInUser').value.trim().toLowerCase();
+        if (username && username !== (me.username || '')) body.username = username;
+
+        const data = await patchProfile(body);
+        Object.assign(me, data.user);
+        paintIdentity(currentTier);
+        syncNav();
+        closeModal('pfEditModal');
+        alertUser('Profile updated.', true);
+      } catch (e) {
+        setHint('pfUserHint', e.message, false);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Save changes';
+      }
+    });
+
+    /* ---------------- avatar picker ---------------- */
+
+    el('pfAvatarBtn').addEventListener('click', () => {
+      loadPickers();
+      openModal('pfAvatarModal');
+    });
+
+    document.querySelectorAll('.pf-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.pf-tab').forEach((t) =>
+          t.setAttribute('aria-selected', String(t === tab)));
+        document.querySelectorAll('[data-pane]').forEach((pane) => {
+          pane.hidden = pane.dataset.pane !== tab.dataset.tab;
+        });
+      });
+    });
+
+    function pickerButton(item) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.title = item.label || '';
+      btn.setAttribute('aria-label', item.label || 'Avatar');
+      const chosen = me.avatarChoice && me.avatarChoice.kind === 'site' && me.avatarChoice.src === item.src;
+      btn.setAttribute('aria-pressed', String(!!chosen));
+
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = '';
+      img.loading = 'lazy';
+      btn.append(img);
+
+      btn.addEventListener('click', () => chooseSite(item.src));
+      return btn;
+    }
+
+    async function chooseSite(src) {
+      try {
+        const data = await patchProfile({ avatar: { kind: 'site', src } });
+        Object.assign(me, data.user);
+        paintAvatar();
+        syncNav();
+        markChosen();
+        closeModal('pfAvatarModal');
+        alertUser('Avatar updated.', true);
+      } catch (e) {
+        alertUser(e.message);
+      }
+    }
+
+    function markChosen() {
+      document.querySelectorAll('.pf-pick button').forEach((btn) => {
+        const src = btn.querySelector('img').getAttribute('src');
+        const chosen = me.avatarChoice && me.avatarChoice.kind === 'site' && me.avatarChoice.src === src;
+        btn.setAttribute('aria-pressed', String(!!chosen));
+      });
+    }
+
+    /* Manifests are fetched once, on first open. A missing or empty gallery
+       manifest simply hides its tab — the folder is meant to be filled in
+       later, and an empty grid would look broken. */
+    let pickersLoaded = false;
+
+    function loadPickers() {
+      if (pickersLoaded) return;
+      pickersLoaded = true;
+
+      fetch('images/avatars/presets/manifest.json')
+        .then((r) => (r.ok ? r.json() : { avatars: [] }))
+        .then((data) => {
+          const list = data.avatars || [];
+          const wrap = el('pfPresets');
+          if (!list.length) {
+            wrap.innerHTML = '<p class="pf-empty-note">No built-in avatars found.</p>';
+            return;
+          }
+          list.forEach((item) => wrap.append(pickerButton(item)));
+        })
+        .catch(() => {
+          el('pfPresets').innerHTML = '<p class="pf-empty-note">Could not load the built-in avatars.</p>';
+        });
+
+      fetch('images/avatars/manifest.json')
+        .then((r) => (r.ok ? r.json() : { avatars: [] }))
+        .then((data) => {
+          const list = data.avatars || [];
+          if (!list.length) return;
+          const tab = document.querySelector('.pf-tab[data-tab="library"]');
+          if (tab) tab.hidden = false;
+          list.forEach((item) => el('pfLibrary').append(pickerButton(item)));
+        })
+        .catch(() => { /* no gallery on this deploy — the tab stays hidden */ });
+    }
+
+    /* ---------------- upload ---------------- */
+
+    const MAX_SIDE = 320;
+
+    /* Crops to a centred square and scales down before upload. Doing it here
+       keeps almost every phone photo well under the server's 1.5 MB limit
+       and means we store one predictable size. */
+    function squareBlob(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          const side = Math.min(img.width, img.height);
+          const size = Math.min(side, MAX_SIDE);
+          const canvas = document.createElement('canvas');
+          canvas.width = canvas.height = size;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, size, size);
+          // webp where it's supported, otherwise the browser hands back PNG —
+          // either way the server sniffs the real type from the bytes
+          canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('Could not read that image.'))), 'image/webp', 0.92);
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('That file is not an image we can read.')); };
+        img.src = url;
+      });
+    }
+
+    async function uploadFile(file) {
+      if (!file) return;
+      setHint('pfUploadHint', 'Preparing…', null);
+      try {
+        const blob = await squareBlob(file);
+        el('pfDropPreview').src = URL.createObjectURL(blob);
+        el('pfDropPreview').hidden = false;
+
+        setHint('pfUploadHint', 'Uploading…', null);
+        const res = await fetch('/api/profile/avatar', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'content-type': blob.type || 'application/octet-stream' },
+          body: blob,
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.message || 'Upload failed.');
+
+        me.avatar = data.avatar;
+        me.avatarChoice = { kind: 'upload', src: null };
+        paintAvatar();
+        syncNav();
+        markChosen();
+        closeModal('pfAvatarModal');
+        alertUser('Avatar updated.', true);
+        setHint('pfUploadHint', '', null);
+      } catch (e) {
+        setHint('pfUploadHint', e.message, false);
+      }
+    }
+
+    el('pfPickFile').addEventListener('click', () => el('pfFile').click());
+    el('pfFile').addEventListener('change', (e) => uploadFile(e.target.files[0]));
+
+    const drop = el('pfDrop');
+    ['dragenter', 'dragover'].forEach((type) =>
+      drop.addEventListener(type, (e) => { e.preventDefault(); drop.classList.add('pf-drop-over'); }));
+    ['dragleave', 'drop'].forEach((type) =>
+      drop.addEventListener(type, (e) => { e.preventDefault(); drop.classList.remove('pf-drop-over'); }));
+    drop.addEventListener('drop', (e) => uploadFile(e.dataTransfer.files[0]));
+
+    el('pfUseWhop').addEventListener('click', async () => {
+      try {
+        // clears the stored upload too, so the picture doesn't linger unused
+        const res = await fetch('/api/profile/avatar', { method: 'DELETE', credentials: 'same-origin' });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.message || 'That could not be changed.');
+        me.avatar = data.avatar;
+        me.avatarChoice = { kind: 'auto', src: null };
+        paintAvatar();
+        syncNav();
+        markChosen();
+        closeModal('pfAvatarModal');
+        alertUser('Back to your account photo.', true);
+      } catch (e) {
+        setHint('pfUploadHint', e.message, false);
+      }
+    });
+
+    /* ---------------- boot ---------------- */
+
+    let currentTier = null;
+
+    Promise.all([
+      fetch('/api/profile', { credentials: 'same-origin' }).then((r) => r.json()),
+      fetch('/api/badges').then((r) => (r.ok ? r.json() : { badges: [] })).catch(() => ({ badges: [] })),
+      fetch('/api/auth/providers').then((r) => (r.ok ? r.json() : { providers: [] })).catch(() => ({ providers: [] })),
+    ])
+      .then(([data, badgeData, providerData]) => {
+        hide('pfLoading');
+
+        if (!data.authenticated) {
+          show('pfSignedOut');
+          return;
+        }
+
+        me = data.user;
+        catalog = badgeData.badges || [];
+        earned = new Set(data.badges || []);
+        currentTier = data.user.tier;
+        emailState = data.email || null;
+        available = (providerData.providers || []).map((p) => p.id);
+
+        paintIdentity(currentTier);
+        paintRank(data.user.level);
+        paintVerify();
+        paintBadges();
+        paintConnections();
+        syncNav();
+        show('pfSignedIn');
+
+        if (!data.whopConnected) {
+          // The banner and this panel already say what to do; an extra
+          // "no subscriptions" card underneath would just nag twice.
+          show('pfNoWhop');
+          return;
+        }
+
+        if (data.membershipsAvailable === false) {
+          alertUser("We couldn't reach Whop to load your subscriptions. Your account is fine — please refresh in a moment.");
+          hide('pfEmpty');
+          return;
+        }
+
+        // active first, then most recent
+        const list = (data.memberships || []).slice().sort((a, b) => {
+          if (a.active !== b.active) return a.active ? -1 : 1;
+          return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+        });
+
+        if (!list.length) {
+          show('pfEmpty');
+          return;
+        }
+
+        const grid = el('pfGrid');
+        list.forEach((m) => grid.append(card(m)));
+      })
+      .catch(() => {
+        hide('pfLoading');
+        show('pfSignedOut');
+        alertUser("Couldn't load your account. Please check your connection and refresh.");
+      });
+  })();
+  </script>
+
+  <script src="site.js"></script>
+  <script src="account.js?v=8"></script>
+</body>
+</html>

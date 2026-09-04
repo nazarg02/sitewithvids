@@ -1,0 +1,6 @@
+# Only [dev] is set here on purpose: production build/publish settings stay in
+# the Netlify UI, so this file cannot change how the live site is deployed.
+[dev]
+  framework = "#static"
+  publish = "."
+  port = 8888

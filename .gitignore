@@ -3,6 +3,13 @@ node_modules/
 .claude/worktrees/
 .claude/skills/
 
+# Secrets & local Netlify state — never commit these
+SETUP-SECRET.txt
+.env
+.env.*
+!.env.example
+.netlify/
+
 # Dev/test artifacts
 screenshot-*.png
 pw_fix.js
@@ -32,3 +39,11 @@ images/qt-trueopen.svg
 # Raw video sources (large, not referenced by pages)
 videos/IMG_3606.MOV
 videos/IMG_3606.mp4
+
+# Local scratch — not part of the site
+.mcp.json
+deno.lock
+_style-preview.html
+b-in.png
+b-out.png
+motion-audit/
