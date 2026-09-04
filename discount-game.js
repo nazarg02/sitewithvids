@@ -20,18 +20,18 @@
 
   var PRIZES = [
     {
-      code: 'ataq0k', label: '15%', note: 'Quarterly Theory Indicator', weight: 24,
+      code: 'ataq0k', label: '15%', note: 'Quarterly Theory Indicator', weight: 36,
       cta: { text: 'See the indicator plans', href: 'indicators.html#pricing' }
     },
     {
-      code: 'fnl8ge', label: '15%', note: 'Premium Access · Espada', weight: 24,
+      code: 'fnl8ge', label: '15%', note: 'Premium Access · Espada', weight: 36,
       cta: { text: 'See Espada Premium', href: 'premium.html#pricing' }
     },
     {
-      code: 'sjxwna', label: '35%', note: 'Espada Lifetime', weight: 8,
+      code: 'sjxwna', label: '35%', note: 'Espada Lifetime', weight: 14,
       cta: { text: 'See Espada Lifetime', href: 'premium.html#pricing' }
     },
-    { code: null, label: 'Empty', note: '', weight: 44 }
+    { code: null, label: 'Empty', note: '', weight: 14 }
   ];
 
   // One try per calendar day (UTC). Set to false while testing.
@@ -346,6 +346,19 @@
     return s;
   }
 
+  /* The site header is fixed, so a plain scrollIntoView tucks the first 68px
+     of the section underneath it. Offset by the real header height. */
+  function scrollUnderNav(target) {
+    var navH = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10);
+    if (!navH) {
+      var bar = document.querySelector('.nav-inner');
+      navH = bar ? bar.getBoundingClientRect().height : 68;
+    }
+    var top = target.getBoundingClientRect().top + window.pageYOffset - navH - 14;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
   function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -481,6 +494,29 @@
 
     var cta = el('a', 'ktg-cta is-quiet', DEFAULT_CTA.text);
     cta.href = DEFAULT_CTA.href;
+    /* The panel locks page scroll while it is open. Following the link without
+       closing it first left the reader stuck behind a modal on a frozen page —
+       and when the target is the page they are already on, there is nothing to
+       navigate to at all, so scroll to the section instead. */
+    cta.addEventListener('click', function (e) {
+      var href = cta.getAttribute('href') || '';
+      var cut = href.indexOf('#');
+      var hash = cut > -1 ? href.slice(cut) : '';
+      var file = cut > -1 ? href.slice(0, cut) : href;
+      var here = location.pathname.split('/').pop() || 'index.html';
+
+      if (hash && (!file || file === here)) {
+        e.preventDefault();
+        e.stopPropagation();   // site.js would otherwise fade out and navigate
+        var target = document.querySelector(hash);
+        close();
+        if (target) {
+          setTimeout(function () { scrollUnderNav(target); }, 180);
+        }
+        return;
+      }
+      close();   // leaving for another page — unlock scroll on the way out
+    });
     inner.appendChild(cta);
 
     inner.appendChild(el('p', 'ktg-foot', ONE_TRY_PER_DAY
