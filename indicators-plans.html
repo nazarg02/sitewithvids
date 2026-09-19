@@ -28,6 +28,9 @@
   <link rel="stylesheet" href="syle.css?v=7" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="theme-light.css?v=2" />
+  <!-- motion-fx pulls Motion from jsDelivr; warm the connection early -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="motion-fx.css?v=3" />
 </head>
 <body>
 
@@ -102,7 +105,7 @@
         <!-- LIFETIME -->
         <div class="price-card reveal reveal-delay-2">
           <div class="price-tier-name">Life Time Subscription</div>
-          <div class="price-amount"><sup>$</sup>250</div>
+          <div class="price-amount"><sup>$</sup>299</div>
           <div class="price-period">one-time payment</div>
           <div class="price-divider"></div>
           <ul class="price-features">
@@ -193,6 +196,7 @@
     }, { threshold: 0.07 });
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
   </script>
-  <script src="account.js?v=8"></script>
+  <script src="account.js?v=9"></script>
+  <script type="module" src="motion-fx.js?v=3"></script>
 </body>
 </html>

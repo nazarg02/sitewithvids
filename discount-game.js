@@ -145,38 +145,42 @@
     '.ktg-face{position:absolute;inset:0;border-radius:15px;overflow:hidden;',
     'backface-visibility:hidden;-webkit-backface-visibility:hidden;}',
 
-    // foil front
-    '.ktg-front{background:linear-gradient(158deg,#8290f8 0%,#6274f2 42%,#4453d8 100%);color:#fff;',
-    'box-shadow:inset 0 0 0 1px rgba(255,255,255,.26),inset 0 1px 0 rgba(255,255,255,.45),',
-    '0 10px 22px -6px rgba(68,83,216,.5);',
-    'transition:transform .3s cubic-bezier(.34,1.4,.64,1),box-shadow .3s ease,filter .3s ease;}',
-    // woven foil texture
-    '.ktg-front::before{content:"";position:absolute;inset:0;',
-    'background:repeating-linear-gradient(118deg,rgba(255,255,255,.09) 0 7px,transparent 7px 17px),',
-    'radial-gradient(ellipse 70% 50% at 22% 12%,rgba(255,255,255,.3),transparent 62%);}',
-    // sheen that keeps sweeping so the row never sits dead
-    '.ktg-front::after{content:"";position:absolute;top:-60%;left:-130%;width:58%;height:220%;',
-    'background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);',
-    'transform:rotate(17deg);animation:ktgSheen 3.6s ease-in-out infinite;}',
-    '@keyframes ktgSheen{0%{left:-130%;}58%,100%{left:160%;}}',
-    '.ktg-cards:not(.is-done) .ktg-card:hover .ktg-front{transform:translateY(-6px);filter:brightness(1.06);',
-    'box-shadow:inset 0 0 0 1px rgba(255,255,255,.36),inset 0 1px 0 rgba(255,255,255,.5),',
-    '0 20px 34px -8px rgba(68,83,216,.62);}',
-    '.ktg-cards:not(.is-done) .ktg-card:active .ktg-front{transform:translateY(-2px) scale(.985);}',
+    /* Folded invitation: white card stock, an envelope flap drawn with two
+       offset triangles, and a small paper seal over its point. The pack's
+       accent only touches the tear tab and the seal, so the row stays keyed
+       to pricing without three competing colour fields. */
+    '.ktg-card:nth-child(1){--ktg-accent:#2563eb;--ktg-wash:#eff4ff;}',
+    '.ktg-card:nth-child(2){--ktg-accent:#16a34a;--ktg-wash:#f0f8f2;}',
+    '.ktg-card:nth-child(3){--ktg-accent:#dc2626;--ktg-wash:#fdf1f1;}',
+    '.ktg-card:focus-visible{outline:2px solid var(--ktg-accent);outline-offset:3px;border-radius:15px;}',
 
-    // die-cut tear strip along the top of the pack
-    '.ktg-tear{position:absolute;top:0;left:0;right:0;height:23px;z-index:2;',
-    'background:rgba(255,255,255,.14);border-bottom:1px dashed rgba(255,255,255,.55);}',
-    '.ktg-tear::before,.ktg-tear::after{content:"";position:absolute;bottom:-5px;width:9px;height:9px;',
-    'border-radius:50%;background:#fff;}',
-    '.ktg-tear::before{left:-4px;}.ktg-tear::after{right:-4px;}',
+    '.ktg-front{box-sizing:border-box;border:1px solid #e6e9f3;background:#fff;color:#2e3440;',
+    'box-shadow:0 3px 9px rgba(46,52,64,.06);transition:transform .2s ease,box-shadow .2s ease;}',
+    // the flap, and a hairline under it from the second triangle one pixel lower
+    '.ktg-front::before,.ktg-front::after{content:"";position:absolute;left:0;right:0;height:40%;',
+    '-webkit-clip-path:polygon(0 0,100% 0,50% 100%);clip-path:polygon(0 0,100% 0,50% 100%);',
+    'pointer-events:none;}',
+    '.ktg-front::before{top:21px;z-index:1;background:linear-gradient(#fff,#f5f7fc);}',
+    '.ktg-front::after{top:22px;z-index:0;background:#e6e9f3;}',
+    '@media (hover:hover){.ktg-cards:not(.is-done) .ktg-card:hover .ktg-front{transform:translateY(-2px);',
+    'box-shadow:0 9px 20px rgba(46,52,64,.10);}}',
+    '.ktg-cards:not(.is-done) .ktg-card:active .ktg-front{transform:translateY(1px);',
+    'box-shadow:0 1px 4px rgba(46,52,64,.08);}',
 
-    // quarters mark + pack number
-    '.ktg-mark{position:absolute;left:0;right:0;top:52%;transform:translateY(-50%);z-index:2;',
-    'display:grid;place-items:center;color:#fff;filter:drop-shadow(0 3px 8px rgba(23,30,90,.4));}',
-    '.ktg-mark svg{width:46%;max-width:52px;height:auto;opacity:.96;}',
-    '.ktg-num{position:absolute;left:0;right:0;bottom:11px;z-index:2;font-size:.53rem;font-weight:800;',
-    'letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72);}',
+    // perforated tear strip with a short accent tab
+    '.ktg-tear{position:absolute;top:0;left:0;right:0;height:20px;z-index:3;background:#fff;',
+    'border-bottom:1px dashed #e6e9f3;pointer-events:none;}',
+    '.ktg-tear::before{content:"";position:absolute;top:8px;left:calc(50% - 9px);width:18px;height:3px;',
+    'border-radius:2px;background:var(--ktg-accent);}',
+
+    // seal over the flap's point + pack number
+    '.ktg-mark{position:absolute;top:54%;left:50%;z-index:2;transform:translate(-50%,-50%);',
+    'width:42px;height:42px;box-sizing:border-box;display:grid;place-items:center;',
+    'border:1px solid #e6e9f3;border-radius:50%;background:var(--ktg-wash);color:var(--ktg-accent);',
+    'box-shadow:0 2px 4px rgba(46,52,64,.06),inset 0 1px 0 #fff;}',
+    '.ktg-mark svg{display:block;width:25px;height:25px;}',
+    '.ktg-num{position:absolute;left:10px;right:10px;bottom:13px;z-index:2;font-size:10px;font-weight:600;',
+    'line-height:1.2;letter-spacing:.12em;text-transform:uppercase;text-align:center;color:#5c6472;}',
 
     // revealed faces
     '.ktg-back-face{transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;',
@@ -191,24 +195,27 @@
     '.ktg-back-face.is-miss{color:#c2c8d6;}',
 
     // ── opening: the pack rattles, then bursts ──
-    '.ktg-card.is-opening{animation:ktgShake .44s ease-in-out;z-index:3;}',
+    /* The pack used to wind up to rotate(5deg) scale(1.14), which read
+       as a cartoon next to the rest of the page. Same beat, half the
+       amplitude — it still says the pack is being torn open. */
+    '.ktg-card.is-opening{animation:ktgShake .42s cubic-bezier(.36,.07,.19,.97);z-index:3;}',
     '@keyframes ktgShake{0%,100%{transform:rotate(0) scale(1);}',
-    '18%{transform:rotate(-4deg) scale(1.04);}38%{transform:rotate(4deg) scale(1.06);}',
-    '58%{transform:rotate(-5deg) scale(1.08);}78%{transform:rotate(4deg) scale(1.1);}',
-    '92%{transform:rotate(0) scale(1.14);}}',
+    '20%{transform:rotate(-2deg) scale(1.02);}42%{transform:rotate(2deg) scale(1.035);}',
+    '64%{transform:rotate(-2.4deg) scale(1.05);}84%{transform:rotate(1.6deg) scale(1.06);}',
+    '94%{transform:rotate(0) scale(1.07);}}',
     '.ktg-burst{position:absolute;pointer-events:none;z-index:5;}',
     '.ktg-flash{position:absolute;inset:0;border-radius:15px;background:#fff;',
     'animation:ktgFlash .34s ease-out forwards;}',
-    '.ktg-ring{position:absolute;inset:0;border-radius:15px;border:3px solid #6274f2;',
+    '.ktg-ring{position:absolute;inset:0;border-radius:15px;border:3px solid var(--ktg-accent,#6274f2);',
     'animation:ktgRing .62s cubic-bezier(.2,.7,.3,1) forwards;}',
     '.ktg-burst.is-miss .ktg-ring{border-color:#ef4444;}',
     '@keyframes ktgFlash{0%{opacity:.7;}100%{opacity:0;}}',
     '@keyframes ktgRing{0%{transform:scale(.9);opacity:1;}100%{transform:scale(1.6);opacity:0;}}',
     '.ktg-burst i{position:absolute;left:50%;top:50%;width:9px;height:9px;border-radius:2px;',
-    'background:#4d5fe8;box-shadow:0 1px 3px rgba(17,20,34,.18);',
+    'background:var(--ktg-accent,#6274f2);box-shadow:0 1px 3px rgba(17,20,34,.18);',
     'animation:ktgPop .74s cubic-bezier(.15,.7,.3,1) forwards;}',
     '.ktg-burst i:nth-child(3n){background:#fbbf24;border-radius:50%;}',
-    '.ktg-burst i:nth-child(4n){width:6px;height:12px;background:#8b98f6;}',
+    '.ktg-burst i:nth-child(4n){width:6px;height:12px;background:var(--ktg-soft,#8b98f6);}',
     '.ktg-burst.is-miss i{background:#dc2626;}',
     '.ktg-burst.is-miss i:nth-child(3n){background:#f87171;}',
     '.ktg-burst.is-miss i:nth-child(4n){background:#ef4444;}',
@@ -271,10 +278,24 @@
     '.ktg-modal{border-radius:22px;}.ktg-modal h2{font-size:1.2rem;}',
     '.ktg-lead{font-size:.81rem;margin-bottom:20px;}.ktg-cards{gap:9px;}',
     '.ktg-prize b{font-size:2.1rem;}.ktg-code{font-size:.94rem;letter-spacing:.13em;}',
-    '.ktg-copy{padding:0 15px;}.ktg-num{font-size:.48rem;}}',
+    '.ktg-copy{padding:0 15px;}}',
+
+    /* The three packs deal in rather than appearing with the panel.
+       Motion drives it when motion-fx has it loaded; this keyframe is
+       the fallback, and the only thing running on a page without it. */
+    '.ktg-cards .ktg-card{animation:ktgDeal .42s cubic-bezier(.16,1,.3,1) both;}',
+    '.ktg-cards .ktg-card:nth-child(1){animation-delay:.10s;}',
+    '.ktg-cards .ktg-card:nth-child(2){animation-delay:.16s;}',
+    '.ktg-cards .ktg-card:nth-child(3){animation-delay:.22s;}',
+    '@keyframes ktgDeal{0%{opacity:0;transform:translateY(16px) scale(.96);}',
+    '100%{opacity:1;transform:none;}}',
+    // a flipped or shaking pack owns its own transform again
+    '.ktg-cards .ktg-card.is-flipped,.ktg-cards .ktg-card.is-opening{animation:none;}',
+    '.ktg-cards .ktg-card.is-flipped{transform:rotateY(180deg);}',
 
     '@media (prefers-reduced-motion:reduce){.ktg-back,.ktg-modal,.ktg-card,.ktg-front{transition:none;}',
-    '.ktg-front::after,.ktg-badge::before,.ktg-card.is-opening,.ktg-ticket{animation:none;}',
+    '.ktg-badge::before,.ktg-card.is-opening,.ktg-ticket,.ktg-cards .ktg-card{animation:none;}',
+    '.ktg-cards .ktg-card:hover .ktg-front,.ktg-cards .ktg-card:active .ktg-front{transform:none;}',
     '.ktg-burst{display:none;}}'
   ].join('');
 
@@ -528,6 +549,10 @@
        parented to it would rotate away with the flip. */
     function burst(card, win) {
       var wrap = el('div', 'ktg-burst' + (win ? ' is-win' : ' is-miss'));
+      // .ktg-burst is parented to the row, not the card, so the pack's
+      // accent has to be handed over rather than inherited
+      var accent = getComputedStyle(card).getPropertyValue('--ktg-accent');
+      if (accent) wrap.style.setProperty('--ktg-accent', accent.trim());
       wrap.style.left = card.offsetLeft + 'px';
       wrap.style.top = card.offsetTop + 'px';
       wrap.style.width = card.offsetWidth + 'px';

@@ -1,0 +1,243 @@
+/* ============================================================
+   MOTION-FX.CSS — interaction layer for Kenpachi Trades
+
+   Aceternity UI (ui.aceternity.com) is React + Tailwind, so its
+   components can't be dropped into this static site. These are the
+   same effects ported by hand to plain CSS + Motion (motion.dev):
+   card spotlight, glowing border, 3D tilt, aurora background,
+   moving-border button, shimmer text, scroll progress.
+
+   Load LAST — after syle.css, after the page <style>, after
+   theme-light.css — so the tokens it reads are already defined.
+   Every animated rule is off under prefers-reduced-motion.
+   ============================================================ */
+
+:root {
+  /* accent as raw channels, so effects can vary the alpha */
+  --mfx-accent-rgb: 98, 116, 242;
+  --mfx-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------
+   1. CARD SPOTLIGHT  (Aceternity "Card Spotlight")
+   A radial wash that follows the cursor inside the card.
+   The layer is a real element, not a pseudo: motion-fx.js
+   inserts it and lifts static children to z-index 1, so the
+   wash can never paint on top of the card's own text.
+   ------------------------------------------------------------ */
+.mfx-spot { position: relative; }
+
+.mfx-spot-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--mfx-ease);
+  background: radial-gradient(
+    240px circle at var(--mfx-x, 50%) var(--mfx-y, 50%),
+    rgba(var(--mfx-accent-rgb), 0.10),
+    rgba(var(--mfx-accent-rgb), 0.04) 40%,
+    transparent 68%
+  );
+}
+.mfx-spot:hover > .mfx-spot-layer { opacity: 1; }
+
+/* Per-card accent: pricing cards keep their own colour identity */
+.ind-pricing .price-card:nth-child(1) .mfx-spot-layer { --mfx-accent-rgb: 37, 99, 235; }
+.ind-pricing .price-card:nth-child(2) .mfx-spot-layer,
+.ind-pricing .price-card-green .mfx-spot-layer { --mfx-accent-rgb: 22, 163, 74; }
+.ind-pricing .price-card:nth-child(3) .mfx-spot-layer { --mfx-accent-rgb: 220, 38, 38; }
+
+/* ------------------------------------------------------------
+   2. GLOWING BORDER  (Aceternity "Hover Border Gradient")
+   A cursor-following rim just outside the card. Drawn on the
+   spotlight layer's own ::after so it needs no extra element.
+   ------------------------------------------------------------ */
+.mfx-spot-layer::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    200px circle at var(--mfx-x, 50%) var(--mfx-y, 50%),
+    rgba(var(--mfx-accent-rgb), 0.55),
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+}
+
+/* ------------------------------------------------------------
+   3. AURORA BACKGROUND  (Aceternity "Aurora / Background Beams")
+   Two slow gradient blooms behind the hero. Pure CSS keyframes
+   on transform + opacity only, so it stays on the compositor.
+   ------------------------------------------------------------ */
+.mfx-aurora {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 120%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.mfx-aurora span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.mfx-aurora span:nth-child(1) {
+  width: 46vw; height: 46vw; max-width: 620px; max-height: 620px;
+  top: -8%; left: 8%;
+  background: radial-gradient(circle, rgba(var(--mfx-accent-rgb), 0.30), transparent 70%);
+  animation: mfx-drift-a 22s var(--mfx-ease) infinite alternate;
+}
+.mfx-aurora span:nth-child(2) {
+  width: 38vw; height: 38vw; max-width: 520px; max-height: 520px;
+  top: 18%; right: 6%;
+  background: radial-gradient(circle, rgba(129, 212, 250, 0.28), transparent 70%);
+  animation: mfx-drift-b 26s var(--mfx-ease) infinite alternate;
+}
+.mfx-aurora span:nth-child(3) {
+  width: 30vw; height: 30vw; max-width: 420px; max-height: 420px;
+  bottom: 6%; left: 38%;
+  background: radial-gradient(circle, rgba(167, 243, 208, 0.26), transparent 70%);
+  animation: mfx-drift-a 30s var(--mfx-ease) infinite alternate-reverse;
+}
+@keyframes mfx-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(6%, 8%, 0) scale(1.14); }
+}
+@keyframes mfx-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.08); }
+  to   { transform: translate3d(-7%, 6%, 0) scale(0.94); }
+}
+
+/* ------------------------------------------------------------
+   4. MOVING BORDER BUTTON  (Aceternity "Moving Border")
+   A conic highlight that travels around the CTA's edge.
+   ------------------------------------------------------------ */
+.mfx-border-move {
+  position: relative;
+  isolation: isolate;
+}
+.mfx-border-move::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--mfx-angle, 0deg),
+    transparent 0turn,
+    rgba(255, 255, 255, 0.95) 0.08turn,
+    transparent 0.22turn,
+    transparent 1turn
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: mfx-spin 3.2s linear infinite;
+}
+.mfx-border-move:hover::before { opacity: 1; }
+
+/* @property lets the conic angle animate; browsers without it
+   simply show a static highlight, which still reads fine. */
+@property --mfx-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes mfx-spin {
+  to { --mfx-angle: 360deg; }
+}
+
+/* ------------------------------------------------------------
+   5. SHIMMER TEXT  (Aceternity "Text Shimmer")
+   A light sweep across the accent words in headings. Applied
+   only to the hero, so it stays an accent and not a tic.
+   ------------------------------------------------------------ */
+.mfx-shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--tt-accent, #6274f2) 0%,
+    var(--tt-accent, #6274f2) 43%,
+    #9aa9ff 50%,
+    var(--tt-accent, #6274f2) 57%,
+    var(--tt-accent, #6274f2) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: mfx-sweep 5.5s linear infinite;
+}
+@keyframes mfx-sweep {
+  from { background-position: 150% 0; }
+  to   { background-position: -50% 0; }
+}
+
+/* ------------------------------------------------------------
+   6. SCROLL PROGRESS BAR
+   Width is driven by Motion's scroll() in motion-fx.js.
+   ------------------------------------------------------------ */
+.mfx-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 9999;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--tt-accent, #6274f2), #8fa0ff);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   7. SPLIT-TEXT WORDS
+   motion-fx.js wraps each word of the hero h1 in one of these;
+   they start hidden so there is no flash before Motion runs.
+   ------------------------------------------------------------ */
+.mfx-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+.mfx-split .mfx-word { opacity: 0; }
+
+/* ------------------------------------------------------------
+   8. TILT
+   The 3D transform itself is set inline by motion-fx.js; this
+   only kills the CSS transition while the cursor is inside, so
+   the card tracks the pointer instead of easing behind it.
+   ------------------------------------------------------------ */
+.mfx-tilt { transform-style: preserve-3d; }
+.mfx-tilt.is-tilting { transition: box-shadow 0.28s ease !important; }
+
+/* ------------------------------------------------------------
+   Reduced motion — keep the look, drop the movement.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .mfx-aurora span,
+  .mfx-border-move::before,
+  .mfx-shimmer { animation: none !important; }
+  /* no sweep to show, so drop the clip and hand the word back to
+     its own colour rather than leaving it half-washed */
+  .mfx-shimmer {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
+  .mfx-spot-layer { transition: none; }
+  .mfx-split .mfx-word { opacity: 1 !important; }
+  .mfx-progress { display: none; }
+}

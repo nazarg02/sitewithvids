@@ -101,7 +101,7 @@
     if (gamePending) return;
     gamePending = true;
     var s = document.createElement('script');
-    s.src = 'discount-game.js?v=1';
+    s.src = 'discount-game.js?v=3';
     s.onload = function () {
       gamePending = false;
       if (window.ktDiscountGame) window.ktDiscountGame.open();
