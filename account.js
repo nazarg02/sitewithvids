@@ -1,10 +1,10 @@
-/* ===== ACCOUNT BUTTON IN NAV (Login with Whop) =====
+/* ===== ACCOUNT BUTTON IN NAV =====
    Kept out of site.js so it can also run on the pages that deliberately
    don't load site.js (prop-firms, indicators-plans).
 
-   Renders only once /api/me answers, so a signed-in visitor never sees a
-   "Sign in" button flash before their own avatar. If the API is missing or
-   offline, nothing is injected and the nav stays exactly as it is. */
+   Signed out it reads "Log in" and goes to login.html. Signed in it turns
+   into the avatar plus "Dashboard" and goes to the profile. If the API is
+   missing or offline, the last known state is used and the nav still works. */
 (function () {
   const nav = document.querySelector('.nav-inner');
   if (!nav) return;
@@ -62,7 +62,7 @@
       const user = data.user || {};
       a.className += ' kt-acct--user';
       a.href = 'profile.html';
-      a.setAttribute('aria-label', 'My account');
+      a.setAttribute('aria-label', 'Your dashboard');
       if (user.picture) {
         const img = document.createElement('img');
         img.src = user.picture;
@@ -73,45 +73,20 @@
       } else {
         a.appendChild(initials(user));
       }
+      // "Dashboard" rather than their own first name: the button is a door,
+      // and the name is already on the page it opens.
       const span = document.createElement('span');
       span.className = 'kt-acct-name';
-      span.textContent = (user.name || 'Account').split(' ')[0];
+      span.textContent = 'Dashboard';
       a.appendChild(span);
     } else {
-      // Accounts aren't live yet: the button opens the "coming soon" panel
-      // (with the discount game) instead of walking anyone into a dead flow.
-      // Swap this branch back to a plain login.html link once auth ships.
-      a.href = 'login.html?return_to=' + encodeURIComponent(location.pathname + location.search);
+      // return_to brings them back to the page they were reading, rather than
+      // dumping everyone on the profile after a sign-in they did from an
+      // education page.
+      a.href = 'login.html?mode=signin&return_to=' + encodeURIComponent(location.pathname + location.search);
       a.textContent = 'Log in';
-      a.addEventListener('click', function (e) {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
-        e.preventDefault();
-        e.stopPropagation();  // site.js turns link clicks into its own navigation
-        openComingSoon();
-      });
     }
     return a;
-  }
-
-  /* The panel lives in its own file so the promo codes are easy to find and
-     edit. It's pulled in on the first click, not on every page load. */
-  var gamePending = false;
-  function openComingSoon() {
-    if (window.ktDiscountGame) { window.ktDiscountGame.open(); return; }
-    if (gamePending) return;
-    gamePending = true;
-    var s = document.createElement('script');
-    s.src = 'discount-game.js?v=3';
-    s.onload = function () {
-      gamePending = false;
-      if (window.ktDiscountGame) window.ktDiscountGame.open();
-    };
-    s.onerror = function () {
-      gamePending = false;
-      // last resort: let them through to the sign-in page
-      location.href = 'login.html';
-    };
-    document.head.appendChild(s);
   }
 
   /* The button is drawn immediately and corrected once /api/me answers.

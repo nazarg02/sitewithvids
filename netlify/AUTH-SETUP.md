@@ -1,5 +1,21 @@
 # Accounts, sign-in and profiles — setup
 
+> **Status: sign-in is live.** `login.html` shows the real form, and the nav
+> button reads "Log in" when signed out and "Dashboard" when signed in.
+> Nothing else is needed in the code. What is left is filling in the
+> environment variables below and registering the redirect URIs.
+>
+> **Shortest path to a working login:**
+> 1. Set `SESSION_SECRET` in Netlify. Email and password sign-up works from
+>    that alone.
+> 2. Add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`, and register the
+>    Google redirect URI. The Google button appears by itself.
+> 3. Add `WHOP_APP_ID`, `WHOP_API_KEY` and `WHOP_COMPANY_ID`, and register the
+>    Whop redirect URI. The Whop button and the subscriptions list appear.
+>
+> A button is only drawn once its two variables are present, so the page is
+> never broken while you are part way through.
+
 The site is hosted on **Netlify** (Cloudflare sits in front as DNS/proxy), so
 the whole account system lives in two Netlify Functions plus a small library.
 No `_redirects` entry is needed — each function's `config.path` export
@@ -66,6 +82,7 @@ while it is missing**
 | `SITE_URL` | e.g. `https://kenpachitrades.com`; leave unset and the origin is derived from the request, which is what you want for deploy previews |
 | `WHOP_PREMIUM_PRODUCT_IDS` | comma-separated product/plan ids that count as Premium. Without it, products are matched on their title (`/premium\|espada/i`) |
 | `WHOP_INDICATOR_PRODUCT_IDS` | same, for the indicator suite |
+| `WHOP_LIFETIME_PRODUCT_IDS` | comma-separated product ids sold as one-off lifetime access. Whop marks a free claim `completed` too, so without this list nobody is treated as lifetime, which is the safe way to be wrong |
 
 Without `RESEND_API_KEY`, sign-up still works — it just does not ask for email
 confirmation, and "Forgot password?" says so plainly instead of pretending to
@@ -98,7 +115,9 @@ each provider needs its callback registered there too, alongside production:
 | Discord | `https://kaleidoscopic-caramel-158fb3.netlify.app/api/callback/discord` |
 
 For local testing with `netlify dev`, add the same paths on
-`http://localhost:8888`.
+`http://localhost:8888`. Local values go in a `.env` file in the project root,
+which is git-ignored. `SESSION_SECRET` on its own is enough to exercise
+sign-up and sign-in without any provider.
 
 Registering several callbacks only works while `SITE_URL` is unset, because
 that is what lets the origin follow the request. Set it and every login lands
@@ -160,5 +179,9 @@ one back. Auto badges are refused — they come from Whop.
 - Sign-in failures are throttled per email: 8 in 15 minutes and it stops
   answering. Wrong password and unknown address give the same message, so the
   form cannot be used to discover who is registered.
+- The nav button is `account.js`: "Log in" when signed out, carrying a
+  `return_to` back to the page being read, and the avatar plus "Dashboard"
+  when signed in. It draws from a cached last-known state first, so a
+  returning visitor does not see a "Log in" flash.
 - `account.js` is cached `immutable` by `_headers`, so bump the `?v=` query on
-  its `<script>` tags whenever you edit it.
+  its `<script>` tags whenever you edit it. It is on `?v=10` now.

@@ -12,17 +12,17 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kenpachitrades.com/profile.html" />
   <meta property="og:title" content="My Account · Kenpachi Trades" />
-  <meta property="og:description" content="Your Kenpachi Trades account — avatar, username, badges, active subscriptions and billing, all in one place." />
+  <meta property="og:description" content="Your Kenpachi Trades dashboard. Avatar, username, badges, active subscriptions and billing, all in one place." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="My Account · Kenpachi Trades" />
-  <meta name="twitter:description" content="Your Kenpachi Trades account — avatar, username, badges, active subscriptions and billing, all in one place." />
-  <meta name="description" content="Your Kenpachi Trades account — avatar, username, badges, active subscriptions and billing, all in one place." />
+  <meta name="twitter:description" content="Your Kenpachi Trades dashboard. Avatar, username, badges, active subscriptions and billing, all in one place." />
+  <meta name="description" content="Your Kenpachi Trades dashboard. Avatar, username, badges, active subscriptions and billing, all in one place." />
   <link rel="stylesheet" href="syle.css?v=7" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     /* ===== PROFILE — light ===== */
 
-    .pf-main { padding: calc(var(--nav-h) + 56px) 0 90px; position: relative; overflow: hidden; min-height: 78vh; }
+    .pf-main { padding: 48px 0 90px; position: relative; overflow: hidden; min-height: 78vh; }
 
     /* animated background decorations */
     .pf-main::before {
@@ -967,7 +967,7 @@
     }
 
     @media (max-width: 640px) {
-      .pf-main { padding-top: calc(var(--nav-h) + 34px); }
+      .pf-main { padding-top: 30px; }
       .pf-verify { padding: 20px; }
       .pf-verify-input { width: 100%; }
       .pf-verify-form { width: 100%; }
@@ -987,7 +987,7 @@
   <link rel="stylesheet" href="theme-light.css?v=2" />
   <!-- motion-fx pulls Motion from jsDelivr; warm the connection early -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="stylesheet" href="motion-fx.css?v=3" />
+  <link rel="stylesheet" href="motion-fx.css?v=4" />
 </head>
 <body>
 
@@ -1039,7 +1039,7 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
           <h1>Sign in to your account</h1>
-          <p>Use the same Whop account you bought with. You'll get a profile you can make your own — avatar, username, badges — plus every active subscription and its renewal date in one place.</p>
+          <p>Use the same Whop account you bought with. You get a profile you can make your own, with an avatar, a username and badges, plus every active subscription and its renewal date in one place.</p>
           <div class="pf-panel-actions">
             <a href="login.html?return_to=%2Fprofile.html" class="pf-btn">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg>
@@ -1047,7 +1047,7 @@
             </a>
             <a href="login.html?return_to=%2Fprofile.html" class="pf-btn pf-btn-ghost">Create an account</a>
           </div>
-          <p class="pf-note">Whop, Google or an email address — whichever you prefer. You can connect the others later.</p>
+          <p class="pf-note">Whop, Google or an email address, whichever you prefer. You can connect the others later.</p>
         </div>
       </div>
 
@@ -1155,7 +1155,7 @@
                 <img src="images/brand/whop-mark.png" alt="" style="width:26px;height:26px;" />
               </div>
               <h2>Subscriptions live on Whop</h2>
-              <p>Connect the Whop account you bought with and everything you own — plans, renewal dates, premium status — appears right here.</p>
+              <p>Connect the Whop account you bought with. Your plans, renewal dates and premium status all appear right here.</p>
               <div class="pf-panel-actions">
                 <a class="pf-whop-btn" href="/api/login/whop?link=1&amp;return_to=%2Fprofile.html">
                   <img src="images/brand/whop-mark.png" alt="" />
@@ -1279,7 +1279,7 @@
       <div data-pane="upload" hidden>
         <div class="pf-drop" id="pfDrop">
           <img class="pf-drop-preview" id="pfDropPreview" alt="" hidden />
-          <p>Drop an image here, or choose a file. PNG, JPG, GIF or WebP — we'll crop it to a square and shrink it for you.</p>
+          <p>Drop an image here, or choose a file. PNG, JPG, GIF and WebP all work. We crop it to a square and shrink it for you.</p>
           <input type="file" id="pfFile" accept="image/png,image/jpeg,image/gif,image/webp" hidden />
           <div class="pf-panel-actions">
             <button class="pf-btn" type="button" id="pfPickFile">Choose image</button>
@@ -1405,7 +1405,7 @@
         params.get('linked')       ? 'Connected. Your subscriptions will load in a moment.'
         : params.get('verified')   ? 'Email confirmed. Thanks!'
         : params.get('reset') === 'done' ? 'Password updated.'
-        : params.get('welcome') === 'verify' ? 'Account created — check your inbox to confirm your email.'
+        : params.get('welcome') === 'verify' ? 'Account created. Check your inbox to confirm your email.'
         : params.get('welcome')    ? 'Account created. Connect Whop below and your subscriptions appear here.'
         : null;
       if (note) {
@@ -2223,7 +2223,7 @@
         }
 
         if (data.membershipsAvailable === false) {
-          alertUser("We couldn't reach Whop to load your subscriptions. Your account is fine — please refresh in a moment.");
+          alertUser("We could not reach Whop to load your subscriptions. Your account is fine, so please refresh in a moment.");
           hide('pfEmpty');
           return;
         }
@@ -2251,7 +2251,7 @@
   </script>
 
   <script src="site.js"></script>
-  <script src="account.js?v=9"></script>
-  <script type="module" src="motion-fx.js?v=3"></script>
+  <script src="account.js?v=11"></script>
+  <script type="module" src="motion-fx.js?v=4"></script>
 </body>
 </html>

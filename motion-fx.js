@@ -26,7 +26,7 @@ const SPOT_CARDS = [
   '.tt-edu-card',
   '.firm-card',
   '.pfx-card',
-  '.lg-card'
+  '.au-panel'
 ].join(',');
 
 /* ---------- helpers ---------- */
@@ -260,10 +260,91 @@ if (!reduced) {
       });
     }
 
+    /* ---------- sign-in page ----------
+       The left panel is the only place on the site with a drawn chart, so it
+       gets its own sequence: the line reads, the rows arrive, then the
+       quarters build from the baseline. Total is about two seconds, and the
+       form on the right is already usable through all of it. */
+    const auAside = $('.au-aside');
+    if (auAside) {
+      const display = $('.au-display', auAside);
+      if (display) {
+        const words = splitWords(display);
+        if (words.length) {
+          display.classList.add('mfx-split');
+          animate(
+            words,
+            { opacity: [0, 1], y: [20, 0], filter: ['blur(6px)', 'blur(0px)'] },
+            { duration: 0.7, delay: stagger(0.045), ease: [0.16, 1, 0.3, 1] }
+          );
+        }
+      }
+
+      const rows = $$('.au-points li', auAside);
+      if (rows.length) {
+        animate(
+          rows,
+          { opacity: [0, 1], x: [-16, 0] },
+          { duration: 0.55, delay: stagger(0.09, { startDelay: 0.24 }), ease: [0.16, 1, 0.3, 1] }
+        );
+      }
+
+      /* Candles grow out of their own baseline, which is what transform-box
+         and a bottom origin buy us in the stylesheet. */
+      const candles = $$('.au-chart .au-candle', auAside);
+      if (candles.length) {
+        animate(
+          candles,
+          { opacity: [0, 1], scaleY: [0.15, 1] },
+          { duration: 0.5, delay: stagger(0.05, { startDelay: 0.5 }), ease: [0.16, 1, 0.3, 1] }
+        );
+      }
+
+      /* pathLength is a framer-motion nicety the vanilla package does not
+         carry, so the dash offset is walked by hand instead. */
+      const line = $('.au-chart-line', auAside);
+      if (line && typeof line.getTotalLength === 'function') {
+        const len = line.getTotalLength();
+        line.style.strokeDasharray = String(len);
+        animate(
+          line,
+          { strokeDashoffset: [len, 0], opacity: [0, 1] },
+          { duration: 1.25, delay: 0.66, ease: [0.16, 1, 0.3, 1] }
+        );
+      }
+
+      const dot = $('.au-chart-dot', auAside);
+      if (dot) {
+        animate(dot, { opacity: [0, 1], scale: [0, 1] }, { type: 'spring', stiffness: 420, damping: 17, delay: 1.72 })
+          .finished
+          .then(() => animate(
+            dot,
+            { opacity: [1, 0.4, 1], scale: [1, 1.45, 1] },
+            { duration: 2.6, repeat: Infinity, ease: 'easeInOut' }
+          ))
+          .catch(() => {});
+      }
+    }
+
+    /* The form column settles in behind the panel it sits next to. */
+    const auPanel = $('.au-panel');
+    if (auPanel) {
+      const parts = ['.au-mark', '.au-head', '#auForm', '#auProviderBlock', '.au-swap']
+        .map((sel) => $(sel, auPanel))
+        .filter(Boolean);
+      if (parts.length) {
+        animate(
+          parts,
+          { opacity: [0, 1], y: [14, 0] },
+          { duration: 0.55, delay: stagger(0.07), ease: [0.16, 1, 0.3, 1] }
+        );
+      }
+    }
+
     /* Tactile press on every CTA. Motion leaves an inline transform
        behind, which would outrank the buttons' own :hover lift — so
        hand the element back to CSS once the spring settles. */
-    press('.tt-btn, .btn-block, .btn', (el) => {
+    press('.tt-btn, .btn-block, .btn, .au-submit, .au-oauth', (el) => {
       animate(el, { scale: 0.97 }, { type: 'spring', stiffness: 700, damping: 30 });
       return () => {
         animate(el, { scale: 1 }, { type: 'spring', stiffness: 500, damping: 26 })
