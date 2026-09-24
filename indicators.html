@@ -1564,15 +1564,31 @@
           </div>
           <div class="card-body">
             <div class="price-row">
-              <div class="price-amount"><sup>$</sup>299</div>
+              <div class="price-amount"><sup>$</sup>119.60</div>
+              <div class="price-original"><sup>$</sup>299</div>
             </div>
-            <div class="price-period">one-time payment</div>
+            <div class="price-period">one-time payment · with code FIRST5</div>
             <div class="price-divider"></div>
             <ul class="price-features">
               <li><span class="check">›</span> Lifetime access — pay once</li>
               <li><span class="check">›</span> Support via Discord &amp; Whop</li>
               <li><span class="check">›</span> All future updates included</li>
             </ul>
+            <div class="promo-block">
+              <p class="promo-hint">Use code at checkout · <strong>60% off</strong></p>
+              <div class="promo-main-row">
+                <span class="promo-code">FIRST5</span>
+                <button class="promo-copy" onclick="navigator.clipboard.writeText('FIRST5');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
+              </div>
+              <div class="promo-countdown" id="promoCountdown">
+                <div class="promo-countdown-label"><span class="promo-dot"></span> <span id="pcLabel">Last 24 hours</span></div>
+                <div class="promo-countdown-units">
+                  <span class="pc-unit"><b id="pcH">24</b><i>hours</i></span><span class="pc-sep">:</span>
+                  <span class="pc-unit"><b id="pcM">00</b><i>min</i></span><span class="pc-sep">:</span>
+                  <span class="pc-unit"><b id="pcS">00</b><i>sec</i></span>
+                </div>
+              </div>
+            </div>
             <a href="https://whop.com/checkout/plan_wQMuomyge6VNp" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Get Lifetime Access</a>
           </div>
         </div>
@@ -1887,6 +1903,33 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.07 });
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // Promo countdown: one fixed deadline, so everyone sees the same 24 hours
+    // run down (reloading does not restart it).
+    (function () {
+      const box = document.getElementById('promoCountdown');
+      if (!box) return;
+      const uH = document.getElementById('pcH'), uM = document.getElementById('pcM'), uS = document.getElementById('pcS');
+      const label = document.getElementById('pcLabel');
+      const END = Date.UTC(2026, 8, 25, 7, 25, 0); // 2026-09-25 07:25 UTC
+      const pad = n => String(n).padStart(2, '0');
+      let timer = null;
+      function tick() {
+        const left = END - Date.now();
+        if (left <= 0) {
+          uH.textContent = '00'; uM.textContent = '00'; uS.textContent = '00';
+          box.classList.add('is-over');
+          if (label) label.textContent = 'This deal has ended';
+          clearInterval(timer);
+          return;
+        }
+        uH.textContent = pad(Math.floor(left / 3600000));
+        uM.textContent = pad(Math.floor(left % 3600000 / 60000));
+        uS.textContent = pad(Math.floor(left % 60000 / 1000));
+      }
+      tick();
+      timer = setInterval(tick, 1000);
+    })();
 
     // Feature carousel
     (function () {
